@@ -1,74 +1,111 @@
-# download functions for different agency sources
-
-#  packages required for all functions
-library(readxl)
-library(curl)
-
-# need to load system files before extraction
-# currently ea_wbids and sepa_links
-load('ea_wbids.rda')
-load('sepa_links.rda')
-
-
-# keep subsetting functions separate from download as far as possible to 
-# reduce code redundency. Pass type, column etc from main function
-
-# function for downloading from SEPA site
-
-download_sepa<-function(url_string){
-  curl_download(url_string, 'temp.xls', mode="wb")
-  sepa_data<-read_excel('temp.xls')
-  # need to derive year info to allow correct extraction
-  # delete the intermediate xl file
-  unlink('temp.xls')
-
-  # need to rewrite the column names (will depend on the year/type)
-  old_names<-names(sepa_data)
-  better_names<-make.names(old_names)
-  names(sepa_data)<-better_names
-  #  str(sepa1)
-  return(sepa_data)
-  
-  # end of function
-}
-
-################################
+#' Download EA Catchment Data
+#' @description Downloads classification data from EA Catchment Data
+#' Explorer site. Data can be downloaded by specifying waterbody id 
+#' (\code{wbid}), Management Catchment (\code{mc}), Operational 
+#' Catchment (\code{oc}) or River Basin District (\code{rbd}).
+#' Start year (\code{startyr}) and end year (\code{endyr}) allow 
+#' specific timeranges to be downloaded.
+#' For Management Catchment (\code{mc}), Operational 
+#' Catchment (\code{oc}) or River Basin District (\code{rbd}) level
+#' downloads, waterbody type can also be specified.
+#
+#' @param col_value A string representing the features to be extracted. For
+#' example to extract data for the whole of the Humber RBD, this would be 
+#' "Humber". Must be an exact match to the values used in the EA database.
+#' Use the \code{\link{search_sites}} function to check for matching values.
+#' @param column The column to be searched. Possible options are 
+#' \code{wbid} (waterbody id), \code{oc} (Operational Catchment), \code{mc} 
+#' (Management Catchment) and \code{rbd} (River Basin District)
+#' @param type Type of waterbody to be extracted. For Operational/Management 
+#' catchment level or RBD level queries, the data can also be subset by 
+#' waterbody type. Possible values are \code{River}, \code{Lake}, 
+#' \code{Groundwater}, \code{Transitional} or \code{Coastal}.
+#' @param startyr The data can be extracted for specific years using the 
+#' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
+#' specified this extracts for a particular year.
+#' @param endyr The data can be extracted for specific years using the 
+#' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
+#' only be specified if \code{startyr} is also included, otherwise it
+#' is ignored.
+#' @return A data frame containing the classifcation details for the 
+#' specified combination of column and value.
+#' 
+#' @examples
+#'
 
 # EA data download - currently does some subsetting as well which needs to 
 # be taken out to main function, but have to pass number in
 # col_value and col_name should be in main really
 
-download_ea<-function(col_value=NULL, col_name=NULL){
-  # what is this going to allow to be parsed in columns?
-  # wbid, catchment, RBD, type?
-  # add in year selection too
-  if (!is.null(col_name) & !is.null(col_value)){
-    # set up a smaller vector that just contains the names of columns
-    # that can be exracted by
-    if (tolower(col_name) %in% tolower(names(ea_wbids))){
-      # match column to  value in ea_wbids
-      #col_name<-"Waterbody.ID"
-      #col_value<-"xxx1"
-      catch_num<-ea_wbids$Number[which(ea_wbids[,col_name]==col_value)]
-      if (length(catch_num)<1){
-        message("Column value not found")
-      }else{
-        temp<-tempfile()
-        downloadurl<-paste0("http://environment.data.gov.uk/catchment-planning/RiverBasinDistrict/", catch_num, "/classification?item=all&status=all&format=csv")
-        downloadurl
-        curl_download(downloadurl, temp, mode="wb")
-        # extract data from zipfile to df
-        catchment_data<-fread(unzip(temp, junkpaths=TRUE), stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-        unlink(temp)
-        # subset catchment_data based on vector of row numbers
-        data_subset<-catchment_data[which(catchment_data[,col_name]==col_value), ]
-      }
-      # repeat for other levels
-      # need to review how to treat data from different cycles - 2015 only has 2
-      # 2013-14 has both
+# rbd (zip): http://environment.data.gov.uk/catchment-planning/RiverBasinDistrict/4/classification?item=all&status=all&format=csv
+# mc (zip): http://environment.data.gov.uk/catchment-planning/ManagementCatchment/3001/classification?item=all&status=all&format=csv
+# oc (csv): http://environment.data.gov.uk/catchment-planning/OperationalCatchment/3097/classification?item=all&status=all&format=csv
+# wb (csv): http://environment.data.gov.uk/catchment-planning/WaterBody/GB30431693/csv
+
+
+download_ea<-function(col_value=NULL, column=NULL, type=NULL, startyr=NULL, endyr=NULL){
+  # list of possible columns to select on
+  choices<-c("wbid", "mc", "oc", "rbd")
+  # is a value/column specified
+  if (!is.null(column) & !is.null(col_value)){
+    # is the column specified correctly
+    if (column %in% choices){
+      if (column =="rbd"){
+      # rbd level extraction
+        index_num<-ea_wbids$number[which(ea_wbids[,column]==col_value)][1]
+        if (length(index_num)<1){
+          message("Column value specified not found")
+        }else{
+          downloadurl<-paste0("http://environment.data.gov.uk/catchment-planning/RiverBasinDistrict/", index_num, "/classification?item=all&status=all&format=csv")
+          classifications<-zip_download(downloadurl)
+        }
+      } # end of rbd extraction
+      else if (column =="mc"){
+        # rbd level extraction
+        index_num<-ea_wbids$mc.num[which(ea_wbids[,column]==col_value)][1]
+        if (length(index_num)<1){
+          message("Column value specified not found")
+        }else{
+          downloadurl<-paste0("http://environment.data.gov.uk/catchment-planning/ManagementCatchment/", index_num, "/classification?item=all&status=all&format=csv")
+          classifications<-zip_download(downloadurl)
+        }
+      } # end of mc extraction
+      # oc next
+      else if (column =="oc"){
+        # oc level extraction - works
+        index_num<-ea_wbids$oc.num[which(ea_wbids[,column]==col_value)][1]
+        print (index_num)
+        if (length(index_num)<1){
+          message("Column value specified not found")
+        }else{
+          classifications<-read.csv(paste0("http://environment.data.gov.uk/catchment-planning/OperationalCatchment/" , index_num, "/classification?item=all&status=all&format=csv"), header=TRUE, stringsAsFactors =  FALSE)
+        }
+      }# end of oc extraction
+      # finally wbid - this works
+      else if (column =="wbid"){
+        # oc level extraction
+        if (col_value %in% ea_wbids[,"wbid"]){
+          classifications<-read.csv(paste0("http://environment.data.gov.uk/catchment-planning/WaterBody/", col_value, "/csv"), header=TRUE, stringsAsFactors =  FALSE)
+        }
+        else{
+          message("Column value specified not found")
+        }
+      }# end of wbid extraction
     }else{
-      message("Column specified should be one of the columns of the allowed")
+      cat("Column specified should be one of the following:", "\n")
+      cat("wbid, mc, oc or rbd", "\n")
     }
   }
-  # end of function
+} # end of function
+
+
+# zip download and extraction function
+zip_download<-function(downloadurl){
+  temp<-tempfile()
+  curl_download(downloadurl, temp, mode="wb")
+  # extract data from zipfile to df
+  catchment_data<-fread(unzip(temp, junkpaths=TRUE), stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+  unlink(temp)
+  return(catchment_data)
+# end of function
 }

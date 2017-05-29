@@ -1,29 +1,33 @@
-# function to query wbid datafile that matches a string in waterbody
-# description - output a df of possible sites.
+#' Search EA site database
+#' @description Searches the listing of EA monitoring sites to find rows
+#' that contain the string provided. Can search by name (\code{waterbody}), 
+#' Management Catchment (\code{mc}), Operational Catchment (\code{oc}) 
+#' or River Basin District (\code{rbd}).
+#
+#' @param string The search string to be matched. Will match whole or partial
+#' strings in the column values.
+#' @param column The column to be searched. Possible options are 
+#' \code{waterbody}, \code{oc} (Operational Catchment), \code{mc} 
+#' (Management Catchment) and \code{rbd} (River Basin District)
+#' @return A data frame containing the details of all the sites that match
+#' the search string (full or partial matches) in the column specified.
+#' @examples
+#' search_sites("Avon", "oc")
+#' search_sites("Tweed", "rbd")
 
-# search options:
-# by wbid, RBD (whole file download), Catchment (Management), waterbody
-# classification level, year range, 
-
-# reverse column and string for vectorisation as per main function
-search_sites<-function(column=NULL, string=NULL){
-  # copy df- not really needed I think
-  seachdf<-ea_wbids
-  # convert to character - need to do this to datafile object loaded
-  searchdf[]<-lapply(ea_wbids, as.character)
+search_sites<-function(string=NULL, column=NULL){
   # if there is a value passed for both arguments
   if (!is.null(column) & !is.null(string)){
   # if the column is found in ea_wbids  
     if (tolower(column) %in% tolower(names(ea_wbids))){
       # set up dummy strings for testing
 #      string<-"Avon"
-#      column<-"water.body"
+#      column<-"waterbody"
       # extract list of rows that match search string
-      matching_rows<-searchdf[grep(string, searchdf[,column]), ]
+      matching_rows<-ea_wbids[grep(string, ea_wbids[,column]), ]
     }else{
-      cat("Column specified should be one of the columns of the site listing.", "\n")
-      cat(colnames(ea_wbids), "\n")
-#      message(colnames(ea_wbids))
+      cat("Column specified should be one of the following:", "\n")
+      cat("waterbody, mc, oc, rbd", "\n")
     }
   }
 # end of function  
