@@ -104,8 +104,10 @@ zip_download<-function(downloadurl){
   temp<-tempfile()
   curl_download(downloadurl, temp, mode="wb")
   # extract data from zipfile to df
-  catchment_data<-fread(unzip(temp, junkpaths=TRUE), stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+  csv<-unzip(temp, junkpaths=TRUE)
+  catchment_data<-fread(csv, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
   unlink(temp)
+  unlink(csv)
   return(catchment_data)
 # end of function
 }
