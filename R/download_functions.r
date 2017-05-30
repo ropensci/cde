@@ -35,7 +35,9 @@
 #' @examples
 #'
 
-download_ea<-function(col_value=NULL, column=NULL, startyr=NULL, endyr=NULL, type=NULL){
+#download_ea<-function(col_value=NULL, column=NULL, startyr=NULL, endyr=NULL, type=NULL){
+  
+download_ea<-function(col_value=NULL, column=NULL){
   # list of possible columns to select on
   choices<-c("WBID", "MC", "OC", "RBD")
   # is a value/column specified
@@ -89,29 +91,29 @@ download_ea<-function(col_value=NULL, column=NULL, startyr=NULL, endyr=NULL, typ
   }
   # now for year subsetting
   # if there is a startyr set
-  if (!is.null(startyr)){
+#  if (!is.null(startyr)){
     # if there is an end year
-    if (!is.null(endyr)){
+#    if (!is.null(endyr)){
       # check values make sense
-      if (endyr >= startyr){
-        if (startyr >=2009 & endyr <=2015){
-          classifications<-classifications[classifications$year>=startyr & classifications$year <=endyr, ]
-        }
-        else {
-          message("Years specified outside range of data available: returning all years.")
-        }
-      }
-      else {
-        message("End year before Start year: returning all years.")
-      }
+#      if (endyr >= startyr){
+#        if (startyr >=2009 & endyr <=2015){
+ #         classifications<-classifications[classifications$year>=startyr & classifications$year <=endyr, ]
+#        }
+#        else {
+#          message("Years specified outside range of data available: returning all years.")
+#        }
+#      }
+#      else {
+#        message("End year before Start year: returning all years.")
+#      }
       # and then extract years
-    }
+#    }
     # or if end year not specified then just extract single year
     # check within right range
-    if (startyr >=2009 | startyr <=2015){
-      classifications<-classifications[classifications$year==startyr, ]
-    }
-  } # or just return all data
+#    if (startyr >=2009 | startyr <=2015){
+#      classifications<-classifications[classifications$year==startyr, ]
+#    }
+#  } # or just return all data
 
 
 } # end of function
