@@ -1,14 +1,16 @@
 #' Search EA site database
 #' @description Searches the listing of EA monitoring sites to find rows
-#' that contain the string provided. Can search by name (\code{waterbody}), 
-#' Management Catchment (\code{mc}), Operational Catchment (\code{oc}) 
-#' or River Basin District (\code{rbd}).
+#' that contain the string provided. Can search by name (\code{name}), 
+#' Management Catchment (\code{MC}), Operational Catchment (\code{OC}) 
+#' or River Basin District (\code{RBD}).
 #
 #' @param string The search string to be matched. Will match whole or partial
 #' strings in the column values.
+#' 
 #' @param column The column to be searched. Possible options are 
-#' \code{waterbody}, \code{oc} (Operational Catchment), \code{mc} 
-#' (Management Catchment) and \code{rbd} (River Basin District)
+#' \code{name}, \code{OC} (Operational Catchment), \code{MC} 
+#' (Management Catchment) and \code{RBD} (River Basin District)
+#' 
 #' @return A data frame containing the details of all the sites that match
 #' the search string (full or partial matches) in the column specified.
 #' 
@@ -33,6 +35,4 @@ search_sites<-function(string=NULL, column=NULL){
     }
   }
   return(matching_rows)
-  # should just return info on column searched on???
-# end of function  
-}
+} # end of function

@@ -23,8 +23,6 @@
 #' @return A data frame containing the classifcation details for the 
 #' specified combination of column and value.
 #' 
-#' @export download_ea
-#'
 
 download_ea<-function(col_value=NULL, column=NULL){
   # list of possible columns to select on
@@ -79,16 +77,21 @@ download_ea<-function(col_value=NULL, column=NULL){
   }
 } # end of function
 
+#' Download Zipfile and extract csv
+#' @description Downloads zipfile from specified url, unzips to 
+#' csv file and reads csv into dataframe.
+#
+#' @param download_url A string representing the url to download the
+#' zip file from. 
 
-# zip download and extraction function
-zip_download<-function(downloadurl){
+zip_download<-function(download_url){
   temp<-tempfile()
-  curl::curl_download(downloadurl, temp, mode="wb")
-  # extract data from zipfile to df
-  csv<-utils::unzip(temp, junkpaths=TRUE)
-  catchment_data<-data.table::fread(csv, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+  curl::curl_download(download_url, temp, mode="wb")
+  # extract data from zipfile to df using data.table to speed things up
+  csvfile<-utils::unzip(temp, junkpaths=TRUE)
+  catchment_data<-data.table::fread(csvfile, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+  # delete the intermediate files
   unlink(temp)
-  unlink(csv)
+  unlink(csvfile)
   return(catchment_data)
-# end of function
-}
+} # end of function
