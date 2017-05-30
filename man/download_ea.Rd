@@ -4,32 +4,18 @@
 \alias{download_ea}
 \title{Download EA Catchment Data}
 \usage{
-download_ea(col_value = NULL, column = NULL, type = NULL,
-  startyr = NULL, endyr = NULL)
+download_ea(col_value = NULL, column = NULL)
 }
 \arguments{
-\item{col_value}{A string representing the features to be extracted. For
-example to extract data for the whole of the Humber RBD, this would be 
-"Humber". Must be an exact match to the values used in the EA database.
-Use the \code{\link{search_sites}} function to check for matching values.}
+\item{col_value}{A string representing the description (name) of the 
+features to be extracted. For example to extract data for the whole of 
+the Humber RBD, this would be "Humber"; also see examples. Must be an 
+exact match to the values used in the EA database.
+Use the \code{\link{search_sites}} function to search for specific values.}
 
 \item{column}{The column to be searched. Possible options are 
-\code{wbid} (waterbody id), \code{oc} (Operational Catchment), \code{mc} 
-(Management Catchment) and \code{rbd} (River Basin District)}
-
-\item{type}{Type of waterbody to be extracted. For Operational/Management 
-catchment level or RBD level queries, the data can also be subset by 
-waterbody type. Possible values are \code{River}, \code{Lake}, 
-\code{Groundwater}, \code{Transitional} or \code{Coastal}.}
-
-\item{startyr}{The data can be extracted for specific years using the 
-\code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
-specified this extracts for a particular year.}
-
-\item{endyr}{The data can be extracted for specific years using the 
-\code{startyr} and \code{endyr} arguments. The \code{endyr} should
-only be specified if \code{startyr} is also included, otherwise it
-is ignored.}
+\code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
+(Management Catchment) and \code{RBD} (River Basin District)}
 }
 \value{
 A data frame containing the classifcation details for the 
@@ -38,14 +24,12 @@ specified combination of column and value.
 \description{
 Downloads classification data from EA Catchment Data
 Explorer site. Data can be downloaded by specifying waterbody id 
-(\code{wbid}), Management Catchment (\code{mc}), Operational 
-Catchment (\code{oc}) or River Basin District (\code{rbd}).
+(\code{WBID}), Management Catchment (\code{MC}), Operational 
+Catchment (\code{OC}) or River Basin District (\code{RBD}).
 Start year (\code{startyr}) and end year (\code{endyr}) allow 
 specific timeranges to be downloaded.
-For Management Catchment (\code{mc}), Operational 
-Catchment (\code{oc}) or River Basin District (\code{rbd}) level
-downloads, waterbody type can also be specified.
-}
-\examples{
-
+For Management Catchment (\code{MC}), Operational 
+Catchment (\code{OC}) or River Basin District (\code{RBD}) level
+downloads, waterbody \code{Type} can also be specified to allow
+extraction of specific waterbody types (River, Lake etc).
 }

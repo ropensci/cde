@@ -15,24 +15,32 @@
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an 
 #' exact match to the values used in the EA database.
 #' Use the \code{\link{search_sites}} function to search for specific values.
+#' 
 #' @param column The column to be searched. Possible options are 
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
 #' (Management Catchment) and \code{RBD} (River Basin District)
-#' @param type Type of waterbody to be extracted. For Operational/Management 
-#' catchment level or RBD level queries, the data can also be subset by 
-#' waterbody type. Possible values are \code{River}, \code{Lake}, 
-#' \code{Groundwater}, \code{Transitional} or \code{Coastal}.
+#' @param element The WFD quality element to be extracted. Defaults to 'Overall
+#' status'. See Vignette for possible values.
+#' 
 #' @param startyr The data can be extracted for specific years using the 
 #' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
-#' specified this extracts for a particular year.
+#' specified this extracts for a particular year. If no years are specified 
+#' all years are returned.
+#' 
 #' @param endyr The data can be extracted for specific years using the 
 #' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 #' only be specified if \code{startyr} is also included, otherwise it
 #' is ignored.
-#' @return A data frame containing the classifcation details for the 
-#' specified combination of column and value.
 #' 
-#' @examples
+#' @param type Type of waterbody to be extracted. For Operational/Management 
+#' catchment level or RBD level queries, the data can also be subset by 
+#' waterbody type. Possible values are \code{River}, \code{Lake}, 
+#' \code{Groundwater}, \code{Transitional} or \code{Coastal}.
+#' 
+#' @return A data frame containing the classifcation details for the 
+#' specified combination of column, value, element and dates.
+#' 
+#' @export wfd_class
 #'
 wfd_class<-function(col_value=NULL, column=NULL, element="Overall status", startyr=NULL, endyr=NULL, type=NULL){
   # start by running checks on input data
@@ -67,9 +75,12 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall status", start
  
   
 # do subsetting here  
+  if (!is.null(startyr) & !is.null(endyr)){
+    # if both years are specified, subset by range
+    class_data<-class_data[class_data$Year>=startyr & class_data$Year <=endyr, ]
+  }
+  else if (!is.null(startyr)){
+    class_data<-class_data[class_data$Year==startyr, ]
+  }
   
 } # end of function
-  
-  ## is there a start year?
-    # if so, is there an end year
-      # if so, is the end year 
