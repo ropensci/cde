@@ -42,7 +42,7 @@
 #' 
 #' @export wfd_class
 #'
-wfd_class<-function(col_value=NULL, column=NULL, element="Overall status", startyr=NULL, endyr=NULL, type=NULL){
+wfd_class<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
   # start by running checks on input data
   # first search value and column choice
   # list of possible columns to select on
@@ -73,8 +73,7 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall status", start
       }
   }
  
-  
-# do subsetting here  
+  # do subsetting here - years first
   if (!is.null(startyr) & !is.null(endyr)){
     # if both years are specified, subset by range
     class_data<-class_data[class_data$Year>=startyr & class_data$Year <=endyr, ]
@@ -82,5 +81,9 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall status", start
   else if (!is.null(startyr)){
     class_data<-class_data[class_data$Year==startyr, ]
   }
-  
+  # element subset
+  class_data<-class_data[class_data$Classification.Item==element, ]
+# Classification.item: Overall Water Body
+# Water.body.type
+  return(class_data)
 } # end of function
