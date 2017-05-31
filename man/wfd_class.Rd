@@ -4,7 +4,7 @@
 \alias{wfd_class}
 \title{Retrieve WFD Classification Information}
 \usage{
-wfd_class(col_value = NULL, column = NULL, element = "Overall status",
+wfd_class(col_value = NULL, column = NULL, element = "Overall Water Body",
   startyr = NULL, endyr = NULL, type = NULL)
 }
 \arguments{
