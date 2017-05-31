@@ -81,9 +81,11 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall Water Body", s
   else if (!is.null(startyr)){
     class_data<-class_data[class_data$Year==startyr, ]
   }
-  # element subset
+  # element subsetting, defaults to "Overall Water Body"
   class_data<-class_data[class_data$Classification.Item==element, ]
-# Classification.item: Overall Water Body
-# Water.body.type
+  # now Water.body.type
+  if (!is.null(type)){
+    class_data<-class_data[class_data$Water.body.type==type, ]
+  }
   return(class_data)
 } # end of function
