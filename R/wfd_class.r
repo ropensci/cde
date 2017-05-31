@@ -65,7 +65,13 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall Water Body", s
           }
         }
       }
-      # should be here
+      if (!is.null(type)){
+        types<-c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
+        if (!type %in% types){
+          stop("Type specified is not a valid choice (River, Lake, CoastalWater, TransitionalWater or GroundWaterBody")
+        }
+      }
+      # if all inputs valid, download data
       class_data<-download_ea(col_value, column)
     }
     else{
