@@ -5,7 +5,7 @@ cde
 
 [![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde)
 
-Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site.
+Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. This is a staging development towards a broader package that will work for all UK WFD classification data, so won't be heading to CRAN in this format.
 
 Installation
 ------------
@@ -42,6 +42,8 @@ This retrieves status data from the CDE site. The data can be retrieved by speci
 
 It returns a dataframe containing the status (and other details) for the specified combination of column, value, element and dates.
 
+Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting.
+
 ``` r
 # get status information for Lakes in the Avon Hampshire Management 
 # Catchment in 2012
@@ -52,7 +54,7 @@ wfd_status("Avon Hampshire", "MC", startyr=2012, type="Lake")
 wfd_status("Solway Tweed", "RBD")
 
 # get status information for all waterbodies within the Humber
-# River Basin District between 2012 and 2014 (BIG - 4847 rows!)
+# River Basin District between 2012 and 2014 (BIG - 2985 rows!)
 wfd_status("Humber", "RBD", startyr=2012, endyr=2014)
 
 # get status information for WBID  GB102021073050 between 2009 and 2012
@@ -75,6 +77,6 @@ status_plot("Avon Hampshire", "MC", startyr=2012, type="Lake")
 status_plot("Solway Tweed", "RBD")
 
 # get status information for all waterbodies within the Humber
-# River Basin District between 2012 and 2014 (BIG - 4847 rows!)
+# River Basin District between 2012 and 2014
 status_plot("Humber", "RBD", startyr=2012, endyr=2014)
 ```

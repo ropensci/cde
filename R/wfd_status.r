@@ -93,5 +93,8 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
   if (!is.null(type)){
     status_data<-status_data[status_data$Water.body.type==type, ]
   }
+  # if year range covers 2013 and 2014, subset to just include cycle 2 data
+  # avoids double counting of waterbodies
+  status_data<-status_data[!(status_data$Year==2013 & status_data$Cycle==1 | status_data$Year==2014 & status_data$Cycle==1),]
   return(status_data)
 } # end of function
