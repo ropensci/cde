@@ -34,8 +34,8 @@ download_ea<-function(col_value=NULL, column=NULL){
       if (column =="RBD"){
       # rbd level extraction
         index_num<-ea_wbids$RBD.num[which(ea_wbids[,column]==col_value)][1]
-        if (length(index_num)<1){
-          message("River Basin District name specified not found.")
+        if (is.na(index_num)){
+          stop("River Basin District name specified not found.")
         }else{
           downloadurl<-paste0("http://environment.data.gov.uk/catchment-planning/RiverBasinDistrict/", index_num, "/classification?item=all&status=all&format=csv")
           classifications<-zip_download(downloadurl)
@@ -45,7 +45,7 @@ download_ea<-function(col_value=NULL, column=NULL){
         # rbd level extraction
         index_num<-ea_wbids$MC.num[which(ea_wbids[,column]==col_value)][1]
         if (length(index_num)<1){
-          message("Management Catchment name specified not found.")
+          stop("Management Catchment name specified not found.")
         }else{
           downloadurl<-paste0("http://environment.data.gov.uk/catchment-planning/ManagementCatchment/", index_num, "/classification?item=all&status=all&format=csv")
           classifications<-zip_download(downloadurl)
@@ -56,7 +56,7 @@ download_ea<-function(col_value=NULL, column=NULL){
         # oc level extraction - works
         index_num<-ea_wbids$OC.num[which(ea_wbids[,column]==col_value)][1]
         if (length(index_num)<1){
-          message("Operational catchment name specified not found.")
+          stop("Operational catchment name specified not found.")
         }else{
           classifications<-utils::read.csv(paste0("http://environment.data.gov.uk/catchment-planning/OperationalCatchment/" , index_num, "/classification?item=all&status=all&format=csv"), header=TRUE, stringsAsFactors =  FALSE)
         }
@@ -68,7 +68,7 @@ download_ea<-function(col_value=NULL, column=NULL){
           classifications<-utils::read.csv(paste0("http://environment.data.gov.uk/catchment-planning/WaterBody/", col_value, "/csv"), header=TRUE, stringsAsFactors =  FALSE)
         }
         else{
-          message("WBID value specified not found.")
+          stop("WBID value specified not found.")
         }
       }# end of wbid extraction
     }else{
