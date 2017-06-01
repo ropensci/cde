@@ -85,6 +85,6 @@ status_plot("Avon Hampshire", "MC", startyr=2012, type="Lake")
 status_plot("Solway Tweed", "RBD")
 
 # get status information for all waterbodies within the Humber
-# River Basin District between 2012 and 2014 (BIG - 4847 rows!)
+# River Basin District between 2012 and 2014
 status_plot("Humber", "RBD", startyr=2012, endyr=2014)
 ```
