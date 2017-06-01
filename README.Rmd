@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cde
+# cde package
 [![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde)
 
 Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. This is a staging development towards a broader package that will work for all UK WFD classification data, so won't be heading to CRAN in this format.
