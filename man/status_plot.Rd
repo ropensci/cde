@@ -19,8 +19,8 @@ Use the \code{\link{search_sites}} function to search for specific values.}
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{element}{The WFD quality element to be extracted. Defaults to 'Overall
-status'. See Vignette for possible values.}
+\item{element}{The WFD quality element to be extracted. Defaults to 
+'Overall Water Body'. See docs for possible values.}
 
 \item{startyr}{The data can be extracted for specific years using the 
 \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
@@ -35,13 +35,13 @@ is ignored.}
 \item{type}{Type of waterbody to be extracted. For Operational/Management 
 catchment level or RBD level queries, the data can also be subset by 
 waterbody type. Possible values are \code{River}, \code{Lake}, 
-\code{Groundwater}, \code{Transitional} or \code{Coastal}.}
+\code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.}
 }
 \value{
-A stacked barplot of the percentage of waterbodies within the 
+A (stacked) barplot of the percentage of waterbodies within the 
 specified area of different status values, with standard colour scheme.
 }
 \description{
-Produces a stacked proportional barplot of waterbody
+Produces a (stacked) percentage barplot of waterbody
 status information for a given set of data (MC, OC or RBD)
 }

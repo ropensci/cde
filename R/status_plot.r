@@ -1,10 +1,12 @@
 #' Plot Status Summary
-#' @description Produces a stacked proportional barplot of waterbody
+#' @description Produces a (stacked) percentage barplot of waterbody
 #' status information for a given set of data (MC, OC or RBD)
 
-#' @inheritParams wfd_class
+#' @inheritParams wfd_status
+#' 
+#' @importFrom graphics barplot
 #'
-#' @return A stacked barplot of the percentage of waterbodies within the 
+#' @return A (stacked) barplot of the percentage of waterbodies within the 
 #' specified area of different status values, with standard colour scheme.
 #'  
 status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
@@ -14,7 +16,7 @@ status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body",
       stop("Column specified is not one of the possible choices (OC, MC or RBD).")
     }
   # get required data
-  plot_data<-wfd_class(col_value, column, element, startyr, endyr, type)
+  plot_data<-wfd_status(col_value, column, element, startyr, endyr, type)
   if (nrow(plot_data)==0){
     stop("No data returned, plotting not possible.")
   }
@@ -46,12 +48,11 @@ status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body",
   ord_props<-props[ordered,]
   
   # do the actual plotting
-  # return(barplot(props, legend=TRUE, col=cols_ordered, xlab="Year", ylab="Percentage of waterbodies", xlim=c(0.4, 10), ylim=c(0,100), args.legend=list(x=10.7,y=80)))
+  # if for a single year
   if (ncol(props)==1){
     return(barplot(ord_props, col=cols_ordered, space=0, ylab="Percentage of waterbodies", ylim=c(0,100)))
   }
   else{
     return(barplot(ord_props, legend=TRUE, args.legend=list(x=(ncol(props)*2)-(ncol(props)/2.5), y=80), col=cols_ordered, ylab="Percentage of waterbodies", xlim=c(0, (ncol(props)*2)-ncol(props)/2), ylim=c(0,100)))
   }
-  ##############
-}# end of function
+} # end of function

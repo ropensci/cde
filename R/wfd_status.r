@@ -1,5 +1,5 @@
-#' Retrieve WFD Classification Information
-#' @description Retrieves classification data from EA Catchment Data
+#' Retrieve WFD Status Information
+#' @description Retrieves WFD Status class data from EA Catchment Data
 #' Explorer site. Data can be retrieved by specifying waterbody id 
 #' (\code{WBID}), Management Catchment (\code{MC}), Operational 
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}).
@@ -19,8 +19,8 @@
 #' @param column The column to be searched. Possible options are 
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
 #' (Management Catchment) and \code{RBD} (River Basin District)
-#' @param element The WFD quality element to be extracted. Defaults to 'Overall
-#' status'. See Vignette for possible values.
+#' @param element The WFD quality element to be extracted. Defaults to 
+#' 'Overall Water Body'. See docs for possible values.
 #' 
 #' @param startyr The data can be extracted for specific years using the 
 #' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
@@ -35,14 +35,14 @@
 #' @param type Type of waterbody to be extracted. For Operational/Management 
 #' catchment level or RBD level queries, the data can also be subset by 
 #' waterbody type. Possible values are \code{River}, \code{Lake}, 
-#' \code{Groundwater}, \code{Transitional} or \code{Coastal}.
+#' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #' 
 #' @return A data frame containing the classifcation details for the 
 #' specified combination of column, value, element and dates.
 #' 
-#' @export wfd_class
+#' @export wfd_status
 #'
-wfd_class<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
+wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
   # start by running checks on input data
   # first search value and column choice
   # list of possible columns to select on
@@ -72,7 +72,7 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall Water Body", s
         }
       }
       # if all inputs valid, download data
-      class_data<-download_ea(col_value, column)
+      status_data<-download_ea(col_value, column)
     }
     else{
       stop("Column specified is not one of the possible choices (WBID, OC, MC or RBD).")
@@ -82,16 +82,16 @@ wfd_class<-function(col_value=NULL, column=NULL, element="Overall Water Body", s
   # do subsetting here - years first
   if (!is.null(startyr) & !is.null(endyr)){
     # if both years are specified, subset by range
-    class_data<-class_data[class_data$Year>=startyr & class_data$Year <=endyr, ]
+    status_data<-status_data[status_data$Year>=startyr & status_data$Year <=endyr, ]
   }
   else if (!is.null(startyr)){
-    class_data<-class_data[class_data$Year==startyr, ]
+    status_data<-status_data[status_data$Year==startyr, ]
   }
   # element subsetting, defaults to "Overall Water Body"
-  class_data<-class_data[class_data$Classification.Item==element, ]
+  status_data<-status_data[status_data$Classification.Item==element, ]
   # now Water.body.type
   if (!is.null(type)){
-    class_data<-class_data[class_data$Water.body.type==type, ]
+    status_data<-status_data[status_data$Water.body.type==type, ]
   }
-  return(class_data)
+  return(status_data)
 } # end of function

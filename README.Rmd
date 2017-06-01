@@ -1,24 +1,32 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-cde
-===
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# cde
 [![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde)
 
 Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site.
 
-Installation
-------------
+## Installation
 
 You can install cde from github with:
 
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("robbriers/cde")
 ```
 
-Basic usage
------------
+## Basic usage
 
 There are three main functions in the package:
 
@@ -28,13 +36,15 @@ This allows you to search the listing of sites, catchments or river basin distri
 
 Searching can be performed by name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). It returns a dataframe containing all rows that match (or partial match) the input string.
 
-``` r
+```{r search_sites example, eval=FALSE}
 # search for Management Catchments containing the string 'Avon'
 search_sites("Avon", "MC")
 
 # search for waterbodies containing the string 'Till'
 search_sites("Till", "name")
+
 ```
+
 
 `wfd_status`
 
@@ -42,7 +52,7 @@ This retrieves status data from the CDE site. The data can be retrieved by speci
 
 It returns a dataframe containing the status (and other details) for the specified combination of column, value, element and dates.
 
-``` r
+```{r wfd_status example, eval=FALSE}
 # get status information for Lakes in the Avon Hampshire Management 
 # Catchment in 2012
 wfd_status("Avon Hampshire", "MC", startyr=2012, type="Lake")
@@ -65,7 +75,7 @@ This produces summary barplots of percentage of waterbodies at different status.
 
 When a single year is specified, the bars represent the percentage of waterbodies in each status class. When multiple years are specified, the output is a stacked barplot of status percentages for each year.
 
-``` r
+```{r status_plot example, eval=FALSE}
 # plot status information for Lakes in the Avon Hampshire Management 
 # Catchment in 2012
 status_plot("Avon Hampshire", "MC", startyr=2012, type="Lake")
