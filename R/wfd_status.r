@@ -96,5 +96,9 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
   status_data<-status_data[!(status_data$Year==2013 & status_data$Cycle==1 | status_data$Year==2014 & status_data$Cycle==1),]
+  
+  # remove web link column - not really needed
+  status_data<-status_data[,!(names(status_data) %in% c("classification.ID"))]
+  
   return(status_data)
 } # end of function
