@@ -42,6 +42,23 @@
 #' 
 #' @export wfd_status
 #'
+#' @examples
+#' \dontrun{
+#' 
+#' # get Overall Water Body status of waterbody GB520804714300 for all years
+#' wfd_status("GB520804714300", "WBID")
+#' 
+#' # get the Overall Water Body status of Lakes in the Humber RBD, betweeen 
+#' 2012 and 2014
+#' wfd_status("Humber", "RBD", startyr=2012, endyr = 2014, type="Lake")
+#' 
+#' # get the Overall Water Body status for Rivers in the Avon Warwickshire 
+#' # Operational Catchment in 2011
+#' wfd_status("Avon Warwickshire, "OC", startyr=2011, type="River")
+#' 
+#' }
+#' 
+
 wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
   # start by running checks on input data
   # first search value and column choice
