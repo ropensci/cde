@@ -25,6 +25,9 @@ Management Catchment (\code{MC}), Operational Catchment (\code{OC})
 or River Basin District (\code{RBD}).
 }
 \examples{
+# search for Operational Catchments containing "Avon"
 search_sites("Avon", "OC")
+
+# search for River Basin Districts containing "Tweed"
 search_sites("Tweed", "RBD")
 }

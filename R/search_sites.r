@@ -17,7 +17,10 @@
 #' @export search_sites
 #' 
 #' @examples
+#' # search for Operational Catchments containing "Avon"
 #' search_sites("Avon", "OC")
+#' 
+#' # search for River Basin Districts containing "Tweed"
 #' search_sites("Tweed", "RBD")
 
 search_sites<-function(string=NULL, column=NULL){
@@ -34,5 +37,10 @@ search_sites<-function(string=NULL, column=NULL){
       stop("Column specified should be: name, MC, OC, or RBD", "\n")
     }
   }
-  return(matching_rows)
+  if (nrow(matching_rows)==0){
+    stop(paste0("No matches found for ", string))
+  }
+  else{
+    return(matching_rows)
+  }
 } # end of function

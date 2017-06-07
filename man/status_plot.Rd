@@ -45,3 +45,13 @@ specified area of different status values, with standard colour scheme.
 Produces a (stacked) percentage barplot of waterbody
 status information for a given set of data (MC, OC or RBD)
 }
+\examples{
+# plot the Overall Water Body status for Rivers in the Avon Warwickshire 
+# Management Catchment in 2011
+status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
+
+# plot the Overall Water Body status of Lakes in the Humber RBD betweeen 
+# 2012 and 2014
+status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake")
+
+}

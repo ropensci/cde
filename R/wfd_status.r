@@ -43,18 +43,16 @@
 #' @export wfd_status
 #'
 #' @examples
-#' 
-#' # get Overall Water Body status of waterbody GB520804714300 for all years
+#' # get Overall Water Body status for waterbody GB520804714300
 #' wfd_status("GB520804714300", "WBID")
 #' 
-#' # get the Overall Water Body status of Lakes in the Humber RBD, betweeen 
-#' 2012 and 2014
-#' wfd_status("Humber", "RBD", startyr=2012, endyr = 2014, type="Lake")
+#' # get the Overall Water Body status of Lakes in the Humber RBD, between 
+#' # 2012 and 2014
+#' wfd_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
 #' 
 #' # get the Overall Water Body status for Rivers in the Avon Warwickshire 
 #' # Operational Catchment in 2011
-#' wfd_status("Avon Warwickshire, "OC", startyr=2011, type="River")
-#' 
+#' wfd_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 #' 
 
 wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
@@ -90,6 +88,7 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
         }
       }
       # if all inputs valid, download data
+      ##### does not currently check that string given is valid choice - run through search_sites
       status_data<-download_ea(col_value, column)
     }
     else{
