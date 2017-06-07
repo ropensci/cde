@@ -30,7 +30,7 @@ all years are returned.}
 \item{endyr}{The data can be extracted for specific years using the 
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 only be specified if \code{startyr} is also included, otherwise it
-is ignored.}
+is ignored and all years are returned.}
 
 \item{type}{Type of waterbody to be extracted. For Operational/Management 
 catchment level or RBD level queries, the data can also be subset by 

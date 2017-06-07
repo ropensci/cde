@@ -12,7 +12,6 @@
 #' @export status_plot
 #'  
 #' @examples 
-#' \dontrun{
 #' 
 #' # plot the Overall Water Body status of Lakes in the Humber RBD, betweeen 
 #' 2012 and 2014
@@ -22,7 +21,6 @@
 #' # Operational Catchment in 2011
 #' status_plot("Avon Warwickshire, "OC", startyr=2011, type="River")
 #' 
-#' }
 #'  
 status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
   # do initial check of column choice

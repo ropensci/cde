@@ -5,7 +5,7 @@ test_that("wfd_status returns a dataframe", {
   # retrieve data for specific waterbody
   testframe<-wfd_status("GB520804714300", "WBID")
   # check that it outputs a dataframe object
-  expect_is(testframe, "data.frame")
+  expect_true(is.data.frame(testframe))
   
 })
 
@@ -18,6 +18,32 @@ test_that("dimensions of dataframe are as expected", {
 })
 
 test_that("invalid column specified returns an error", {
-  # retrieve data for "Aardvark"
+  # retrieve data for column "Aardvark"
   expect_error(wfd_status("Avon Warwickshire", "Aardvark"))
+})
+
+test_that("invalid string returns an error", {
+  # retrieve data for site "Aardvark"
+  expect_error(wfd_status("Aardvark", "WBID"))
+})
+
+test_that("invalid type returns an error", {
+  # retrieve data for site "Aardvark"
+  expect_error(wfd_status("Avon Hampshire", "MC", startyr=2012, type="Aardvark"))
+})
+
+
+test_that("start date outside data range returns an error", {
+  # retrieve data for site "Aardvark"
+  expect_error(wfd_status("Avon Hampshire", "MC", startyr=1900))
+})
+
+test_that("end date before start date returns an error", {
+  # retrieve data for site "Aardvark"
+  expect_error(wfd_status("Avon Hampshire", "MC", startyr=2012, endyr=1900))
+})
+
+test_that("end date outside available range returns an error", {
+  # retrieve data for site "Aardvark"
+  expect_error(wfd_status("Avon Hampshire", "MC", startyr=2012, endyr=2018))
 })

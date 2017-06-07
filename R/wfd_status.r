@@ -30,7 +30,7 @@
 #' @param endyr The data can be extracted for specific years using the 
 #' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 #' only be specified if \code{startyr} is also included, otherwise it
-#' is ignored.
+#' is ignored and all years are returned.
 #' 
 #' @param type Type of waterbody to be extracted. For Operational/Management 
 #' catchment level or RBD level queries, the data can also be subset by 
@@ -43,7 +43,6 @@
 #' @export wfd_status
 #'
 #' @examples
-#' \dontrun{
 #' 
 #' # get Overall Water Body status of waterbody GB520804714300 for all years
 #' wfd_status("GB520804714300", "WBID")
@@ -56,7 +55,6 @@
 #' # Operational Catchment in 2011
 #' wfd_status("Avon Warwickshire, "OC", startyr=2011, type="River")
 #' 
-#' }
 #' 
 
 wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
@@ -70,6 +68,9 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
       # a valid column has been chosen, next test years
       # if there is a startyr set
       if (!is.null(startyr)){
+        if (startyr<2009 | startyr >2015){
+          stop("Starting year cannot be before 2009 or after 2015")
+        }
         # if there is an end year
         if (!is.null(endyr)){
           # check values make sense
@@ -77,7 +78,7 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
             stop("End year is before Start year: please correct.")
           }
           # years are in correct order
-          if (!startyr >=2009 & endyr <=2015){
+          if (!startyr >=2009 | !endyr <=2015){
             stop("Years specified outside range of data available (2009-2015).")
           }
         }
