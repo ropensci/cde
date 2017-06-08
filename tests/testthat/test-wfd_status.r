@@ -28,22 +28,22 @@ test_that("invalid string returns an error", {
 })
 
 test_that("invalid type returns an error", {
-  # retrieve data for site "Aardvark"
+  # retrieve data for type "Aardvark"
   expect_error(wfd_status("Avon Hampshire", "MC", startyr=2012, type="Aardvark"))
 })
 
 
 test_that("start date outside data range returns an error", {
-  # retrieve data for site "Aardvark"
+  # retrieve data for year 1900
   expect_error(wfd_status("Avon Hampshire", "MC", startyr=1900))
 })
 
 test_that("end date before start date returns an error", {
-  # retrieve data for site "Aardvark"
+  # retrieve data for impossible year range
   expect_error(wfd_status("Avon Hampshire", "MC", startyr=2012, endyr=1900))
 })
 
 test_that("end date outside available range returns an error", {
-  # retrieve data for site "Aardvark"
+  # retrieve data for years outside possible range
   expect_error(wfd_status("Avon Hampshire", "MC", startyr=2012, endyr=2018))
 })

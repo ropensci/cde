@@ -44,7 +44,8 @@ download_ea<-function(col_value=NULL, column=NULL){
       else if (column =="MC"){
         # rbd level extraction
         index_num<-ea_wbids$MC.num[which(ea_wbids[,column]==col_value)][1]
-        if (length(index_num)<1){
+        print(index_num)
+        if (is.na(index_num)){
           stop("Management Catchment name specified not found.")
         }else{
           downloadurl<-paste0("http://environment.data.gov.uk/catchment-planning/ManagementCatchment/", index_num, "/classification?item=all&status=all&format=csv")
@@ -55,7 +56,7 @@ download_ea<-function(col_value=NULL, column=NULL){
       else if (column =="OC"){
         # oc level extraction - works
         index_num<-ea_wbids$OC.num[which(ea_wbids[,column]==col_value)][1]
-        if (length(index_num)<1){
+        if (is.na(index_num)){
           stop("Operational catchment name specified not found.")
         }else{
           classifications<-utils::read.csv(paste0("http://environment.data.gov.uk/catchment-planning/OperationalCatchment/" , index_num, "/classification?item=all&status=all&format=csv"), header=TRUE, stringsAsFactors =  FALSE)
@@ -63,7 +64,7 @@ download_ea<-function(col_value=NULL, column=NULL){
       }# end of oc extraction
       # finally wbid
       else if (column =="WBID"){
-        # oc level extraction
+        # wbid level extraction
         if (col_value %in% ea_wbids[,"WBID"]){
           classifications<-utils::read.csv(paste0("http://environment.data.gov.uk/catchment-planning/WaterBody/", col_value, "/csv"), header=TRUE, stringsAsFactors =  FALSE)
         }
