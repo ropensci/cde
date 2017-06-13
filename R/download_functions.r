@@ -44,7 +44,6 @@ download_ea<-function(col_value=NULL, column=NULL){
       else if (column =="MC"){
         # rbd level extraction
         index_num<-ea_wbids$MC.num[which(ea_wbids[,column]==col_value)][1]
-        print(index_num)
         if (is.na(index_num)){
           stop("Management Catchment name specified not found.")
         }else{
