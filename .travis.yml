@@ -10,5 +10,5 @@ os:
 
 r:
 - release
-- oldrelease
+- oldrel
 - devel
