@@ -1,0 +1,13 @@
+cde TO DO
+----------
+Need to revise tests - fails on size of returned df - change in source data
+
+Revise max year (2016 data now available) - can this be set from actual data?
+
+Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default?
+
+Check layout of legend to avoid overlap
+
+Allow specification of colours in plotting functions
+
+Add function to get other data (beyond classification) - more detail on elements, measures etc.
