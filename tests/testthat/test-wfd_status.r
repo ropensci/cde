@@ -13,7 +13,7 @@ test_that("dimensions of dataframe are as expected", {
   # retrieve data for Avon Warwickshire MC
   test_mc_avon<-wfd_status("Avon Warwickshire", "MC")
   # check that the dimensions are 516 rows, 17 cols
-  expect_true(all(dim(test_mc_avon)== c(594, 17)))
+  expect_true(all(dim(test_mc_avon)== c(594, 18)))
 
 })
 
