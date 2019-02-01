@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # cde package
 [![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde)
 
-Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. This is a staging development towards a broader package that will work for all UK WFD classification data, so won't be heading to CRAN in this format.
+Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. This is still under development (see To Do list at bottom) but core functions work.
 
 ## Installation
 
@@ -90,3 +90,17 @@ status_plot("Solway Tweed", "RBD")
 # River Basin District between 2012 and 2014
 status_plot("Humber", "RBD", startyr=2012, endyr=2014)
 ```
+
+### Things to do (2019-02-01)
+
+Need to revise tests - fails on size of returned df - change in source data- DONE
+
+Revise max year (2016 data now available) - can this be set from actual data?
+
+Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default?
+
+Check layout of legend to avoid overlap
+
+Allow specification of colours in plotting functions
+
+Add function to get other data (beyond classification) - more detail on elements, measures etc.
