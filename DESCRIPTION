@@ -21,5 +21,5 @@ Suggests:
     rmarkdown
 URL: https://github.com/robbriers/cde
 BugReports: https://github.com/robbriers/cde/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
