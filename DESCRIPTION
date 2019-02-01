@@ -2,8 +2,8 @@ Package: cde
 Type: Package
 Title: Access Environment Agency WFD Classifcation Data
 Version: 0.1.0
-Author: Dr Rob Briers
-Maintainer: Dr Rob Briers <r.briers@napier.ac.uk>
+Authors@R: person("Rob", "Briers", email = "r.briers@napier.ac.uk",
+  role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0341-1203"))
 Description: Retrieves WFD Waterbody Classification information from the
    Environment Agency Catchment Data Explorer (CDE) site.
 Depends:

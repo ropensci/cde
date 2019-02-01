@@ -66,8 +66,8 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
       # a valid column has been chosen, next test years
       # if there is a startyr set
       if (!is.null(startyr)){
-        if (startyr<2009 | startyr >2015){
-          stop("Starting year cannot be before 2009 or after 2015")
+        if (startyr<2009 | startyr >2016){
+          stop("Starting year cannot be before 2009 or after 2016")
         }
         # if there is an end year
         if (!is.null(endyr)){
