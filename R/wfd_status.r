@@ -76,8 +76,8 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
             stop("End year is before Start year: please correct.")
           }
           # years are in correct order
-          if (!startyr >=2009 | !endyr <=2015){
-            stop("Years specified outside range of data available (2009-2015).")
+          if (!startyr >=2009 | !endyr <=2016){
+            stop("Years specified outside range of data available (2009-2016).")
           }
         }
       }
