@@ -6,7 +6,7 @@
 \usage{
 status_plot(col_value = NULL, column = NULL,
   element = "Overall Water Body", startyr = NULL, endyr = NULL,
-  type = NULL)
+  type = NULL, scheme = "vir")
 }
 \arguments{
 \item{col_value}{A string representing the description (name) of the 
@@ -36,10 +36,15 @@ is ignored and all years are returned.}
 catchment level or RBD level queries, the data can also be subset by 
 waterbody type. Possible values are \code{River}, \code{Lake}, 
 \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.}
+
+\item{scheme}{Which colour scheme to use with plots; defaults to a viridis
+based scheme (\code{"vir"} but can also choose to use the colours specified
+in the WFD document by specifying as \code{"wfd"}.}
 }
 \value{
 A (stacked) barplot of the percentage of waterbodies within the 
-specified area of different status values, with standard colour scheme.
+specified area of different status values represented as different colours
+depending on the scheme specified.
 }
 \description{
 Produces a (stacked) percentage barplot of waterbody
@@ -47,11 +52,11 @@ status information for a given set of data (MC, OC or RBD)
 }
 \examples{
 # plot the Overall Water Body status for Rivers in the Avon Warwickshire 
-# Management Catchment in 2011
+# Management Catchment in 2011 using viridis-based colours
 status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 
 # plot the Overall Water Body status of Lakes in the Humber RBD betweeen 
-# 2012 and 2014
-status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake")
+# 2012 and 2014 using WFD colour scheme
+status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake", scheme="wfd")
 
 }
