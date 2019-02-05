@@ -26,6 +26,9 @@
 search_sites<-function(string=NULL, column=NULL){
   search_choices<-c("name", "MC", "OC", "RBD")
   # if there is a value passed for both arguments
+  ################
+  ##### this does not catch error if only one passed!
+  ################
   if (!is.null(column) & !is.null(string)){
   # if the column is found in ea_wbids  
     if (column %in% search_choices){

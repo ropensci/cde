@@ -4,23 +4,28 @@
 
 #' @inheritParams wfd_status
 #' 
+#' @param scheme Which colour scheme to use with plots; defaults to a viridis
+#' based scheme (\code{"vir"} but can also choose to use the colours specified
+#' in the WFD document by specifying as \code{"wfd"}.
+#' 
 #' @importFrom graphics barplot
 #'
 #' @return A (stacked) barplot of the percentage of waterbodies within the 
-#' specified area of different status values, with standard colour scheme.
+#' specified area of different status values represented as different colours
+#' depending on the scheme specified.
 #'  
 #' @export status_plot
 #'  
 #' @examples
 #' # plot the Overall Water Body status for Rivers in the Avon Warwickshire 
-#' # Management Catchment in 2011
+#' # Management Catchment in 2011 using viridis-based colours
 #' status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 #' 
 #' # plot the Overall Water Body status of Lakes in the Humber RBD betweeen 
-#' # 2012 and 2014
-#' status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake")
+#' # 2012 and 2014 using WFD colour scheme
+#' status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake", scheme="wfd")
 #'
-status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
+status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL, scheme="vir"){
   # do initial check of column choice
   plot_choices<-c("MC", "OC", "RBD")
     if (!column %in% plot_choices){
@@ -43,8 +48,9 @@ status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body",
   # set up df of rows, status grades and colours
   nums<-c(1,2,3,4,5)
   status<-c("High", "Good", "Moderate", "Poor", "Bad")
-  colours<-c("Blue", "Green", "Yellow", "Orange", "Red")
-  statusdf<-cbind.data.frame(nums, status, colours)
+  vir_colours<-c("#79d051ff", "#26a784ff","#2a768eff", "#404284ff", "#440154ff")
+  wfd_colours<-c("Blue", "Green", "Yellow", "Orange", "Red")
+  statusdf<-cbind.data.frame(nums, status, vir_colours, wfd_colours)
   
   # subset df based on status classes present in dataset
   needed<-statusdf[match(row.names(props), statusdf$status),]
@@ -52,8 +58,13 @@ status_plot<-function(col_value=NULL, column=NULL, element="Overall Water Body",
   # order the numbers required in decreasing order to set sequence
   ordered<-order(needed$nums, decreasing=TRUE)
   
-  # order the colours needed in the same way
-  cols_ordered<-as.character(needed$colours[ordered])
+  # order the colours needed in the same way, depending on scheme choice
+  if (scheme=="wfd"){
+    cols_ordered<-as.character(needed$wfd_colours[ordered])
+  }
+  else{
+    cols_ordered<-as.character(needed$vir_colours[ordered])
+  }
   
   # order the proportions in the same order
   ord_props<-props[ordered,]
