@@ -67,14 +67,16 @@ This produces summary barplots of percentage of waterbodies at different status.
 
 When a single year is specified, the bars represent the percentage of waterbodies in each status class. When multiple years are specified, the output is a stacked barplot of status percentages for each year.
 
+The default colour scheme (\code{scheme="vir"}) is a viridis-based set of colours. The colours specified for status classes within the WFD text can be used instead by specifying \code{scheme="wfd"}.
+
 ``` r
 # plot status information for Lakes in the Avon Hampshire Management 
 # Catchment in 2012
 status_plot("Avon Hampshire", "MC", startyr=2012, type="Lake")
 
 # get status information for all waterbodies within the Solway Tweed
-# River Basin District in all years (2009-2015)
-status_plot("Solway Tweed", "RBD")
+# River Basin District in all years (2009-2015) and plot in WFD colour scheme.
+status_plot("Solway Tweed", "RBD", scheme="wfd")
 
 # get status information for all waterbodies within the Humber
 # River Basin District between 2012 and 2014
@@ -85,12 +87,12 @@ status_plot("Humber", "RBD", startyr=2012, endyr=2014)
 
 Need to revise tests - fails on size of returned df - change in source data- DONE
 
-Revise max year (2016 data now available) - can this be set from actual data?
+Revise max year (2016 data now available) - can this be set from actual data? SHOULD BE ABLE TO GET MAX VALUE OF YEAR FROM DATA RETURNED AND CHECK THIS AGAINST ARGUMENTS - SOME YEARS DATA INCOMPLETE SO COULD WARN
 
-Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default?
+Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default? DONE
 
-Check layout of legend to avoid overlap
+Allow specification of colours in plotting functions = PROBABLY NOT
 
-Allow specification of colours in plotting functions
+Derive list of elements to base selection on - use WBID Excel sheet to extract. Probably not a good idea to go down to component level.
 
-Add function to get other data (beyond classification) - more detail on elements, measures etc.
+Add function to get other data (beyond classification) - more detail on measures, RNAG etc.
