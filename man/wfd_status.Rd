@@ -5,7 +5,7 @@
 \title{Retrieve WFD Status Information}
 \usage{
 wfd_status(col_value = NULL, column = NULL,
-  element = "Overall Water Body", startyr = NULL, endyr = NULL,
+  level = "Overall Water Body", startyr = NULL, endyr = NULL,
   type = NULL)
 }
 \arguments{
@@ -19,8 +19,8 @@ Use the \code{\link{search_sites}} function to search for specific values.}
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{element}{The WFD quality element to be extracted. Defaults to 
-'Overall Water Body'. See docs for possible values.}
+\item{level}{The level within the WFD quality status classification to be 
+extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
 
 \item{startyr}{The data can be extracted for specific years using the 
 \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
@@ -39,7 +39,7 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 }
 \value{
 A data frame containing the classifcation details for the 
-specified combination of column, value, element and dates.
+specified combination of column, value, level and dates.
 }
 \description{
 Retrieves WFD Status class data from EA Catchment Data
@@ -54,8 +54,11 @@ downloads, waterbody \code{Type} can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).
 }
 \examples{
-# get Overall Water Body status for waterbody GB520804714300
+# get Overall Water Body status classification for waterbody GB520804714300
 wfd_status("GB520804714300", "WBID")
+
+# get status class based on Priority substances for waterbody GB520804714300
+wfd_status("GB520804714300", "WBID", level="Priority substances")
 
 # get the Overall Water Body status of Lakes in the Humber RBD, between 
 # 2012 and 2014

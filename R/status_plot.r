@@ -21,12 +21,12 @@
 #' # Management Catchment in 2011 using viridis-based colours
 #' status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 #' 
-#' # the same, but just for Hydromorphological Supporting Elements
-#' status_plot("Avon Warwickshire", "MC",, level="Hydromorphological Supporting Elements", startyr = 2011, type = "River")
+#' # Chemical status classification for same MC, but all years and types
+#' status_plot("Avon Warwickshire", "MC", level="Chemical")
 #' 
-#' # plot the Overall Water Body status of Lakes in the Humber RBD betweeen 
-#' # 2012 and 2014 using WFD colour scheme
-#' status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake", scheme="wfd")
+#' # plot the Overall Water Body status of all waterbodies
+#' # in the Humber RBD between 2012 and 2014 using WFD colour scheme
+#' status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, scheme="wfd")
 #'
 status_plot<-function(col_value=NULL, column=NULL, level="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL, scheme="vir"){
   # do initial check of column choice
@@ -48,11 +48,13 @@ status_plot<-function(col_value=NULL, column=NULL, level="Overall Water Body", s
   
   props<-as.matrix(prop.table(plot_table, 2)*100)
 
-  # set up df of rows, status grades and colours
-  nums<-c(1,2,3,4,5)
-  status<-c("High", "Good", "Moderate", "Poor", "Bad")
-  vir_colours<-c("#79d051ff", "#26a784ff","#2a768eff", "#404284ff", "#440154ff")
-  wfd_colours<-c("Blue", "Green", "Yellow", "Orange", "Red")
+  # set up df of rows, status grades and colours # adapting for other elements
+  # second 5 is fail for chemical and priority subs
+  # 6 is Does not require assessment = Gray
+  nums<-c(1, 2, 2, 3, 4, 5, 5, 6)
+  status<-c("High", "Good", "Supports Good", "Moderate", "Poor", "Bad", "Fail", "Does not require assessment")
+  vir_colours<-c("#79d051ff", "#26a784ff", "#26a784ff", "#2a768eff", "#404284ff", "#440154ff", "#440154ff", "#BEBEBE")
+  wfd_colours<-c("Blue", "Green", "Green", "Yellow", "Orange", "Red", "Red", "Gray")
   statusdf<-cbind.data.frame(nums, status, vir_colours, wfd_colours)
   
   # subset df based on status classes present in dataset
@@ -74,6 +76,7 @@ status_plot<-function(col_value=NULL, column=NULL, level="Overall Water Body", s
   
   # do the actual plotting
   # if for a single year
+  ###### this does not work if there is only one status class for all WB ######
   if (ncol(props)==1){
     return(graphics::barplot(ord_props, col=cols_ordered, space=0, ylab="Percentage of waterbodies", ylim=c(0,100)))
   }

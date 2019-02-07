@@ -5,7 +5,7 @@
 \title{Plot Status Summary}
 \usage{
 status_plot(col_value = NULL, column = NULL,
-  element = "Overall Water Body", startyr = NULL, endyr = NULL,
+  level = "Overall Water Body", startyr = NULL, endyr = NULL,
   type = NULL, scheme = "vir")
 }
 \arguments{
@@ -19,8 +19,8 @@ Use the \code{\link{search_sites}} function to search for specific values.}
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{element}{The WFD quality element to be extracted. Defaults to 
-'Overall Water Body'. See docs for possible values.}
+\item{level}{The level within the WFD quality status classification to be 
+extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
 
 \item{startyr}{The data can be extracted for specific years using the 
 \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
@@ -55,8 +55,11 @@ status information for a given set of data (MC, OC or RBD)
 # Management Catchment in 2011 using viridis-based colours
 status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 
-# plot the Overall Water Body status of Lakes in the Humber RBD betweeen 
-# 2012 and 2014 using WFD colour scheme
-status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, type="Lake", scheme="wfd")
+# Chemical status classification for same MC, but all years and types
+status_plot("Avon Warwickshire", "MC", level="Chemical")
+
+# plot the Overall Water Body status of all waterbodies
+# in the Humber RBD between 2012 and 2014 using WFD colour scheme
+status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, scheme="wfd")
 
 }
