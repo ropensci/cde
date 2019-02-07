@@ -19,8 +19,9 @@
 #' @param column The column to be searched. Possible options are 
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
 #' (Management Catchment) and \code{RBD} (River Basin District)
-#' @param element The WFD quality element to be extracted. Defaults to 
-#' 'Overall Water Body'. See docs for possible values.
+#' 
+#' @param level The level within the WFD quality status classification to be 
+#' extracted. Defaults to 'Overall Water Body'. See docs for possible values.
 #' 
 #' @param startyr The data can be extracted for specific years using the 
 #' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
@@ -38,13 +39,17 @@
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #' 
 #' @return A data frame containing the classifcation details for the 
-#' specified combination of column, value, element and dates.
+#' specified combination of column, value, level and dates.
 #' 
 #' @export wfd_status
 #'
 #' @examples
-#' # get Overall Water Body status for waterbody GB520804714300
+#' # get Overall Water Body status classification for waterbody GB520804714300
 #' wfd_status("GB520804714300", "WBID")
+#' 
+#' # get status class based on Priority substances for waterbody GB520804714300
+#' wfd_status("GB520804714300", "WBID", level="Priority substances")
+
 #' 
 #' # get the Overall Water Body status of Lakes in the Humber RBD, between 
 #' # 2012 and 2014
@@ -55,15 +60,21 @@
 #' wfd_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 #' 
 
-wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
+wfd_status<-function(col_value=NULL, column=NULL, level="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
   # start by running checks on input data
   # first search value and column choice
   # list of possible columns to select on
   choices<-c("WBID", "MC", "OC", "RBD")
+  # list of classification levels that can be extracted
+  class_levels<-c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
   # is a value/column specified
   if (!is.null(column) & !is.null(col_value)){
     if (column %in% choices){
-      # a valid column has been chosen, next test years
+      # if both search string and choice are present and valid, check level
+      if (!level %in% class_levels){
+        stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
+      }
+      # a valid level has been chosen, next test years
       # if there is a startyr set
       if (!is.null(startyr)){
         if (startyr<2009 | startyr >2016){
@@ -81,7 +92,7 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
           }
         }
       }
-      if (!is.null(type)){
+        if (!is.null(type)){
         types<-c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
         if (!type %in% types){
           stop("Type specified is not a valid choice (River, Lake, CoastalWater, TransitionalWater or GroundWaterBody")
@@ -104,8 +115,18 @@ wfd_status<-function(col_value=NULL, column=NULL, element="Overall Water Body", 
   else if (!is.null(startyr)){
     status_data<-status_data[status_data$Year==startyr, ]
   }
-  # element subsetting, defaults to "Overall Water Body"
-  status_data<-status_data[status_data$Classification.Item==element, ]
+  # level subsetting, defaults to "Overall Water Body"
+  # for Chemical and Supporting Elements levels, need to deal with options for
+  # surface waters and groundwaters
+  if (level=="Chemical"){
+    status_data<-status_data[status_data$Classification.Item=="Chemical" | status_data$Classification.Item=="Chemical (GW)", ]
+  }
+  else if (level=="Supporting elements"){
+    status_data<-status_data[status_data$Classification.Item=="Supporting elements (Surface Water)" | status_data$Classification.Item=="Supporting elements (Groundwater)", ]
+  }
+  else{
+    status_data<-status_data[status_data$Classification.Item==level, ]
+  }
   # now Water.body.type
   if (!is.null(type)){
     status_data<-status_data[status_data$Water.body.type==type, ]

@@ -97,10 +97,18 @@ Need to revise tests - fails on size of returned df - change in source data- DON
 
 Revise max year (2016 data now available) - can this be set from actual data?
 
-Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default?
+Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default? DONE
 
-Check layout of legend to avoid overlap
+Set up list of classification levels:
 
-Allow specification of colours in plotting functions
+**Have taken this to levels 1, 2 and 4 but causes an issue for plotting as supporting elements like Hydromorph have a status class of 'supporting good', rather than expected values**
 
-Add function to get other data (beyond classification) - more detail on elements, measures etc.
+e.g. 
+```{r, eval=FALSE}
+# single year and type
+test_mc_avon<-wfd_status("Avon Warwickshire", "MC", level="Hydromorphological Supporting Elements", startyr = 2011, type = "River")
+
+
+status_plot("Avon Warwickshire", "MC", level="Hydromorphological Supporting Elements", startyr = 2011, type = "River")
+# results in blank plot
+```
