@@ -2,7 +2,7 @@
 % Please edit documentation in R/search_sites.r
 \name{search_sites}
 \alias{search_sites}
-\title{Search EA site database}
+\title{Search database of site names}
 \usage{
 search_sites(string = NULL, column = NULL)
 }
@@ -22,7 +22,8 @@ the search string (full or partial matches) in the column specified.
 Searches the listing of EA monitoring sites to find rows
 that contain the string provided. Can search by name (\code{name}), 
 Management Catchment (\code{MC}), Operational Catchment (\code{OC}) 
-or River Basin District (\code{RBD}).
+or River Basin District (\code{RBD}). The search is done on a local copy
+of the waterbody listing rather than connecting to the EA site.
 }
 \examples{
 # search for Operational Catchments containing "Avon"
