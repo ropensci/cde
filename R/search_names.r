@@ -15,22 +15,17 @@
 #' @return A data frame containing the details of all the sites that match
 #' the search string (full or partial matches) in the column specified.
 #'
-#' @export search_sites
+#' @export search_names
 #'
 #' @examples
 #' # search for Operational Catchments containing "Avon"
-#' search_sites("Avon", "OC")
+#' search_names("Avon", "OC")
 #' 
 #' # search for River Basin Districts containing "Tweed"
-#' search_sites("Tweed", "RBD")
-search_sites <- function(string = NULL, column = NULL) {
+#' search_names("Tweed", "RBD")
+search_names <- function(string = NULL, column = NULL) {
   search_choices <- c("name", "MC", "OC", "RBD")
-  # if there is a value passed for both arguments
-  ################
-  ##### this does not catch error if only one passed!
-  ################
-  #  if (!is.null(column) & !is.null(string)){
-
+  # check if there is a value passed for both arguments
   if (is.null(column) | is.null(string)) {
     stop("Both a search string and column (name, MC, OC, or RBD) should be specified", "\n")
   }

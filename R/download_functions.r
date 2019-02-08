@@ -4,7 +4,8 @@
 #' (\code{WBID}), Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}).
 #' Start year (\code{startyr}) and end year (\code{endyr}) allow
-#' specific timeranges to be downloaded.
+#' specific timeranges to be downloaded. This is not exported as it is
+#' called by \code{\link{get_status}}.
 #' For Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}) level
 #' downloads, waterbody \code{Type} can also be specified to allow
@@ -14,7 +15,7 @@
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
-#' Use the \code{\link{search_sites}} function to search for specific values.
+#' Use the \code{\link{search_names}} function to search for specific values.
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}

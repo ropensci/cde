@@ -2,7 +2,7 @@
 #' @description Produces a (stacked) percentage barplot of waterbody
 #' status information for a given set of data (MC, OC or RBD)
 
-#' @inheritParams wfd_status
+#' @inheritParams get_status
 #'
 #' @param scheme Which colour scheme to use with plots; defaults to a viridis
 #' based scheme (\code{"vir"} but can also choose to use the colours specified
@@ -14,20 +14,20 @@
 #' specified area of different status values represented as different colours
 #' depending on the scheme specified.
 #'
-#' @export status_plot
+#' @export plot_status
 #'
 #' @examples
 #' # plot the Overall Water Body status for Rivers in the Avon Warwickshire
 #' # Management Catchment in 2011 using viridis-based colours
-#' status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
+#' plot_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 #' 
 #' # Chemical status classification for same MC, but all years and types
-#' status_plot("Avon Warwickshire", "MC", level = "Chemical")
+#' plot_status("Avon Warwickshire", "MC", level = "Chemical")
 #' 
 #' # plot the Overall Water Body status of all waterbodies
 #' # in the Humber RBD between 2012 and 2014 using WFD colour scheme
-#' status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
-status_plot <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, scheme = "vir") {
+#' plot_status("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
+plot_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, scheme = "vir") {
   # are both col_value and column given?
   if (is.null(col_value) | is.null(column)) {
     stop("Both col_value (site name) and column (name, MC, OC, or RBD) should be specified", "\n")
@@ -38,7 +38,7 @@ status_plot <- function(col_value = NULL, column = NULL, level = "Overall Water 
     stop("Column specified is not one of the possible choices (OC, MC or RBD).")
   }
   # get required data
-  plot_data <- wfd_status(col_value, column, level, startyr, endyr, type)
+  plot_data <- get_status(col_value, column, level, startyr, endyr, type)
   if (nrow(plot_data) == 0) {
     stop("No data returned, plotting not possible.")
   }
@@ -46,9 +46,6 @@ status_plot <- function(col_value = NULL, column = NULL, level = "Overall Water 
   plot_table <- with(plot_data, table(Status, Year))
 
   # convert to percentages
-  # remove rounding
-  # props<-as.matrix(round(prop.table(plot_table, 2)*100),2)
-
   props <- as.matrix(prop.table(plot_table, 2) * 100)
 
   # set up df of rows, status grades and colours # adapting for other elements

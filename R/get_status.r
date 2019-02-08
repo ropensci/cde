@@ -14,7 +14,7 @@
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
-#' Use the \code{\link{search_sites}} function to search for specific values.
+#' Use the \code{\link{search_names}} function to search for specific values.
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
@@ -41,24 +41,24 @@
 #' @return A data frame containing the classifcation details for the
 #' specified combination of column, value, level and dates.
 #'
-#' @export wfd_status
+#' @export get_status
 #'
 #' @examples
 #' # get Overall Water Body status classification for waterbody GB520804714300
-#' wfd_status("GB520804714300", "WBID")
+#' get_status("GB520804714300", "WBID")
 #' 
 #' # get status class based on Priority substances for waterbody GB520804714300
-#' wfd_status("GB520804714300", "WBID", level = "Priority substances")
+#' get_status("GB520804714300", "WBID", level = "Priority substances")
 #' 
 #' 
 #' # get the Overall Water Body status of Lakes in the Humber RBD, between
 #' # 2012 and 2014
-#' wfd_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
+#' get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
 #' 
 #' # get the Overall Water Body status for Rivers in the Avon Warwickshire
 #' # Operational Catchment in 2011
-#' wfd_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
-wfd_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+#' get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
+get_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
   # start by running checks on input data
   # first are both col_value and column specified
   if (is.null(col_value) | is.null(column)) {
@@ -69,7 +69,6 @@ wfd_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
   # list of classification levels that can be extracted
   class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
   # is a value/column specified
-  #  if (!is.null(column) & !is.null(col_value)){
   if (column %in% choices) {
     # if both search string and choice are present and valid, check level
     if (!level %in% class_levels) {
