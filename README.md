@@ -26,9 +26,7 @@ There are three main functions in the package:
 
 This allows you to search the listing of sites, catchments or river basin districts on the CDE website to locate those that match the string specified. The output of this can then be used to define inputs for the following functions.
 
-Searching can be performed by waterbody name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). These exist in a hierarchy as shown below.
-
-<img src="docs/hierarchy.png" width=600, align="center">
+Searching can be performed by waterbody name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`).
 
 The function returns a dataframe containing all rows that match (or partial match) the input string.
 

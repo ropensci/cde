@@ -90,7 +90,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <p><code>search_names</code></p>
 <p>This allows you to search the listing of sites, catchments or river basin districts on the CDE website to locate those that match the string specified. The output of this can then be used to define inputs for the following functions.</p>
 <p>Searching can be performed by waterbody name (<code>name</code>), Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).</p>
-<p>These exist in a hierarchy as shown below.</p>
 <p>The function returns a dataframe containing all rows that match (or partial match) the input string.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># search for Management Catchments containing the string 'Avon'</span>
 <span class="kw">search_names</span>(<span class="st">"Avon"</span>, <span class="st">"MC"</span>)
@@ -98,7 +97,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <span class="co"># search for waterbodies containing the string 'Till'</span>
 <span class="kw">search_names</span>(<span class="st">"Till"</span>, <span class="st">"name"</span>)</code></pre></div>
 <p><code>get_status</code></p>
-<p>This retrieves status data from the CDE site. The data can be retrieved by specifying waterbody id (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>). Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow specific timeranges to be downloaded. For Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level downloads, waterbody type (<code>type</code>) can also be specified to allow extraction of specific waterbody types (River, Lake, GroundWaterBody, TransitionalWater or CoastalWater. The classification level (<code>level</code>) can also be specified; this defaults to “Overall Water Body”, which is the Level 4 classification. Other possible values are:</p>
+<p>This retrieves status data from the CDE site. The data can be retrieved by specifying waterbody id (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>). Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow specific timeranges to be downloaded. For Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level downloads, waterbody type (<code>type</code>) can also be specified to allow extraction of specific waterbody types (“River”, “Lake”, “GroundWaterBody”, “TransitionalWater” or “CoastalWater”. The classification level (<code>level</code>) can also be specified; this defaults to “Overall Water Body”, which is the Level 4 classification. Other possible values are:</p>
 <table class="table table">
 <thead><tr class="header">
 <th>Level 1</th>
@@ -159,8 +158,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 </tbody>
 </table>
 <p>For full details of the classification hierarchy used, see the details <a href="https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy">here</a>.</p>
-<p>The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates.</p>
-<p>Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting.</p>
+<p>The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates. Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get status information for Lakes in the Avon Hampshire Management </span>
 <span class="co"># Catchment in 2012</span>
 <span class="kw">get_status</span>(<span class="st">"Avon Hampshire"</span>, <span class="st">"MC"</span>, <span class="dt">startyr=</span><span class="dv">2012</span>, <span class="dt">type=</span><span class="st">"Lake"</span>)
