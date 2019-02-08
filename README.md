@@ -3,7 +3,7 @@
 cde package
 ===========
 
-[![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=dev)](https://travis-ci.org/robbriers/cde) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/robbriers/cde?branch=dev&svg=true)](https://ci.appveyor.com/project/robbriers/cde/branch/dev) [![Coverage Status](https://coveralls.io/repos/github/robbriers/cde/badge.svg?branch=dev)](https://coveralls.io/github/robbriers/cde?branch=dev)
+[![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=dev)](https://travis-ci.org/robbriers/cde) [![Coverage Status](https://coveralls.io/repos/github/robbriers/cde/badge.svg?branch=dev)](https://coveralls.io/github/robbriers/cde?branch=dev)
 
 Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. The data that are downloaded and summarised using this package are made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
@@ -79,27 +79,4 @@ status_plot("Solway Tweed", "RBD")
 # get status information for all waterbodies within the Humber
 # River Basin District between 2012 and 2014
 status_plot("Humber", "RBD", startyr=2012, endyr=2014)
-```
-
-### Things to do (2019-02-01)
-
-Need to revise tests - fails on size of returned df - change in source data- DONE
-
-Revise max year (2016 data now available) - can this be set from actual data?
-
-Change colour scheme to allow viridis option (hard code to avoid dependencies?) - set as default? DONE
-
-Set up list of classification levels:
-
-**Have taken this to levels 1, 2 and 4 but causes an issue for plotting as supporting elements like Hydromorph have a status class of 'supporting good', rather than expected values**
-
-e.g.
-
-``` r
-# single year and type
-test_mc_avon<-wfd_status("Avon Warwickshire", "MC", level="Hydromorphological Supporting Elements", startyr = 2011, type = "River")
-
-
-status_plot("Avon Warwickshire", "MC", level="Hydromorphological Supporting Elements", startyr = 2011, type = "River")
-# results in blank plot
 ```

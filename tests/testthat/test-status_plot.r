@@ -16,6 +16,10 @@ test_that("invalid type returns an error", {
   expect_error(status_plot("Avon Hampshire", "MC", startyr=2012, type="Aardvark"))
 })
 
+test_that("incorrect arguments returns an error", {
+  # left out column value to search on
+  expect_error(status_plot("Avon Hampshire", startyr=2012))
+})
 
 test_that("start date outside data range returns an error", {
   # retrieve data for year 1900

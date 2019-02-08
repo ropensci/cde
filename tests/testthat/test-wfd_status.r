@@ -22,6 +22,11 @@ test_that("invalid column specified returns an error", {
   expect_error(wfd_status("Avon Warwickshire", "Aardvark"))
 })
 
+test_that("incorrect arguments returns an error", {
+  # left out column value to search on
+  expect_error(wfd_status("Avon Hampshire", startyr=2012))
+})
+
 test_that("invalid string returns an error", {
   # retrieve data for site "Aardvark"
   expect_error(wfd_status("Aardvark", "WBID"))
