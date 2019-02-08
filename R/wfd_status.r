@@ -75,6 +75,12 @@ wfd_status<-function(col_value=NULL, column=NULL, level="Overall Water Body", st
         stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
       }
       # a valid level has been chosen, next test years
+      # are years, if present, numeric?
+      if (!is.null(startyr) & !is.null(endyr)){
+        if (!is.numeric(startyr) | !is.numeric(endyr)) {
+          stop("Please enter numeric values for the starting and ending years")
+        }
+      }
       # if there is a startyr set
       if (!is.null(startyr)){
         if (startyr<2009 | startyr >2016){
