@@ -26,9 +26,9 @@ There are three main functions in the package:
 
 This allows you to search the listing of sites, catchments or river basin districts on the CDE website to locate those that match the string specified. The output of this can then be used to define inputs for the following functions.
 
-Searching can be performed by waterbody name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`).
+Searching can be performed by waterbody name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). These exist in a hierarchy as shown below.
 
-These exist in a hierarchy as shown below.
+<img src="docs/img/hierarchy.png" width=600, align="center">
 
 The function returns a dataframe containing all rows that match (or partial match) the input string.
 
@@ -42,7 +42,7 @@ search_names("Till", "name")
 
 `get_status`
 
-This retrieves status data from the CDE site. The data can be retrieved by specifying waterbody id (`WBID`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). Start year (`startyr`) and end year (`endyr`) allow specific timeranges to be downloaded. For Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`) level downloads, waterbody type (`type`) can also be specified to allow extraction of specific waterbody types (River, Lake, GroundWaterBody, TransitionalWater or CoastalWater. The classification level (`level`) can also be specified; this defaults to "Overall Water Body", which is the Level 4 classification. Other possible values are:
+This retrieves status data from the CDE site. The data can be retrieved by specifying waterbody id (`WBID`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). Start year (`startyr`) and end year (`endyr`) allow specific timeranges to be downloaded. For Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`) level downloads, waterbody type (`type`) can also be specified to allow extraction of specific waterbody types ("River", "Lake", "GroundWaterBody", "TransitionalWater" or "CoastalWater". The classification level (`level`) can also be specified; this defaults to "Overall Water Body", which is the Level 4 classification. Other possible values are:
 
 | Level 1      | Level 2                                | Level 4            |
 |--------------|----------------------------------------|--------------------|
@@ -59,9 +59,7 @@ This retrieves status data from the CDE site. The data can be retrieved by speci
 
 For full details of the classification hierarchy used, see the details [here](https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy).
 
-The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates.
-
-Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting.
+The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates. Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting.
 
 ``` r
 # get status information for Lakes in the Avon Hampshire Management 
