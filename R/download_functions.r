@@ -24,6 +24,8 @@
 #' @return A data frame containing the classifcation details for the
 #' specified combination of column and value.
 #'
+#' @noRd
+
 
 download_ea <- function(col_value = NULL, column = NULL) {
   # set up url components
@@ -87,6 +89,8 @@ download_ea <- function(col_value = NULL, column = NULL) {
 #
 #' @param download_url A string representing the url to download the
 #' zip file from.
+#' 
+#' @noRd
 
 zip_download <- function(download_url) {
   temp <- tempfile()
