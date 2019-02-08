@@ -45,19 +45,18 @@
 #'
 #' @examples
 #' # get Overall Water Body status classification for waterbody GB520804714300
-#' get_status("GB520804714300", "WBID")
+#' \dontrun{get_status("GB520804714300", "WBID")}
 #' 
 #' # get status class based on Priority substances for waterbody GB520804714300
-#' get_status("GB520804714300", "WBID", level = "Priority substances")
-#' 
+#' \dontrun{get_status("GB520804714300", "WBID", level = "Priority substances")}
 #' 
 #' # get the Overall Water Body status of Lakes in the Humber RBD, between
 #' # 2012 and 2014
-#' get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
+#' \dontrun{get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
 #' 
 #' # get the Overall Water Body status for Rivers in the Avon Warwickshire
 #' # Operational Catchment in 2011
-#' get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
+#' \dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
 get_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
   # start by running checks on input data
   # first are both col_value and column specified

@@ -36,7 +36,7 @@ This allows you to search the listing of sites, catchments or river basin distri
 
 Searching can be performed by waterbody name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). These exist in a hierarchy as shown below.
 
-<img src="docs/img/hierarchy.png" width=600, align="center">
+<img src="docs/hierarchy.png" width=600, align="center">
 
 The function returns a dataframe containing all rows that match (or partial match) the input string.
 
