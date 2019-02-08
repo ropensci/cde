@@ -5,7 +5,7 @@
 \alias{cde}
 \alias{cde-package}
 \title{cde: Extract and plot Water Framework Directive (WFD) waterbody status data
- from the Environment Agency Catchment Data Explorer (CDE) website}
+from the Environment Agency Catchment Data Explorer (CDE) website}
 \description{
 The cde package allows searching, download and plotting of the WFD
 waterbody status classification data for all waterbodies within the
