@@ -75,17 +75,19 @@ status_plot<-function(col_value=NULL, column=NULL, level="Overall Water Body", s
   ord_props<-props[ordered,]
   
   # do the actual plotting
-  # if for a single year
-  ###### this does not work if there is only one status class for all WB ######
+  # single year, single status class
   if (ncol(props)==1 & nrow(props)==1){
     return(graphics::barplot(ord_props, names.arg=needed$status, col=cols_ordered, space=0, ylab="Percentage of waterbodies", ylim=c(0,100)))
   }
+  # single year, more than one status class
   if (ncol(props)==1 & nrow(props)>1){
     return(graphics::barplot(ord_props, col=cols_ordered, space=0, ylab="Percentage of waterbodies", ylim=c(0,100)))
   }
+  # more than one year, one status class
   if(ncol(props)>1 & nrow(props)==1){
     graphics::barplot(ord_props, legend.text=needed$status, args.legend=list(x=(ncol(props)*2)-(ncol(props)/2.5), y=80), col=cols_ordered, ylab="Percentage of waterbodies", xlim=c(0, (ncol(props)*2)-ncol(props)/2), ylim=c(0,100))
   }
+  # more than one year, more than one status class
   else{
     return(graphics::barplot(ord_props, legend=TRUE, args.legend=list(x=(ncol(props)*2)-(ncol(props)/2.5), y=80), col=cols_ordered, ylab="Percentage of waterbodies", xlim=c(0, (ncol(props)*2)-ncol(props)/2), ylim=c(0,100)))
   }
