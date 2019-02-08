@@ -62,44 +62,47 @@
 
 wfd_status<-function(col_value=NULL, column=NULL, level="Overall Water Body", startyr=NULL, endyr=NULL, type=NULL){
   # start by running checks on input data
-  # first search value and column choice
+  # first are both col_value and column specified
+  if (is.null(col_value) | is.null(column)){
+    stop("Both col_value (site name) and column (name, MC, OC, or RBD) should be specified", "\n")
+  }
   # list of possible columns to select on
   choices<-c("WBID", "MC", "OC", "RBD")
   # list of classification levels that can be extracted
   class_levels<-c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
   # is a value/column specified
-  if (!is.null(column) & !is.null(col_value)){
-    if (column %in% choices){
-      # if both search string and choice are present and valid, check level
-      if (!level %in% class_levels){
-        stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
+#  if (!is.null(column) & !is.null(col_value)){
+  if (column %in% choices){
+    # if both search string and choice are present and valid, check level
+    if (!level %in% class_levels){
+      stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
+    }
+    # a valid level has been chosen, next test years
+    # are years, if present, numeric?
+    if (!is.null(startyr) & !is.null(endyr)){
+      if (!is.numeric(startyr) | !is.numeric(endyr)) {
+        stop("Please enter numeric values for the starting and ending years")
       }
-      # a valid level has been chosen, next test years
-      # are years, if present, numeric?
-      if (!is.null(startyr) & !is.null(endyr)){
-        if (!is.numeric(startyr) | !is.numeric(endyr)) {
-          stop("Please enter numeric values for the starting and ending years")
+    }
+    # if there is a startyr set
+    if (!is.null(startyr)){
+      if (startyr<2009 | startyr >2016){
+        stop("Starting year cannot be before 2009 or after 2016")
+      }
+      # if there is an end year
+      if (!is.null(endyr)){
+        # check values make sense
+        if (!endyr >= startyr){
+          stop("End year is before Start year: please correct.")
+        }
+        # years are in correct order
+        if (!startyr >=2009 | !endyr <=2016){
+          stop("Years specified outside range of data available (2009-2016).")
         }
       }
-      # if there is a startyr set
-      if (!is.null(startyr)){
-        if (startyr<2009 | startyr >2016){
-          stop("Starting year cannot be before 2009 or after 2016")
-        }
-        # if there is an end year
-        if (!is.null(endyr)){
-          # check values make sense
-          if (!endyr >= startyr){
-            stop("End year is before Start year: please correct.")
-          }
-          # years are in correct order
-          if (!startyr >=2009 | !endyr <=2016){
-            stop("Years specified outside range of data available (2009-2016).")
-          }
-        }
-      }
-        if (!is.null(type)){
-        types<-c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
+    }
+    if (!is.null(type)){
+      types<-c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
         if (!type %in% types){
           stop("Type specified is not a valid choice (River, Lake, CoastalWater, TransitionalWater or GroundWaterBody")
         }
@@ -110,8 +113,7 @@ wfd_status<-function(col_value=NULL, column=NULL, level="Overall Water Body", st
     }
     else{
       stop("Column specified is not one of the possible choices (WBID, OC, MC or RBD).")
-      }
-  }
+    }
  
   # do subsetting here - years first
   if (!is.null(startyr) & !is.null(endyr)){
