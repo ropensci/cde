@@ -3,7 +3,7 @@
 cde package
 ===========
 
-[![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde)
+[![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=dev)](https://travis-ci.org/robbriers/cde) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/robbriers/cde?branch=dev&svg=true)](https://ci.appveyor.com/project/robbriers/cde/branch/dev) [![Coverage Status](https://coveralls.io/repos/github/robbriers/cde/badge.svg?branch=dev)](https://coveralls.io/github/robbriers/cde?branch=dev)
 
 Repo for R package to extract and plot WFD waterbody status data from the [EA Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. The data that are downloaded and summarised using this package are made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
