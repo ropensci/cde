@@ -26,7 +26,11 @@ There are three main functions in the package:
 
 This allows you to search the listing of sites, catchments or river basin districts on the CDE website to locate those that match the string specified. The output of this can then be used to define inputs for the following functions.
 
-Searching can be performed by name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). It returns a dataframe containing all rows that match (or partial match) the input string.
+Searching can be performed by waterbody name (`name`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`).
+
+These exist in a hierarchy as shown below.
+
+The function returns a dataframe containing all rows that match (or partial match) the input string.
 
 ``` r
 # search for Management Catchments containing the string 'Avon'
@@ -55,7 +59,7 @@ This retrieves status data from the CDE site. The data can be retrieved by speci
 
 For full details of the classification hierarchy used, see the details [here](https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy).
 
-It returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates.
+The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates.
 
 Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting.
 
