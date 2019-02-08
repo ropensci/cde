@@ -25,6 +25,9 @@
 #'
 
 download_ea <- function(col_value = NULL, column = NULL) {
+  # set up url components
+  base_url<-"http://environment.data.gov.uk/catchment-planning/"
+  end_url<-"/classification?item=all&status=all&format=csv"
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # is a value/column specified
@@ -37,7 +40,7 @@ download_ea <- function(col_value = NULL, column = NULL) {
         if (is.na(index_num)) {
           stop("River Basin District name specified not found.")
         } else {
-          downloadurl <- paste0("http://environment.data.gov.uk/catchment-planning/RiverBasinDistrict/", index_num, "/classification?item=all&status=all&format=csv")
+          downloadurl <- paste0(base_url, "RiverBasinDistrict/", index_num, end_url)
           classifications <- zip_download(downloadurl)
         }
       } # end of rbd extraction
@@ -47,7 +50,7 @@ download_ea <- function(col_value = NULL, column = NULL) {
         if (is.na(index_num)) {
           stop("Management Catchment name specified not found.")
         } else {
-          downloadurl <- paste0("http://environment.data.gov.uk/catchment-planning/ManagementCatchment/", index_num, "/classification?item=all&status=all&format=csv")
+          downloadurl <- paste0(base_url, "ManagementCatchment/", index_num, end_url)
           classifications <- zip_download(downloadurl)
         }
       } # end of mc extraction
@@ -58,14 +61,14 @@ download_ea <- function(col_value = NULL, column = NULL) {
         if (is.na(index_num)) {
           stop("Operational catchment name specified not found.")
         } else {
-          classifications <- utils::read.csv(paste0("http://environment.data.gov.uk/catchment-planning/OperationalCatchment/", index_num, "/classification?item=all&status=all&format=csv"), header = TRUE, stringsAsFactors = FALSE)
+          classifications <- utils::read.csv(paste0(base_url, "OperationalCatchment/", index_num, end_url), header = TRUE, stringsAsFactors = FALSE)
         }
       } # end of oc extraction
       # finally wbid
       else if (column == "WBID") {
         # wbid level extraction
         if (col_value %in% ea_wbids[, "WBID"]) {
-          classifications <- utils::read.csv(paste0("http://environment.data.gov.uk/catchment-planning/WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
+          classifications <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
         }
         else {
           stop("WBID value specified not found.")
