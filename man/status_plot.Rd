@@ -9,32 +9,32 @@ status_plot(col_value = NULL, column = NULL,
   type = NULL, scheme = "vir")
 }
 \arguments{
-\item{col_value}{A string representing the description (name) of the 
-features to be extracted. For example to extract data for the whole of 
-the Humber RBD, this would be "Humber"; also see examples. Must be an 
+\item{col_value}{A string representing the description (name) of the
+features to be extracted. For example to extract data for the whole of
+the Humber RBD, this would be "Humber"; also see examples. Must be an
 exact match to the values used in the EA database.
 Use the \code{\link{search_sites}} function to search for specific values.}
 
-\item{column}{The column to be searched. Possible options are 
-\code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
+\item{column}{The column to be searched. Possible options are
+\code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{level}{The level within the WFD quality status classification to be 
+\item{level}{The level within the WFD quality status classification to be
 extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
 
-\item{startyr}{The data can be extracted for specific years using the 
-\code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
-specified this extracts for a particular year. If no years are specified 
+\item{startyr}{The data can be extracted for specific years using the
+\code{startyr} and \code{endyr} arguments. If only \code{startyr} is
+specified this extracts for a particular year. If no years are specified
 all years are returned.}
 
-\item{endyr}{The data can be extracted for specific years using the 
+\item{endyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 only be specified if \code{startyr} is also included, otherwise it
 is ignored and all years are returned.}
 
-\item{type}{Type of waterbody to be extracted. For Operational/Management 
-catchment level or RBD level queries, the data can also be subset by 
-waterbody type. Possible values are \code{River}, \code{Lake}, 
+\item{type}{Type of waterbody to be extracted. For Operational/Management
+catchment level or RBD level queries, the data can also be subset by
+waterbody type. Possible values are \code{River}, \code{Lake},
 \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.}
 
 \item{scheme}{Which colour scheme to use with plots; defaults to a viridis
@@ -42,7 +42,7 @@ based scheme (\code{"vir"} but can also choose to use the colours specified
 in the WFD document by specifying as \code{"wfd"}.}
 }
 \value{
-A (stacked) barplot of the percentage of waterbodies within the 
+A (stacked) barplot of the percentage of waterbodies within the
 specified area of different status values represented as different colours
 depending on the scheme specified.
 }
@@ -51,15 +51,14 @@ Produces a (stacked) percentage barplot of waterbody
 status information for a given set of data (MC, OC or RBD)
 }
 \examples{
-# plot the Overall Water Body status for Rivers in the Avon Warwickshire 
+# plot the Overall Water Body status for Rivers in the Avon Warwickshire
 # Management Catchment in 2011 using viridis-based colours
 status_plot("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 
 # Chemical status classification for same MC, but all years and types
-status_plot("Avon Warwickshire", "MC", level="Chemical")
+status_plot("Avon Warwickshire", "MC", level = "Chemical")
 
 # plot the Overall Water Body status of all waterbodies
 # in the Humber RBD between 2012 and 2014 using WFD colour scheme
-status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, scheme="wfd")
-
+status_plot("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
 }

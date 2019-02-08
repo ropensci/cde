@@ -11,6 +11,6 @@ zip_download(download_url)
 zip file from.}
 }
 \description{
-Downloads zipfile from specified url, unzips to 
+Downloads zipfile from specified url, unzips to
 csv file and reads csv into dataframe.
 }

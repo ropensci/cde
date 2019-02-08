@@ -9,46 +9,46 @@ wfd_status(col_value = NULL, column = NULL,
   type = NULL)
 }
 \arguments{
-\item{col_value}{A string representing the description (name) of the 
-features to be extracted. For example to extract data for the whole of 
-the Humber RBD, this would be "Humber"; also see examples. Must be an 
+\item{col_value}{A string representing the description (name) of the
+features to be extracted. For example to extract data for the whole of
+the Humber RBD, this would be "Humber"; also see examples. Must be an
 exact match to the values used in the EA database.
 Use the \code{\link{search_sites}} function to search for specific values.}
 
-\item{column}{The column to be searched. Possible options are 
-\code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC} 
+\item{column}{The column to be searched. Possible options are
+\code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{level}{The level within the WFD quality status classification to be 
+\item{level}{The level within the WFD quality status classification to be
 extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
 
-\item{startyr}{The data can be extracted for specific years using the 
-\code{startyr} and \code{endyr} arguments. If only \code{startyr} is 
-specified this extracts for a particular year. If no years are specified 
+\item{startyr}{The data can be extracted for specific years using the
+\code{startyr} and \code{endyr} arguments. If only \code{startyr} is
+specified this extracts for a particular year. If no years are specified
 all years are returned.}
 
-\item{endyr}{The data can be extracted for specific years using the 
+\item{endyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 only be specified if \code{startyr} is also included, otherwise it
 is ignored and all years are returned.}
 
-\item{type}{Type of waterbody to be extracted. For Operational/Management 
-catchment level or RBD level queries, the data can also be subset by 
-waterbody type. Possible values are \code{River}, \code{Lake}, 
+\item{type}{Type of waterbody to be extracted. For Operational/Management
+catchment level or RBD level queries, the data can also be subset by
+waterbody type. Possible values are \code{River}, \code{Lake},
 \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.}
 }
 \value{
-A data frame containing the classifcation details for the 
+A data frame containing the classifcation details for the
 specified combination of column, value, level and dates.
 }
 \description{
 Retrieves WFD Status class data from EA Catchment Data
-Explorer site. Data can be retrieved by specifying waterbody id 
-(\code{WBID}), Management Catchment (\code{MC}), Operational 
+Explorer site. Data can be retrieved by specifying waterbody id
+(\code{WBID}), Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}).
-Start year (\code{startyr}) and end year (\code{endyr}) allow 
+Start year (\code{startyr}) and end year (\code{endyr}) allow
 specific timeranges to be downloaded.
-For Management Catchment (\code{MC}), Operational 
+For Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}) level
 downloads, waterbody \code{Type} can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).
@@ -58,14 +58,14 @@ extraction of specific waterbody types (River, Lake etc).
 wfd_status("GB520804714300", "WBID")
 
 # get status class based on Priority substances for waterbody GB520804714300
-wfd_status("GB520804714300", "WBID", level="Priority substances")
+wfd_status("GB520804714300", "WBID", level = "Priority substances")
 
-# get the Overall Water Body status of Lakes in the Humber RBD, between 
+
+# get the Overall Water Body status of Lakes in the Humber RBD, between
 # 2012 and 2014
 wfd_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
 
-# get the Overall Water Body status for Rivers in the Avon Warwickshire 
+# get the Overall Water Body status for Rivers in the Avon Warwickshire
 # Operational Catchment in 2011
 wfd_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
-
 }

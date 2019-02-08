@@ -10,8 +10,8 @@ search_sites(string = NULL, column = NULL)
 \item{string}{The search string to be matched. Will match whole or partial
 strings in the column values.}
 
-\item{column}{The column to be searched. Possible options are 
-\code{name}, \code{OC} (Operational Catchment), \code{MC} 
+\item{column}{The column to be searched. Possible options are
+\code{name}, \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
 }
 \value{
@@ -20,8 +20,8 @@ the search string (full or partial matches) in the column specified.
 }
 \description{
 Searches the listing of EA monitoring sites to find rows
-that contain the string provided. Can search by name (\code{name}), 
-Management Catchment (\code{MC}), Operational Catchment (\code{OC}) 
+that contain the string provided. Can search by name (\code{name}),
+Management Catchment (\code{MC}), Operational Catchment (\code{OC})
 or River Basin District (\code{RBD}). The search is done on a local copy
 of the waterbody listing rather than connecting to the EA site.
 }
