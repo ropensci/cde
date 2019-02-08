@@ -1,20 +1,18 @@
 library(cde)
-context("wfd_status")
+context("testing wfd status downloads")
 
 test_that("wfd_status returns a dataframe", {
   # retrieve data for specific waterbody
   testframe<-wfd_status("GB520804714300", "WBID")
   # check that it outputs a dataframe object
   expect_true(is.data.frame(testframe))
-  
 })
 
 test_that("dimensions of dataframe are as expected", {
   # retrieve data for Avon Warwickshire MC
   test_mc_avon<-wfd_status("Avon Warwickshire", "MC")
-  # check that the dimensions are 516 rows, 17 cols
+  # check that the dimensions are 516 rows, 18 cols
   expect_true(all(dim(test_mc_avon)== c(594, 18)))
-
 })
 
 test_that("invalid column specified returns an error", {

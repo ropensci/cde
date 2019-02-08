@@ -1,5 +1,5 @@
 library(cde)
-context("status_plot")
+context("testing status plots")
 
 test_that("invalid column specified returns an error", {
   # retrieve data for column "Aardvark"
@@ -34,4 +34,11 @@ test_that("end date before start date returns an error", {
 test_that("end date outside available range returns an error", {
   # retrieve data for years outside possible range
   expect_error(status_plot("Avon Hampshire", "MC", startyr=2012, endyr=2018))
+})
+
+test_that("function returns a vector of given length", {
+  # plot for Avon Warwickshire MC chemical status
+  test_plot<-status_plot("Avon Warwickshire", "MC", level="Chemical")
+  # check that the vector has a length of 8
+  expect_true(length(test_plot)== 8)
 })

@@ -6,7 +6,6 @@ test_that("download_ea returns a dataframe", {
   testframe<-download_ea("GB520804714300", "WBID")
   # check that it outputs a dataframe object
   expect_true(is.data.frame(testframe))
-  
 })
 
 
@@ -16,5 +15,10 @@ test_that("zip_download returns a dataframe", {
   testframe<-zip_download(test_url)
   # check that it outputs a dataframe object
   expect_true(is.data.frame(testframe))
-  
+})
+
+
+test_that("tryingto download a nonsense column returns an error", {
+  # retrieve data for impossible year range
+  expect_error(download_ea("GB520804714300", "Aardvark"))
 })
