@@ -37,6 +37,11 @@ plot_status <- function(col_value = NULL, column = NULL, level = "Overall Water 
   if (!column %in% plot_choices) {
     stop("Column specified is not one of the possible choices (OC, MC or RBD).")
   }
+  # check that scheme is specified correctly
+  scheme_choices<-c("vir", "wfd")
+  if (!scheme %in% scheme_choices){
+    stop("scheme should be either \"vir\" or \"wfd\".")
+  }
   # get required data
   plot_data <- get_status(col_value, column, level, startyr, endyr, type)
   if (nrow(plot_data) == 0) {
