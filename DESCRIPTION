@@ -1,12 +1,13 @@
 Package: cde
 Type: Package
 Title: Access Environment Agency WFD Classifcation Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Rob", "Briers", email = "r.briers@napier.ac.uk",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0341-1203"))
-Description: Retrieves WFD Waterbody Classification information from the
-   Environment Agency Catchment Data Explorer (CDE) site 
-   (https://environment.data.gov.uk/catchment-planning/).
+Description: Retrieves and plots Water Framework Directive Waterbody 
+  Classification information from the Environment Agency Catchment 
+  Data Explorer (CDE) site 
+  (https://environment.data.gov.uk/catchment-planning/).
 Depends:
     R (>= 3.0.0)
 License: GPL-3

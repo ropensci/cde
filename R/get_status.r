@@ -91,12 +91,17 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
         if (!endyr >= startyr) {
           stop("End year is before Start year: please correct.")
         }
-        # years are in correct order
+        # are both years in the rigth range
         if (!startyr >= 2009 | !endyr <= 2016) {
           stop("Years specified outside range of data available (2009-2016).")
         }
       }
     }
+    # catch when only endyr is set
+    if (is.null(startyr) & !is.null(endyr)){
+      stop("Only endyr specified, also needs startyr.")
+    }
+    # check that the waterbody type is a valid choice
     if (!is.null(type)) {
       types <- c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
       if (!type %in% types) {
