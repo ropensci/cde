@@ -79,7 +79,29 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
   status_data <- download_cde(col_value, column, "class")
 
   # do subsetting here - years first
+  # if only start year is set, is it beyond the data range?
+  if (!is.null(startyr) & is.null(endyr)){
+    if (startyr>max(status_data$Year)){
+      message(paste0("Start year is beyond the most recent year of data (",max(status_data$Year),")"))
+      message("Just outputting most recent year")
+      startyr<-max(status_data$Year)
+    }
+  }
+  # if endyr is set, is it beyond the data range?
+  if (!is.null(endyr)){
+    if (endyr>max(status_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(status_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(status_data$Year)
+    }
+  }
+  # if they are both set, check the endyr
   if (!is.null(startyr) & !is.null(endyr)) {
+    if (endyr>max(status_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(status_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(status_data$Year)
+    }
     # if both years are specified, subset by range
     status_data <- status_data[status_data$Year >= startyr & status_data$Year <= endyr, ]
   }

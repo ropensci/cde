@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # cde package
 [![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde) [![Coverage Status](https://coveralls.io/repos/github/robbriers/cde/badge.svg?branch=master)](https://coveralls.io/github/robbriers/cde?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-R package to extract and plot Water Framework Directive (WFD) waterbody status data from the [Environment Agency Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. The data that are downloaded and summarised using this package are made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+R package to extract Water Framework Directive (WFD) waterbody status classifications and Reasons for Not Achieving Good (RNAG) status data from the [Environment Agency Catchment Data Explorer](http://environment.data.gov.uk/catchment-planning/) (CDE) site. Also provides quick overview plots of status classes. The data that are downloaded and summarised using this package are made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
 ## Installation
 
@@ -28,7 +28,7 @@ devtools::install_github("robbriers/cde")
 
 ## Basic usage
 
-There are three main functions in the package:
+There are four main functions in the package:
 
 `search_names`
 
@@ -104,4 +104,21 @@ plot_status("Solway Tweed", "RBD", scheme="wfd")
 # plot status information for all waterbodies within the Humber
 # River Basin District between 2012 and 2014
 plot_status("Humber", "RBD", startyr=2012, endyr=2014)
+```
+
+`get_rnag`
+
+This retrieves data on the Reasons for Not Achieving Good (RNAG) status (i.e. pressure data) from the CDE site. The data can be retrieved by specifying waterbody id (`WBID`), Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`). Start year (`startyr`) and end year (`endyr`) allow specific timeranges to be downloaded. For Management Catchment (`MC`), Operational Catchment (`OC`) or River Basin District (`RBD`) level downloads, waterbody type (`type`) can also be specified to allow extraction of specific waterbody types ("River", "Lake", "GroundWaterBody", "TransitionalWater" or "CoastalWater".
+
+```{r get_rnag example, eval=FALSE}
+# get RNAG issues identified for waterbody GB112071065700
+get_rnag("GB112071065700", "WBID")
+
+# get the RNAG issues for Lakes in the Humber RBD, between
+# 2012 and 2014
+get_rnag("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
+
+# get the RNAG issues for Rivers in the Avon Warwickshire
+# Operational Catchment in 2011
+get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 ```

@@ -52,17 +52,14 @@ downloads, waterbody \code{Type} can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).
 }
 \examples{
-# get Overall Water Body status classification for waterbody GB520804714300
-\dontrun{get_rnag("GB520804714300", "WBID")}
+# get RNAG issues identified for waterbody GB112071065700
+\dontrun{get_rnag("GB112071065700", "WBID")}
 
-# get status class based on Priority substances for waterbody GB520804714300
-\dontrun{get_rnag("GB520804714300", "WBID", level = "Priority substances")}
-
-# get the Overall Water Body status of Lakes in the Humber RBD, between
+# get the RNAG issues for Lakes in the Humber RBD, between
 # 2012 and 2014
 \dontrun{get_rnag("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
 
-# get the Overall Water Body status for Rivers in the Avon Warwickshire
+# get the RNAG issues for Rivers in the Avon Warwickshire
 # Operational Catchment in 2011
 \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
 }

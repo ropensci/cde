@@ -43,14 +43,14 @@
 #' @export get_rnag
 #'
 #' @examples
-#' # get Overall Water Body status classification for waterbody GB112071065700
+#' # get RNAG issues identified for waterbody GB112071065700
 #' \dontrun{get_rnag("GB112071065700", "WBID")}
 #' 
-#' # get the Overall Water Body status of Lakes in the Humber RBD, between
+#' # get the RNAG issues for Lakes in the Humber RBD, between
 #' # 2012 and 2014
 #' \dontrun{get_rnag("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
 #' 
-#' # get the Overall Water Body status for Rivers in the Avon Warwickshire
+#' # get the RNAG issues for Rivers in the Avon Warwickshire
 #' # Operational Catchment in 2011
 #' \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
 get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
@@ -70,7 +70,29 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     colnames(rnag_data)[which(names(rnag_data) == "Year")] <- "Classification.Year"
   }
   # do subsetting here - years first
+  # if only start year is set, is it beyond the data range?
+  if (!is.null(startyr) & is.null(endyr)){
+    if (startyr>max(rnag_data$Classification.Year)){
+      message(paste0("Start year is beyond the most recent year of data (",max(rnag_data$Classification.Year),")"))
+      message("Just outputting most recent year")
+      startyr<-max(rnag_data$Classification.Year)
+    }
+  }
+  # if endyr is set, is it beyond the data range?
+  if (!is.null(endyr)){
+    if (endyr>max(rnag_data$Classification.Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(rnag_data$Classification.Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(rnag_data$Classification.Year)
+    }
+  }
+  # if they are both set, check the endyr
   if (!is.null(startyr) & !is.null(endyr)) {
+    if (endyr>max(rnag_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(rnag_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(rnag_data$Year)
+    }
   # if both years are specified, subset by range
     rnag_data <- rnag_data[rnag_data$Classification.Year >= startyr & rnag_data$Classification.Year <= endyr, ]
   }
