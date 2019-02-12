@@ -1,4 +1,4 @@
-#' Retrieve Reasonf for Not Achieving Good Status 
+#' Retrieve Reasons for Not Achieving Good Status 
 #' @description Retrieves details of Reasons for Not Achieving Good (RNAG)
 #' status from EA Catchment Data Explorer site.
 #' Data can be retrieved by specifying waterbody id
@@ -71,10 +71,10 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   # do subsetting here - years first
   if (!is.null(startyr) & !is.null(endyr)) {
     # if both years are specified, subset by range
-    rnag_data <- rnag_data[rnag_data$Year >= startyr & rnag_data$Year <= endyr, ]
+    rnag_data <- rnag_data[rnag_data$Classification.Year >= startyr & rnag_data$Classification.Year <= endyr, ]
   }
   else if (!is.null(startyr)) {
-    rnag_data <- rnag_data[rnag_data$Year == startyr, ]
+    rnag_data <- rnag_data[rnag_data$Classification.Year == startyr, ]
   }
   # subset by Water.body.type
   if (!is.null(type)) {
@@ -82,10 +82,7 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   }
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
-  rnag_data <- rnag_data[!(rnag_data$Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Year == 2014 & rnag_data$Cycle == 1), ]
-
-  # remove web link column - not really needed
-  rnag_data <- rnag_data[, !(names(rnag_data) %in% c("classification.ID"))]
+  rnag_data <- rnag_data[!(rnag_data$Classification.Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Classification.Year == 2014 & rnag_data$Cycle == 1), ]
 
   return(rnag_data)
 } # end of function
