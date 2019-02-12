@@ -43,11 +43,8 @@
 #' @export get_rnag
 #'
 #' @examples
-#' # get Overall Water Body status classification for waterbody GB520804714300
-#' \dontrun{get_rnag("GB520804714300", "WBID")}
-#' 
-#' # get status class based on Priority substances for waterbody GB520804714300
-#' \dontrun{get_rnag("GB520804714300", "WBID", level = "Priority substances")}
+#' # get Overall Water Body status classification for waterbody GB112071065700
+#' \dontrun{get_rnag("GB112071065700", "WBID")}
 #' 
 #' # get the Overall Water Body status of Lakes in the Humber RBD, between
 #' # 2012 and 2014
@@ -66,11 +63,15 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     stop("Column specified is not one of the possible choices (WBID, OC, MC or RBD).")
   }
   # if all inputs valid, download data
-  rnag_data <- download_cde(col_value, column, "rnag")
-
+  rnag_data <- download_cde(col_value, column, data_type="rnag")
+  # if WBID, rename columns for consistency
+  if (column=="WBID"){
+    colnames(rnag_data)[which(names(rnag_data) == "water.body.type")] <- "Water.body.type"
+    colnames(rnag_data)[which(names(rnag_data) == "Year")] <- "Classification.Year"
+  }
   # do subsetting here - years first
   if (!is.null(startyr) & !is.null(endyr)) {
-    # if both years are specified, subset by range
+  # if both years are specified, subset by range
     rnag_data <- rnag_data[rnag_data$Classification.Year >= startyr & rnag_data$Classification.Year <= endyr, ]
   }
   else if (!is.null(startyr)) {
@@ -83,6 +84,5 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
   rnag_data <- rnag_data[!(rnag_data$Classification.Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Classification.Year == 2014 & rnag_data$Cycle == 1), ]
-
   return(rnag_data)
 } # end of function

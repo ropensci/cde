@@ -79,7 +79,11 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
       else if (column == "WBID") {
         # wbid level extraction
         if (col_value %in% ea_wbids[, "WBID"]) {
-          cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
+          if (data_type=="rnag"){
+            cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
+          }else{
+            cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
+          }
         }
         else {
           stop("WBID value specified not found.")
