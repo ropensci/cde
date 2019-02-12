@@ -27,10 +27,12 @@
 #' @noRd
 
 
-download_ea <- function(col_value = NULL, column = NULL) {
+download_ea <- function(col_value = NULL, column = NULL, data_type=NULL) {
   # set up url components
   base_url<-"http://environment.data.gov.uk/catchment-planning/"
   end_url<-"/classification?item=all&status=all&format=csv"
+  # data_type should be either "classification" or "ReasonsForNotAchievingGood"
+  # note different for wb 
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # is a value/column specified
@@ -103,3 +105,73 @@ zip_download <- function(download_url) {
   unlink(csvfile)
   return(catchment_data)
 } # end of function
+
+
+#' Check common arguments to functions
+#' @description Checks the col_value, year ranges and waterbody type
+#' for all functions 
+#
+#' @param col_value A string representing the description (name) of the
+#' features to be extracted. For example to extract data for the whole of
+#' the Humber RBD, this would be "Humber"; also see examples. Must be an
+#' exact match to the values used in the EA database.
+#' Use the \code{\link{search_names}} function to search for specific values.
+#'
+#' @param column The column to be searched. Possible options are
+#' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
+#' (Management Catchment) and \code{RBD} (River Basin District)
+#'
+#' @param startyr The data can be extracted for specific years using the
+#' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
+#' specified this extracts for a particular year. If no years are specified
+#' all years are returned.
+#'
+#' @param endyr The data can be extracted for specific years using the
+#' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
+#' only be specified if \code{startyr} is also included, otherwise it
+#' is ignored and all years are returned.
+#'
+#' @param type Type of waterbody to be extracted. For Operational/Management
+#' catchment level or RBD level queries, the data can also be subset by
+#' waterbody type. Possible values are \code{River}, \code{Lake},
+#' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
+#' 
+#' @noRd
+
+check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+   # check that both col_value and column are present
+  if (is.null(col_value) | is.null(column)) {
+    stop("Both col_value (site name) and column (name, MC, OC, or RBD) should be specified", "\n")
+  }
+  # are years, if present, numeric?
+  if (!is.null(startyr) & !is.null(endyr)) {
+    if (!is.numeric(startyr) | !is.numeric(endyr)) {
+      stop("Please enter numeric values for the starting and ending years")
+    }
+  }
+  # if there is a startyr set
+  if (!is.null(startyr)) {
+    if (startyr < 2009) {
+      stop("Starting year cannot be before 2009")
+    }
+    # if there is an end year alsoset
+    if (!is.null(endyr)) {
+      # check values make sense
+      if (!endyr >= startyr) {
+        stop("End year is before Start year: please correct.")
+      }
+    }
+  }
+  # catch when only endyr is set
+  if (is.null(startyr) & !is.null(endyr)){
+    stop("Only end year specified, also needs start year.")
+  }
+  # check that the waterbody type is a valid choice
+  if (!is.null(type)) {
+    types <- c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
+    if (!type %in% types) {
+      stop("Type specified is not a valid choice (River, Lake, CoastalWater, TransitionalWater or GroundWaterBody")
+    }
+  }
+}
+# end of function
