@@ -72,9 +72,9 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
   }
   if (column!="WBID"){
-    names(test2)[which(names(test2) == "Water.body.id")] <- "Waterbody.ID"
-    names(test2)[which(names(test2) == "Classification.Year")] <- "Year"
-    names(test2)[which(names(test2) == "Classification.Status")] <- "status"
+    names(rnag_data)[which(names(rnag_data) == "Water.body.id")] <- "Waterbody.ID"
+    names(rnag_data)[which(names(rnag_data) == "Classification.Year")] <- "Year"
+    names(rnag_data)[which(names(rnag_data) == "Classification.Status")] <- "status"
     names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
     names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
     names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
