@@ -82,18 +82,18 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   # do subsetting here - years first
   # if only start year is set, is it beyond the data range?
   if (!is.null(startyr) & is.null(endyr)){
-    if (startyr>max(rnag_data$Classification.Year)){
-      message(paste0("Start year is beyond the most recent year of data (",max(rnag_data$Classification.Year),")"))
+    if (startyr>max(rnag_data$Year)){
+      message(paste0("Start year is beyond the most recent year of data (",max(rnag_data$Year),")"))
       message("Just outputting most recent year")
-      startyr<-max(rnag_data$Classification.Year)
+      startyr<-max(rnag_data$Year)
     }
   }
   # if endyr is set, is it beyond the data range?
   if (!is.null(endyr)){
-    if (endyr>max(rnag_data$Classification.Year)){
-      message(paste0("End year is beyond the most recent year of data (",max(rnag_data$Classification.Year),")"))
+    if (endyr>max(rnag_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(rnag_data$Year),")"))
       message("Subsetting to most recent year")
-      endyr<-max(rnag_data$Classification.Year)
+      endyr<-max(rnag_data$Year)
     }
   }
   # if they are both set, check the endyr
@@ -104,10 +104,10 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
       endyr<-max(rnag_data$Year)
     }
   # if both years are specified, subset by range
-    rnag_data <- rnag_data[rnag_data$Classification.Year >= startyr & rnag_data$Classification.Year <= endyr, ]
+    rnag_data <- rnag_data[rnag_data$Year >= startyr & rnag_data$Year <= endyr, ]
   }
   else if (!is.null(startyr)) {
-    rnag_data <- rnag_data[rnag_data$Classification.Year == startyr, ]
+    rnag_data <- rnag_data[rnag_data$Year == startyr, ]
   }
   # subset by Water.body.type
   if (!is.null(type)) {
@@ -115,6 +115,6 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   }
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
-  rnag_data <- rnag_data[!(rnag_data$Classification.Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Classification.Year == 2014 & rnag_data$Cycle == 1), ]
+  rnag_data <- rnag_data[!(rnag_data$Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Year == 2014 & rnag_data$Cycle == 1), ]
   return(rnag_data)
 } # end of function
