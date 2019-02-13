@@ -20,8 +20,11 @@
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
-
-#' @return A data frame containing the classifcation details for the
+#' 
+#' @param data_type The type of data to be retrieved, either status 
+#' classification ("class") or Reasons of Not Acheving Good ("rnag").
+#' 
+#' @return A data frame containing the classifcation or RNAG details for the
 #' specified combination of column and value.
 #'
 #' @noRd

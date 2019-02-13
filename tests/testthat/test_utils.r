@@ -1,5 +1,5 @@
 library(cde)
-context("download functions")
+context("utility function testing")
 
 test_that("download returns a dataframe", {
   # retrieve data for specific waterbody
@@ -20,5 +20,10 @@ test_that("zip_download returns a dataframe", {
 
 test_that("tryingto download a nonsense column returns an error", {
   # retrieve data for impossible year range
-  expect_error(download_cde("GB520804714300", "Aardvark"))
+  expect_error(download_cde("GB520804714300", "Aardvark", "class"))
+})
+
+test_that("trying to download a nonsense RBD name returns an error", {
+  # retrieve data for impossible year range
+  expect_error(download_cde("Aardvark", "RBD", "class"))
 })

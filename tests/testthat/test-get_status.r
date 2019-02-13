@@ -45,8 +45,27 @@ test_that("end date before start date returns an error", {
   expect_error(get_status("Avon Hampshire", "MC", startyr=2012, endyr=1900))
 })
 
-# removing test until fixed code for end year
-#test_that("end date outside available range returns an error", {
+test_that("end date outside available range returns a message", {
   # retrieve data for years outside possible range
-#  expect_error(get_status("Avon Hampshire", "MC", startyr=2012, endyr=2018))
-#})
+  expect_message(get_status("Avon Hampshire", "MC", startyr=2012, endyr=2100))
+})
+
+test_that("start date outside available range returns a message", {
+  # retrieve data for years outside possible range
+  expect_message(get_status("Avon Hampshire", "MC", startyr=2100))
+})
+
+test_that("start and end date outside available range returns a message", {
+  # retrieve data for years outside possible range
+  expect_message(get_status("Avon Hampshire", "MC", startyr=2100))
+})
+
+test_that("incorrect level returns a error", {
+  # retrieve data for level that does not exist
+  expect_error(get_status("Avon Hampshire", "MC", level="Aaardvark", startyr=2012))
+})
+
+test_that("specifying type for WB download returns a error", {
+  # retrieve data for level that does not exist
+  expect_error(get_status("GB520804714300", "WBID", level="River"))
+})

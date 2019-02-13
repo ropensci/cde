@@ -18,3 +18,8 @@ test_that("invalid column choice returns an error", {
   # search for "Avon in column "Aardvark"
   expect_error(search_names("Avon", "Aardvark"))
 })
+
+test_that("incomplete arguments returns an error", {
+  # search for "Avon in column "Aardvark"
+  expect_error(search_names("Aardvark"))
+})
