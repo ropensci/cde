@@ -1,11 +1,12 @@
 Package: cde
 Type: Package
-Title: Access Environment Agency WFD Classifcation Data
-Version: 0.1.1
+Title: Access Environment Agency WFD Classifcation and Reasons for Not Achieving Good Status Data
+Version: 0.2.0
 Authors@R: person("Rob", "Briers", email = "r.briers@napier.ac.uk",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0341-1203"))
 Description: Retrieves and plots Water Framework Directive Waterbody 
-  Classification information from the Environment Agency Catchment 
+  Classification and Reasons for Not Achieving Good (RNAG) status 
+  information from the Environment Agency Catchment 
   Data Explorer (CDE) site 
   (https://environment.data.gov.uk/catchment-planning/).
 Depends:

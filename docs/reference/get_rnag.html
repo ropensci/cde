@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve WFD Status Information — get_status • cde</title>
+<title>Retrieve Reasons for Not Achieving Good Status — get_rnag • cde</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,11 @@
 
 
 
-<meta property="og:title" content="Retrieve WFD Status Information — get_status" />
+<meta property="og:title" content="Retrieve Reasons for Not Achieving Good Status — get_rnag" />
 
-<meta property="og:description" content="Retrieves WFD Status class data from EA Catchment Data
-Explorer site. Data can be retrieved by specifying waterbody id
+<meta property="og:description" content="Retrieves details of Reasons for Not Achieving Good (RNAG)
+status from EA Catchment Data Explorer site.
+Data can be retrieved by specifying waterbody id
 (WBID), Management Catchment (MC), Operational
 Catchment (OC) or River Basin District (RBD).
 Start year (startyr) and end year (endyr) allow
@@ -108,15 +109,16 @@ extraction of specific waterbody types (River, Lake etc)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve WFD Status Information</h1>
-    <small class="dont-index">Source: <a href='https://github.com/robbriers/cde/blob/master/R/get_status.r'><code>R/get_status.r</code></a></small>
-    <div class="hidden name"><code>get_status.Rd</code></div>
+    <h1>Retrieve Reasons for Not Achieving Good Status</h1>
+    <small class="dont-index">Source: <a href='https://github.com/robbriers/cde/blob/master/R/get_rnag.r'><code>R/get_rnag.r</code></a></small>
+    <div class="hidden name"><code>get_rnag.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Retrieves WFD Status class data from EA Catchment Data
-Explorer site. Data can be retrieved by specifying waterbody id
+    <p>Retrieves details of Reasons for Not Achieving Good (RNAG)
+status from EA Catchment Data Explorer site.
+Data can be retrieved by specifying waterbody id
 (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational
 Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).
 Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow
@@ -128,9 +130,8 @@ extraction of specific waterbody types (River, Lake etc).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_status</span>(<span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"Overall Water Body"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_rnag</span>(<span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,11 +149,6 @@ Use the <code>search_names</code> function to search for specific values.</p></t
       <td><p>The column to be searched. Possible options are
 <code>WBID</code> (waterbody id), <code>OC</code> (Operational Catchment), <code>MC</code>
 (Management Catchment) and <code>RBD</code> (River Basin District)</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>The level within the WFD quality status classification to be
-extracted. Defaults to 'Overall Water Body'. See docs for possible values.</p></td>
     </tr>
     <tr>
       <th>startyr</th>
@@ -179,28 +175,25 @@ waterbody type. Possible values are <code>River</code>, <code>Lake</code>,
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame containing the classifcation details for the
-specified combination of column, value, level and dates.</p>
+    <p>A data frame containing the details of the Reasons for Not 
+Achieving Good Status for the specified combination of column, value, 
+dates and type.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># get Overall Water Body status classification for waterbody GB520804714300
+    <pre class="examples"><div class='input'># get RNAG issues identified for waterbody GB112071065700
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_status</span>(<span class='st'>"GB520804714300"</span>, <span class='st'>"WBID"</span>)
+<span class='fu'>get_rnag</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)
 <span class='co'># }</span><div class='input'>
-# get status class based on Priority substances for waterbody GB520804714300
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_status</span>(<span class='st'>"GB520804714300"</span>, <span class='st'>"WBID"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"Priority substances"</span>)
-<span class='co'># }</span><div class='input'>
-# get the Overall Water Body status of Lakes in the Humber RBD, between
+# get the RNAG issues for Lakes in the Humber RBD, between
 # 2012 and 2014
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_status</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2012</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)
+<span class='fu'>get_rnag</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2012</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)
 <span class='co'># }</span><div class='input'>
-# get the Overall Water Body status for Rivers in the Avon Warwickshire
+# get the RNAG issues for Rivers in the Avon Warwickshire
 # Operational Catchment in 2011
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_status</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2011</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
+<span class='fu'>get_rnag</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2011</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

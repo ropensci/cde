@@ -58,66 +58,50 @@
 #' # Operational Catchment in 2011
 #' \dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
 get_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
-  # start by running checks on input data
-  # first are both col_value and column specified
-  if (is.null(col_value) | is.null(column)) {
-    stop("Both col_value (site name) and column (name, MC, OC, or RBD) should be specified", "\n")
-  }
+  # start by running general checks on input data
+  check_args(col_value, column, startyr, endyr, type)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
-  # list of classification levels that can be extracted
-  class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
-  # is a value/column specified
-  if (column %in% choices) {
-    # if both search string and choice are present and valid, check level
-    if (!level %in% class_levels) {
-      stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
-    }
-    # a valid level has been chosen, next test years
-    # are years, if present, numeric?
-    if (!is.null(startyr) & !is.null(endyr)) {
-      if (!is.numeric(startyr) | !is.numeric(endyr)) {
-        stop("Please enter numeric values for the starting and ending years")
-      }
-    }
-    # if there is a startyr set
-    if (!is.null(startyr)) {
-      if (startyr < 2009 | startyr > 2016) {
-        stop("Starting year cannot be before 2009 or after 2016")
-      }
-      # if there is an end year
-      if (!is.null(endyr)) {
-        # check values make sense
-        if (!endyr >= startyr) {
-          stop("End year is before Start year: please correct.")
-        }
-        # are both years in the rigth range
-        if (!startyr >= 2009 | !endyr <= 2016) {
-          stop("Years specified outside range of data available (2009-2016).")
-        }
-      }
-    }
-    # catch when only endyr is set
-    if (is.null(startyr) & !is.null(endyr)){
-      stop("Only endyr specified, also needs startyr.")
-    }
-    # check that the waterbody type is a valid choice
-    if (!is.null(type)) {
-      types <- c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
-      if (!type %in% types) {
-        stop("Type specified is not a valid choice (River, Lake, CoastalWater, TransitionalWater or GroundWaterBody")
-      }
-    }
-    # if all inputs valid, download data
-    ##### does not currently check that string given is valid choice - run through search_sites
-    status_data <- download_ea(col_value, column)
-  }
-  else {
+  # check column is one of options
+  if (!column %in% choices) {
     stop("Column specified is not one of the possible choices (WBID, OC, MC or RBD).")
   }
+  # list of classification levels that can be extracted
+  class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
+  if (!level %in% class_levels) {
+    stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
+  }
+  # if WB level download, type should not be specified
+  if (column=="WBID" & !is.null(type)){
+    stop("Type should not be specified for waterbody level downloads")
+  }
+  # if all inputs valid, download data
+  status_data <- download_cde(col_value, column, "class")
 
   # do subsetting here - years first
+  # if only start year is set, is it beyond the data range?
+  if (!is.null(startyr) & is.null(endyr)){
+    if (startyr>max(status_data$Year)){
+      message(paste0("Start year is beyond the most recent year of data (",max(status_data$Year),")"))
+      message("Just outputting most recent year")
+      startyr<-max(status_data$Year)
+    }
+  }
+  # if endyr is set, is it beyond the data range?
+  if (!is.null(endyr)){
+    if (endyr>max(status_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(status_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(status_data$Year)
+    }
+  }
+  # if they are both set, check the endyr
   if (!is.null(startyr) & !is.null(endyr)) {
+    if (endyr>max(status_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(status_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(status_data$Year)
+    }
     # if both years are specified, subset by range
     status_data <- status_data[status_data$Year >= startyr & status_data$Year <= endyr, ]
   }
@@ -143,9 +127,6 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
   status_data <- status_data[!(status_data$Year == 2013 & status_data$Cycle == 1 | status_data$Year == 2014 & status_data$Cycle == 1), ]
-
-  # remove web link column - not really needed
-  status_data <- status_data[, !(names(status_data) %in% c("classification.ID"))]
 
   return(status_data)
 } # end of function

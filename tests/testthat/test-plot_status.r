@@ -16,6 +16,11 @@ test_that("invalid type returns an error", {
   expect_error(plot_status("Avon Hampshire", "MC", startyr=2012, type="Aardvark"))
 })
 
+test_that("invalid scheme  returns an error", {
+  # retrieve data for column "Aardvark"
+  expect_error(plot_status("Avon Warwickshire", "MC", scheme="Aardvark"))
+})
+
 test_that("incorrect arguments returns an error", {
   # left out column value to search on
   expect_error(plot_status("Avon Hampshire", startyr=2012))
@@ -29,11 +34,6 @@ test_that("start date outside data range returns an error", {
 test_that("end date before start date returns an error", {
   # retrieve data for impossible year range
   expect_error(plot_status("Avon Hampshire", "MC", startyr=2012, endyr=1900))
-})
-
-test_that("end date outside available range returns an error", {
-  # retrieve data for years outside possible range
-  expect_error(plot_status("Avon Hampshire", "MC", startyr=2012, endyr=2018))
 })
 
 test_that("function returns a vector of given length", {

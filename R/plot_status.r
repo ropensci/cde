@@ -28,10 +28,8 @@
 #' # in the Humber RBD between 2012 and 2014 using WFD colour scheme
 #' plot_status("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
 plot_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, scheme = "vir") {
-  # are both col_value and column given?
-  if (is.null(col_value) | is.null(column)) {
-    stop("Both col_value (site name) and column (name, MC, OC, or RBD) should be specified", "\n")
-  }
+  # start by running general checks on input data
+  check_args(col_value, column, startyr, endyr, type)
   # do initial check of column choice
   plot_choices <- c("MC", "OC", "RBD")
   if (!column %in% plot_choices) {

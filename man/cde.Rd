@@ -4,12 +4,13 @@
 \name{cde}
 \alias{cde}
 \alias{cde-package}
-\title{cde: Extract and plot Water Framework Directive (WFD) waterbody status data
-from the Environment Agency Catchment Data Explorer (CDE) website}
+\title{cde: Extract and plot Water Framework Directive (WFD) waterbody status and 
+Reasons for Not Achieving Good (RNAG) data from the Environment Agency 
+Catchment Data Explorer (CDE) website.}
 \description{
 The cde package allows searching, download and plotting of the WFD
-waterbody status classification data for all waterbodies within the
-Environment Agency area.
+waterbody status classification data and download of RNAG data for all 
+waterbodies within the Environment Agency area.
 }
 \details{
 The website that is accessed is:
