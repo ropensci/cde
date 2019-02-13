@@ -64,10 +64,20 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   }
   # if all inputs valid, download data
   rnag_data <- download_cde(col_value, column, data_type="rnag")
-  # if WBID, rename columns for consistency
+  # rename columns for consistency with get_status
   if (column=="WBID"){
-    colnames(rnag_data)[which(names(rnag_data) == "water.body.type")] <- "Water.body.type"
-    colnames(rnag_data)[which(names(rnag_data) == "Year")] <- "Classification.Year"
+    names(rnag_data)[which(names(rnag_data) == "water.body.type")] <- "Water.body.type"
+    names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
+    names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
+    names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
+  }
+  if (column!="WBID"){
+    names(test2)[which(names(test2) == "Water.body.id")] <- "Waterbody.ID"
+    names(test2)[which(names(test2) == "Classification.Year")] <- "Year"
+    names(test2)[which(names(test2) == "Classification.Status")] <- "status"
+    names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
+    names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
+    names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
   }
   # do subsetting here - years first
   # if only start year is set, is it beyond the data range?
