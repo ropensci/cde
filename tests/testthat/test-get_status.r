@@ -60,6 +60,11 @@ test_that("start and end date outside available range returns a message", {
   expect_message(get_status("Avon Hampshire", "MC", startyr=2100))
 })
 
+test_that("non numeric dates returns an error", {
+  # retrieve data for years outside possible range
+  expect_error(get_status("Avon Hampshire", "MC", startyr="Aardvark", endyr="Aardvark"))
+})
+
 test_that("incorrect level returns a error", {
   # retrieve data for level that does not exist
   expect_error(get_status("Avon Hampshire", "MC", level="Aaardvark", startyr=2012))

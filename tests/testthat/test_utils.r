@@ -18,7 +18,7 @@ test_that("zip_download returns a dataframe", {
 })
 
 
-test_that("tryingto download a nonsense column returns an error", {
+test_that("trying to download a nonsense column returns an error", {
   # retrieve data for impossible year range
   expect_error(download_cde("GB520804714300", "Aardvark", "class"))
 })
