@@ -8,3 +8,4 @@
 ^cran-comments\.Rmd$
 ^cran-comments\.md$
 ^docs$
+^paper$
