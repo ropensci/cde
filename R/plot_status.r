@@ -33,7 +33,7 @@ plot_status <- function(col_value = NULL, column = NULL, level = "Overall Water 
   # do initial check of column choice
   plot_choices <- c("MC", "OC", "RBD")
   if (!column %in% plot_choices) {
-    stop("Column specified is not one of the possible choices (OC, MC or RBD).")
+    stop("Column specified is not one of the possible choices (\"OC\", \"MC\" or \"RBD\").")
   }
   # check that scheme is specified correctly
   scheme_choices<-c("vir", "wfd")

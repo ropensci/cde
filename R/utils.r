@@ -93,7 +93,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
         }
       } # end of wbid extraction
     } else {
-      stop("Column specified should be one of WBID, MC, OC or RBD")
+      stop("Column specified should be one of \"WBID\", \"MC\", \"OC\" or \"RBD\"")
     }
   }
 } # end of function
@@ -154,7 +154,7 @@ zip_download <- function(download_url) {
 check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
    # check that both col_value and column are present
   if (is.null(col_value) | is.null(column)) {
-    stop("Both col_value (site name) and column (name, MC, OC, or RBD) should be specified", "\n")
+    stop("Both col_value (name) and column (\"WBID\", \"MC\", \"OC\", or \"RBD\") should be specified", "\n")
   }
   # are years, if present, numeric?
   if (!is.null(startyr) & !is.null(endyr)) {
@@ -183,7 +183,7 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
   if (!is.null(type)) {
     types <- c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
     if (!type %in% types) {
-      stop("Type specified is not a valid choice (River, Lake, CoastalWater, TransitionalWater or GroundWaterBody")
+      stop("Type specified is not a valid choice (\"River\", \"Lake\", \"CoastalWater\", \"TransitionalWater\" or \"GroundWaterBody\"")
     }
   }
 }

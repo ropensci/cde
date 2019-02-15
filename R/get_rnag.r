@@ -60,7 +60,7 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (WBID, OC, MC or RBD).")
+    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   # if all inputs valid, download data
   rnag_data <- download_cde(col_value, column, data_type="rnag")

@@ -64,7 +64,7 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (WBID, OC, MC or RBD).")
+    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   # list of classification levels that can be extracted
   class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
