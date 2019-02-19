@@ -77,7 +77,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     if (is.na(index_num)) {
       stop("Operational catchment name specified not found.")
     } else {
-      cde_data <- utils::read.csv(paste0(base_url, "OperationalCatchment/", index_num, end_url), header = TRUE, stringsAsFactors = FALSE)
+      cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", index_num, end_url), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
     }
   } # end of oc extraction
   # finally wbid
@@ -85,12 +85,17 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     # wbid level extraction
     if (col_value %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
-        cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
+        #      cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", index_num, end_url), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        
+        #cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
       }
       if (data_type=="objectives"){
-        cde_data <- utils::read.csv(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), header = TRUE, stringsAsFactors = FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+#        cde_data <- utils::read.csv(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), header = TRUE, stringsAsFactors = FALSE)
       }else{
-        cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+#        cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
       }
     }
     else {
@@ -113,7 +118,7 @@ zip_download <- function(download_url) {
   curl::curl_download(download_url, temp, mode = "wb")
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
-  catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, check.names = TRUE, data.table = FALSE)
+  catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, check.names = TRUE, data.table = FALSE, showProgress = FALSE)
   # delete the intermediate files
   unlink(temp)
   unlink(csvfile)

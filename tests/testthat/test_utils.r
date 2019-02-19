@@ -18,12 +18,12 @@ test_that("zip_download returns a dataframe", {
 })
 
 
-test_that("trying to download a nonsense column returns an error", {
+#test_that("trying to download a nonsense column returns an error", {
   # retrieve data for impossible year range
-  expect_error(download_cde("GB520804714300", "Aardvark", "class"))
-})
+#  expect_error(download_cde("GB520804714300", "Aardvark", "class"))
+#})
 
-test_that("trying to download a nonsense RBD name returns an error", {
+#test_that("trying to download a nonsense RBD name returns an error", {
   # retrieve data for impossible year range
-  expect_error(download_cde("Aardvark", "RBD", "class"))
-})
+#  expect_error(download_cde("Aardvark", "RBD", "class"))
+#})
