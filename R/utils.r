@@ -50,65 +50,53 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     end_url<-"/outcome?item=all&status=all&format=csv"
   }
 
-    # note different for wb 
-  # list of possible columns to select on
-  ########### DONT NEED THIS ########
-  choices <- c("WBID", "MC", "OC", "RBD")
-  # is a value/column specified
-  if (!is.null(column) & !is.null(col_value)) {
-    # is the column specified correctly
-    if (column %in% choices) {
-      if (column == "RBD") {
-        # rbd level extraction
-        index_num <- ea_wbids$RBD.num[which(ea_wbids[, column] == col_value)][1]
-        if (is.na(index_num)) {
-          stop("River Basin District name specified not found.")
-        } else {
-          downloadurl <- paste0(base_url, "RiverBasinDistrict/", index_num, end_url)
-          cde_data <- zip_download(downloadurl)
-        }
-      } # end of rbd extraction
-      else if (column == "MC") {
-        # rbd level extraction
-        index_num <- ea_wbids$MC.num[which(ea_wbids[, column] == col_value)][1]
-        if (is.na(index_num)) {
-          stop("Management Catchment name specified not found.")
-        } else {
-          downloadurl <- paste0(base_url, "ManagementCatchment/", index_num, end_url)
-          cde_data <- zip_download(downloadurl)
-        }
-      } # end of mc extraction
-      # oc next
-      else if (column == "OC") {
-        # oc level extraction - works
-        index_num <- ea_wbids$OC.num[which(ea_wbids[, column] == col_value)][1]
-        if (is.na(index_num)) {
-          stop("Operational catchment name specified not found.")
-        } else {
-          cde_data <- utils::read.csv(paste0(base_url, "OperationalCatchment/", index_num, end_url), header = TRUE, stringsAsFactors = FALSE)
-        }
-      } # end of oc extraction
-      # finally wbid
-      else if (column == "WBID") {
-        # wbid level extraction
-        if (col_value %in% ea_wbids[, "WBID"]) {
-          if (data_type=="rnag"){
-            cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
-          }
-          if (data_type=="objectives"){
-            cde_data <- utils::read.csv(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), header = TRUE, stringsAsFactors = FALSE)
-            }else{
-            cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
-          }
-        }
-        else {
-          stop("WBID value specified not found.")
-        }
-      } # end of wbid extraction
+  if (column == "RBD") {
+    # rbd level extraction
+    index_num <- ea_wbids$RBD.num[which(ea_wbids[, column] == col_value)][1]
+    if (is.na(index_num)) {
+      stop("River Basin District name specified not found.")
     } else {
-      stop("Column specified should be one of \"WBID\", \"MC\", \"OC\" or \"RBD\"")
+      downloadurl <- paste0(base_url, "RiverBasinDistrict/", index_num, end_url)
+      cde_data <- zip_download(downloadurl)
     }
-  }
+  } # end of rbd extraction
+  else if (column == "MC") {
+    # mc level extraction
+    index_num <- ea_wbids$MC.num[which(ea_wbids[, column] == col_value)][1]
+    if (is.na(index_num)) {
+      stop("Management Catchment name specified not found.")
+    } else {
+      downloadurl <- paste0(base_url, "ManagementCatchment/", index_num, end_url)
+      cde_data <- zip_download(downloadurl)
+    }
+  } # end of mc extraction
+  # oc next
+  else if (column == "OC") {
+    # oc level extraction - works
+    index_num <- ea_wbids$OC.num[which(ea_wbids[, column] == col_value)][1]
+    if (is.na(index_num)) {
+      stop("Operational catchment name specified not found.")
+    } else {
+      cde_data <- utils::read.csv(paste0(base_url, "OperationalCatchment/", index_num, end_url), header = TRUE, stringsAsFactors = FALSE)
+    }
+  } # end of oc extraction
+  # finally wbid
+  else if (column == "WBID") {
+    # wbid level extraction
+    if (col_value %in% ea_wbids[, "WBID"]) {
+      if (data_type=="rnag"){
+        cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
+      }
+      if (data_type=="objectives"){
+        cde_data <- utils::read.csv(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), header = TRUE, stringsAsFactors = FALSE)
+      }else{
+        cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
+      }
+    }
+    else {
+      stop("WBID value specified not found.")
+    }
+  } # end of wbid extraction
 } # end of function
 
 #' Download Zipfile and extract csv
