@@ -46,6 +46,9 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
   if(data_type=="pa"){
     end_url<-"/pa/csv"
   }
+  if (data_type=="objectives"){
+    end_url<-"/outcome?item=all&status=all&format=csv"
+  }
 
     # note different for wb 
   # list of possible columns to select on
@@ -91,7 +94,10 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
         if (col_value %in% ea_wbids[, "WBID"]) {
           if (data_type=="rnag"){
             cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
-          }else{
+          }
+          if (data_type=="objectives"){
+            cde_data <- utils::read.csv(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), header = TRUE, stringsAsFactors = FALSE)
+            }else{
             cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
           }
         }

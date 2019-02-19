@@ -22,9 +22,8 @@
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #'
-#' @return A data frame containing the details of the Reasons for Not 
-#' Achieving Good Status for the specified combination of column, value, 
-#' dates and type.
+#' @return A data frame containing the details of the Protected Areas 
+#' associated with the waterbodies.
 #'
 #' @export get_pa
 #'
@@ -56,7 +55,7 @@ get_pa <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL
   names(pa_data)[which(names(pa_data) == "Management.Catchment")] <- "Management.catchment"
   names(pa_data)[which(names(pa_data) == "Operational.Catchment")] <- "Operational.catchment"
   if (nrow(pa_data)==0){
-    message("No measures data specified - empty dataframe returned")
+    message("No protected areas present - empty dataframe returned")
   }
   return(pa_data)
 } # end of function

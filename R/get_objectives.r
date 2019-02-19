@@ -1,4 +1,4 @@
-#' Retrieve Reasons for Not Achieving Good Status 
+#' Retrieve Objectives
 #' @description Retrieves details of Reasons for Not Achieving Good (RNAG)
 #' status from EA Catchment Data Explorer site.
 #' Data can be retrieved by specifying waterbody id
