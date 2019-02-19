@@ -40,9 +40,16 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
   if (data_type=="rnag"){
     end_url<-"/ReasonsForNotAchievingGood?item=all&format=csv"
   }
-  # data_type should be either "classification" or "ReasonsForNotAchievingGood"
-  # note different for wb 
+  if(data_type=="measures"){
+    end_url<-"/Action?format=csv"
+  }
+  if(data_type=="pa"){
+    end_url<-"/pa/csv"
+  }
+
+    # note different for wb 
   # list of possible columns to select on
+  ########### DONT NEED THIS ########
   choices <- c("WBID", "MC", "OC", "RBD")
   # is a value/column specified
   if (!is.null(column) & !is.null(col_value)) {

@@ -116,5 +116,11 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
   rnag_data <- rnag_data[!(rnag_data$Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Year == 2014 & rnag_data$Cycle == 1), ]
+  
+  # check if any data returned
+  if (nrow(rnag_data)==0){
+    message("No RNAG data - empty dataframe returned")
+  }
+  
   return(rnag_data)
 } # end of function
