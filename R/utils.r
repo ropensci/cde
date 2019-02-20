@@ -194,3 +194,98 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
   }
 }
 # end of function
+
+# do subsetting
+
+#' Subset data as required
+#' @description Subsets data by year, year range, classification level
+#' and waterbody type as required
+#' 
+#' @param full_data The dataframe to be subset
+#' 
+#' @param col_value A string representing the description (name) of the
+#' features to be extracted. For example to extract data for the whole of
+#' the Humber RBD, this would be "Humber"; also see examples. Must be an
+#' exact match to the values used in the EA database.
+#' Use the \code{\link{search_names}} function to search for specific values.
+#'
+#' @param column The column to be searched. Possible options are
+#' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
+#' (Management Catchment) and \code{RBD} (River Basin District)
+#'
+#' @param level The level within the WFD quality status classification to be
+#' extracted. Defaults to 'Overall Water Body'. See docs for possible values.
+#'
+#' @param startyr The data can be extracted for specific years using the
+#' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
+#' specified this extracts for a particular year. If no years are specified
+#' all years are returned.
+#'
+#' @param endyr The data can be extracted for specific years using the
+#' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
+#' only be specified if \code{startyr} is also included, otherwise it
+#' is ignored and all years are returned.
+#'
+#' @param type Type of waterbody to be extracted. For Operational/Management
+#' catchment level or RBD level queries, the data can also be subset by
+#' waterbody type. Possible values are \code{River}, \code{Lake},
+#' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
+#'
+#' @return A data frame that has been subsetted by the 
+#' specified combination of column, value, level and dates.
+#'
+#' @noRd
+#'
+subset_data <- function(full_data, col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+
+  # if only start year is set, is it beyond the data range?
+  if (!is.null(startyr) & is.null(endyr)){
+    if (startyr>max(full_data$Year)){
+      message(paste0("Start year is beyond the most recent year of data (",max(full_data$Year),")"))
+      message("Just outputting most recent year")
+      startyr<-max(full_data$Year)
+    }
+  }
+  # if endyr is set, is it beyond the data range?
+  if (!is.null(endyr)){
+    if (endyr>max(full_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(full_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(full_data$Year)
+    }
+  }
+  # if they are both set, check the endyr
+  if (!is.null(startyr) & !is.null(endyr)) {
+    if (endyr>max(full_data$Year)){
+      message(paste0("End year is beyond the most recent year of data (",max(full_data$Year),")"))
+      message("Subsetting to most recent year")
+      endyr<-max(full_data$Year)
+    }
+    # if both years are specified, subset by range
+    full_data <- full_data[full_data$Year >= startyr & full_data$Year <= endyr, ]
+  }
+  else if (!is.null(startyr)) {
+    full_data <- full_data[full_data$Year == startyr, ]
+  }
+  # level subsetting, defaults to "Overall Water Body"
+  # for Chemical and Supporting Elements levels, need to deal with options for
+  # surface waters and groundwaters
+  if (level == "Chemical") {
+    full_data <- full_data[full_data$Classification.Item == "Chemical" | full_data$Classification.Item == "Chemical (GW)", ]
+  }
+  else if (level == "Supporting elements") {
+    full_data <- full_data[full_data$Classification.Item == "Supporting elements (Surface Water)" | full_data$Classification.Item == "Supporting elements (Groundwater)", ]
+  }
+  else {
+    full_data <- full_data[full_data$Classification.Item == level, ]
+  }
+  # now Water.body.type
+  if (!is.null(type)) {
+    full_data <- full_data[full_data$Water.body.type == type, ]
+  }
+  # if year range covers 2013 and 2014, subset to just include cycle 2 data
+  # avoids double counting of waterbodies
+  full_data <- full_data[!(full_data$Year == 2013 & full_data$Cycle == 1 | full_data$Year == 2014 & full_data$Cycle == 1), ]
+  
+  return(full_data)
+} # end of function

@@ -43,8 +43,8 @@
 #' @export get_objectives
 #'
 #' @examples
-#' # get RNAG issues identified for waterbody GB112071065700
-#' \dontrun{get_rnag("GB112071065700", "WBID")}
+#' # get objectives set for waterbody GB112071065700
+#' \dontrun{get_objectives("GB112071065700", "WBID")}
 #' 
 #' # get the RNAG issues for Lakes in the Humber RBD, between
 #' # 2012 and 2014
@@ -53,24 +53,39 @@
 #' # get the RNAG issues for Rivers in the Avon Warwickshire
 #' # Operational Catchment in 2011
 #' \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
-get_objectives <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+get_objectives <- function(col_value = NULL, column = NULL, level="Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
   # start by running general checks on input data
   check_args(col_value, column, startyr, endyr, type)
   # list of possible columns to select on
-  choices <- c("MC", "OC", "RBD")
+  choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (\"OC\", \"MC\" or \"RBD\").")
+    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
-  # if all inputs valid, download data
-  measures_data <- download_cde(col_value, column, data_type="measures")
   
-  # rename columns for consistency with get_status
-  names(measures_data)[which(names(measures_data) == "River.Basin.District")] <- "River.basin.district"
-  names(measures_data)[which(names(measures_data) == "Management.Catchment")] <- "Management.catchment"
-  names(measures_data)[which(names(measures_data) == "Operational.Catchment")] <- "Operational.catchment"
-  if (nrow(measures_data)==0){
-    message("No measures data specified - empty dataframe returned")
+  # list of classification levels that can be extracted
+  class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
+  if (!level %in% class_levels) {
+    stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
   }
-  return(measures_data)
+  
+  # if WB level download, type should not be specified
+  if (column=="WBID" & !is.null(type)){
+    stop("Type should not be specified for waterbody level downloads")
+  }
+  
+  # if all inputs valid, download data
+  obj_data <- download_cde(col_value, column, data_type="objectives")
+  
+  # if there are no objectives set, give a message
+  if (nrow(obj_data)==0){
+    message("No objectives specified - empty dataframe returned")
+    return(obj_data)
+  } else{
+    # subset data by specified values
+    ############## if WBID - Year is objective year so don't subset by year and give message
+    obj_data<-subset_data(obj_data, col_value, column, level, startyr, endyr, type)
+    # check that there are rows left here now as well
+    return(obj_data)
+  }
 } # end of function
