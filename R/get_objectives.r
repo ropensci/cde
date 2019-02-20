@@ -84,6 +84,14 @@ get_objectives <- function(col_value = NULL, column = NULL, level="Overall Water
   } else{
     # subset data by specified values
     ############## if WBID - Year is objective year so don't subset by year and give message
+    if (column=="WBID"){
+      if (!is.null(startyr) | !is.null(endyr) |!is.null(type)){
+        startyr=NULL
+        endyr=NULL
+        type=NULL
+        message("Start/end years and type ignored for WBID objectives")
+      }
+    }
     obj_data<-subset_data(obj_data, col_value, column, level, startyr, endyr, type)
     # check that there are rows left here now as well
     return(obj_data)
