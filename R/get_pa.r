@@ -28,19 +28,19 @@
 #' @export get_pa
 #'
 #' @examples
-#' # get RNAG issues identified for waterbody GB112071065700
-#' \dontrun{get_rnag("GB112071065700", "WBID")}
+#' # get protected areas associated with waterbody GB112071065700
+#' \dontrun{get_pa("GB112071065700", "WBID")}
 #' 
-#' # get the RNAG issues for Lakes in the Humber RBD, between
-#' # 2012 and 2014
-#' \dontrun{get_rnag("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
+#' # get the protected areas associated with Lakes in the Humber RBD
+#' \dontrun{get_pa("Humber", "RBD", type = "Lake")}
 #' 
-#' # get the RNAG issues for Rivers in the Avon Warwickshire
-#' # Operational Catchment in 2011
-#' \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
-get_pa <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
-  # start by running general checks on input data
-  check_args(col_value, column, startyr, endyr, type)
+#' # get the protected areas associated with Rivers in the Avon Warwickshire
+#' # Operational Catchment
+#' \dontrun{get_pa("Avon Warwickshire", "MC", type = "River")}
+#' 
+get_pa <- function(col_value = NULL, column = NULL, type = NULL) {
+  # start by running general checks on input data, setting years to NULL
+  check_args(col_value, column, NULL, NULL, type)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options

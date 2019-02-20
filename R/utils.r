@@ -85,17 +85,12 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     # wbid level extraction
     if (col_value %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
-        #      cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", index_num, end_url), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
         cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-        
-        #cde_data <- utils::read.csv(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), header = TRUE, stringsAsFactors = FALSE)
       }
       if (data_type=="objectives"){
         cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-#        cde_data <- utils::read.csv(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), header = TRUE, stringsAsFactors = FALSE)
       }else{
         cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-#        cde_data <- utils::read.csv(paste0(base_url, "WaterBody/", col_value, "/csv"), header = TRUE, stringsAsFactors = FALSE)
       }
     }
     else {
@@ -177,7 +172,7 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
     if (!is.null(endyr)) {
       # check values make sense
       if (!endyr >= startyr) {
-        stop("End year is before Start year: please correct.")
+        stop("End year is before start year: please correct.")
       }
     }
   }
@@ -194,8 +189,6 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
   }
 }
 # end of function
-
-# do subsetting
 
 #' Subset data as required
 #' @description Subsets data by year, year range, classification level

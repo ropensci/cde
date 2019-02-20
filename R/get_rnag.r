@@ -10,6 +10,8 @@
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}) level
 #' downloads, waterbody \code{Type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
+#' Data is presented at the level of individual elements that are the
+#' reasons for not achieving good status.
 #
 #' @param col_value A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
@@ -53,7 +55,16 @@
 #' # get the RNAG issues for Rivers in the Avon Warwickshire
 #' # Operational Catchment in 2011
 #' \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
+#' 
 get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+
+  ### need to check year ranges - seem to start in 2013, so would need to catch in checks
+  # if there is a startyr set
+  if (!is.null(startyr)) {
+    if (startyr < 2013) {
+      stop("RNAG data only available from 2013 onwards")
+    }
+  }
   # start by running general checks on input data
   check_args(col_value, column, startyr, endyr, type)
   # list of possible columns to select on

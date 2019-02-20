@@ -1,15 +1,11 @@
-#' Retrieve Reasons for Not Achieving Good Status 
-#' @description Retrieves details of Reasons for Not Achieving Good (RNAG)
-#' status from EA Catchment Data Explorer site.
-#' Data can be retrieved by specifying waterbody id
-#' (\code{WBID}), Management Catchment (\code{MC}), Operational
-#' Catchment (\code{OC}) or River Basin District (\code{RBD}).
-#' Start year (\code{startyr}) and end year (\code{endyr}) allow
-#' specific timeranges to be downloaded.
-#' For Management Catchment (\code{MC}), Operational
-#' Catchment (\code{OC}) or River Basin District (\code{RBD}) level
-#' downloads, waterbody \code{Type} can also be specified to allow
-#' extraction of specific waterbody types (River, Lake etc).
+#' Retrieve Measures Specified for Waterbodies 
+#' @description Retrieves details of the Measures put in place for 
+#' specified waterbodies to try and ensure that they reach Good status
+#' from EA Catchment Data Explorer site.
+#' Data can be retrieved by specifying  Management Catchment (\code{MC}), 
+#' Operational Catchment (\code{OC}) or River Basin District (\code{RBD}).
+#' Note that Measures data is very patchy and in many cases will return an 
+#' empty dataframe with a message.
 #
 #' @param col_value A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
@@ -19,43 +15,22 @@
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
-#' (Management Catchment) and \code{RBD} (River Basin District)
+#' (Management Catchment) and \code{RBD} (River Basin District).
 #'
-#' @param startyr The data can be extracted for specific years using the
-#' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
-#' specified this extracts for a particular year. If no years are specified
-#' all years are returned.
-#'
-#' @param endyr The data can be extracted for specific years using the
-#' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
-#' only be specified if \code{startyr} is also included, otherwise it
-#' is ignored and all years are returned.
-#'
-#' @param type Type of waterbody to be extracted. For Operational/Management
-#' catchment level or RBD level queries, the data can also be subset by
-#' waterbody type. Possible values are \code{River}, \code{Lake},
-#' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
-#'
-#' @return A data frame containing the details of the Reasons for Not 
-#' Achieving Good Status for the specified combination of column, value, 
-#' dates and type.
+#' @return A data frame containing the details of the Measures put in place 
+#' to try and improve water quality.
 #'
 #' @export get_measures
 #'
 #' @examples
-#' # get RNAG issues identified for waterbody GB112071065700
-#' \dontrun{get_rnag("GB112071065700", "WBID")}
+#' # get the measures put in place for the Thames RBD
+#' \dontrun{get_measures("Thames", "RBD")}
 #' 
-#' # get the RNAG issues for Lakes in the Humber RBD, between
-#' # 2012 and 2014
-#' \dontrun{get_rnag("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
-#' 
-#' # get the RNAG issues for Rivers in the Avon Warwickshire
-#' # Operational Catchment in 2011
-#' \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
-get_measures <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+#' # get the measures put in place for the Loddon Operational Catchment
+#' \dontrun{get_measures("Loddon", "OC")}
+get_measures <- function(col_value = NULL, column = NULL) {
   # start by running general checks on input data
-  check_args(col_value, column, startyr, endyr, type)
+  check_args(col_value, column, NULL, NULL, NULL)
   # list of possible columns to select on
   choices <- c("MC", "OC", "RBD")
   # check column is one of options
