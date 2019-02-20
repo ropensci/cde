@@ -38,9 +38,9 @@
 #' # Operational Catchment
 #' \dontrun{get_pa("Avon Warwickshire", "MC", type = "River")}
 #' 
-get_pa <- function(col_value = NULL, column = NULL, type = NULL) {
+get_pa <- function(col_value = NULL, column = NULL) {
   # start by running general checks on input data, setting years to NULL
-  check_args(col_value, column, NULL, NULL, type)
+  check_args(col_value, column, NULL, NULL, NULL)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
