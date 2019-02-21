@@ -16,9 +16,9 @@ Use the \code{\link{search_names}} function to search for specific values.}
 
 \item{column}{The column to be searched. Possible options are
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
-(Management Catchment) and \code{RBD} (River Basin District)
+(Management Catchment) and \code{RBD} (River Basin District)}
 
-#' @param level The level within the WFD quality status classification to be
+\item{level}{The level within the WFD quality status classification to be
 extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
 
 \item{year}{The year that wich objectives are set for, either 2015, 
@@ -52,7 +52,7 @@ extraction of specific waterbody types (River, Lake etc).
 \dontrun{get_objectives("GB112071065700", "WBID")}
 
 # get the objectives set for Lakes in the Humber RBD, for the year 2021
-\dontrun{get_objectives("Humber", "RBD", type = "Lake")}
+\dontrun{get_objectives("Humber", "RBD", year=2021, type="Lake")}
 
 # get the objectives set for Rivers in the Avon Warwickshire
 # Operational Catchment in relation to Chemical status

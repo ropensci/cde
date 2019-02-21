@@ -43,7 +43,7 @@
 #' \dontrun{get_objectives("GB112071065700", "WBID")}
 #' 
 #' # get the objectives set for Lakes in the Humber RBD, for the year 2021
-#' \dontrun{get_objectives("Humber", "RBD", type = "Lake")}
+#' \dontrun{get_objectives("Humber", "RBD", year=2021, type="Lake")}
 #' 
 #' # get the objectives set for Rivers in the Avon Warwickshire
 #' # Operational Catchment in relation to Chemical status
