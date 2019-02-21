@@ -90,6 +90,9 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
     names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
   }
+  ###############
+  # need to add in subset_data function here
+  #############
   # do subsetting here - years first
   # if only start year is set, is it beyond the data range?
   if (!is.null(startyr) & is.null(endyr)){

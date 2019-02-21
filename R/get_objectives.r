@@ -21,7 +21,7 @@
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #' 
-#' #' @param level The level within the WFD quality status classification to be
+#' @param level The level within the WFD quality status classification to be
 #' extracted. Defaults to 'Overall Water Body'. See docs for possible values.
 #'
 #' @param year The year that wich objectives are set for, either 2015, 
