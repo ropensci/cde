@@ -85,7 +85,8 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     # wbid level extraction
     if (col_value %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
-        cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        # have to add supress warnings as data.table does not like empty RNAG data (bad download format on the part of EA)
+        suppressWarnings(cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE))
       }
       if (data_type=="objectives"){
         cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
