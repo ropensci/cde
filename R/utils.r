@@ -85,18 +85,15 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     # wbid level extraction
     if (col_value %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
-        print(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"))
         cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="objectives"){
-        print(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"))
         cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="pa"){
         cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/pa/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="class"){
-        print(paste0(base_url, "data/classification.csv?waterBody=", col_value, "&_view=csv"))
         cde_data <- data.table::fread(paste0(base_url, "data/classification.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
     }
@@ -225,8 +222,7 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
 #'
 #' @param endyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
-#' only be specified if \code{startyr} is also included, otherwise it
-#' is ignored and all years are returned.
+#' only be specified if \code{startyr} is also included.
 #'
 #' @param type Type of waterbody to be extracted. For Operational/Management
 #' catchment level or RBD level queries, the data can also be subset by

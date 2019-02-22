@@ -18,11 +18,11 @@ Use the \code{\link{search_names}} function to search for specific values.}
 (Management Catchment) and \code{RBD} (River Basin District).}
 }
 \value{
-A data frame containing the details of the Measures put in place 
+A data frame containing the details of the measures put in place 
 to try and improve water quality.
 }
 \description{
-Retrieves details of the Measures put in place for 
+Retrieves details of the measures put in place for 
 specified waterbodies to try and ensure that they reach Good status
 from EA Catchment Data Explorer site.
 Data can be retrieved by specifying  Management Catchment (\code{MC}), 
@@ -36,4 +36,5 @@ empty dataframe with a message.
 
 # get the measures put in place for the Loddon Operational Catchment
 \dontrun{get_measures("Loddon", "OC")}
+
 }

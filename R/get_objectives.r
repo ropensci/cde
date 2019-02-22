@@ -102,10 +102,7 @@ get_objectives <- function(col_value = NULL, column = NULL, level="Overall Water
         message("Type is ignored for WBID objectives")
       }
     }
-    #################################### see test3
-    ########### for waterbodies, the data format is different - subsetting on year won't work
-    # also need to rename columns x2021 etc.
-    #####################################
+    # subset data as required
     obj_data<-subset_data(obj_data, col_value, column, level, startyr=year, endyr=NULL, type)
     # if there are no objectives returned, give a message
     if (nrow(obj_data)==0){

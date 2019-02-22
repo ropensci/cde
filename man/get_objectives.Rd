@@ -21,7 +21,7 @@ Use the \code{\link{search_names}} function to search for specific values.}
 \item{level}{The level within the WFD quality status classification to be
 extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
 
-\item{year}{The year that wich objectives are set for, either 2015, 
+\item{year}{The year that objectives are set for, either 2015, 
 2021 or 2027. If not given then objectives for all years are returned.
 Note that objectives may not be set for all years.}
 
@@ -35,8 +35,8 @@ A data frame containing the details of the objectives set for
 the specified set of waterbodies.
 }
 \description{
-Retrieves details of Reasons for Not Achieving Good (RNAG)
-status from EA Catchment Data Explorer site.
+Retrieves details of objectives set for waterbodies in terms
+of predicted classification from EA Catchment Data Explorer site.
 Data can be retrieved by specifying waterbody id
 (\code{WBID}), Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}).
@@ -48,7 +48,7 @@ downloads, waterbody \code{Type} can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).
 }
 \examples{
-# get objectives set for waterbody GB112071065700
+# get all objectives set for waterbody GB112071065700
 \dontrun{get_objectives("GB112071065700", "WBID")}
 
 # get the objectives set for Lakes in the Humber RBD, for the year 2021
@@ -56,5 +56,6 @@ extraction of specific waterbody types (River, Lake etc).
 
 # get the objectives set for Rivers in the Avon Warwickshire
 # Operational Catchment in relation to Chemical status
-\dontrun{get_rnag("Avon Warwickshire", "MC", level="Chemical", type = "River")}
+\dontrun{get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")}
+
 }

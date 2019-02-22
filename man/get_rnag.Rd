@@ -21,12 +21,13 @@ Use the \code{\link{search_names}} function to search for specific values.}
 \item{startyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
 specified this extracts for a particular year. If no years are specified
-all years are returned.}
+all years are returned. RNAG data are only available from 2013 onwards.}
 
 \item{endyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 only be specified if \code{startyr} is also included, otherwise it
-is ignored and all years are returned.}
+is ignored and all years are returned. RNAG data is only available from 
+2013 onwards.}
 
 \item{type}{Type of waterbody to be extracted. For Operational/Management
 catchment level or RBD level queries, the data can also be subset by
@@ -35,12 +36,11 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 }
 \value{
 A data frame containing the details of the Reasons for Not 
-Achieving Good Status for the specified combination of column, value, 
-dates and type.
+Achieving Good Status for the specified combination of criteria.
 }
 \description{
 Retrieves details of Reasons for Not Achieving Good (RNAG)
-status from EA Catchment Data Explorer site.
+status and Reasons For Failure (RFF) from EA Catchment Data Explorer site.
 Data can be retrieved by specifying waterbody id
 (\code{WBID}), Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}).
@@ -54,15 +54,15 @@ Data is presented at the level of individual elements that are the
 reasons for not achieving good status.
 }
 \examples{
-# get RNAG issues identified for waterbody GB112071065700
+# get all RNAG issues identified for waterbody GB112071065700
 \dontrun{get_rnag("GB112071065700", "WBID")}
 
 # get the RNAG issues for Lakes in the Humber RBD, between
-# 2012 and 2014
-\dontrun{get_rnag("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
+# 2013 and 2014
+\dontrun{get_rnag("Humber", "RBD", startyr = 2013, endyr = 2014, type = "Lake")}
 
 # get the RNAG issues for Rivers in the Avon Warwickshire
-# Operational Catchment in 2011
-\dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
+# Management Catchment in 2015
+\dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2015, type = "River")}
 
 }

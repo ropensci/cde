@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_status.r
 \name{get_status}
 \alias{get_status}
-\title{Retrieve WFD Status Information}
+\title{Retrieve WFD Status Classification Data}
 \usage{
 get_status(col_value = NULL, column = NULL,
   level = "Overall Water Body", startyr = NULL, endyr = NULL,
@@ -29,8 +29,8 @@ all years are returned.}
 
 \item{endyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
-only be specified if \code{startyr} is also included, otherwise it
-is ignored and all years are returned.}
+only be specified if \code{startyr} is also included, otherwise an 
+error is returned.}
 
 \item{type}{Type of waterbody to be extracted. For Operational/Management
 catchment level or RBD level queries, the data can also be subset by
@@ -39,11 +39,11 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 }
 \value{
 A data frame containing the classifcation details for the
-specified combination of column, value, level and dates.
+specified combination of criteroa.
 }
 \description{
-Retrieves WFD Status class data from EA Catchment Data
-Explorer site. Data can be retrieved by specifying waterbody id
+Retrieves WFD Status classification data from EA Catchment 
+Data Explorer site. Data can be retrieved by specifying waterbody id
 (\code{WBID}), Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}).
 Start year (\code{startyr}) and end year (\code{endyr}) allow
@@ -67,4 +67,5 @@ extraction of specific waterbody types (River, Lake etc).
 # get the Overall Water Body status for Rivers in the Avon Warwickshire
 # Operational Catchment in 2011
 \dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
+
 }

@@ -33,7 +33,7 @@
 <meta property="og:title" content="Retrieve Reasons for Not Achieving Good Status — get_rnag" />
 
 <meta property="og:description" content="Retrieves details of Reasons for Not Achieving Good (RNAG)
-status from EA Catchment Data Explorer site.
+status and Reasons For Failure (RFF) from EA Catchment Data Explorer site.
 Data can be retrieved by specifying waterbody id
 (WBID), Management Catchment (MC), Operational
 Catchment (OC) or River Basin District (RBD).
@@ -42,7 +42,9 @@ specific timeranges to be downloaded.
 For Management Catchment (MC), Operational
 Catchment (OC) or River Basin District (RBD) level
 downloads, waterbody Type can also be specified to allow
-extraction of specific waterbody types (River, Lake etc)." />
+extraction of specific waterbody types (River, Lake etc).
+Data is presented at the level of individual elements that are the
+reasons for not achieving good status." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,7 +122,7 @@ extraction of specific waterbody types (River, Lake etc)." />
     <div class="ref-description">
     
     <p>Retrieves details of Reasons for Not Achieving Good (RNAG)
-status from EA Catchment Data Explorer site.
+status and Reasons For Failure (RFF) from EA Catchment Data Explorer site.
 Data can be retrieved by specifying waterbody id
 (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational
 Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).
@@ -129,7 +131,9 @@ specific timeranges to be downloaded.
 For Management Catchment (<code>MC</code>), Operational
 Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level
 downloads, waterbody <code>Type</code> can also be specified to allow
-extraction of specific waterbody types (River, Lake etc).</p>
+extraction of specific waterbody types (River, Lake etc).
+Data is presented at the level of individual elements that are the
+reasons for not achieving good status.</p>
     
     </div>
 
@@ -145,7 +149,7 @@ extraction of specific waterbody types (River, Lake etc).</p>
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
 exact match to the values used in the EA database.
-Use the <code>search_names</code> function to search for specific values.</p></td>
+Use the <code><a href='search_names.html'>search_names</a></code> function to search for specific values.</p></td>
     </tr>
     <tr>
       <th>column</th>
@@ -158,14 +162,15 @@ Use the <code>search_names</code> function to search for specific values.</p></t
       <td><p>The data can be extracted for specific years using the
 <code>startyr</code> and <code>endyr</code> arguments. If only <code>startyr</code> is
 specified this extracts for a particular year. If no years are specified
-all years are returned.</p></td>
+all years are returned. RNAG data are only available from 2013 onwards.</p></td>
     </tr>
     <tr>
       <th>endyr</th>
       <td><p>The data can be extracted for specific years using the
 <code>startyr</code> and <code>endyr</code> arguments. The <code>endyr</code> should
 only be specified if <code>startyr</code> is also included, otherwise it
-is ignored and all years are returned.</p></td>
+is ignored and all years are returned. RNAG data is only available from 
+2013 onwards.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -179,25 +184,25 @@ waterbody type. Possible values are <code>River</code>, <code>Lake</code>,
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame containing the details of the Reasons for Not 
-Achieving Good Status for the specified combination of column, value, 
-dates and type.</p>
+Achieving Good Status for the specified combination of criteria.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># get RNAG issues identified for waterbody GB112071065700
+    <pre class="examples"><div class='input'># get all RNAG issues identified for waterbody GB112071065700
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>get_rnag</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)
 <span class='co'># }</span><div class='input'>
 # get the RNAG issues for Lakes in the Humber RBD, between
-# 2012 and 2014
+# 2013 and 2014
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_rnag</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2012</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)
+<span class='fu'>get_rnag</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2013</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)
 <span class='co'># }</span><div class='input'>
 # get the RNAG issues for Rivers in the Avon Warwickshire
-# Operational Catchment in 2011
+# Management Catchment in 2015
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_rnag</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2011</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
-<span class='co'># }</span></pre>
+<span class='fu'>get_rnag</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2015</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
