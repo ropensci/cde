@@ -75,12 +75,12 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
   # if all inputs valid, download data
   rnag_data <- download_cde(col_value, column, data_type="rnag")
   # rename columns for consistency with get_status
-  if (column=="WBID"){
-    names(rnag_data)[which(names(rnag_data) == "water.body.type")] <- "Water.body.type"
-    names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
-    names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
-    names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
-  }
+   if (column=="WBID"){
+     names(rnag_data)[which(names(rnag_data) == "water.body.type")] <- "Water.body.type"
+     names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
+     names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
+     names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
+   }
   if (column!="WBID"){
     names(rnag_data)[which(names(rnag_data) == "Water.body.id")] <- "Waterbody.ID"
     names(rnag_data)[which(names(rnag_data) == "Classification.Year")] <- "Year"

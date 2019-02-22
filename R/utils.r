@@ -60,7 +60,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
       cde_data <- zip_download(downloadurl)
     }
   } # end of rbd extraction
-  else if (column == "MC") {
+  if (column == "MC") {
     # mc level extraction
     index_num <- ea_wbids$MC.num[which(ea_wbids[, column] == col_value)][1]
     if (is.na(index_num)) {
@@ -71,7 +71,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     }
   } # end of mc extraction
   # oc next
-  else if (column == "OC") {
+  if (column == "OC") {
     # oc level extraction - works
     index_num <- ea_wbids$OC.num[which(ea_wbids[, column] == col_value)][1]
     if (is.na(index_num)) {
@@ -81,25 +81,32 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
     }
   } # end of oc extraction
   # finally wbid
-  else if (column == "WBID") {
+  if (column == "WBID") {
     # wbid level extraction
     if (col_value %in% ea_wbids[, "WBID"]) {
+      ##########
       if (data_type=="rnag"){
+        print(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"))
         cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="objectives"){
+        print(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"))
         cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="pa"){
         cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/pa/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-      }else{
-        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+      }
+      if (data_type=="class"){
+        print(paste0(base_url, "data/classification.csv?waterBody=", col_value, "&_view=csv"))
+        cde_data <- data.table::fread(paste0(base_url, "data/classification.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
     }
     else {
       stop("WBID value specified not found.")
     }
-  } # end of wbid extraction
+  }
+  # end of wbid extraction
+  return(cde_data)
 } # end of function
 
 #' Download Zipfile and extract csv
