@@ -72,5 +72,5 @@ test_that("incorrect level returns a error", {
 
 test_that("specifying type for WB download returns a message", {
   # retrieve data for level that does not exist
-  expect_message(get_status("GB520804714300", "WBID", level="River"))
+  expect_message(get_status("GB520804714300", "WBID", type="River"))
 })
