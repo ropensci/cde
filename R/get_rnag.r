@@ -94,8 +94,15 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     message("No RNAG data - empty dataframe returned")
     return(rnag_data)
   }else{
+    # if WBID - don't subset by type and give message
+    if (column=="WBID"){
+      if (!is.null(type)){
+        type<-NULL
+        message("Type is ignored for WBID objectives")
+      }
+    }
     # subset data
-    rnag_data<-subset_data(rnag_data, col_value, column, NULL, startyr=startyr, endyr=endyr, type=type)
+    rnag_data<-subset_data(rnag_data, col_value, column, NULL, startyr, endyr, type)
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
     }
