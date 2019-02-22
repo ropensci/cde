@@ -103,7 +103,7 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     rnag_data<-subset_data(rnag_data, col_value, column, NULL, startyr=startyr, endyr=endyr, type=type)
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
-      return(obj_data)
+      return(rnag_data)
     }
     return(rnag_data)
   }
