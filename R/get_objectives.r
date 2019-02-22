@@ -1,6 +1,6 @@
 #' Retrieve Objectives
-#' @description Retrieves details of Reasons for Not Achieving Good (RNAG)
-#' status from EA Catchment Data Explorer site.
+#' @description Retrieves details of objectives set for waterbodies in terms
+#' of predicted classification from EA Catchment Data Explorer site.
 #' Data can be retrieved by specifying waterbody id
 #' (\code{WBID}), Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}).
@@ -24,7 +24,7 @@
 #' @param level The level within the WFD quality status classification to be
 #' extracted. Defaults to 'Overall Water Body'. See docs for possible values.
 #'
-#' @param year The year that wich objectives are set for, either 2015, 
+#' @param year The year that objectives are set for, either 2015, 
 #' 2021 or 2027. If not given then objectives for all years are returned.
 #' Note that objectives may not be set for all years.
 #'
@@ -48,6 +48,7 @@
 #' # get the objectives set for Rivers in the Avon Warwickshire
 #' # Operational Catchment in relation to Chemical status
 #' \dontrun{get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")}
+#' 
 get_objectives <- function(col_value = NULL, column = NULL, level="Overall Water Body", year = NULL, type = NULL) {
   # start by running general checks on input data
   check_args(col_value, column, NULL, NULL, type)
@@ -101,6 +102,10 @@ get_objectives <- function(col_value = NULL, column = NULL, level="Overall Water
         message("Type is ignored for WBID objectives")
       }
     }
+    #################################### see test3
+    ########### for waterbodies, the data format is different - subsetting on year won't work
+    # also need to rename columns x2021 etc.
+    #####################################
     obj_data<-subset_data(obj_data, col_value, column, level, startyr=year, endyr=NULL, type)
     # if there are no objectives returned, give a message
     if (nrow(obj_data)==0){

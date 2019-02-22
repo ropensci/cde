@@ -1,5 +1,5 @@
 #' Retrieve Measures Specified for Waterbodies 
-#' @description Retrieves details of the Measures put in place for 
+#' @description Retrieves details of the measures put in place for 
 #' specified waterbodies to try and ensure that they reach Good status
 #' from EA Catchment Data Explorer site.
 #' Data can be retrieved by specifying  Management Catchment (\code{MC}), 
@@ -28,6 +28,7 @@
 #' 
 #' # get the measures put in place for the Loddon Operational Catchment
 #' \dontrun{get_measures("Loddon", "OC")}
+#' 
 get_measures <- function(col_value = NULL, column = NULL) {
   # start by running general checks on input data
   check_args(col_value, column, NULL, NULL, NULL)

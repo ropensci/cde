@@ -145,8 +145,8 @@ zip_download <- function(download_url) {
 #'
 #' @param endyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
-#' only be specified if \code{startyr} is also included, otherwise it
-#' is ignored and all years are returned.
+#' only be specified if \code{startyr} is also included, otherwise an 
+#' error is returned.
 #'
 #' @param type Type of waterbody to be extracted. For Operational/Management
 #' catchment level or RBD level queries, the data can also be subset by

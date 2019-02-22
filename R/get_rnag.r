@@ -1,6 +1,6 @@
 #' Retrieve Reasons for Not Achieving Good Status 
 #' @description Retrieves details of Reasons for Not Achieving Good (RNAG)
-#' status from EA Catchment Data Explorer site.
+#' status and Reasons For Failure (RFF) from EA Catchment Data Explorer site.
 #' Data can be retrieved by specifying waterbody id
 #' (\code{WBID}), Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}).
@@ -26,7 +26,7 @@
 #' @param startyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
 #' specified this extracts for a particular year. If no years are specified
-#' all years are returned. RNAG data is only available from 2013 onwards.
+#' all years are returned. RNAG data are only available from 2013 onwards.
 #'
 #' @param endyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
@@ -40,13 +40,12 @@
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #'
 #' @return A data frame containing the details of the Reasons for Not 
-#' Achieving Good Status for the specified combination of column, value, 
-#' dates and type.
+#' Achieving Good Status for the specified combination of criteria.
 #'
 #' @export get_rnag
 #'
 #' @examples
-#' # get RNAG issues identified for waterbody GB112071065700
+#' # get all RNAG issues identified for waterbody GB112071065700
 #' \dontrun{get_rnag("GB112071065700", "WBID")}
 #' 
 #' # get the RNAG issues for Lakes in the Humber RBD, between
@@ -59,7 +58,6 @@
 #' 
 get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
 
-  ### need to check year ranges - seem to start in 2013, so would need to catch in checks
   # if there is a startyr set
   if (!is.null(startyr)) {
     if (startyr < 2013) {
@@ -91,67 +89,17 @@ get_rnag <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NU
     names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
     names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
   }
-  ###############
-  # need to add in subset_data function here
-  
-  # if there are no objectives returned, give a message
   # check if any data returned
   if (nrow(rnag_data)==0){
     message("No RNAG data - empty dataframe returned")
     return(rnag_data)
   }else{
+    # subset data
     rnag_data<-subset_data(rnag_data, col_value, column, NULL, startyr=startyr, endyr=endyr, type=type)
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
-      return(rnag_data)
     }
     return(rnag_data)
   }
   
-  
-  #############
-  # do subsetting here - years first
-  # if only start year is set, is it beyond the data range?
-  # if (!is.null(startyr) & is.null(endyr)){
-  #   if (startyr>max(rnag_data$Year)){
-  #     message(paste0("Start year is beyond the most recent year of data (",max(rnag_data$Year),")"))
-  #     message("Just outputting most recent year")
-  #     startyr<-max(rnag_data$Year)
-  #   }
-  # }
-  # # if endyr is set, is it beyond the data range?
-  # if (!is.null(endyr)){
-  #   if (endyr>max(rnag_data$Year)){
-  #     message(paste0("End year is beyond the most recent year of data (",max(rnag_data$Year),")"))
-  #     message("Subsetting to most recent year")
-  #     endyr<-max(rnag_data$Year)
-  #   }
-  # }
-  # # if they are both set, check the endyr
-  # if (!is.null(startyr) & !is.null(endyr)) {
-  #   if (endyr>max(rnag_data$Year)){
-  #     message(paste0("End year is beyond the most recent year of data (",max(rnag_data$Year),")"))
-  #     message("Subsetting to most recent year")
-  #     endyr<-max(rnag_data$Year)
-  #   }
-  # # if both years are specified, subset by range
-  #   rnag_data <- rnag_data[rnag_data$Year >= startyr & rnag_data$Year <= endyr, ]
-  # }
-  # else if (!is.null(startyr)) {
-  #   rnag_data <- rnag_data[rnag_data$Year == startyr, ]
-  # }
-  # # subset by Water.body.type
-  # if (!is.null(type)) {
-  #   rnag_data <- rnag_data[rnag_data$Water.body.type == type, ]
-  # }
-  # # if year range covers 2013 and 2014, subset to just include cycle 2 data
-  # # avoids double counting of waterbodies
-  # rnag_data <- rnag_data[!(rnag_data$Year == 2013 & rnag_data$Cycle == 1 | rnag_data$Year == 2014 & rnag_data$Cycle == 1), ]
-  # 
-  # # check if any data returned
-  # if (nrow(rnag_data)==0){
-  #   message("No RNAG data - empty dataframe returned")
-  # }
-  # 
-  # return(rnag_data)
 } # end of function
