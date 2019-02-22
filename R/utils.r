@@ -89,6 +89,9 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
       }
       if (data_type=="objectives"){
         cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+      }
+      if (data_type=="pa"){
+        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/pa/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }else{
         cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
@@ -263,14 +266,16 @@ subset_data <- function(full_data, col_value = NULL, column = NULL, level = "Ove
   # level subsetting, defaults to "Overall Water Body"
   # for Chemical and Supporting Elements levels, need to deal with options for
   # surface waters and groundwaters
-  if (level == "Chemical") {
-    full_data <- full_data[full_data$Classification.Item == "Chemical" | full_data$Classification.Item == "Chemical (GW)", ]
-  }
-  else if (level == "Supporting elements") {
-    full_data <- full_data[full_data$Classification.Item == "Supporting elements (Surface Water)" | full_data$Classification.Item == "Supporting elements (Groundwater)", ]
-  }
-  else {
-    full_data <- full_data[full_data$Classification.Item == level, ]
+  if (!is.null(level)){
+    if (level == "Chemical") {
+      full_data <- full_data[full_data$Classification.Item == "Chemical" | full_data$Classification.Item == "Chemical (GW)", ]
+    }
+    else if (level == "Supporting elements") {
+      full_data <- full_data[full_data$Classification.Item == "Supporting elements (Surface Water)" | full_data$Classification.Item == "Supporting elements (Groundwater)", ]
+    }
+    else {
+      full_data <- full_data[full_data$Classification.Item == level, ]
+    }
   }
   # now Water.body.type
   if (!is.null(type)) {

@@ -127,6 +127,10 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
   status_data <- status_data[!(status_data$Year == 2013 & status_data$Cycle == 1 | status_data$Year == 2014 & status_data$Cycle == 1), ]
-
+  
+  # check if any status data returned
+  if (nrow(status_data)==0){
+    message("No status data for combination specified - empty dataframe returned")
+  }
   return(status_data)
 } # end of function

@@ -39,7 +39,7 @@
 #' @export get_objectives
 #'
 #' @examples
-#' # get objectives set for waterbody GB112071065700
+#' # get all objectives set for waterbody GB112071065700
 #' \dontrun{get_objectives("GB112071065700", "WBID")}
 #' 
 #' # get the objectives set for Lakes in the Humber RBD, for the year 2021
@@ -47,7 +47,7 @@
 #' 
 #' # get the objectives set for Rivers in the Avon Warwickshire
 #' # Operational Catchment in relation to Chemical status
-#' \dontrun{get_rnag("Avon Warwickshire", "MC", level="Chemical", type = "River")}
+#' \dontrun{get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")}
 get_objectives <- function(col_value = NULL, column = NULL, level="Overall Water Body", year = NULL, type = NULL) {
   # start by running general checks on input data
   check_args(col_value, column, NULL, NULL, type)
