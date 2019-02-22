@@ -11,7 +11,7 @@
 #' downloads, waterbody \code{Type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #
-#' @param col_value A string representing the description (name) of the
+#' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
@@ -30,7 +30,7 @@
 #' @noRd
 
 
-download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
+download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   # set up url components
   base_url<-"http://environment.data.gov.uk/catchment-planning/"
   # need to set the end URL differently depending on data_type
@@ -52,7 +52,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
 
   if (column == "RBD") {
     # rbd level extraction
-    index_num <- ea_wbids$RBD.num[which(ea_wbids[, column] == col_value)][1]
+    index_num <- ea_wbids$RBD.num[which(ea_wbids[, column] == ea_name)][1]
     if (is.na(index_num)) {
       stop("River Basin District name specified not found.")
     } else {
@@ -62,7 +62,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
   } # end of rbd extraction
   if (column == "MC") {
     # mc level extraction
-    index_num <- ea_wbids$MC.num[which(ea_wbids[, column] == col_value)][1]
+    index_num <- ea_wbids$MC.num[which(ea_wbids[, column] == ea_name)][1]
     if (is.na(index_num)) {
       stop("Management Catchment name specified not found.")
     } else {
@@ -73,7 +73,7 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
   # oc next
   if (column == "OC") {
     # oc level extraction - works
-    index_num <- ea_wbids$OC.num[which(ea_wbids[, column] == col_value)][1]
+    index_num <- ea_wbids$OC.num[which(ea_wbids[, column] == ea_name)][1]
     if (is.na(index_num)) {
       stop("Operational catchment name specified not found.")
     } else {
@@ -83,19 +83,19 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
   # finally wbid
   if (column == "WBID") {
     # wbid level extraction
-    if (col_value %in% ea_wbids[, "WBID"]) {
+    if (ea_name %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
         # have to add supress warnings as data.table does not like empty RNAG data (bad download format on the part of EA)
-        suppressWarnings(cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE))
+        suppressWarnings(cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", ea_name, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE))
       }
       if (data_type=="objectives"){
-        cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", col_value, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", ea_name, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="pa"){
-        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", col_value, "/pa/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", ea_name, "/pa/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="class"){
-        cde_data <- data.table::fread(paste0(base_url, "data/classification.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "data/classification.csv?waterBody=", ea_name, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
     }
     else {
@@ -129,10 +129,10 @@ zip_download <- function(download_url) {
 
 
 #' Check common arguments to functions
-#' @description Checks the col_value, year ranges and waterbody type
+#' @description Checks the ea_name, year ranges and waterbody type
 #' for all functions 
 #
-#' @param col_value A string representing the description (name) of the
+#' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
@@ -159,10 +159,10 @@ zip_download <- function(download_url) {
 #' 
 #' @noRd
 
-check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
-   # check that both col_value and column are present
-  if (is.null(col_value) | is.null(column)) {
-    stop("Both col_value (name) and column (\"WBID\", \"MC\", \"OC\", or \"RBD\") should be specified", "\n")
+check_args <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+   # check that both ea_name and column are present
+  if (is.null(ea_name) | is.null(column)) {
+    stop("Both ea_name (name) and column (\"WBID\", \"MC\", \"OC\", or \"RBD\") should be specified", "\n")
   }
   # are years, if present, numeric?
   if (!is.null(startyr) & !is.null(endyr)) {
@@ -203,7 +203,7 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
 #' 
 #' @param full_data The dataframe to be subset
 #' 
-#' @param col_value A string representing the description (name) of the
+#' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
@@ -235,7 +235,7 @@ check_args <- function(col_value = NULL, column = NULL, startyr = NULL, endyr = 
 #'
 #' @noRd
 #'
-subset_data <- function(full_data, col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+subset_data <- function(full_data, ea_name = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
 
   # if only start year is set, is it beyond the data range?
   if (!is.null(startyr) & is.null(endyr)){

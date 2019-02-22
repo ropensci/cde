@@ -10,7 +10,7 @@
 #' downloads, waterbody \code{Type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #
-#' @param col_value A string representing the description (name) of the
+#' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
@@ -58,9 +58,9 @@
 #' # Operational Catchment in 2011
 #' \dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
 #' 
-get_status <- function(col_value = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+get_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
   # start by running general checks on input data
-  check_args(col_value, column, startyr, endyr, type)
+  check_args(ea_name, column, startyr, endyr, type)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
@@ -78,7 +78,7 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
     message("Type is ignored for WBID objectives")
   }
   # if all inputs valid, download data
-  status_data <- download_cde(col_value, column, "class")
+  status_data <- download_cde(ea_name, column, "class")
 
   # check if any data returned
   if (nrow(status_data)==0){
@@ -86,7 +86,7 @@ get_status <- function(col_value = NULL, column = NULL, level = "Overall Water B
     return(status_data)
   }else{
     # subset data as required
-    status_data<-subset_data(status_data, col_value, column, level, startyr, endyr, type)
+    status_data<-subset_data(status_data, ea_name, column, level, startyr, endyr, type)
     if (nrow(status_data)==0){
       message("No status data for combination specified - empty dataframe returned")
     }

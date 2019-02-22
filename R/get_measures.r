@@ -7,7 +7,7 @@
 #' Note that Measures data is very patchy and in many cases will return an 
 #' empty dataframe with a message.
 #
-#' @param col_value A string representing the description (name) of the
+#' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
@@ -29,9 +29,9 @@
 #' # get the measures put in place for the Loddon Operational Catchment
 #' \dontrun{get_measures("Loddon", "OC")}
 #' 
-get_measures <- function(col_value = NULL, column = NULL) {
+get_measures <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data
-  check_args(col_value, column, NULL, NULL, NULL)
+  check_args(ea_name, column, NULL, NULL, NULL)
   # list of possible columns to select on
   choices <- c("MC", "OC", "RBD")
   # check column is one of options
@@ -39,7 +39,7 @@ get_measures <- function(col_value = NULL, column = NULL) {
     stop("Column specified is not one of the possible choices (\"OC\", \"MC\" or \"RBD\").")
   }
   # if all inputs valid, download data
-  measures_data <- download_cde(col_value, column, data_type="measures")
+  measures_data <- download_cde(ea_name, column, data_type="measures")
   
   # rename columns for consistency with get_status
   names(measures_data)[which(names(measures_data) == "River.Basin.District")] <- "River.basin.district"

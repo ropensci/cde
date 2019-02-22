@@ -12,7 +12,7 @@
 #' downloads, waterbody \code{Type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #
-#' @param col_value A string representing the description (name) of the
+#' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
 #' the Humber RBD, this would be "Humber"; also see examples. Must be an
 #' exact match to the values used in the EA database.
@@ -38,9 +38,9 @@
 #' # Operational Catchment
 #' \dontrun{get_pa("Avon Warwickshire", "MC", type = "River")}
 #' 
-get_pa <- function(col_value = NULL, column = NULL) {
+get_pa <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data, setting years to NULL
-  check_args(col_value, column, NULL, NULL, NULL)
+  check_args(ea_name, column, NULL, NULL, NULL)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
@@ -48,7 +48,7 @@ get_pa <- function(col_value = NULL, column = NULL) {
     stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   # if all inputs valid, download data
-  pa_data <- download_cde(col_value, column, data_type="pa")
+  pa_data <- download_cde(ea_name, column, data_type="pa")
   
   # rename columns for consistency with get_status
   names(pa_data)[which(names(pa_data) == "River.Basin.District")] <- "River.basin.district"
