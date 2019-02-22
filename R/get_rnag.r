@@ -31,7 +31,7 @@
 #' @param endyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 #' only be specified if \code{startyr} is also included, otherwise it
-#' is ignored and all years are returned. RNAG data is only available from 
+#' is ignored and all years are returned. RNAG data are only available from 
 #' 2013 onwards.
 #'
 #' @param type Type of waterbody to be extracted. For Operational/Management
