@@ -84,7 +84,6 @@ download_cde <- function(col_value = NULL, column = NULL, data_type=NULL) {
   if (column == "WBID") {
     # wbid level extraction
     if (col_value %in% ea_wbids[, "WBID"]) {
-      ##########
       if (data_type=="rnag"){
         print(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"))
         cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", col_value, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
