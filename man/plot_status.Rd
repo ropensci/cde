@@ -20,7 +20,8 @@ Use the \code{\link{search_names}} function to search for specific values.}
 (Management Catchment) and \code{RBD} (River Basin District)}
 
 \item{level}{The level within the WFD quality status classification to be
-extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
+extracted. Defaults to 'Overall Water Body'. See Vignette for possible 
+values.}
 
 \item{startyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
@@ -61,4 +62,5 @@ plot_status("Avon Warwickshire", "MC", level = "Chemical")
 # plot the Overall Water Body status of all waterbodies
 # in the Humber RBD between 2012 and 2014 using WFD colour scheme
 plot_status("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
+
 }
