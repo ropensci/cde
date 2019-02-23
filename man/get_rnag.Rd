@@ -4,11 +4,11 @@
 \alias{get_rnag}
 \title{Retrieve Reasons for Not Achieving Good Status}
 \usage{
-get_rnag(col_value = NULL, column = NULL, startyr = NULL,
+get_rnag(ea_name = NULL, column = NULL, startyr = NULL,
   endyr = NULL, type = NULL)
 }
 \arguments{
-\item{col_value}{A string representing the description (name) of the
+\item{ea_name}{A string representing the description (name) of the
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
 exact match to the values used in the EA database.
@@ -26,7 +26,7 @@ all years are returned. RNAG data are only available from 2013 onwards.}
 \item{endyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 only be specified if \code{startyr} is also included, otherwise it
-is ignored and all years are returned. RNAG data is only available from 
+is ignored and all years are returned. RNAG data are only available from 
 2013 onwards.}
 
 \item{type}{Type of waterbody to be extracted. For Operational/Management

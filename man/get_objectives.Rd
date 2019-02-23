@@ -4,11 +4,11 @@
 \alias{get_objectives}
 \title{Retrieve Objectives}
 \usage{
-get_objectives(col_value = NULL, column = NULL,
+get_objectives(ea_name = NULL, column = NULL,
   level = "Overall Water Body", year = NULL, type = NULL)
 }
 \arguments{
-\item{col_value}{A string representing the description (name) of the
+\item{ea_name}{A string representing the description (name) of the
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
 exact match to the values used in the EA database.

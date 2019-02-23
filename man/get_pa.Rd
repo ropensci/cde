@@ -4,10 +4,10 @@
 \alias{get_pa}
 \title{Retrieve Protected Area Information}
 \usage{
-get_pa(col_value = NULL, column = NULL)
+get_pa(ea_name = NULL, column = NULL)
 }
 \arguments{
-\item{col_value}{A string representing the description (name) of the
+\item{ea_name}{A string representing the description (name) of the
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
 exact match to the values used in the EA database.
