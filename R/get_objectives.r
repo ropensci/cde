@@ -8,7 +8,7 @@
 #' specific timeranges to be downloaded.
 #' For Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}) level
-#' downloads, waterbody \code{Type} can also be specified to allow
+#' downloads, waterbody \code{type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #
 #' @param ea_name A string representing the description (name) of the
@@ -21,8 +21,9 @@
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #' 
-#' @param level The level within the WFD quality status classification to be
-#' extracted. Defaults to 'Overall Water Body'. See docs for possible values.
+#' @param level The level within the WFD quality classification that 
+#' objectives have been set at. Defaults to 'Overall Water Body'. 
+#' See information in the Vignette for possible values.
 #'
 #' @param year The year that objectives are set for, either 2015, 
 #' 2021 or 2027. If not given then objectives for all years are returned.

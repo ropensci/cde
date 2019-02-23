@@ -8,7 +8,7 @@
 #' specific timeranges to be downloaded.
 #' For Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}) level
-#' downloads, waterbody \code{Type} can also be specified to allow
+#' downloads, waterbody \code{type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #' Data is presented at the level of individual elements that are the
 #' reasons for not achieving good status.

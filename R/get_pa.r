@@ -5,12 +5,6 @@
 #' Data can be retrieved by specifying waterbody id
 #' (\code{WBID}), Management Catchment (\code{MC}), Operational
 #' Catchment (\code{OC}) or River Basin District (\code{RBD}).
-#' Start year (\code{startyr}) and end year (\code{endyr}) allow
-#' specific timeranges to be downloaded.
-#' For Management Catchment (\code{MC}), Operational
-#' Catchment (\code{OC}) or River Basin District (\code{RBD}) level
-#' downloads, waterbody \code{Type} can also be specified to allow
-#' extraction of specific waterbody types (River, Lake etc).
 #
 #' @param ea_name A string representing the description (name) of the
 #' features to be extracted. For example to extract data for the whole of
@@ -31,12 +25,12 @@
 #' # get protected areas associated with waterbody GB112071065700
 #' \dontrun{get_pa("GB112071065700", "WBID")}
 #' 
-#' # get the protected areas associated with Lakes in the Humber RBD
-#' \dontrun{get_pa("Humber", "RBD", type = "Lake")}
+#' # get the protected areas associated with the Humber RBD
+#' \dontrun{get_pa("Humber", "RBD")}
 #' 
-#' # get the protected areas associated with Rivers in the Avon Warwickshire
-#' # Operational Catchment
-#' \dontrun{get_pa("Avon Warwickshire", "MC", type = "River")}
+#' # get the protected areas associated with the Avon Warwickshire
+#' # Management Catchment
+#' \dontrun{get_pa("Avon Warwickshire", "MC")}
 #' 
 get_pa <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data, setting years to NULL

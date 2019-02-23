@@ -64,7 +64,7 @@ status information for a given set of data (MC, OC or RBD)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cde</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -115,7 +115,7 @@ status information for a given set of data (MC, OC or RBD)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>plot_status</span>(<span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>plot_status</span>(<span class='kw'>ea_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"Overall Water Body"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scheme</span> <span class='kw'>=</span> <span class='st'>"vir"</span>)</pre>
     
@@ -123,7 +123,7 @@ status information for a given set of data (MC, OC or RBD)</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>col_value</th>
+      <th>ea_name</th>
       <td><p>A string representing the description (name) of the
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
@@ -139,7 +139,8 @@ Use the <code><a href='search_names.html'>search_names</a></code> function to se
     <tr>
       <th>level</th>
       <td><p>The level within the WFD quality status classification to be
-extracted. Defaults to 'Overall Water Body'. See docs for possible values.</p></td>
+extracted. Defaults to 'Overall Water Body'. See Vignette for possible 
+values.</p></td>
     </tr>
     <tr>
       <th>startyr</th>
@@ -185,7 +186,8 @@ depending on the scheme specified.</p>
 <span class='fu'>plot_status</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"Chemical"</span>)</div><div class='img'><img src='plot_status-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># plot the Overall Water Body status of all waterbodies</span>
 <span class='co'># in the Humber RBD between 2012 and 2014 using WFD colour scheme</span>
-<span class='fu'>plot_status</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2012</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>scheme</span> <span class='kw'>=</span> <span class='st'>"wfd"</span>)</div><div class='img'><img src='plot_status-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot_status</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2012</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>scheme</span> <span class='kw'>=</span> <span class='st'>"wfd"</span>)</div><div class='img'><img src='plot_status-3.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -20,7 +20,8 @@ Use the \code{\link{search_names}} function to search for specific values.}
 (Management Catchment) and \code{RBD} (River Basin District)}
 
 \item{level}{The level within the WFD quality status classification to be
-extracted. Defaults to 'Overall Water Body'. See docs for possible values.}
+extracted. Defaults to 'Overall Water Body'. See Vignette for possible 
+values.}
 
 \item{startyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
@@ -50,7 +51,7 @@ Start year (\code{startyr}) and end year (\code{endyr}) allow
 specific timeranges to be downloaded.
 For Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}) level
-downloads, waterbody \code{Type} can also be specified to allow
+downloads, waterbody \code{type} can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).
 }
 \examples{

@@ -40,7 +40,7 @@ Start year (startyr) and end year (endyr) allow
 specific timeranges to be downloaded.
 For Management Catchment (MC), Operational
 Catchment (OC) or River Basin District (RBD) level
-downloads, waterbody Type can also be specified to allow
+downloads, waterbody type can also be specified to allow
 extraction of specific waterbody types (River, Lake etc)." />
 <meta name="twitter:card" content="summary" />
 
@@ -72,7 +72,7 @@ extraction of specific waterbody types (River, Lake etc)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cde</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -126,12 +126,12 @@ Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow
 specific timeranges to be downloaded.
 For Management Catchment (<code>MC</code>), Operational
 Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level
-downloads, waterbody <code>Type</code> can also be specified to allow
+downloads, waterbody <code>type</code> can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_status</span>(<span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>get_status</span>(<span class='kw'>ea_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"Overall Water Body"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
@@ -139,7 +139,7 @@ extraction of specific waterbody types (River, Lake etc).</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>col_value</th>
+      <th>ea_name</th>
       <td><p>A string representing the description (name) of the
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
@@ -155,7 +155,8 @@ Use the <code><a href='search_names.html'>search_names</a></code> function to se
     <tr>
       <th>level</th>
       <td><p>The level within the WFD quality status classification to be
-extracted. Defaults to 'Overall Water Body'. See docs for possible values.</p></td>
+extracted. Defaults to 'Overall Water Body'. See Vignette for possible 
+values.</p></td>
     </tr>
     <tr>
       <th>startyr</th>

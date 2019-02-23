@@ -27,6 +27,7 @@
 #' # plot the Overall Water Body status of all waterbodies
 #' # in the Humber RBD between 2012 and 2014 using WFD colour scheme
 #' plot_status("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
+#' 
 plot_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, scheme = "vir") {
   # start by running general checks on input data
   check_args(ea_name, column, startyr, endyr, type)

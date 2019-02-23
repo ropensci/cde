@@ -37,13 +37,7 @@ waterbodies, catchments or River Basin Districts from the EA
 Catchment Data Explorer site.
 Data can be retrieved by specifying waterbody id
 (WBID), Management Catchment (MC), Operational
-Catchment (OC) or River Basin District (RBD).
-Start year (startyr) and end year (endyr) allow
-specific timeranges to be downloaded.
-For Management Catchment (MC), Operational
-Catchment (OC) or River Basin District (RBD) level
-downloads, waterbody Type can also be specified to allow
-extraction of specific waterbody types (River, Lake etc)." />
+Catchment (OC) or River Basin District (RBD)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -74,7 +68,7 @@ extraction of specific waterbody types (River, Lake etc)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cde</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -125,23 +119,17 @@ waterbodies, catchments or River Basin Districts from the EA
 Catchment Data Explorer site.
 Data can be retrieved by specifying waterbody id
 (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational
-Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).
-Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow
-specific timeranges to be downloaded.
-For Management Catchment (<code>MC</code>), Operational
-Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level
-downloads, waterbody <code>Type</code> can also be specified to allow
-extraction of specific waterbody types (River, Lake etc).</p>
+Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_pa</span>(<span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_pa</span>(<span class='kw'>ea_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>col_value</th>
+      <th>ea_name</th>
       <td><p>A string representing the description (name) of the
 features to be extracted. For example to extract data for the whole of
 the Humber RBD, this would be "Humber"; also see examples. Must be an
@@ -167,14 +155,14 @@ associated with the waterbodies.</p>
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>get_pa</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)
 <span class='co'># }</span><div class='input'>
-# get the protected areas associated with Lakes in the Humber RBD
+# get the protected areas associated with the Humber RBD
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_pa</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)
+<span class='fu'>get_pa</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>)
 <span class='co'># }</span><div class='input'>
-# get the protected areas associated with Rivers in the Avon Warwickshire
-# Operational Catchment
+# get the protected areas associated with the Avon Warwickshire
+# Management Catchment
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_pa</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
+<span class='fu'>get_pa</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
