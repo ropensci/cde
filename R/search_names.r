@@ -18,11 +18,12 @@
 #' @export search_names
 #'
 #' @examples
-#' # search for Management Catchments containing "Kennet"
-#' search_names("Kennet", "MC")
-#' 
 #' # search for River Basin Districts containing "Tweed"
 #' \dontrun{search_names("Tweed", "RBD")}
+#' 
+#' # search for Management Catchments containing "Kennet"
+#' \dontrun{search_names("Kennet", "MC")}
+#' 
 search_names <- function(string = NULL, column = NULL) {
   search_choices <- c("name", "MC", "OC", "RBD")
   # check if there is a value passed for both arguments

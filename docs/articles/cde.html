@@ -83,7 +83,9 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p><code>cde</code> is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area. The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas. The site accessed is <a href="https://environment.data.gov.uk/catchment-planning/" class="uri">https://environment.data.gov.uk/catchment-planning/</a>. The data that are downloaded are made available under the Open Government Licence v3.0 (<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="uri">https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a>) and use of this package implies acceptance of these licence conditions.</p>
+<p><code>cde</code> is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area.</p>
+<p>The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.</p>
+<p>The site accessed is <a href="https://environment.data.gov.uk/catchment-planning/" class="uri">https://environment.data.gov.uk/catchment-planning/</a>. The data that are downloaded are made available under the Open Government Licence v3.0 (<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="uri">https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a>) and use of this package implies acceptance of these licence conditions.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -210,31 +212,31 @@ lark_wb&lt;-<span class="kw"><a href="../reference/search_names.html">search_nam
 lark_hawstead&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="st">"GB105033042920"</span>, <span class="st">"WBID"</span>)
 
 <span class="co"># the dataframe returned contains all of the data for this site in all </span>
-<span class="co"># years (we did not specify year/year range)</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(lark_hawstead)
+<span class="co"># years (we did not specify year/year range) (truncate to fit screen)</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(lark_hawstead, <span class="dt">vec.len=</span><span class="dv">1</span>, <span class="dt">nchar.max=</span><span class="dv">20</span>)
 <span class="co">#&gt; 'data.frame':    8 obs. of  22 variables:</span>
-<span class="co">#&gt;  $ River.Basin.District          : chr  "Anglian" "Anglian" "Anglian" "Anglian" ...</span>
-<span class="co">#&gt;  $ Management.Catchment          : chr  "Cam and Ely Ouse" "Cam and Ely Ouse" "Cam and Ely Ouse" "Cam and Ely Ouse" ...</span>
-<span class="co">#&gt;  $ Operational.Catchment         : chr  "Lark" "Lark" "Lark" "Lark" ...</span>
-<span class="co">#&gt;  $ Waterbody.ID                  : chr  "GB105033042920" "GB105033042920" "GB105033042920" "GB105033042920" ...</span>
-<span class="co">#&gt;  $ water.body                    : chr  "Lark (US Hawstead)" "Lark (US Hawstead)" "Lark (US Hawstead)" "Lark (US Hawstead)" ...</span>
-<span class="co">#&gt;  $ water.body.type               : chr  "River" "River" "River" "River" ...</span>
-<span class="co">#&gt;  $ easting                       : int  586958 586958 586958 586958 586958 586958 586958 586958</span>
-<span class="co">#&gt;  $ northing                      : int  258237 258237 258237 258237 258237 258237 258237 258237</span>
-<span class="co">#&gt;  $ ngr                           : chr  "TL8695858237" "TL8695858237" "TL8695858237" "TL8695858237" ...</span>
-<span class="co">#&gt;  $ Hydromorphological.designation: chr  "not designated artificial or heavily modified" "not designated artificial or heavily modified" "not designated artificial or heavily modified" "not designated artificial or heavily modified" ...</span>
-<span class="co">#&gt;  $ Year                          : int  2011 2010 2016 2015 2014 2013 2012 2009</span>
-<span class="co">#&gt;  $ Status                        : chr  "Moderate" "Moderate" "Moderate" "Moderate" ...</span>
-<span class="co">#&gt;  $ Cycle                         : int  1 1 2 2 2 2 1 1</span>
-<span class="co">#&gt;  $ Classification.Level          : chr  "Overall Waterbody" "Overall Waterbody" "Overall Waterbody" "Overall Waterbody" ...</span>
-<span class="co">#&gt;  $ Classification.Item           : chr  "Overall Water Body" "Overall Water Body" "Overall Water Body" "Overall Water Body" ...</span>
-<span class="co">#&gt;  $ classification.ID             : chr  "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2011/item/wbc_106/cycle/1" "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2010/item/wbc_106/cycle/1" "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2016/item/wbc_106/cycle/2" "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2015/item/wbc_106/cycle/2" ...</span>
-<span class="co">#&gt;  $ Certainty                     : chr  "" "" "Uncertain" "Uncertain" ...</span>
-<span class="co">#&gt;  $ Confidence                    : num  NA NA NA NA NA NA NA NA</span>
-<span class="co">#&gt;  $ Type                          : chr  "Classification" "Classification" "Classification" "Classification" ...</span>
-<span class="co">#&gt;  $ Deterioration.type            : chr  "" "" "" "" ...</span>
-<span class="co">#&gt;  $ Linked.Reasons                : chr  "" "" "" "" ...</span>
-<span class="co">#&gt;  $ Investigation.outcome         : logi  NA NA NA NA NA NA ...</span>
+<span class="co">#&gt;  $ River.Basin.District          : chr  "Anglian" ...</span>
+<span class="co">#&gt;  $ Management.Catchment          : chr  "Cam and Ely Ouse" ...</span>
+<span class="co">#&gt;  $ Operational.Catchment         : chr  "Lark" ...</span>
+<span class="co">#&gt;  $ Waterbody.ID                  : chr  "GB105033042920" ...</span>
+<span class="co">#&gt;  $ water.body                    : chr  "Lark (US Hawstead)" ...</span>
+<span class="co">#&gt;  $ water.body.type               : chr  "River" ...</span>
+<span class="co">#&gt;  $ easting                       : int  586958 586958 ...</span>
+<span class="co">#&gt;  $ northing                      : int  258237 258237 ...</span>
+<span class="co">#&gt;  $ ngr                           : chr  "TL8695858237" ...</span>
+<span class="co">#&gt;  $ Hydromorphological.designation: chr  "not"| __truncated__ ...</span>
+<span class="co">#&gt;  $ Year                          : int  2011 2010 ...</span>
+<span class="co">#&gt;  $ Status                        : chr  "Moderate" ...</span>
+<span class="co">#&gt;  $ Cycle                         : int  1 1 ...</span>
+<span class="co">#&gt;  $ Classification.Level          : chr  "Overall Waterbody" ...</span>
+<span class="co">#&gt;  $ Classification.Item           : chr  "Overall Water Body" ...</span>
+<span class="co">#&gt;  $ classification.ID             : chr  "htt"| __truncated__ ...</span>
+<span class="co">#&gt;  $ Certainty                     : chr  "" ...</span>
+<span class="co">#&gt;  $ Confidence                    : num  NA NA ...</span>
+<span class="co">#&gt;  $ Type                          : chr  "Classification" ...</span>
+<span class="co">#&gt;  $ Deterioration.type            : chr  "" ...</span>
+<span class="co">#&gt;  $ Linked.Reasons                : chr  "" ...</span>
+<span class="co">#&gt;  $ Investigation.outcome         : logi  NA ...</span>
 
 <span class="co"># just a quick look at the status data</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_hawstead<span class="op">$</span>Status)

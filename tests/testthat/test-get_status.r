@@ -25,9 +25,14 @@ test_that("incorrect arguments returns an error", {
   expect_error(get_status("Avon Hampshire", startyr=2012))
 })
 
-test_that("invalid string returns an error", {
+test_that("invalid string for WBID returns an error", {
   # retrieve data for site "Aardvark"
   expect_error(get_status("Aardvark", "WBID"))
+})
+
+test_that("invalid string for OC returns an error", {
+  # retrieve data for site "Aardvark"
+  expect_error(get_status("Aardvark", "OC"))
 })
 
 test_that("invalid type returns an error", {
@@ -38,6 +43,11 @@ test_that("invalid type returns an error", {
 test_that("start date outside data range returns an error", {
   # retrieve data for year 1900
   expect_error(get_status("Avon Hampshire", "MC", startyr=1900))
+})
+
+test_that("end date only returns an error", {
+  # retrieve data for year 1900
+  expect_error(get_status("Avon Hampshire", "MC", endyr=2015))
 })
 
 test_that("end date before start date returns an error", {
@@ -73,4 +83,9 @@ test_that("incorrect level returns a error", {
 test_that("specifying type for WB download returns a message", {
   # retrieve data for level that does not exist
   expect_message(get_status("GB520804714300", "WBID", type="River"))
+})
+
+test_that("incorrect set of criteria returns a message", {
+  # retrieve data for level that does not exist
+  expect_message(get_status("Avon Warwickshire", "MC", type="CoastalWater"))
 })

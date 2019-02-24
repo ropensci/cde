@@ -18,7 +18,11 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`cde` is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area. The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas. The site accessed is [https://environment.data.gov.uk/catchment-planning/](https://environment.data.gov.uk/catchment-planning/). The data that are downloaded are made available under the Open Government Licence v3.0 (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) and use of this package implies acceptance of these licence conditions.
+`cde` is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area.
+
+The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.
+
+The site accessed is [https://environment.data.gov.uk/catchment-planning/](https://environment.data.gov.uk/catchment-planning/). The data that are downloaded are made available under the Open Government Licence v3.0 (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) and use of this package implies acceptance of these licence conditions.
 
 ## Installation
 
@@ -84,8 +88,8 @@ head(lark_wb)
 lark_hawstead<-get_status("GB105033042920", "WBID")
 
 # the dataframe returned contains all of the data for this site in all 
-# years (we did not specify year/year range)
-str(lark_hawstead)
+# years (we did not specify year/year range) (truncate to fit screen)
+str(lark_hawstead, vec.len=1, nchar.max=20)
 
 # just a quick look at the status data
 table(lark_hawstead$Status)

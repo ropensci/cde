@@ -26,9 +26,10 @@ or River Basin District (\code{RBD}). The search is done on a local copy
 of the waterbody listing rather than connecting to the EA site.
 }
 \examples{
-# search for Management Catchments containing "Kennet"
-search_names("Kennet", "MC")
-
 # search for River Basin Districts containing "Tweed"
 \dontrun{search_names("Tweed", "RBD")}
+
+# search for Management Catchments containing "Kennet"
+\dontrun{search_names("Kennet", "MC")}
+
 }

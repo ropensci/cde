@@ -146,79 +146,15 @@ the search string (full or partial matches) in the column specified.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># search for Management Catchments containing "Kennet"</span>
-<span class='fu'>search_names</span>(<span class='st'>"Kennet"</span>, <span class='st'>"MC"</span>)</div><div class='output co'>#&gt;                WBID                                                       name
-#&gt; 2589 GB106039017360                           Inkpen Stream (source to Kennet)
-#&gt; 2590 GB106039017300                 West End Brook (tributary of Foudry Brook)
-#&gt; 2591 GB106039017380                        Foudry Brook (West End Brook to M4)
-#&gt; 2592 GB106039023120                                             Clayhill Brook
-#&gt; 2593 GB106039023173                  Middle Kennet (Marlborough to Hungerford)
-#&gt; 2594 GB106039017410                                           Burghfield Brook
-#&gt; 2595 GB106039017370               Shalbourne  (source to Kennet at Hungerford)
-#&gt; 2596 GB106039017280                         Enborne (Source to downstream A34)
-#&gt; 2597 GB106039017310               Enborne (downstream A34 to Burghclere Brook)
-#&gt; 2598     GB30642611                         Farnham Flint or Englefield Lagoon
-#&gt; 2599 GB106039017210                                             Penwood Stream
-#&gt; 2600 GB106039017250                      Ecchinswell Brook (source to Enborne)
-#&gt; 2601     GB30642622                                 Ameys Lake or Theale Lakes
-#&gt; 2602 GB106039023200                                                  Aldbourne
-#&gt; 2603     GB30643126                                               Milford Lake
-#&gt; 2604 GB106039017190                                           Silchester Brook
-#&gt; 2605 GB106039023140                                      Kennet and Holy Brook
-#&gt; 2606 GB106039023180                                                         Og
-#&gt; 2607 GB106039017261             Enborne (Burghclere Brook to Kingsclere Brook)
-#&gt; 2608 GB106039017390             Kennet and Avon Canal and Dun above Hungerford
-#&gt; 2609 GB106039023220                               Lambourn (Source to Newbury)
-#&gt; 2610 GB106039023171                                Upper Kennet to Marlborough
-#&gt; 2611 GB106039017200                                            Baughurst Brook
-#&gt; 2612 GB106039017220                       Kingsclere Brook (Source to Enborne)
-#&gt; 2613 GB106039023210                                               Winterbourne
-#&gt; 2614 GB106039017340                                              Lower Enborne
-#&gt; 2615 GB106039023174                      Middle Kennet (Hungerford to Newbury)
-#&gt; 2616 GB106039017420         Kennet (Lambourn confluence to Enborne confluence)
-#&gt; 2617 GB106039023141                                                 Holy Brook
-#&gt; 2618 GB106039017350                                                  Upper Dun
-#&gt; 2619 GB106039017230 Earlstone Stream and  Burghclere Brook (source to Enborne)
-#&gt; 2620 GB106039017430                                           Froxfield Stream
-#&gt; 2621     GB30643001                                          Wasing Wood Ponds
-#&gt;       type     OC                     MC    RBD
-#&gt; 2589 River Kennet Kennet and tributaries Thames
-#&gt; 2590 River Kennet Kennet and tributaries Thames
-#&gt; 2591 River Kennet Kennet and tributaries Thames
-#&gt; 2592 River Kennet Kennet and tributaries Thames
-#&gt; 2593 River Kennet Kennet and tributaries Thames
-#&gt; 2594 River Kennet Kennet and tributaries Thames
-#&gt; 2595 River Kennet Kennet and tributaries Thames
-#&gt; 2596 River Kennet Kennet and tributaries Thames
-#&gt; 2597 River Kennet Kennet and tributaries Thames
-#&gt; 2598  Lake Kennet Kennet and tributaries Thames
-#&gt; 2599 River Kennet Kennet and tributaries Thames
-#&gt; 2600 River Kennet Kennet and tributaries Thames
-#&gt; 2601  Lake Kennet Kennet and tributaries Thames
-#&gt; 2602 River Kennet Kennet and tributaries Thames
-#&gt; 2603  Lake Kennet Kennet and tributaries Thames
-#&gt; 2604 River Kennet Kennet and tributaries Thames
-#&gt; 2605 River Kennet Kennet and tributaries Thames
-#&gt; 2606 River Kennet Kennet and tributaries Thames
-#&gt; 2607 River Kennet Kennet and tributaries Thames
-#&gt; 2608 River Kennet Kennet and tributaries Thames
-#&gt; 2609 River Kennet Kennet and tributaries Thames
-#&gt; 2610 River Kennet Kennet and tributaries Thames
-#&gt; 2611 River Kennet Kennet and tributaries Thames
-#&gt; 2612 River Kennet Kennet and tributaries Thames
-#&gt; 2613 River Kennet Kennet and tributaries Thames
-#&gt; 2614 River Kennet Kennet and tributaries Thames
-#&gt; 2615 River Kennet Kennet and tributaries Thames
-#&gt; 2616 River Kennet Kennet and tributaries Thames
-#&gt; 2617 River Kennet Kennet and tributaries Thames
-#&gt; 2618 River Kennet Kennet and tributaries Thames
-#&gt; 2619 River Kennet Kennet and tributaries Thames
-#&gt; 2620 River Kennet Kennet and tributaries Thames
-#&gt; 2621  Lake Kennet Kennet and tributaries Thames</div><div class='input'>
-# search for River Basin Districts containing "Tweed"
+    <pre class="examples"><div class='input'># search for River Basin Districts containing "Tweed"
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>search_names</span>(<span class='st'>"Tweed"</span>, <span class='st'>"RBD"</span>)
-<span class='co'># }</span></pre>
+<span class='co'># }</span><div class='input'>
+# search for Management Catchments containing "Kennet"
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>search_names</span>(<span class='st'>"Kennet"</span>, <span class='st'>"MC"</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
