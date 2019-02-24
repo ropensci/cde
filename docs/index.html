@@ -88,8 +88,7 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>The <a href="http://ec.europa.eu/environment/water/water-framework/index_en.html">WFD</a> set EU-wide standards for surface water quality. The quality of individual waterbodies is assessed through a wide range of indicators and standards that cover biological, chemical and hydromorphological elements. For each waterbody, overall status is classified into 5 classes: ‘High’, ‘Good’, ‘Moderate’, ‘Poor’ and ‘Bad’. The aim of the WFD is for all waterbodies to reach at least ‘Good’ status. Pressures on waterbodies that may prevent this or impact on their status are also assessed.</p>
-<p><code>cde</code> is a package for R to extract Water Framework Directive (WFD) waterbody status classifications and Reasons for Not Achieving Good (RNAG) status data from the <a href="http://environment.data.gov.uk/catchment-planning/">Environment Agency Catchment Data Explorer</a> (CDE) site. Also provides quick overview plots of status classes. The data that are downloaded and summarised using this package are made available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>.</p>
+<p><code>cde</code> is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area. The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas. The site accessed is <a href="https://environment.data.gov.uk/catchment-planning/" class="uri">https://environment.data.gov.uk/catchment-planning/</a>. The data that are downloaded are made available under the Open Government Licence v3.0 (<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="uri">https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a>) and use of this package implies acceptance of these licence conditions.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -101,119 +100,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic usage</h2>
-<p>There are four main functions in the package:</p>
-<p><code>search_names</code></p>
-<p>This allows you to search the listing of sites, catchments or river basin districts on the CDE website to locate those that match the string specified. The output of this can then be used to define inputs for the following functions. Searching can be performed by waterbody name (<code>name</code>), Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).</p>
-<p>The function returns a dataframe containing all rows that match (or partially match) the input string with details of waterbody ID (WBID), Managment and Operational Catchment and River Basin District to facilitate use with other functions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># search for Management Catchments containing the string 'Avon'</span>
-<span class="kw"><a href="reference/search_names.html">search_names</a></span>(<span class="st">"Avon"</span>, <span class="st">"MC"</span>)
-
-<span class="co"># search for waterbodies containing the string 'Till'</span>
-<span class="kw"><a href="reference/search_names.html">search_names</a></span>(<span class="st">"Till"</span>, <span class="st">"name"</span>)</code></pre></div>
-<p><code>get_status</code></p>
-<p>This retrieves status data from the CDE site. The data can be retrieved by specifying waterbody id (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>). Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow specific timeranges to be downloaded. For Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level downloads, waterbody type (<code>type</code>) can also be specified to allow extraction of specific waterbody types (“River”, “Lake”, “GroundWaterBody”, “TransitionalWater” or “CoastalWater”. The classification level (<code>level</code>) can also be specified; this defaults to “Overall Water Body”, which is the Level 4 classification. Other possible values that can be specified are:</p>
-<table class="table table">
-<thead><tr class="header">
-<th>Level 1</th>
-<th>Level 2</th>
-<th>Level 4</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Ecological</td>
-<td>Biological quality elements</td>
-<td>Overall water body</td>
-</tr>
-<tr class="even">
-<td>Chemical</td>
-<td>Chemical Status element</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>Quantitative</td>
-<td>Hydromorphological Supporting Elements</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>Other Substances</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>Physico-chemical quality elements</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>Priority hazardous substances</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>Priority substances</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>Quantitative Status element</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>Specific pollutants</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>Supporting elements</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<p>For full details of the classification hierarchy used, see the details <a href="https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy">here</a>.</p>
-<p>The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates. Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting. There was also a change in some of the environmental standards applied to chemical aspects of status assessment between cycles, so there may be some noticeable changes in status between these years. See <a href="https://environment.data.gov.uk/catchment-planning/help#help-surface-water-chemical-classification">here</a> for more details.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get status information for Lakes in the Avon Hampshire Management </span>
-<span class="co"># Catchment in 2012</span>
-<span class="kw"><a href="reference/get_status.html">get_status</a></span>(<span class="st">"Avon Hampshire"</span>, <span class="st">"MC"</span>, <span class="dt">startyr=</span><span class="dv">2012</span>, <span class="dt">type=</span><span class="st">"Lake"</span>)
-
-<span class="co"># get status information for all waterbodies within the Solway Tweed</span>
-<span class="co"># River Basin District in all years (2009-2015)</span>
-<span class="kw"><a href="reference/get_status.html">get_status</a></span>(<span class="st">"Solway Tweed"</span>, <span class="st">"RBD"</span>)
-
-<span class="co"># get status information for all waterbodies within the Humber</span>
-<span class="co"># River Basin District between 2012 and 2014 (BIG - 2985 rows!)</span>
-<span class="kw"><a href="reference/get_status.html">get_status</a></span>(<span class="st">"Humber"</span>, <span class="st">"RBD"</span>, <span class="dt">startyr=</span><span class="dv">2012</span>, <span class="dt">endyr=</span><span class="dv">2014</span>)
-
-<span class="co"># get status information for WBID  GB102021073050 between 2009 and 2012</span>
-<span class="kw"><a href="reference/get_status.html">get_status</a></span>(<span class="st">"GB102021073050"</span>, <span class="st">"WBID"</span>, <span class="dt">startyr=</span><span class="dv">2009</span>, <span class="dt">endyr=</span><span class="dv">2012</span>)</code></pre></div>
-<p><code>plot_status</code></p>
-<p>This produces summary barplots of percentage of waterbodies at different status. As for <code>get_status</code> year range, level and type can be specified, along with colour scheme. The default is <code>scheme="vir"</code>, which is a <code>viridis</code>-based scheme. The alternative is <code>scheme="wfd"</code>, which gives the status colours specified within the WFD. Only works for Management/Operational Catchments or River Basin District level searches.</p>
-<p>When a single year is specified, the bars represent the percentage of waterbodies in each status class. When multiple years are specified, the output is a stacked barplot of status percentages for each year.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot status information for Lakes in the Avon Hampshire Management </span>
-<span class="co"># Catchment in 2012</span>
-<span class="kw"><a href="reference/plot_status.html">plot_status</a></span>(<span class="st">"Avon Hampshire"</span>, <span class="st">"MC"</span>, <span class="dt">startyr=</span><span class="dv">2012</span>, <span class="dt">type=</span><span class="st">"Lake"</span>)
-
-<span class="co"># plot status information for all waterbodies within the Solway Tweed</span>
-<span class="co"># River Basin District in all years (2009-2015) using WFD colours</span>
-<span class="kw"><a href="reference/plot_status.html">plot_status</a></span>(<span class="st">"Solway Tweed"</span>, <span class="st">"RBD"</span>, <span class="dt">scheme=</span><span class="st">"wfd"</span>)
-
-<span class="co"># plot status information for all waterbodies within the Humber</span>
-<span class="co"># River Basin District between 2012 and 2014</span>
-<span class="kw"><a href="reference/plot_status.html">plot_status</a></span>(<span class="st">"Humber"</span>, <span class="st">"RBD"</span>, <span class="dt">startyr=</span><span class="dv">2012</span>, <span class="dt">endyr=</span><span class="dv">2014</span>)</code></pre></div>
-<p><code>get_rnag</code></p>
-<p>This retrieves data on the Reasons for Not Achieving Good (RNAG) status (i.e. pressure data) from the CDE site. The data can be retrieved by specifying waterbody id (<code>WBID</code>), Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>). Start year (<code>startyr</code>) and end year (<code>endyr</code>) allow specific timeranges to be downloaded. For Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>) level downloads, waterbody type (<code>type</code>) can also be specified to allow extraction of specific waterbody types (“River”, “Lake”, “GroundWaterBody”, “TransitionalWater” or “CoastalWater”.</p>
-<p>The function returns a dataframe containing information on the classification level at which the waterbodies failed to reach good status (ecological, chemical etc.) along with details of the pressures identified, classified at a number of different hierarchical levels. Details of these can be found <a href="https://environment.data.gov.uk/catchment-planning/help#help-rnag-search">here</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get RNAG issues identified for waterbody GB112071065700</span>
-<span class="kw"><a href="reference/get_rnag.html">get_rnag</a></span>(<span class="st">"GB112071065700"</span>, <span class="st">"WBID"</span>)
-
-<span class="co"># get the RNAG issues for Lakes in the Humber RBD, between</span>
-<span class="co"># 2012 and 2014</span>
-<span class="kw"><a href="reference/get_rnag.html">get_rnag</a></span>(<span class="st">"Humber"</span>, <span class="st">"RBD"</span>, <span class="dt">startyr =</span> <span class="dv">2012</span>, <span class="dt">endyr =</span> <span class="dv">2014</span>, <span class="dt">type =</span> <span class="st">"Lake"</span>)
-
-<span class="co"># get the RNAG issues for Rivers in the Avon Warwickshire</span>
-<span class="co"># Operational Catchment in 2011</span>
-<span class="kw"><a href="reference/get_rnag.html">get_rnag</a></span>(<span class="st">"Avon Warwickshire"</span>, <span class="st">"MC"</span>, <span class="dt">startyr =</span> <span class="dv">2011</span>, <span class="dt">type =</span> <span class="st">"River"</span>)</code></pre></div>
+<p>See the ‘Getting started’ vignette or ‘Reference’ sections above for details of the different functions.</p>
 </div>
 </div>
   </div>

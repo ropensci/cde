@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vignette Title • cde</title>
+<title>cde: a run through • cde</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Vignette Title">
+<script src="../pkgdown.js"></script><meta property="og:title" content="cde: a run through">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -68,10 +68,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Vignette Title</h1>
-                        <h4 class="author">Vignette Author</h4>
+      <h1>cde: a run through</h1>
+                        <h4 class="author">Dr Rob Briers</h4>
             
-            <h4 class="date">2019-02-23</h4>
+            <h4 class="date">2019-02-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robbriers/cde/blob/master/vignettes/cde.Rmd"><code>vignettes/cde.Rmd</code></a></small>
       <div class="hidden name"><code>cde.Rmd</code></div>
@@ -80,210 +80,250 @@
 
     
     
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
-<ul>
-<li>Never uses retina figures</li>
-<li>Has a smaller default figure size</li>
-<li>Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style</li>
-</ul>
-<div id="vignette-info" class="section level2">
+<div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#vignette-info" class="anchor"></a>Vignette Info</h2>
-<p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p><code>cde</code> is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area. The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas. The site accessed is <a href="https://environment.data.gov.uk/catchment-planning/" class="uri">https://environment.data.gov.uk/catchment-planning/</a>. The data that are downloaded are made available under the Open Government Licence v3.0 (<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="uri">https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a>) and use of this package implies acceptance of these licence conditions.</p>
 </div>
-<div id="styles" class="section level2">
+<div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#styles" class="anchor"></a>Styles</h2>
-<p>The <code>html_vignette</code> template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:</p>
-<pre><code>output: 
-  rmarkdown::html_vignette:
-    css: mystyles.css</code></pre>
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>You can install cde from github with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if you have not done so already</span>
+<span class="co"># install.packages("devtools")</span>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"robbriers/cde"</span>)</code></pre></div>
 </div>
-<div id="figures" class="section level2">
+<div id="searching-for-sites" class="section level2">
 <h2 class="hasAnchor">
-<a href="#figures" class="anchor"></a>Figures</h2>
-<p>The figure sizes have been customised so that you can easily put two images side-by-side.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(<span class="dv">10</span><span class="op">:</span><span class="dv">1</span>)</code></pre></div>
-<p><img src="cde_files/figure-html/unnamed-chunk-1-1.png" width="700"><img src="cde_files/figure-html/unnamed-chunk-1-2.png" width="700"></p>
-<p>You can enable figure captions by <code>fig_caption: yes</code> in YAML:</p>
-<pre><code>output:
-  rmarkdown::html_vignette:
-    fig_caption: yes</code></pre>
-<p>Then you can use the chunk option <code>fig.cap = "Your figure caption."</code> in <strong>knitr</strong>.</p>
+<a href="#searching-for-sites" class="anchor"></a>Searching for sites</h2>
+<p>The <code>search_sites</code> function allows you to search for waterbodies, Operational or Management Catchments or River Basin Districts that contain a match or partial match for a specified search string. There is a hierarchical relationship between waterbodies, catchments and River Basin Districts (RBD) as shown below. As an example, we will search for waterbodies containing the name “Lark”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the package</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cde)
+
+<span class="co"># search for waterbodies containing the name "Lark"</span>
+lark_wb&lt;-<span class="kw"><a href="../reference/search_names.html">search_names</a></span>(<span class="st">"Lark"</span>, <span class="st">"name"</span>)</code></pre></div>
+<p>The dataframe returned contains details of all the waterbodies containing the string “Lark”. The details include waterbody id codes (WBID), type of waterbody, Operational and Management Catchment names and River Basin District.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(lark_wb)
+<span class="co">#&gt;                WBID                                  name  type    OC</span>
+<span class="co">#&gt; 1911 GB105033042920                    Lark (US Hawstead) River  Lark</span>
+<span class="co">#&gt; 1912 GB105033043052 Lark downstream of Mill Street Bridge River  Lark</span>
+<span class="co">#&gt; 1914 GB105033042940      Lark (Hawstead to Abbey Gardens) River  Lark</span>
+<span class="co">#&gt; 1918 GB105033043051    Lark (Abbey Gardens to Mildenhall) River  Lark</span>
+<span class="co">#&gt; 2197 GB105035040360                                  Lark River Deben</span>
+<span class="co">#&gt; 2200 GB105035040300          Lark - Fynn (d/s confluence) River Deben</span>
+<span class="co">#&gt;                    MC     RBD</span>
+<span class="co">#&gt; 1911 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1912 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1914 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1918 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 2197     East Suffolk Anglian</span>
+<span class="co">#&gt; 2200     East Suffolk Anglian</span></code></pre></div>
+<p>To search for Operational Catchments containing the same string we would use the following code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lark_oc&lt;-<span class="kw"><a href="../reference/search_names.html">search_names</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>)</code></pre></div>
 </div>
-<div id="more-examples" class="section level2">
+<div id="retrieving-quality-status-classification-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#more-examples" class="anchor"></a>More Examples</h2>
-<p>You can write math expressions, e.g. <span class="math inline">\(Y = X\beta + \epsilon\)</span>, footnotes<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, and tables, e.g. using <code><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">knitr::kable()</a></code>.</p>
+<a href="#retrieving-quality-status-classification-data" class="anchor"></a>Retrieving quality status classification data</h2>
+<p>Having located a waterbody, catchment or River Basin District that we want to retrieve data for, we can use the <code>get_status</code> function to retrieve the status classification information from the CDE website. We can extract the data for a specific year, or a range of years. For Operational/Management Catchment or River Basin District level downloads, we can also extract information just for a specific waterbody type (such as rivers) or for all waterbody types. In addition it is possible to extract classification data relating to a specific element of the classification. The overall classification is made up of a number of different elements in a hierarchy. Details of the hierarchy of classification levels can be found <a href="https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy">here</a>. By default it retrieves the “Overall Water Body”" classification status, but by specifying the <code>level</code>, information on a specific level of classification can be retrieved. The possible values are:</p>
 <table class="table">
 <thead><tr class="header">
-<th></th>
-<th align="right">mpg</th>
-<th align="right">cyl</th>
-<th align="right">disp</th>
-<th align="right">hp</th>
-<th align="right">drat</th>
-<th align="right">wt</th>
-<th align="right">qsec</th>
-<th align="right">vs</th>
-<th align="right">am</th>
-<th align="right">gear</th>
-<th align="right">carb</th>
+<th>Level 1</th>
+<th>Level 2</th>
+<th>Level 4</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Mazda RX4</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.620</td>
-<td align="right">16.46</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td>Ecological</td>
+<td>Biological quality elements</td>
+<td>Overall water body</td>
 </tr>
 <tr class="even">
-<td>Mazda RX4 Wag</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.875</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td>Chemical</td>
+<td>Chemical Status element</td>
+<td>-</td>
 </tr>
 <tr class="odd">
-<td>Datsun 710</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">108.0</td>
-<td align="right">93</td>
-<td align="right">3.85</td>
-<td align="right">2.320</td>
-<td align="right">18.61</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
+<td>Quantitative</td>
+<td>Hydromorphological Supporting Elements</td>
+<td>-</td>
 </tr>
 <tr class="even">
-<td>Hornet 4 Drive</td>
-<td align="right">21.4</td>
-<td align="right">6</td>
-<td align="right">258.0</td>
-<td align="right">110</td>
-<td align="right">3.08</td>
-<td align="right">3.215</td>
-<td align="right">19.44</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
+<td>-</td>
+<td>Other Substances</td>
+<td>-</td>
 </tr>
 <tr class="odd">
-<td>Hornet Sportabout</td>
-<td align="right">18.7</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">175</td>
-<td align="right">3.15</td>
-<td align="right">3.440</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">2</td>
+<td>-</td>
+<td>Physico-chemical quality elements</td>
+<td>-</td>
 </tr>
 <tr class="even">
-<td>Valiant</td>
-<td align="right">18.1</td>
-<td align="right">6</td>
-<td align="right">225.0</td>
-<td align="right">105</td>
-<td align="right">2.76</td>
-<td align="right">3.460</td>
-<td align="right">20.22</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
+<td>-</td>
+<td>Priority hazardous substances</td>
+<td>-</td>
 </tr>
 <tr class="odd">
-<td>Duster 360</td>
-<td align="right">14.3</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">245</td>
-<td align="right">3.21</td>
-<td align="right">3.570</td>
-<td align="right">15.84</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">4</td>
+<td>-</td>
+<td>Priority substances</td>
+<td>-</td>
 </tr>
 <tr class="even">
-<td>Merc 240D</td>
-<td align="right">24.4</td>
-<td align="right">4</td>
-<td align="right">146.7</td>
-<td align="right">62</td>
-<td align="right">3.69</td>
-<td align="right">3.190</td>
-<td align="right">20.00</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
+<td>-</td>
+<td>Quantitative Status element</td>
+<td>-</td>
 </tr>
 <tr class="odd">
-<td>Merc 230</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">140.8</td>
-<td align="right">95</td>
-<td align="right">3.92</td>
-<td align="right">3.150</td>
-<td align="right">22.90</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
+<td>-</td>
+<td>Specific pollutants</td>
+<td>-</td>
 </tr>
 <tr class="even">
-<td>Merc 280</td>
-<td align="right">19.2</td>
-<td align="right">6</td>
-<td align="right">167.6</td>
-<td align="right">123</td>
-<td align="right">3.92</td>
-<td align="right">3.440</td>
-<td align="right">18.30</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td>-</td>
+<td>Supporting elements</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
-<p>Also a quote using <code>&gt;</code>:</p>
-<blockquote>
-<p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract overall waterbody status classification data for a single </span>
+<span class="co"># waterbody in all years</span>
+
+<span class="co"># first decide which waterbody, we can use one from the first search </span>
+<span class="co"># above (need the WBID information)</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(lark_wb)
+<span class="co">#&gt;                WBID                                  name  type    OC</span>
+<span class="co">#&gt; 1911 GB105033042920                    Lark (US Hawstead) River  Lark</span>
+<span class="co">#&gt; 1912 GB105033043052 Lark downstream of Mill Street Bridge River  Lark</span>
+<span class="co">#&gt; 1914 GB105033042940      Lark (Hawstead to Abbey Gardens) River  Lark</span>
+<span class="co">#&gt; 1918 GB105033043051    Lark (Abbey Gardens to Mildenhall) River  Lark</span>
+<span class="co">#&gt; 2197 GB105035040360                                  Lark River Deben</span>
+<span class="co">#&gt; 2200 GB105035040300          Lark - Fynn (d/s confluence) River Deben</span>
+<span class="co">#&gt;                    MC     RBD</span>
+<span class="co">#&gt; 1911 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1912 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1914 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1918 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 2197     East Suffolk Anglian</span>
+<span class="co">#&gt; 2200     East Suffolk Anglian</span>
+
+<span class="co"># we will get data for the first waterbody here (WBID: GB105033042920, </span>
+<span class="co"># name: Lark (US Hawstead))</span>
+lark_hawstead&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="st">"GB105033042920"</span>, <span class="st">"WBID"</span>)
+
+<span class="co"># the dataframe returned contains all of the data for this site in all </span>
+<span class="co"># years (we did not specify year/year range)</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(lark_hawstead)
+<span class="co">#&gt; 'data.frame':    8 obs. of  22 variables:</span>
+<span class="co">#&gt;  $ River.Basin.District          : chr  "Anglian" "Anglian" "Anglian" "Anglian" ...</span>
+<span class="co">#&gt;  $ Management.Catchment          : chr  "Cam and Ely Ouse" "Cam and Ely Ouse" "Cam and Ely Ouse" "Cam and Ely Ouse" ...</span>
+<span class="co">#&gt;  $ Operational.Catchment         : chr  "Lark" "Lark" "Lark" "Lark" ...</span>
+<span class="co">#&gt;  $ Waterbody.ID                  : chr  "GB105033042920" "GB105033042920" "GB105033042920" "GB105033042920" ...</span>
+<span class="co">#&gt;  $ water.body                    : chr  "Lark (US Hawstead)" "Lark (US Hawstead)" "Lark (US Hawstead)" "Lark (US Hawstead)" ...</span>
+<span class="co">#&gt;  $ water.body.type               : chr  "River" "River" "River" "River" ...</span>
+<span class="co">#&gt;  $ easting                       : int  586958 586958 586958 586958 586958 586958 586958 586958</span>
+<span class="co">#&gt;  $ northing                      : int  258237 258237 258237 258237 258237 258237 258237 258237</span>
+<span class="co">#&gt;  $ ngr                           : chr  "TL8695858237" "TL8695858237" "TL8695858237" "TL8695858237" ...</span>
+<span class="co">#&gt;  $ Hydromorphological.designation: chr  "not designated artificial or heavily modified" "not designated artificial or heavily modified" "not designated artificial or heavily modified" "not designated artificial or heavily modified" ...</span>
+<span class="co">#&gt;  $ Year                          : int  2011 2010 2016 2015 2014 2013 2012 2009</span>
+<span class="co">#&gt;  $ Status                        : chr  "Moderate" "Moderate" "Moderate" "Moderate" ...</span>
+<span class="co">#&gt;  $ Cycle                         : int  1 1 2 2 2 2 1 1</span>
+<span class="co">#&gt;  $ Classification.Level          : chr  "Overall Waterbody" "Overall Waterbody" "Overall Waterbody" "Overall Waterbody" ...</span>
+<span class="co">#&gt;  $ Classification.Item           : chr  "Overall Water Body" "Overall Water Body" "Overall Water Body" "Overall Water Body" ...</span>
+<span class="co">#&gt;  $ classification.ID             : chr  "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2011/item/wbc_106/cycle/1" "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2010/item/wbc_106/cycle/1" "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2016/item/wbc_106/cycle/2" "http://environment.data.gov.uk/catchment-planning/data/classification/waterbody/GB105033042920/year/2015/item/wbc_106/cycle/2" ...</span>
+<span class="co">#&gt;  $ Certainty                     : chr  "" "" "Uncertain" "Uncertain" ...</span>
+<span class="co">#&gt;  $ Confidence                    : num  NA NA NA NA NA NA NA NA</span>
+<span class="co">#&gt;  $ Type                          : chr  "Classification" "Classification" "Classification" "Classification" ...</span>
+<span class="co">#&gt;  $ Deterioration.type            : chr  "" "" "" "" ...</span>
+<span class="co">#&gt;  $ Linked.Reasons                : chr  "" "" "" "" ...</span>
+<span class="co">#&gt;  $ Investigation.outcome         : logi  NA NA NA NA NA NA ...</span>
+
+<span class="co"># just a quick look at the status data</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_hawstead<span class="op">$</span>Status)
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Good Moderate </span>
+<span class="co">#&gt;        1        7</span></code></pre></div>
+<p>An example of a higher level download, specifying a year range and type (in this case Rivers).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download status data for a given year range and type of waterbody</span>
+lark_OC_rivers&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>, <span class="dt">type=</span><span class="st">"River"</span>)</code></pre></div>
+<p>To get information about status classification in relation to a specific level in the classification, we can specify <code>level</code> as well (see table above for options).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download Chemical status for rivers in all years</span>
+lark_OC_rivers_chem&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>, <span class="dt">type=</span><span class="st">"River"</span>, <span class="dt">level=</span><span class="st">"Chemical"</span>)</code></pre></div>
+<p>The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates. Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting. There was also a change in some of the environmental standards applied to chemical aspects of status assessment between cycles, so there may be some noticeable changes in status between these years. See <a href="https://environment.data.gov.uk/catchment-planning/help#help-surface-water-chemical-classification">here</a> for more details.</p>
 </div>
-<div class="footnotes">
-<hr>
-<ol>
-<li id="fn1"><p>A footnote here.<a href="#fnref1">↩</a></p></li>
-</ol>
+<div id="plotting-quality-status-classification-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plotting-quality-status-classification-data" class="anchor"></a>Plotting quality status classification data</h2>
+<p>Using the <code>get_status</code> function provides maximum flexibility as the user can decide how they want to process the data retrieved. The <code>plot_status</code> function just provides quick overview plots of status classes, giving a plot of percentages of waterbodies in different status classes. Plotting is only possible for Operational/Management Catchment or River Basin District downloads. As for the <code>get_status</code> function, year/year range, type and level can be specified as well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot overall waterbody status information for the Lark OC between 2013 and 2015</span>
+<span class="kw"><a href="../reference/plot_status.html">plot_status</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>)</code></pre></div>
+<p><img src="cde_files/figure-html/lark%20plot-1.png" width="624" style="display: block; margin: auto;"></p>
+<p>The default colour scheme (<code>vir</code>) is based on the <code>viridis</code> pallette, but the WFD-defined status colours can be used instead by setting <code>scheme="wfd"</code>. Also if a single year is specified, a standard (as opposed to stacked) barplot is produced.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot overall waterbody status information for rivers in the Lark OC in 2015</span>
+<span class="kw"><a href="../reference/plot_status.html">plot_status</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2015</span>, <span class="dt">type=</span><span class="st">"River"</span>, <span class="dt">scheme=</span><span class="st">"wfd"</span>)</code></pre></div>
+<p><img src="cde_files/figure-html/lark%20riverplot%20wfd-1.png" width="624" style="display: block; margin: auto;"></p>
+</div>
+<div id="reasons-for-not-achieving-good-status" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reasons-for-not-achieving-good-status" class="anchor"></a>Reasons for Not Achieving Good status</h2>
+<p>Not all waterbodies in the Lark Operational Catchment example above have achieved Good status. The <code>get_rnag</code> function downloads Reasons for Not Achieving Good (RNAG) data, which allow us to find out more detail on the pressures on the waterbodies that have been assessed to be driving the failure. RNAG data are only available from 2013 onwards. The RNAG data can be extracted for specific years, and also for specific classification levels, as per the status data above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># what are the RNAG for the Lark OC between 2013 and 2015</span>
+lark_OC_RNAG&lt;-<span class="kw"><a href="../reference/get_rnag.html">get_rnag</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>)</code></pre></div>
+<p>RNAG data are recorded across a number of different columns, the ‘Activity’ column for example gives high level categories of pressure, so how frequently are they occuring in different years?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># crosstab activities by year</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_OC_RNAG<span class="op">$</span>Activity, lark_OC_RNAG<span class="op">$</span>Year)
+<span class="co">#&gt;                                                    </span>
+<span class="co">#&gt;                                                     2013 2014 2015</span>
+<span class="co">#&gt;   Barriers - ecological discontinuity                  0    1    1</span>
+<span class="co">#&gt;   Drought                                              0    2    0</span>
+<span class="co">#&gt;   Flood protection - other operational management      0    1    0</span>
+<span class="co">#&gt;   Flood protection - structures                        0    1    0</span>
+<span class="co">#&gt;   Groundwater abstraction                              3   19    1</span>
+<span class="co">#&gt;   Land drainage                                        0    4    0</span>
+<span class="co">#&gt;   Livestock                                            0    1    0</span>
+<span class="co">#&gt;   North american signal crayfish                       0    5    0</span>
+<span class="co">#&gt;   Not applicable                                       0    2    1</span>
+<span class="co">#&gt;   Other (not in list, must add details in comments)   12    0    0</span>
+<span class="co">#&gt;   Poor nutrient management                             0    1    1</span>
+<span class="co">#&gt;   Poor soil management                                 0    1    0</span>
+<span class="co">#&gt;   Sewage discharge (continuous)                        0    6    3</span>
+<span class="co">#&gt;   Surface water abstraction                            1    5    0</span>
+<span class="co">#&gt;   Trade/Industry discharge                             0    1    0</span>
+<span class="co">#&gt;   Unknown (pending investigation)                      0    0    7</span>
+<span class="co">#&gt;   Urbanisation - urban development                     0    2    0</span></code></pre></div>
+</div>
+<div id="objectives-set-for-waterbodies" class="section level2">
+<h2 class="hasAnchor">
+<a href="#objectives-set-for-waterbodies" class="anchor"></a>Objectives set for waterbodies</h2>
+<p>For those waterbodies that are at less than Good status, objectives are set to indicate what status is aimed for in the longer term. The objectives are set in relation to what is determined to be achievable in the given timescale. Therefore objectives have been set in relation to the 6-year cycle of assessment (so years 2015, 2021 and 2027). Using the <code>get_objectives</code> function, we can download objectives for waterbodies, catchments or River Basin Districts. Objectives can be downloaded for a specific year (2015, 2021 or 2027), level of classification and waterbody type as per the <code>get_status</code> function. Note however that not all waterbodies have objectives set for all years, levels or types. If no objectives are set for the criteria specified, a message is given.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download the objectives set for 2015 for the Lark Operational Catchment</span>
+lark_OC_obj_<span class="dv">2015</span>&lt;-<span class="kw"><a href="../reference/get_objectives.html">get_objectives</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>, <span class="dt">year=</span><span class="dv">2015</span>)</code></pre></div>
+<p>In the case of objectives, Status is the target status by the relevant date, so what are the target status classes here?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_OC_obj_<span class="dv">2015</span><span class="op">$</span>Status)
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      Bad     Good Moderate </span>
+<span class="co">#&gt;        1        1        4</span></code></pre></div>
+</div>
+<div id="measures-put-in-place-to-improve-status" class="section level2">
+<h2 class="hasAnchor">
+<a href="#measures-put-in-place-to-improve-status" class="anchor"></a>Measures put in place to improve status</h2>
+<p>Measures are the planned actions that are intended to achieve the objectives set for given waterbodies/catchments etc. The <code>get_measures</code> function downloads the details of the measures in place or proposed. These data are very patchy, so this will quite often return no data. Only the name and column need to be specified for this - measures are not specified in more detail than this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># what measures are there for the Lark Operational Catchment?</span>
+lark_OC_meas&lt;-<span class="kw"><a href="../reference/get_measures.html">get_measures</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>)</code></pre></div>
+<p>Details of measures are given at different levels of detail. Measure.Category.1 is the broadest level, not all details may be present at category 2 or 3.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lark_OC_meas<span class="op">$</span>Measure.Category.<span class="dv">1</span>
+<span class="co">#&gt; [1] "To control or manage point source discharges"</span></code></pre></div>
+</div>
+<div id="protected-areas" class="section level2">
+<h2 class="hasAnchor">
+<a href="#protected-areas" class="anchor"></a>Protected Areas</h2>
+<p>Finally the <code>get_pa</code> function downloads details of the protected areas associated with a waterbody, catchment or River Basin District. The protected areas listed include those designated under conservation reasons, such as SACs, SSSIs or SPAs, as well as those relating to pollution reduction such as Nutrient Sensitive Areas and Nitrate Vulnerable Zones.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get details of the protected areas within the Lark Operational Catchment</span>
+lark_OC_pa&lt;-<span class="kw"><a href="../reference/get_pa.html">get_pa</a></span>(<span class="st">"Lark"</span>, <span class="st">"OC"</span>)</code></pre></div>
+<p>The column <code>protected.area.type</code> gives details of the reasons for designation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_OC_pa<span class="op">$</span>protected.area.type)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Habitats and Species Directive             Nitrates Directive </span>
+<span class="co">#&gt;                              2                             18</span></code></pre></div>
+<p>Data on different aspects of water quality classification and pressures etc. can be combined using tools such as those within the <a href="https://cloud.r-project.org/package=dplyr">dplyr</a> package to take analysis further.</p>
 </div>
   </div>
 
@@ -292,10 +332,15 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#vignette-info">Vignette Info</a></li>
-      <li><a href="#styles">Styles</a></li>
-      <li><a href="#figures">Figures</a></li>
-      <li><a href="#more-examples">More Examples</a></li>
+<li><a href="#introduction">Introduction</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#searching-for-sites">Searching for sites</a></li>
+      <li><a href="#retrieving-quality-status-classification-data">Retrieving quality status classification data</a></li>
+      <li><a href="#plotting-quality-status-classification-data">Plotting quality status classification data</a></li>
+      <li><a href="#reasons-for-not-achieving-good-status">Reasons for Not Achieving Good status</a></li>
+      <li><a href="#objectives-set-for-waterbodies">Objectives set for waterbodies</a></li>
+      <li><a href="#measures-put-in-place-to-improve-status">Measures put in place to improve status</a></li>
+      <li><a href="#protected-areas">Protected Areas</a></li>
       </ul>
 </div>
       </div>

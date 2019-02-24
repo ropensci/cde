@@ -30,4 +30,4 @@ devtools::install_github("robbriers/cde")
 
 ## Basic usage
 
-Details of how to use the package can be found [here](https://robbriers.github.io/cde).
+See the 'Getting started' vignette or 'Reference' sections above for details of the different functions.
