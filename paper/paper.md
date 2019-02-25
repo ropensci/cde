@@ -37,6 +37,6 @@ The package contains functions to allow users to search for waterbodies, catchme
 
 # Acknowledgements
 
-Thanks to Matt Starr of the EA and Dave Reynolds of Epimorphics Ltd for useful discussions about the CDE API and providing a full site-listing to help development.
+Thanks to Matt Starr of the EA and Dave Reynolds of Epimorphics Ltd for useful discussions about the CDE API and providing a full site listing to help development.
 
 # References
