@@ -64,7 +64,7 @@ Having located a waterbody, catchment or River Basin District that we want to re
 
 Level 1 | Level 2 | Level 4
 --- | --- | ---
-Ecological | Biological quality elements | Overall water body
+Ecological | Biological quality elements | Overall Water Body
 Chemical | Chemical Status element | -
 Quantitative | Hydromorphological Supporting Elements | -
  - | Other Substances | -
