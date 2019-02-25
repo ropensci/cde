@@ -39,8 +39,8 @@
 #' waterbody type. Possible values are \code{River}, \code{Lake},
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #'
-#' @return A data frame containing the classifcation details for the
-#' specified combination of criteroa.
+#' @return A data frame containing the classification details for the
+#' specified combination of criteria.
 #'
 #' @export get_status
 #'

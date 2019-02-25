@@ -118,7 +118,7 @@ Using the `get_status` function provides maximum flexibility as the user can dec
 plot_status("Lark", "OC", startyr=2013, endyr=2015)
 ```
 
-The default colour scheme (`vir`) is based on the `viridis` pallette, but the WFD-defined status colours can be used instead by setting `scheme="wfd"`. Also if a single year is specified, a standard (as opposed to stacked) barplot is produced.
+The default colour scheme (`vir`) is based on the `viridis` palette, but the WFD-defined status colours can be used instead by setting `scheme="wfd"`. Also if a single year is specified, a standard (as opposed to stacked) barplot is produced.
 
 ```{r lark riverplot wfd,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
 # plot overall waterbody status information for rivers in the Lark OC in 2015
@@ -134,7 +134,7 @@ Not all waterbodies in the Lark Operational Catchment example above have achieve
 lark_OC_RNAG<-get_rnag("Lark", "OC", startyr=2013, endyr=2015)
 ```
 
-RNAG data are recorded across a number of different columns, the 'Activity' column for example gives high level categories of pressure, so how frequently are they occuring in different years?
+RNAG data are recorded across a number of different columns, the 'Activity' column for example gives high level categories of pressure, so how frequently are they occurring in different years?
 
 ```{r lark RNAG table, eval=TRUE}
 # crosstab activities by year

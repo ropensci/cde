@@ -22,13 +22,14 @@ A data frame containing the details of the measures put in place
 to try and improve water quality.
 }
 \description{
-Retrieves details of the measures put in place for 
-specified waterbodies to try and ensure that they reach Good status
-from EA Catchment Data Explorer site.
+Retrieves details of the measures put in place or proposed 
+for specified waterbodies to try and achieve the status objectives set
+for 2021 from the EA Catchment Data Explorer site.
 Data can be retrieved by specifying  Management Catchment (\code{MC}), 
 Operational Catchment (\code{OC}) or River Basin District (\code{RBD}).
-Note that Measures data is very patchy and in many cases will return an 
-empty dataframe with a message.
+Note that Measures data are patchy as only measures explicitly linked 
+to a target change in status are included. Therefore in many cases 
+the function will return an empty dataframe with a message.
 }
 \examples{
 # get the measures put in place for the Thames RBD

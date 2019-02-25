@@ -39,8 +39,8 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.}
 }
 \value{
-A data frame containing the classifcation details for the
-specified combination of criteroa.
+A data frame containing the classification details for the
+specified combination of criteria.
 }
 \description{
 Retrieves WFD Status classification data from EA Catchment 
