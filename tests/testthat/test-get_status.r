@@ -37,7 +37,8 @@ test_that("invalid string for OC returns an error", {
 
 test_that("invalid type returns an error", {
   # retrieve data for type "Aardvark"
-  expect_error(get_status("Avon Hampshire", "MC", startyr=2012, type="Aardvark"))
+  expect_error(get_status("Avon Hampshire", "MC", startyr=2012, 
+                          type="Aardvark"))
 })
 
 test_that("start date outside data range returns an error", {
@@ -72,12 +73,14 @@ test_that("start and end date outside available range returns a message", {
 
 test_that("non numeric dates returns an error", {
   # retrieve data for years outside possible range
-  expect_error(get_status("Avon Hampshire", "MC", startyr="Aardvark", endyr="Aardvark"))
+  expect_error(get_status("Avon Hampshire", "MC", startyr="Aardvark", 
+                          endyr="Aardvark"))
 })
 
 test_that("incorrect level returns a error", {
   # retrieve data for level that does not exist
-  expect_error(get_status("Avon Hampshire", "MC", level="Aaardvark", startyr=2012))
+  expect_error(get_status("Avon Hampshire", "MC", level="Aaardvark", 
+                          startyr=2012))
 })
 
 test_that("specifying type for WB download returns a message", {

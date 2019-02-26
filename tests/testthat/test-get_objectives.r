@@ -37,7 +37,8 @@ test_that("invalid string returns an error", {
 
 test_that("invalid type returns an error", {
   # retrieve data for type "Aardvark"
-  expect_error(get_objectives("Avon Hampshire", "MC", year=2015, type="Aardvark"))
+  expect_error(get_objectives("Avon Hampshire", "MC", year=2015, 
+                              type="Aardvark"))
 })
 
 test_that("invalid level returns an error", {

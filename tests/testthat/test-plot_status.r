@@ -13,7 +13,8 @@ test_that("invalid string returns an error", {
 
 test_that("invalid type returns an error", {
   # retrieve data for type "Aardvark"
-  expect_error(plot_status("Avon Hampshire", "MC", startyr=2012, type="Aardvark"))
+  expect_error(plot_status("Avon Hampshire", "MC", startyr=2012, 
+                           type="Aardvark"))
 })
 
 test_that("invalid scheme  returns an error", {

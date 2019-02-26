@@ -89,7 +89,8 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
     # wbid level extraction
     if (ea_name %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
-        # have to add supress warnings as data.table does not like empty RNAG data (bad download format on the part of EA)
+        # have to add supress warnings as data.table does not like empty 
+        # RNAG data (bad download format on the part of EA)
         suppressWarnings(cde_data <- data.table::fread(paste0(base_url, 
           "data/reason-for-failure.csv?waterBody=", ea_name, "&_view=csv"), 
           showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 

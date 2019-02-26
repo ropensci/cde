@@ -50,7 +50,8 @@ test_that("start date outside available range returns a message", {
 
 test_that("incorrect level returns a error", {
   # retrieve data for level that does not exist
-  expect_error(get_rnag("Avon Hampshire", "MC", level="Aaardvark", startyr=2015))
+  expect_error(get_rnag("Avon Hampshire", "MC", level="Aaardvark", 
+                        startyr=2015))
 })
 
 test_that("specifying type for WB download returns a message", {

@@ -6,7 +6,6 @@ test_that("dimensions of search_name dataframe are as expected", {
   test_search_avon<-search_names("Avon", "name")
   # check that the dimensions are 103 rows, 6 cols
   expect_true(all(dim(test_search_avon)== c(103, 6)))
-  
 })
 
 test_that("invalid site name returns an error", {
@@ -23,3 +22,4 @@ test_that("incomplete arguments returns an error", {
   # search for "Avon in column "Aardvark"
   expect_error(search_names("Aardvark"))
 })
+
