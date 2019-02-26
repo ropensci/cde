@@ -56,7 +56,8 @@
 #' # Management Catchment in 2015
 #' \dontrun{get_rnag("Avon Warwickshire", "MC", startyr = 2015, type = "River")}
 #' 
-get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL, 
+    endyr = NULL, type = NULL) {
 
   # if there is a startyr set
   if (!is.null(startyr)) {
@@ -70,24 +71,35 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NULL
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
+    stop("Column specified is not one of the possible choices 
+         (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   # if all inputs valid, download data
   rnag_data <- download_cde(ea_name, column, data_type="rnag")
   # rename columns for consistency with get_status
    if (column=="WBID"){
-     names(rnag_data)[which(names(rnag_data) == "water.body.type")] <- "Water.body.type"
-     names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
-     names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
-     names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
+     names(rnag_data)[which(names(rnag_data) == 
+        "water.body.type")] <- "Water.body.type"
+     names(rnag_data)[which(names(rnag_data) == 
+        "River.Basin.District")] <- "River.basin.district"
+     names(rnag_data)[which(names(rnag_data) == 
+        "Management.Catchment")] <- "Management.catchment"
+     names(rnag_data)[which(names(rnag_data) == 
+        "Operational.Catchment")] <- "Operational.catchment"
    }
   if (column!="WBID"){
-    names(rnag_data)[which(names(rnag_data) == "Water.body.id")] <- "Waterbody.ID"
-    names(rnag_data)[which(names(rnag_data) == "Classification.Year")] <- "Year"
-    names(rnag_data)[which(names(rnag_data) == "Classification.Status")] <- "status"
-    names(rnag_data)[which(names(rnag_data) == "River.Basin.District")] <- "River.basin.district"
-    names(rnag_data)[which(names(rnag_data) == "Management.Catchment")] <- "Management.catchment"
-    names(rnag_data)[which(names(rnag_data) == "Operational.Catchment")] <- "Operational.catchment"
+    names(rnag_data)[which(names(rnag_data) == 
+        "Water.body.id")] <- "Waterbody.ID"
+    names(rnag_data)[which(names(rnag_data) == 
+        "Classification.Year")] <- "Year"
+    names(rnag_data)[which(names(rnag_data) == 
+        "Classification.Status")] <- "status"
+    names(rnag_data)[which(names(rnag_data) == 
+        "River.Basin.District")] <- "River.basin.district"
+    names(rnag_data)[which(names(rnag_data) == 
+        "Management.Catchment")] <- "Management.catchment"
+    names(rnag_data)[which(names(rnag_data) == 
+        "Operational.Catchment")] <- "Operational.catchment"
   }
   # check if any data returned
   if (nrow(rnag_data)==0){
@@ -102,7 +114,8 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NULL
       }
     }
     # subset data
-    rnag_data<-subset_data(rnag_data, ea_name, column, NULL, startyr, endyr, type)
+    rnag_data<-subset_data(rnag_data, ea_name, column, NULL, 
+        startyr, endyr, type)
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
     }

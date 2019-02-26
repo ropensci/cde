@@ -39,15 +39,19 @@ get_pa <- function(ea_name = NULL, column = NULL) {
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
+    stop("Column specified is not one of the possible choices 
+         (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   # if all inputs valid, download data
   pa_data <- download_cde(ea_name, column, data_type="pa")
   
   # rename columns for consistency with get_status
-  names(pa_data)[which(names(pa_data) == "River.Basin.District")] <- "River.basin.district"
-  names(pa_data)[which(names(pa_data) == "Management.Catchment")] <- "Management.catchment"
-  names(pa_data)[which(names(pa_data) == "Operational.Catchment")] <- "Operational.catchment"
+  names(pa_data)[which(names(pa_data) == 
+    "River.Basin.District")] <- "River.basin.district"
+  names(pa_data)[which(names(pa_data) == 
+    "Management.Catchment")] <- "Management.catchment"
+  names(pa_data)[which(names(pa_data) == 
+    "Operational.Catchment")] <- "Operational.catchment"
   if (nrow(pa_data)==0){
     message("No protected areas present - empty dataframe returned")
   }

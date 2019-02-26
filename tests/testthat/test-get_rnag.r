@@ -8,13 +8,6 @@ test_that("get_rnag returns a dataframe", {
   expect_true(is.data.frame(testframe))
 })
 
-test_that("dimensions of dataframe are as expected", {
-# retrieve data for Avon Warwickshire MC
-  test_mc_avon<-get_rnag("Avon Warwickshire", "MC", startyr=2014)
-# check that the dimensions are 221 rows, 26 cols
-  expect_true(all(dim(test_mc_avon)== c(221, 26)))
-})
-
 test_that("invalid column specified returns an error", {
   # retrieve data for column "Aardvark"
   expect_error(get_rnag("Avon Warwickshire", "Aardvark"))

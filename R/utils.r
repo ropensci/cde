@@ -56,7 +56,8 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
     if (is.na(index_num)) {
       stop("River Basin District name specified not found.")
     } else {
-      downloadurl <- paste0(base_url, "RiverBasinDistrict/", index_num, end_url)
+      downloadurl <- paste0(base_url, "RiverBasinDistrict/", index_num, 
+                            end_url)
       cde_data <- zip_download(downloadurl)
     }
   } # end of rbd extraction
@@ -66,7 +67,8 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
     if (is.na(index_num)) {
       stop("Management Catchment name specified not found.")
     } else {
-      downloadurl <- paste0(base_url, "ManagementCatchment/", index_num, end_url)
+      downloadurl <- paste0(base_url, "ManagementCatchment/", index_num, 
+                            end_url)
       cde_data <- zip_download(downloadurl)
     }
   } # end of mc extraction
@@ -77,7 +79,9 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
     if (is.na(index_num)) {
       stop("Operational catchment name specified not found.")
     } else {
-      cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", index_num, end_url), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+      cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", 
+          index_num, end_url), showProgress = FALSE, header = TRUE, 
+          stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
     }
   } # end of oc extraction
   # finally wbid
@@ -86,16 +90,27 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
     if (ea_name %in% ea_wbids[, "WBID"]) {
       if (data_type=="rnag"){
         # have to add supress warnings as data.table does not like empty RNAG data (bad download format on the part of EA)
-        suppressWarnings(cde_data <- data.table::fread(paste0(base_url, "data/reason-for-failure.csv?waterBody=", ea_name, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE))
+        suppressWarnings(cde_data <- data.table::fread(paste0(base_url, 
+          "data/reason-for-failure.csv?waterBody=", ea_name, "&_view=csv"), 
+          showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 
+          check.names=TRUE, data.table=FALSE))
       }
       if (data_type=="objectives"){
-        cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", ea_name, "/objective-outcomes.csv?_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", 
+            ea_name, "/objective-outcomes.csv?_view=csv"), 
+            showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 
+            check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="pa"){
-        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", ea_name, "/pa/csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", 
+            ea_name, "/pa/csv"), showProgress = FALSE, header = TRUE, 
+            stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="class"){
-        cde_data <- data.table::fread(paste0(base_url, "data/classification.csv?waterBody=", ea_name, "&_view=csv"), showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
+        cde_data <- data.table::fread(paste0(base_url, 
+            "data/classification.csv?waterBody=", ea_name, "&_view=csv"), 
+            showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 
+            check.names=TRUE, data.table=FALSE)
       }
     }
     else {
@@ -120,7 +135,8 @@ zip_download <- function(download_url) {
   curl::curl_download(download_url, temp, mode = "wb")
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
-  catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, check.names = TRUE, data.table = FALSE, showProgress = FALSE)
+  catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
+      check.names = TRUE, data.table = FALSE, showProgress = FALSE)
   # delete the intermediate files
   unlink(temp)
   unlink(csvfile)
@@ -159,10 +175,12 @@ zip_download <- function(download_url) {
 #' 
 #' @noRd
 
-check_args <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NULL, type = NULL) {
+check_args <- function(ea_name = NULL, column = NULL, startyr = NULL, 
+                        endyr = NULL, type = NULL) {
    # check that both ea_name and column are present
   if (is.null(ea_name) | is.null(column)) {
-    stop("Both ea_name (name) and column (\"WBID\", \"MC\", \"OC\", or \"RBD\") should be specified", "\n")
+    stop("Both ea_name (name) and column (\"WBID\", \"MC\", \"OC\", 
+         or \"RBD\") should be specified", "\n")
   }
   # are years, if present, numeric?
   if (!is.null(startyr) & !is.null(endyr)) {
@@ -189,9 +207,11 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NU
   }
   # check that the waterbody type is a valid choice
   if (!is.null(type)) {
-    types <- c("River", "Lake", "TransitionalWater", "GroundWaterBody", "CoastalWater")
+    types <- c("River", "Lake", "TransitionalWater", "GroundWaterBody", 
+               "CoastalWater")
     if (!type %in% types) {
-      stop("Type specified is not a valid choice (\"River\", \"Lake\", \"CoastalWater\", \"TransitionalWater\" or \"GroundWaterBody\"")
+      stop("Type specified is not a valid choice (\"River\", \"Lake\", 
+           \"CoastalWater\", \"TransitionalWater\" or \"GroundWaterBody\"")
     }
   }
 }
@@ -235,12 +255,14 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL, endyr = NU
 #'
 #' @noRd
 #'
-subset_data <- function(full_data, ea_name = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+subset_data <- function(full_data, ea_name = NULL, column = NULL, 
+    level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
 
   # if only start year is set, is it beyond the data range?
   if (!is.null(startyr) & is.null(endyr)){
     if (startyr>max(full_data$Year)){
-      message(paste0("Start year is beyond the most recent year of data (",max(full_data$Year),")"))
+      message(paste0("Start year is beyond the most recent year of data (", 
+                     max(full_data$Year),")"))
       message("Just outputting most recent year")
       startyr<-max(full_data$Year)
     }
@@ -248,7 +270,8 @@ subset_data <- function(full_data, ea_name = NULL, column = NULL, level = "Overa
   # if endyr is set, is it beyond the data range?
   if (!is.null(endyr)){
     if (endyr>max(full_data$Year)){
-      message(paste0("End year is beyond the most recent year of data (",max(full_data$Year),")"))
+      message(paste0("End year is beyond the most recent year of data (", 
+                     max(full_data$Year),")"))
       message("Subsetting to most recent year")
       endyr<-max(full_data$Year)
     }
@@ -256,12 +279,14 @@ subset_data <- function(full_data, ea_name = NULL, column = NULL, level = "Overa
   # if they are both set, check the endyr
   if (!is.null(startyr) & !is.null(endyr)) {
     if (endyr>max(full_data$Year)){
-      message(paste0("End year is beyond the most recent year of data (",max(full_data$Year),")"))
+      message(paste0("End year is beyond the most recent year of data (", 
+                     max(full_data$Year),")"))
       message("Subsetting to most recent year")
       endyr<-max(full_data$Year)
     }
     # if both years are specified, subset by range
-    full_data <- full_data[full_data$Year >= startyr & full_data$Year <= endyr, ]
+    full_data <- full_data[full_data$Year >= startyr 
+                           & full_data$Year <= endyr, ]
   }
   else if (!is.null(startyr)) {
     full_data <- full_data[full_data$Year == startyr, ]
@@ -271,10 +296,14 @@ subset_data <- function(full_data, ea_name = NULL, column = NULL, level = "Overa
   # surface waters and groundwaters
   if (!is.null(level)){
     if (level == "Chemical") {
-      full_data <- full_data[full_data$Classification.Item == "Chemical" | full_data$Classification.Item == "Chemical (GW)", ]
+      full_data <- full_data[full_data$Classification.Item == "Chemical" | 
+                        full_data$Classification.Item == "Chemical (GW)", ]
     }
     else if (level == "Supporting elements") {
-      full_data <- full_data[full_data$Classification.Item == "Supporting elements (Surface Water)" | full_data$Classification.Item == "Supporting elements (Groundwater)", ]
+      full_data <- full_data[full_data$Classification.Item == 
+                      "Supporting elements (Surface Water)" | 
+                        full_data$Classification.Item == 
+                        "Supporting elements (Groundwater)", ]
     }
     else {
       full_data <- full_data[full_data$Classification.Item == level, ]
@@ -286,7 +315,8 @@ subset_data <- function(full_data, ea_name = NULL, column = NULL, level = "Overa
   }
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
-  full_data <- full_data[!(full_data$Year == 2013 & full_data$Cycle == 1 | full_data$Year == 2014 & full_data$Cycle == 1), ]
+  full_data <- full_data[!(full_data$Year == 2013 & full_data$Cycle == 1 | 
+                             full_data$Year == 2014 & full_data$Cycle == 1), ]
   
   return(full_data)
 } # end of function

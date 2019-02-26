@@ -50,28 +50,38 @@
 #' # Operational Catchment in relation to Chemical status
 #' \dontrun{get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")}
 #' 
-get_objectives <- function(ea_name = NULL, column = NULL, level="Overall Water Body", year = NULL, type = NULL) {
+get_objectives <- function(ea_name = NULL, column = NULL, 
+  level="Overall Water Body", year = NULL, type = NULL) {
   # start by running general checks on input data
   check_args(ea_name, column, NULL, NULL, type)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
+    stop("Column specified is not one of the possible choices 
+         (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   
   # check year is one of options
   years <- c(2015, 2021, 2027)
   if (!is.null(year)){
     if (!year %in% years) {
-      stop("Year specified is not one of the possible choices (2015, 2021 or 2027).")
+      stop("Year specified is not one of the possible choices 
+           (2015, 2021 or 2027).")
     }
   }
   
   # list of classification levels that can be extracted
-  class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
+  class_levels <- c("Overall Water Body", "Ecological", "Chemical",
+      "Quantitative", "Biological quality elements", 
+      "Hydromorphological Supporting Elements", 
+      "Physico-chemical quality elements", "Specific pollutants", 
+      "Priority hazardous substances", "Priority substances", 
+      "Quantitative Status element", "Chemical Status element", 
+      "Supporting elements", "Other Substances")
   if (!level %in% class_levels) {
-    stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
+    stop(paste0("Classification level specified: ", level, 
+        ", is not a valid choice"))
   }
 
   # if all inputs valid, download data
@@ -79,15 +89,22 @@ get_objectives <- function(ea_name = NULL, column = NULL, level="Overall Water B
 
     # rename columns for consistency with get_status
   if (column=="WBID"){
-    names(obj_data)[which(names(obj_data) == "water.body.type")] <- "Water.body.type"
-    names(obj_data)[which(names(obj_data) == "River.Basin.District")] <- "River.basin.district"
-    names(obj_data)[which(names(obj_data) == "Management.Catchment")] <- "Management.catchment"
-    names(obj_data)[which(names(obj_data) == "Operational.Catchment")] <- "Operational.catchment"
+    names(obj_data)[which(names(obj_data) == 
+        "water.body.type")] <- "Water.body.type"
+    names(obj_data)[which(names(obj_data) == 
+        "River.Basin.District")] <- "River.basin.district"
+    names(obj_data)[which(names(obj_data) == 
+        "Management.Catchment")] <- "Management.catchment"
+    names(obj_data)[which(names(obj_data) == 
+        "Operational.Catchment")] <- "Operational.catchment"
   }
   if (column!="WBID"){
-    names(obj_data)[which(names(obj_data) == "River.Basin.District")] <- "River.basin.district"
-    names(obj_data)[which(names(obj_data) == "Management.Catchment")] <- "Management.catchment"
-    names(obj_data)[which(names(obj_data) == "Operational.Catchment")] <- "Operational.catchment"
+    names(obj_data)[which(names(obj_data) == 
+        "River.Basin.District")] <- "River.basin.district"
+    names(obj_data)[which(names(obj_data) == 
+        "Management.Catchment")] <- "Management.catchment"
+    names(obj_data)[which(names(obj_data) == 
+        "Operational.Catchment")] <- "Operational.catchment"
   }
   
   # if there are no objectives set, give a message
@@ -104,7 +121,8 @@ get_objectives <- function(ea_name = NULL, column = NULL, level="Overall Water B
       }
     }
     # subset data as required
-    obj_data<-subset_data(obj_data, ea_name, column, level, startyr=year, endyr=NULL, type)
+    obj_data<-subset_data(obj_data, ea_name, column, level, 
+      startyr=year, endyr=NULL, type)
     # if there are no objectives returned, give a message
     if (nrow(obj_data)==0){
       message("No objectives specified - empty dataframe returned")

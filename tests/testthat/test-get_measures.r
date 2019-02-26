@@ -8,13 +8,6 @@ test_that("get_measures returns a dataframe", {
   expect_true(is.data.frame(testframe))
 })
 
-test_that("dimensions of dataframe are as expected", {
-  # retrieve data
-  test_thames<-get_measures("Thames", "RBD")
-  # check that the dimensions are 9 rows, 17 cols
-  expect_true(all(dim(test_thames)== c(9, 17)))
-})
-
 test_that("invalid column specified returns an error", {
   # retrieve data for column "Aardvark"
   expect_error(get_measures("Avon Warwickshire", "Aardvark"))

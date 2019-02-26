@@ -28,7 +28,8 @@ search_names <- function(string = NULL, column = NULL) {
   search_choices <- c("name", "MC", "OC", "RBD")
   # check if there is a value passed for both arguments
   if (is.null(column) | is.null(string)) {
-    stop("Both a search string and column (name, MC, OC, or RBD) should be specified", "\n")
+    stop("Both a search string and column (name, MC, OC, or RBD) 
+         should be specified", "\n")
   }
   # if the column is found in ea_wbids
   if (column %in% search_choices) {

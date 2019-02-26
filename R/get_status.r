@@ -59,19 +59,28 @@
 #' # Operational Catchment in 2011
 #' \dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
 #' 
-get_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+get_status <- function(ea_name = NULL, column = NULL, 
+    level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
   # start by running general checks on input data
   check_args(ea_name, column, startyr, endyr, type)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
   if (!column %in% choices) {
-    stop("Column specified is not one of the possible choices (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
+    stop("Column specified is not one of the possible choices 
+         (\"WBID\", \"OC\", \"MC\" or \"RBD\").")
   }
   # list of classification levels that can be extracted
-  class_levels <- c("Overall Water Body", "Ecological", "Chemical", "Quantitative", "Biological quality elements", "Hydromorphological Supporting Elements", "Physico-chemical quality elements", "Specific pollutants", "Priority hazardous substances", "Priority substances", "Quantitative Status element", "Chemical Status element", "Supporting elements", "Other Substances")
+  class_levels <- c("Overall Water Body", "Ecological", "Chemical", 
+      "Quantitative", "Biological quality elements", 
+      "Hydromorphological Supporting Elements", 
+      "Physico-chemical quality elements", "Specific pollutants",
+      "Priority hazardous substances", "Priority substances", 
+      "Quantitative Status element", "Chemical Status element", 
+      "Supporting elements", "Other Substances")
   if (!level %in% class_levels) {
-    stop(paste0("Classification level specified: ", level, ", is not a valid choice"))
+    stop(paste0("Classification level specified: ", level, 
+        ", is not a valid choice"))
   }
   # if WB level download, type should not be specified, so give message
   if (column=="WBID" & !is.null(type)){
@@ -83,13 +92,16 @@ get_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Bod
 
   # check if any data returned
   if (nrow(status_data)==0){
-    message("No status data for combination specified - empty dataframe returned")
+    message("No status data for combination specified - 
+      empty dataframe returned")
     return(status_data)
   }else{
     # subset data as required
-    status_data<-subset_data(status_data, ea_name, column, level, startyr, endyr, type)
+    status_data<-subset_data(status_data, ea_name, column, 
+        level, startyr, endyr, type)
     if (nrow(status_data)==0){
-      message("No status data for combination specified - empty dataframe returned")
+      message("No status data for combination specified - 
+        empty dataframe returned")
     }
   }
   return(status_data)

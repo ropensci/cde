@@ -28,13 +28,16 @@
 #' # in the Humber RBD between 2012 and 2014 using WFD colour scheme
 #' plot_status("Humber", "RBD", startyr = 2012, endyr = 2014, scheme = "wfd")
 #' 
-plot_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, scheme = "vir") {
+plot_status <- function(ea_name = NULL, column = NULL, 
+    level = "Overall Water Body", startyr = NULL, endyr = NULL, 
+    type = NULL, scheme = "vir") {
   # start by running general checks on input data
   check_args(ea_name, column, startyr, endyr, type)
   # do initial check of column choice
   plot_choices <- c("MC", "OC", "RBD")
   if (!column %in% plot_choices) {
-    stop("Column specified is not one of the possible choices (\"OC\", \"MC\" or \"RBD\").")
+    stop("Column specified is not one of the possible choices 
+         (\"OC\", \"MC\" or \"RBD\").")
   }
   # check that scheme is specified correctly
   scheme_choices<-c("vir", "wfd")
@@ -56,9 +59,12 @@ plot_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Bo
   # second 5 is fail for chemical and priority subs
   # 6 is Does not require assessment = Gray
   nums <- c(1, 2, 2, 3, 4, 5, 5, 6)
-  status <- c("High", "Good", "Supports Good", "Moderate", "Poor", "Bad", "Fail", "Does not require assessment")
-  vir_colours <- c("#79d051ff", "#26a784ff", "#26a784ff", "#2a768eff", "#404284ff", "#440154ff", "#440154ff", "#BEBEBE")
-  wfd_colours <- c("Blue", "Green", "Green", "Yellow", "Orange", "Red", "Red", "Gray")
+  status <- c("High", "Good", "Supports Good", "Moderate", "Poor", 
+              "Bad", "Fail", "Does not require assessment")
+  vir_colours <- c("#79d051ff", "#26a784ff", "#26a784ff", "#2a768eff", 
+                   "#404284ff", "#440154ff", "#440154ff", "#BEBEBE")
+  wfd_colours <- c("Blue", "Green", "Green", "Yellow", "Orange", "Red", 
+                   "Red", "Gray")
   statusdf <- cbind.data.frame(nums, status, vir_colours, wfd_colours)
 
   # subset df based on status classes present in dataset
@@ -81,18 +87,29 @@ plot_status <- function(ea_name = NULL, column = NULL, level = "Overall Water Bo
   # do the actual plotting
   # single year, single status class
   if (ncol(props) == 1 & nrow(props) == 1) {
-    return(graphics::barplot(ord_props, names.arg = needed$status, col = cols_ordered, space = 0, ylab = "Percentage of waterbodies", ylim = c(0, 100)))
+    return(graphics::barplot(ord_props, names.arg = needed$status, 
+      col = cols_ordered, space = 0, ylab = "Percentage of waterbodies", 
+      ylim = c(0, 100)))
   }
   # single year, more than one status class
   if (ncol(props) == 1 & nrow(props) > 1) {
-    return(graphics::barplot(ord_props, col = cols_ordered, space = 0, ylab = "Percentage of waterbodies", ylim = c(0, 100)))
+    return(graphics::barplot(ord_props, col = cols_ordered, space = 0, 
+      ylab = "Percentage of waterbodies", ylim = c(0, 100)))
   }
   # more than one year, one status class
   if (ncol(props) > 1 & nrow(props) == 1) {
-    graphics::barplot(ord_props, legend.text = needed$status, args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), y = 80, bg="white"), col = cols_ordered, ylab = "Percentage of waterbodies", xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100))
+    graphics::barplot(ord_props, legend.text = needed$status, 
+      args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), 
+      y = 80, bg="white"), col = cols_ordered, 
+      ylab = "Percentage of waterbodies", 
+      xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100))
   }
   # more than one year, more than one status class
   else {
-    return(graphics::barplot(ord_props, legend = TRUE, args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), y = 80, bg="white"), col = cols_ordered, ylab = "Percentage of waterbodies", xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100)))
+    return(graphics::barplot(ord_props, legend = TRUE, 
+      args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), 
+      y = 80, bg="white"), col = cols_ordered, 
+      ylab = "Percentage of waterbodies", 
+      xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100)))
   }
 } # end of function
