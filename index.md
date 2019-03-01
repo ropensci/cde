@@ -3,7 +3,7 @@
 cde <img src="docs/logo/logo.png" align="right" height=140/>
 ============================================================
 
-[![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde) [![Coverage Status](https://coveralls.io/repos/github/robbriers/cde/badge.svg?branch=master)](https://coveralls.io/github/robbriers/cde?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/92712854.svg)](https://zenodo.org/badge/latestdoi/92712854)
+[![Travis-CI Build Status](https://travis-ci.org/robbriers/cde.svg?branch=master)](https://travis-ci.org/robbriers/cde) [![Coverage Status](https://coveralls.io/repos/github/robbriers/cde/badge.svg?branch=master)](https://coveralls.io/github/robbriers/cde?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/92712854.svg)](https://zenodo.org/badge/latestdoi/92712854) [![](https://badges.ropensci.org/284_status.svg)](https://github.com/ropensci/onboarding/issues/284)
 
 Introduction
 ------------
