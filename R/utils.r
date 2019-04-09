@@ -33,22 +33,9 @@
 download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   # set up url components
   base_url<-"http://environment.data.gov.uk/catchment-planning/"
+  
   # need to set the end URL differently depending on data_type
-  if (data_type=="class"){
-    end_url<-"/classification?item=all&status=all&format=csv"
-  }
-  if (data_type=="rnag"){
-    end_url<-"/ReasonsForNotAchievingGood?item=all&format=csv"
-  }
-  if(data_type=="measures"){
-    end_url<-"/Action?format=csv"
-  }
-  if(data_type=="pa"){
-    end_url<-"/pa/csv"
-  }
-  if (data_type=="objectives"){
-    end_url<-"/outcome?item=all&status=all&format=csv"
-  }
+  end_url<-set_end_url(data_type)
 
   if (column == "RBD") {
     # rbd level extraction
@@ -121,6 +108,24 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   # end of wbid extraction
   return(cde_data)
 } # end of function
+
+#' Set end URL
+#' @description Sets the final part of the download URL to the correct
+#' string depending on data type to be downloaded
+#
+#' @param data_type A string representing the type of data (class, rnag, 
+#' measures, pa or objecties) to be downloaded
+#' 
+#' @noRd
+
+set_end_url<-function(data_type){
+  switch(data_type, 
+         "class" = "/classification?item=all&status=all&format=csv",
+         "rnag" = "/ReasonsForNotAchievingGood?item=all&format=csv",
+         "measures" = "/Action?format=csv",
+         "pa" = "/pa/csv",
+         "objectives" = "/outcome?item=all&status=all&format=csv")
+}
 
 #' Download Zipfile and extract csv
 #' @description Downloads zipfile from specified url, unzips to
