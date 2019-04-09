@@ -133,11 +133,10 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
 
 zip_download <- function(download_url) {
   temp <- tempfile()
-  print("Doing the download")
-  curl::curl_download(download_url, temp, mode = "wb")
+  download.file(download_url, temp, mode = "wb", quiet=FALSE)
+  #curl::curl_download(download_url, temp, mode = "wb", quiet=FALSE)
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
-  print ("Doing the extraction")
   catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
       check.names = TRUE, data.table = FALSE, showProgress = TRUE)
   # delete the intermediate files
