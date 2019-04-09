@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.
 
-The site accessed is [https://environment.data.gov.uk/catchment-planning/](https://environment.data.gov.uk/catchment-planning/). The data that are downloaded are made available under the Open Government Licence v3.0 (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) and use of this package implies acceptance of these licence conditions.
+The site accessed is [https://environment.data.gov.uk/catchment-planning/](https://environment.data.gov.uk/catchment-planning/). The data that are downloaded are made available under the Open Government Licence v3.0 (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) and use of the data accessed by this package implies acceptance of these licence conditions.
 
 ## Installation
 
@@ -30,8 +30,8 @@ You can install cde from github with:
 
 ```{r gh-installation, eval = FALSE}
 # if you have not done so already
-# install.packages("devtools")
-devtools::install_github("robbriers/cde")
+# install.packages("remotes")
+remotes::install_github("robbriers/cde")
 ```
 
 ## Searching for sites
@@ -43,7 +43,7 @@ The `search_sites` function allows you to search for waterbodies, Operational or
 library(cde)
 
 # search for waterbodies containing the name "Lark"
-lark_wb<-search_names("Lark", "name")
+lark_wb<-search_names(string="Lark", column="name")
 ```
 
 The dataframe returned contains details of all the waterbodies containing the string "Lark". The details include waterbody id codes (WBID), type of waterbody, Operational and Management Catchment names and River Basin District.
@@ -55,7 +55,7 @@ head(lark_wb)
 To search for Operational Catchments containing the same string we would use the following code.
 
 ```{r lark search, eval=TRUE}
-lark_oc<-search_names("Lark", "OC")
+lark_oc<-search_names(string="Lark", column="OC")
 ```
 
 ## Retrieving quality status classification data
@@ -85,7 +85,7 @@ head(lark_wb)
 
 # we will get data for the first waterbody here (WBID: GB105033042920, 
 # name: Lark (US Hawstead))
-lark_hawstead<-get_status("GB105033042920", "WBID")
+lark_hawstead<-get_status(ea_name="GB105033042920", column="WBID")
 
 # the dataframe returned contains all of the data for this site in all 
 # years (we did not specify year/year range) (truncate to fit screen)
@@ -98,13 +98,13 @@ An example of a higher level download, specifying a year range and type (in this
 
 ```{r lark river,eval=TRUE}
 # download status data for a given year range and type of waterbody
-lark_OC_rivers<-get_status("Lark", "OC", startyr=2013, endyr=2015, type="River")
+lark_OC_rivers<-get_status(ea_name="Lark", column="OC", startyr=2013, endyr=2015, type="River")
 ```
 To get information about status classification in relation to a specific level in the classification, we can specify `level` as well (see table above for options).
 
 ```{r lark rivers chem, eval=TRUE}
 # download Chemical status for rivers in all years
-lark_OC_rivers_chem<-get_status("Lark", "OC", type="River", level="Chemical")
+lark_OC_rivers_chem<-get_status(ea_name="Lark", column="OC", type="River", level="Chemical")
 ```
 
 The function returns a dataframe containing the status (and other details) for the specified combination of column, value, level and dates. Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting. There was also a change in some of the environmental standards applied to chemical aspects of status assessment between cycles, so there may be some noticeable changes in status between these years. See [here](https://environment.data.gov.uk/catchment-planning/help#help-surface-water-chemical-classification) for more details.
@@ -115,14 +115,14 @@ Using the `get_status` function provides maximum flexibility as the user can dec
 
 ```{r lark plot, fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
 # plot overall waterbody status information for the Lark OC between 2013 and 2015
-plot_status("Lark", "OC", startyr=2013, endyr=2015)
+plot_status(ea_name="Lark", column="OC", startyr=2013, endyr=2015)
 ```
 
 The default colour scheme (`vir`) is based on the `viridis` palette, but the WFD-defined status colours can be used instead by setting `scheme="wfd"`. Also if a single year is specified, a standard (as opposed to stacked) barplot is produced.
 
 ```{r lark riverplot wfd,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
 # plot overall waterbody status information for rivers in the Lark OC in 2015
-plot_status("Lark", "OC", startyr=2015, type="River", scheme="wfd")
+plot_status(ea_name="Lark", column="OC", startyr=2015, type="River", scheme="wfd")
 ```
 
 ## Reasons for Not Achieving Good status
@@ -131,7 +131,7 @@ Not all waterbodies in the Lark Operational Catchment example above have achieve
 
 ```{r RNAG in Lark, eval=TRUE}
 # what are the RNAG for the Lark OC between 2013 and 2015
-lark_OC_RNAG<-get_rnag("Lark", "OC", startyr=2013, endyr=2015)
+lark_OC_RNAG<-get_rnag(ea_name="Lark", column="OC", startyr=2013, endyr=2015)
 ```
 
 RNAG data are recorded across a number of different columns, the 'Activity' column for example gives high level categories of pressure, so how frequently are they occurring in different years?
@@ -147,7 +147,7 @@ For those waterbodies that are at less than Good status, objectives are set to i
 
 ```{r lark obj, eval=TRUE}
 # download the objectives set for 2015 for the Lark Operational Catchment
-lark_OC_obj_2015<-get_objectives("Lark", "OC", year=2015)
+lark_OC_obj_2015<-get_objectives(ea_name="Lark", column="OC", year=2015)
 ```
 
 In the case of objectives, Status is the target status by the relevant date, so what are the target status classes here?
@@ -162,7 +162,7 @@ Measures are the planned actions that are intended to achieve the objectives set
 
 ```{r lark measures, eval=TRUE}
 # what measures are there for the Lark Operational Catchment?
-lark_OC_meas<-get_measures("Lark", "OC")
+lark_OC_meas<-get_measures(ea_name="Lark", column="OC")
 ```
 
 Details of measures are given at different levels of detail. Measure.Category.1 is the broadest level, not all details may be present at category 2 or 3.
@@ -177,7 +177,7 @@ Finally the `get_pa` function downloads details of the protected areas associate
 
 ```{r lark PA, eval=TRUE}
 # get details of the protected areas within the Lark Operational Catchment
-lark_OC_pa<-get_pa("Lark", "OC")
+lark_OC_pa<-get_pa(ea_name="Lark", column="OC")
 ```
 
 The column `protected.area.type` gives details of the reasons for designation.

@@ -80,7 +80,7 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
       stop("Operational catchment name specified not found.")
     } else {
       cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", 
-          index_num, end_url), showProgress = FALSE, header = TRUE, 
+          index_num, end_url), showProgress = TRUE, header = TRUE, 
           stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
     }
   } # end of oc extraction
@@ -93,24 +93,24 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
         # RNAG data (bad download format on the part of EA)
         suppressWarnings(cde_data <- data.table::fread(paste0(base_url, 
           "data/reason-for-failure.csv?waterBody=", ea_name, "&_view=csv"), 
-          showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 
+          showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
           check.names=TRUE, data.table=FALSE))
       }
       if (data_type=="objectives"){
         cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", 
             ea_name, "/objective-outcomes.csv?_view=csv"), 
-            showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 
+            showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
             check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="pa"){
         cde_data <- data.table::fread(paste0(base_url, "WaterBody/", 
-            ea_name, "/pa/csv"), showProgress = FALSE, header = TRUE, 
+            ea_name, "/pa/csv"), showProgress = TRUE, header = TRUE, 
             stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
       }
       if (data_type=="class"){
         cde_data <- data.table::fread(paste0(base_url, 
             "data/classification.csv?waterBody=", ea_name, "&_view=csv"), 
-            showProgress = FALSE, header = TRUE, stringsAsFactors = FALSE, 
+            showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
             check.names=TRUE, data.table=FALSE)
       }
     }
@@ -133,11 +133,13 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
 
 zip_download <- function(download_url) {
   temp <- tempfile()
+  print("Doing the download")
   curl::curl_download(download_url, temp, mode = "wb")
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
+  print ("Doing the extraction")
   catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
-      check.names = TRUE, data.table = FALSE, showProgress = FALSE)
+      check.names = TRUE, data.table = FALSE, showProgress = TRUE)
   # delete the intermediate files
   unlink(temp)
   unlink(csvfile)

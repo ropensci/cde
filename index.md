@@ -12,7 +12,7 @@ Introduction
 
 The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.
 
-The site accessed is <https://environment.data.gov.uk/catchment-planning/>. The data that are downloaded are made available under the Open Government Licence v3.0 (<https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>) and use of this package implies acceptance of these licence conditions.
+The site accessed is <https://environment.data.gov.uk/catchment-planning/>. The data that are downloaded are made available under the Open Government Licence v3.0 (<https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/>) and use of the data accessed by this package implies acceptance of these licence conditions.
 
 Installation
 ------------
@@ -20,11 +20,11 @@ Installation
 You can install cde from github with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("robbriers/cde")
+# install.packages("remotes")
+remotes::install_github("robbriers/cde")
 ```
 
 Basic usage
 -----------
 
-See the 'Getting started' vignette or 'Reference' sections above for details of the different functions.
+See the 'Get started' vignette or 'Reference' sections above for details of the different functions.

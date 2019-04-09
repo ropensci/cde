@@ -28,10 +28,10 @@ The site accessed is [https://environment.data.gov.uk/catchment-planning/](https
 You can install cde from github with:
 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("robbriers/cde")
+# install.packages("remotes")
+remotes::install_github("robbriers/cde")
 ```
 
 ## Basic usage
 
-See the 'Getting started' vignette or 'Reference' sections above for details of the different functions.
+See the 'Get started' vignette or 'Reference' sections above for details of the different functions.
