@@ -114,8 +114,7 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
       }
     }
     # subset data
-    rnag_data<-subset_data(rnag_data, ea_name, column, NULL, 
-        startyr, endyr, type)
+    rnag_data<-subset_data(rnag_data, column, NULL, startyr, endyr, type)
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
     }

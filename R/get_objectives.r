@@ -121,8 +121,8 @@ get_objectives <- function(ea_name = NULL, column = NULL,
       }
     }
     # subset data as required
-    obj_data<-subset_data(obj_data, ea_name, column, level, 
-      startyr=year, endyr=NULL, type)
+    obj_data<-subset_data(obj_data, column, level, startyr=year, 
+        endyr=NULL, type)
     # if there are no objectives returned, give a message
     if (nrow(obj_data)==0){
       message("No objectives specified - empty dataframe returned")

@@ -226,12 +226,6 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 #' 
 #' @param full_data The dataframe to be subset
 #' 
-#' @param ea_name A string representing the description (name) of the
-#' features to be extracted. For example to extract data for the whole of
-#' the Humber RBD, this would be "Humber"; also see examples. Must be an
-#' exact match to the values used in the EA database.
-#' Use the \code{\link{search_names}} function to search for specific values.
-#'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
@@ -258,7 +252,7 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 #'
 #' @noRd
 #'
-subset_data <- function(full_data, ea_name = NULL, column = NULL, 
+subset_data <- function(full_data, column = NULL, 
     level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
 
   # if only start year is set, is it beyond the data range?
