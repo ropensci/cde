@@ -31,90 +31,32 @@
 
 
 download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
-  # set up url components
-  base_url<-"http://environment.data.gov.uk/catchment-planning/"
+  # do search to make sure that name is present
+  #search_names(ea_name, column)
+  # check that this thows out if error given
   
-  # need to set the end URL differently depending on data_type
-  end_url<-set_end_url(data_type)
-
-  if (column == "RBD") {
-    # rbd level extraction
-    index_num <- ea_wbids$RBD.num[which(ea_wbids[, column] == ea_name)][1]
-    if (is.na(index_num)) {
-      stop("River Basin District name specified not found.")
-    } else {
-      downloadurl <- paste0(base_url, "RiverBasinDistrict/", index_num, 
-                            end_url)
-      cde_data <- zip_download(downloadurl)
-    }
-  } # end of rbd extraction
-  if (column == "MC") {
-    # mc level extraction
-    index_num <- ea_wbids$MC.num[which(ea_wbids[, column] == ea_name)][1]
-    if (is.na(index_num)) {
-      stop("Management Catchment name specified not found.")
-    } else {
-      downloadurl <- paste0(base_url, "ManagementCatchment/", index_num, 
-                            end_url)
-      cde_data <- zip_download(downloadurl)
-    }
-  } # end of mc extraction
-  # oc next
-  if (column == "OC") {
-    # oc level extraction - works
-    index_num <- ea_wbids$OC.num[which(ea_wbids[, column] == ea_name)][1]
-    if (is.na(index_num)) {
-      stop("Operational catchment name specified not found.")
-    } else {
-      cde_data <- data.table::fread(paste0(base_url, "OperationalCatchment/", 
-          index_num, end_url), showProgress = TRUE, header = TRUE, 
-          stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-    }
-  } # end of oc extraction
-  # finally wbid
-  if (column == "WBID") {
-    # wbid level extraction
-    if (ea_name %in% ea_wbids[, "WBID"]) {
-      if (data_type=="rnag"){
-        # have to add supress warnings as data.table does not like empty 
-        # RNAG data (bad download format on the part of EA)
-        suppressWarnings(cde_data <- data.table::fread(paste0(base_url, 
-          "data/reason-for-failure.csv?waterBody=", ea_name, "&_view=csv"), 
-          showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
-          check.names=TRUE, data.table=FALSE))
-      }
-      if (data_type=="objectives"){
-        cde_data <- data.table::fread(paste0(base_url, "so/WaterBody/", 
-            ea_name, "/objective-outcomes.csv?_view=csv"), 
-            showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
-            check.names=TRUE, data.table=FALSE)
-      }
-      if (data_type=="pa"){
-        cde_data <- data.table::fread(paste0(base_url, "WaterBody/", 
-            ea_name, "/pa/csv"), showProgress = TRUE, header = TRUE, 
-            stringsAsFactors = FALSE, check.names=TRUE, data.table=FALSE)
-      }
-      if (data_type=="class"){
-        cde_data <- data.table::fread(paste0(base_url, 
-            "data/classification.csv?waterBody=", ea_name, "&_view=csv"), 
-            showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
-            check.names=TRUE, data.table=FALSE)
-      }
-    }
-    else {
-      stop("WBID value specified not found.")
-    }
+  # this gives either index number (RBD, MC, OC) or wbid for next bit
+  index<-find_index(column, ea_name)
+  
+  # do download using either zip or plain fread depending on type
+  if (column=="RBD" | column=="MC"){
+    cde_data <- zip_download(set_url(column, data_type, index))
+  } else{
+    # use tryCatch to deal with warning from WBID download - bad EA data format
+    cde_data <- tryCatch(data.table::fread(set_url(column, data_type, index),
+                    showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
+                    check.names=TRUE, data.table=FALSE),
+                    warning=function(w){})
   }
-  # end of wbid extraction
   return(cde_data)
 } # end of function
 
 #' Set end URL
 #' @description Sets the final part of the download URL to the correct
-#' string depending on data type to be downloaded
+#' string depending on data type to be downloaded (except for WBIDs)
 #
 #' @param data_type A string representing the type of data (class, rnag, 
-#' measures, pa or objecties) to be downloaded
+#' measures, pa or objectives) to be downloaded
 #' 
 #' @noRd
 
@@ -125,6 +67,69 @@ set_end_url<-function(data_type){
          "measures" = "/Action?format=csv",
          "pa" = "/pa/csv",
          "objectives" = "/outcome?item=all&status=all&format=csv")
+}
+
+#' Set end URL for WBID level downloads (different format to rest)
+#' @description Sets the final part of the download URL to the correct
+#' string depending on data type to be downloaded for WBID level downloads
+#
+#' @param data_type A string representing the type of data (class, rnag, 
+#'  pa or objectives) to be downloaded
+#' 
+#' @param ea_name A string representing the WBID to be downloaded
+#' 
+#' @noRd
+
+wbid_end_url <- function(data_type, index_num){
+  switch(data_type,
+         "class" = paste0("data/classification.csv?waterBody=", index_num, "&_view=csv"),
+         "rnag" = paste0("data/reason-for-failure.csv?waterBody=", index_num, "&_view=csv"),
+         "pa" = paste0("WaterBody/", index_num, "/pa/csv"),
+         "objectives" = paste0("so/WaterBody/", index_num, "/objective-outcomes.csv?_view=csv"))
+}
+
+#' Set overall URL for downloads
+#' @description Sets the overall download URL for all types (columns)
+#
+#' @param data_type A string representing the type of data (class, rnag, 
+#'  pa or objectives) to be downloaded
+#'  
+#' @param column A string representing the column type to be downloaded
+#' 
+#' @param index_num Numeric index of RBD/OC/MC to be downloaded (WBID)
+#' needs the name (below)
+#' 
+#' @param ea_name A string representing the WBID to be downloaded
+#' 
+#' @noRd
+
+########## reorder arguments ######################
+set_url<-function(column, data_type, index){
+  start_url<-"http://environment.data.gov.uk/catchment-planning/"
+  switch(column,
+       "RBD"=paste0(start_url, "RiverBasinDistrict/", index, set_end_url(data_type)),
+       "MC"=paste0(start_url, "ManagementCatchment/", index, end_url<-set_end_url(data_type)),
+       "OC"=paste0(start_url, "OperationalCatchment/", index, end_url<-set_end_url(data_type)),
+       "WBID"=paste0(start_url, wbid_end_url(data_type, index))
+)
+}
+
+#' Find column index number
+#' @description Find column index number for different types for download
+#'  
+#' @param column A string representing the column type to be downloaded
+#' 
+#' @param ea_name A string representing the WBID to be downloaded
+#' 
+#' @noRd
+
+find_index<-function(column, ea_name){
+  switch(column,
+         "RBD"=ea_wbids$RBD.num[which(ea_wbids[, column] == ea_name)][1],
+          "MC"=ea_wbids$MC.num[which(ea_wbids[, column] == ea_name)][1],
+          "OC"=ea_wbids$OC.num[which(ea_wbids[, column] == ea_name)][1],
+          "WBID"=ea_wbids$WBID[which(ea_wbids[, column] == ea_name)][1]
+)
 }
 
 #' Download Zipfile and extract csv
