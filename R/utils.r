@@ -145,7 +145,7 @@ find_index<-function(column, ea_name){
 
 zip_download <- function(download_url) {
   temp <- tempfile()
-  download.file(download_url, temp, mode = "wb", quiet=FALSE)
+  utils::download.file(download_url, temp, mode = "wb", quiet=FALSE)
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
   catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 

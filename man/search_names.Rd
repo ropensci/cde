@@ -11,7 +11,7 @@ search_names(string = NULL, column = NULL)
 strings in the column values.}
 
 \item{column}{The column to be searched. Possible options are
-\code{name}, \code{OC} (Operational Catchment), \code{MC}
+\code{WBID}, \code{name}, \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
 }
 \value{
@@ -20,10 +20,11 @@ the search string (full or partial matches) in the column specified.
 }
 \description{
 Searches the listing of EA monitoring sites to find rows
-that contain the string provided. Can search by name (\code{name}),
-Management Catchment (\code{MC}), Operational Catchment (\code{OC})
-or River Basin District (\code{RBD}). The search is done on a local copy
-of the waterbody listing rather than connecting to the EA site.
+that contain the string provided. Can search by WBID (\code{WBID}), name 
+(\code{name}), Management Catchment (\code{MC}), Operational Catchment 
+(\code{OC}) or River Basin District (\code{RBD}). The search is done 
+on a local copy of the waterbody listing rather than connecting to the 
+EA site.
 }
 \examples{
 # search for River Basin Districts containing "Tweed"
