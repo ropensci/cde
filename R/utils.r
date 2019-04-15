@@ -22,7 +22,9 @@
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #' 
 #' @param data_type The type of data to be retrieved, either status 
-#' classification ("class") or Reasons of Not Acheving Good ("rnag").
+#' classification ("class"), Reasons of Not Acheving Good ("rnag"), 
+#' objectives ("objectives"), measures ("Measures") or Protected 
+#' Areas ("pa").
 #' 
 #' @return A data frame containing the classifcation or RNAG details for the
 #' specified combination of column and value.
@@ -53,10 +55,10 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
 
 #' Set end URL
 #' @description Sets the final part of the download URL to the correct
-#' string depending on data type to be downloaded (except for WBIDs)
+#' string depending on data type to be downloaded (except for WBIDs).
 #
 #' @param data_type A string representing the type of data (class, rnag, 
-#' measures, pa or objectives) to be downloaded
+#' measures, pa or objectives) to be downloaded.
 #' 
 #' @noRd
 
@@ -71,12 +73,13 @@ set_end_url<-function(data_type){
 
 #' Set end URL for WBID level downloads (different format to rest)
 #' @description Sets the final part of the download URL to the correct
-#' string depending on data type to be downloaded for WBID level downloads
+#' string depending on data type to be downloaded for WBID level downloads.
 #
 #' @param data_type A string representing the type of data (class, rnag, 
-#'  pa or objectives) to be downloaded
+#' measures, objectives or pa) to be downloaded.
 #' 
-#' @param ea_name A string representing the WBID to be downloaded
+#' @param ea_name A string representing the site name (WBID) to be 
+#' downloaded.
 #' 
 #' @noRd
 
@@ -89,17 +92,15 @@ wbid_end_url <- function(data_type, index_num){
 }
 
 #' Set overall URL for downloads
-#' @description Sets the overall download URL for all types (columns)
+#' @description Derive the overall download URL for all types (columns).
 #
 #' @param data_type A string representing the type of data (class, rnag, 
-#'  pa or objectives) to be downloaded
+#' measures, objectives or pa) to be downloaded.
 #'  
-#' @param column A string representing the column type to be downloaded
+#' @param column A string representing the column type to be downloaded.
 #' 
-#' @param index_num Numeric index of RBD/OC/MC to be downloaded (WBID)
-#' needs the name (below)
-#' 
-#' @param ea_name A string representing the WBID to be downloaded
+#' @param index_num Numeric index of RBD/OC/MC to be downloaded or for
+#' WBID downloads the WBID name.
 #' 
 #' @noRd
 
@@ -108,18 +109,19 @@ set_url<-function(column, data_type, index){
   start_url<-"http://environment.data.gov.uk/catchment-planning/"
   switch(column,
        "RBD"=paste0(start_url, "RiverBasinDistrict/", index, set_end_url(data_type)),
-       "MC"=paste0(start_url, "ManagementCatchment/", index, end_url<-set_end_url(data_type)),
-       "OC"=paste0(start_url, "OperationalCatchment/", index, end_url<-set_end_url(data_type)),
+       "MC"=paste0(start_url, "ManagementCatchment/", index, set_end_url(data_type)),
+       "OC"=paste0(start_url, "OperationalCatchment/", index, set_end_url(data_type)),
        "WBID"=paste0(start_url, wbid_end_url(data_type, index))
 )
 }
 
 #' Find column index number
-#' @description Find column index number for different types for download
+#' @description Find column index number for different types for download.
 #'  
-#' @param column A string representing the column type to be downloaded
+#' @param column A string representing the column type to be downloaded.
 #' 
-#' @param ea_name A string representing the WBID to be downloaded
+#' @param ea_name A string representing the name of the site/catchment to 
+#' be downloaded.
 #' 
 #' @noRd
 
@@ -144,7 +146,6 @@ find_index<-function(column, ea_name){
 zip_download <- function(download_url) {
   temp <- tempfile()
   download.file(download_url, temp, mode = "wb", quiet=FALSE)
-  #curl::curl_download(download_url, temp, mode = "wb", quiet=FALSE)
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
   catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
