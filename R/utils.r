@@ -44,12 +44,13 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   if (column=="RBD" | column=="MC"){
     cde_data <- zip_download(set_url(column, data_type, index))
   } else{
-    # use tryCatch to deal with warning from WBID download - bad EA data format
     cde_data <- tryCatch(data.table::fread(set_url(column, data_type, index),
                     showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
                     check.names=TRUE, data.table=FALSE),
                     warning=function(w){})
   }
+  # substitute . for _ in all column names
+  names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
   return(cde_data)
 } # end of function
 
@@ -127,9 +128,9 @@ set_url<-function(column, data_type, index){
 
 find_index<-function(column, ea_name){
   switch(column,
-         "RBD"=ea_wbids$RBD.num[which(ea_wbids[, column] == ea_name)][1],
-          "MC"=ea_wbids$MC.num[which(ea_wbids[, column] == ea_name)][1],
-          "OC"=ea_wbids$OC.num[which(ea_wbids[, column] == ea_name)][1],
+         "RBD"=ea_wbids$RBD_num[which(ea_wbids[, column] == ea_name)][1],
+          "MC"=ea_wbids$MC_num[which(ea_wbids[, column] == ea_name)][1],
+          "OC"=ea_wbids$OC_num[which(ea_wbids[, column] == ea_name)][1],
           "WBID"=ea_wbids$WBID[which(ea_wbids[, column] == ea_name)][1]
 )
 }
@@ -137,6 +138,8 @@ find_index<-function(column, ea_name){
 #' Download Zipfile and extract csv
 #' @description Downloads zipfile from specified url, unzips to
 #' csv file and reads csv into dataframe.
+#' 
+#' @importFrom utils download.file
 #
 #' @param download_url A string representing the url to download the
 #' zip file from.
@@ -148,12 +151,13 @@ zip_download <- function(download_url) {
   utils::download.file(download_url, temp, mode = "wb", quiet=FALSE)
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
-  catchment_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
+  cde_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
       check.names = TRUE, data.table = FALSE, showProgress = TRUE)
+  names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
   # delete the intermediate files
   unlink(temp)
   unlink(csvfile)
-  return(catchment_data)
+  return(cde_data)
 } # end of function
 
 
@@ -303,22 +307,22 @@ subset_data <- function(full_data, column = NULL,
   # surface waters and groundwaters
   if (!is.null(level)){
     if (level == "Chemical") {
-      full_data <- full_data[full_data$Classification.Item == "Chemical" | 
-                        full_data$Classification.Item == "Chemical (GW)", ]
+      full_data <- full_data[full_data$Classification_Item == "Chemical" | 
+                        full_data$Classification_Item == "Chemical (GW)", ]
     }
     else if (level == "Supporting elements") {
-      full_data <- full_data[full_data$Classification.Item == 
+      full_data <- full_data[full_data$Classification_Item == 
                       "Supporting elements (Surface Water)" | 
-                        full_data$Classification.Item == 
+                        full_data$Classification_Item == 
                         "Supporting elements (Groundwater)", ]
     }
     else {
-      full_data <- full_data[full_data$Classification.Item == level, ]
+      full_data <- full_data[full_data$Classification_Item == level, ]
     }
   }
   # now Water.body.type
   if (!is.null(type)) {
-    full_data <- full_data[full_data$Water.body.type == type, ]
+    full_data <- full_data[full_data$Water_body_type == type, ]
   }
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies

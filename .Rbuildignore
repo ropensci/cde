@@ -11,3 +11,4 @@
 ^paper$
 ^index\.Rmd$
 ^index\.md$
+^data-raw$
