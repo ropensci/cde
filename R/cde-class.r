@@ -8,9 +8,11 @@ as.cde <- function(x) {
 # custom print method
 print.cde_df <- function(x){
   # find number of columns that will fit on current width
-  ### checking no data situation
-  cols<-min(which(cumsum(nchar(names(x))+2) > getOption("width")))-1
-  
+  # if the maximum length of all column names is greater than the width
+  # sebset the columns
+  if(max(cumsum(nchar(names(x))+2)>getOption("width"))){
+    cols<-min(which(cumsum(nchar(names(x))+2) > getOption("width")))-1
+  }else{cols<-ncol(x)}
   # subset df for just these columns
   data_to_print <- x[,1:cols]
   
