@@ -55,5 +55,5 @@ get_pa <- function(ea_name = NULL, column = NULL) {
   if (nrow(pa_data)==0){
     message("No protected areas present - empty dataframe returned")
   }
-  return(pa_data)
+  return(as.cde(pa_data))
 } # end of function

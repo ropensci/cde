@@ -110,7 +110,7 @@ get_objectives <- function(ea_name = NULL, column = NULL,
   # if there are no objectives set, give a message
   if (nrow(obj_data)==0){
     message("No objectives specified - empty dataframe returned")
-    return(obj_data)
+    return(as.cde(obj_data))
   } else{
     # subset data by specified values
     # if WBID - don't subset by type and give message
@@ -127,6 +127,6 @@ get_objectives <- function(ea_name = NULL, column = NULL,
     if (nrow(obj_data)==0){
       message("No objectives specified - empty dataframe returned")
     }
-    return(obj_data)
+    return(as.cde(obj_data))
   }
 } # end of function

@@ -53,5 +53,5 @@ get_measures <- function(ea_name = NULL, column = NULL) {
   if (nrow(measures_data)==0){
     message("No measures data specified - empty dataframe returned")
   }
-  return(measures_data)
+  return(as.cde(measures_data))
 } # end of function

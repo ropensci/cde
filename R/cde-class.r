@@ -29,7 +29,7 @@ print.cde_df <- function(x){
   # if more than 10 rows, indicate missing data
   if(nrow(x)>10){
     # #### need to handle if 11 or just one more column
-    cat(paste0("With an additional ", nrow(test4)-10, " rows and ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
+    cat(paste0("With an additional ", nrow(x)-10, " rows and ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
     cat("Row values may be truncated to fit console.")
   }
   # end of function

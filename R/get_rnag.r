@@ -104,7 +104,7 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
   # check if any data returned
   if (nrow(rnag_data)==0){
     message("No RNAG data - empty dataframe returned")
-    return(rnag_data)
+    return(as.cde(rnag_data))
   }else{
     # if WBID - don't subset by type and give message
     if (column=="WBID"){
@@ -118,7 +118,7 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
     }
-    return(rnag_data)
+    return(as.cde(rnag_data))
   }
   
 } # end of function

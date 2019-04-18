@@ -94,7 +94,7 @@ get_status <- function(ea_name = NULL, column = NULL,
   if (nrow(status_data)==0){
     message("No status data for combination specified - 
       empty dataframe returned")
-    return(status_data)
+    return(as.cde(status_data))
   }else{
     # subset data as required
     status_data<-subset_data(status_data, column, level, startyr, endyr, type)
@@ -103,5 +103,5 @@ get_status <- function(ea_name = NULL, column = NULL,
         empty dataframe returned")
     }
   }
-  return(status_data)
+  return(as.cde(status_data))
 } # end of function

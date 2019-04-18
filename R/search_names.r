@@ -46,6 +46,6 @@ search_names <- function(string = NULL, column = NULL) {
     stop(paste0("No matches found for ", string))
   }
   else {
-    return(matching_rows)
+    return(as.cde(matching_rows))
   }
 } # end of function
