@@ -39,7 +39,6 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   
   # this gives either index number (RBD, MC, OC) or wbid for next bit
   index<-find_index(column, ea_name)
-  
   # do download using either zip or plain fread depending on type
   if (column=="RBD" | column=="MC"){
     cde_data <- zip_download(set_url(column, data_type, index))
@@ -306,6 +305,10 @@ subset_data <- function(full_data, column = NULL,
   # level subsetting, defaults to "Overall Water Body"
   # for Chemical and Supporting Elements levels, need to deal with options for
   # surface waters and groundwaters
+  
+  # PROBLEM HERE FOR RNAG DATA - change in format, so level needs to be
+  # adjusted - only reported at Element level now.
+  
   if (!is.null(level)){
     if (level == "Chemical") {
       full_data <- full_data[full_data$classification_item == "Chemical" | 
