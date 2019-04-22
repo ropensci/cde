@@ -45,13 +45,6 @@ get_pa <- function(ea_name = NULL, column = NULL) {
   # if all inputs valid, download data
   pa_data <- download_cde(ea_name, column, data_type="pa")
   
-  # rename columns for consistency with get_status
-  names(pa_data)[which(names(pa_data) == 
-    "River.Basin.District")] <- "River.basin.district"
-  names(pa_data)[which(names(pa_data) == 
-    "Management.Catchment")] <- "Management.catchment"
-  names(pa_data)[which(names(pa_data) == 
-    "Operational.Catchment")] <- "Operational.catchment"
   if (nrow(pa_data)==0){
     message("No protected areas present - empty dataframe returned")
   }

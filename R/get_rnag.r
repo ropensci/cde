@@ -76,32 +76,8 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
   }
   # if all inputs valid, download data
   rnag_data <- download_cde(ea_name, column, data_type="rnag")
-  # rename columns for consistency with get_status
-   if (column=="WBID"){
-     names(rnag_data)[which(names(rnag_data) == 
-        "water.body.type")] <- "Water.body.type"
-     names(rnag_data)[which(names(rnag_data) == 
-        "River.Basin.District")] <- "River.basin.district"
-     names(rnag_data)[which(names(rnag_data) == 
-        "Management.Catchment")] <- "Management.catchment"
-     names(rnag_data)[which(names(rnag_data) == 
-        "Operational.Catchment")] <- "Operational.catchment"
-   }
-  if (column!="WBID"){
-    names(rnag_data)[which(names(rnag_data) == 
-        "Water.body.id")] <- "Waterbody.ID"
-    names(rnag_data)[which(names(rnag_data) == 
-        "Classification.Year")] <- "Year"
-    names(rnag_data)[which(names(rnag_data) == 
-        "Classification.Status")] <- "status"
-    names(rnag_data)[which(names(rnag_data) == 
-        "River.Basin.District")] <- "River.basin.district"
-    names(rnag_data)[which(names(rnag_data) == 
-        "Management.Catchment")] <- "Management.catchment"
-    names(rnag_data)[which(names(rnag_data) == 
-        "Operational.Catchment")] <- "Operational.catchment"
-  }
-  # check if any data returned
+
+    # check if any data returned
   if (nrow(rnag_data)==0){
     message("No RNAG data - empty dataframe returned")
     return(as.cde(rnag_data))

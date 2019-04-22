@@ -43,13 +43,6 @@ get_measures <- function(ea_name = NULL, column = NULL) {
   # if all inputs valid, download data
   measures_data <- download_cde(ea_name, column, data_type="measures")
   
-  # rename columns for consistency with get_status
-  names(measures_data)[which(names(measures_data) == 
-      "River.Basin.District")] <- "River.basin.district"
-  names(measures_data)[which(names(measures_data) == 
-      "Management.Catchment")] <- "Management.catchment"
-  names(measures_data)[which(names(measures_data) == 
-      "Operational.Catchment")] <- "Operational.catchment"
   if (nrow(measures_data)==0){
     message("No measures data specified - empty dataframe returned")
   }

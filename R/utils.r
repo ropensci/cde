@@ -51,6 +51,8 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   }
   # substitute . for _ in all column names
   names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
+  # convert all to lower case
+  names(cde_data)<-tolower(names(cde_data))
   return(cde_data)
 } # end of function
 
@@ -105,7 +107,6 @@ wbid_end_url <- function(data_type, index_num){
 #' 
 #' @noRd
 
-########## reorder arguments ######################
 set_url<-function(column, data_type, index){
   start_url<-"http://environment.data.gov.uk/catchment-planning/"
   switch(column,
@@ -271,63 +272,63 @@ subset_data <- function(full_data, column = NULL,
 
   # if only start year is set, is it beyond the data range?
   if (!is.null(startyr) & is.null(endyr)){
-    if (startyr>max(full_data$Year)){
+    if (startyr>max(full_data$year)){
       message(paste0("Start year is beyond the most recent year of data (", 
-                     max(full_data$Year),")"))
+                     max(full_data$year),")"))
       message("Just outputting most recent year")
-      startyr<-max(full_data$Year)
+      startyr<-max(full_data$year)
     }
   }
   # if endyr is set, is it beyond the data range?
   if (!is.null(endyr)){
-    if (endyr>max(full_data$Year)){
+    if (endyr>max(full_data$year)){
       message(paste0("End year is beyond the most recent year of data (", 
-                     max(full_data$Year),")"))
+                     max(full_data$year),")"))
       message("Subsetting to most recent year")
-      endyr<-max(full_data$Year)
+      endyr<-max(full_data$year)
     }
   }
   # if they are both set, check the endyr
   if (!is.null(startyr) & !is.null(endyr)) {
-    if (endyr>max(full_data$Year)){
+    if (endyr>max(full_data$year)){
       message(paste0("End year is beyond the most recent year of data (", 
-                     max(full_data$Year),")"))
+                     max(full_data$year),")"))
       message("Subsetting to most recent year")
-      endyr<-max(full_data$Year)
+      endyr<-max(full_data$year)
     }
     # if both years are specified, subset by range
-    full_data <- full_data[full_data$Year >= startyr 
-                           & full_data$Year <= endyr, ]
+    full_data <- full_data[full_data$year >= startyr 
+                           & full_data$year <= endyr, ]
   }
   else if (!is.null(startyr)) {
-    full_data <- full_data[full_data$Year == startyr, ]
+    full_data <- full_data[full_data$year == startyr, ]
   }
   # level subsetting, defaults to "Overall Water Body"
   # for Chemical and Supporting Elements levels, need to deal with options for
   # surface waters and groundwaters
   if (!is.null(level)){
     if (level == "Chemical") {
-      full_data <- full_data[full_data$Classification_Item == "Chemical" | 
-                        full_data$Classification_Item == "Chemical (GW)", ]
+      full_data <- full_data[full_data$classification_item == "Chemical" | 
+                        full_data$classification_item == "Chemical (GW)", ]
     }
     else if (level == "Supporting elements") {
-      full_data <- full_data[full_data$Classification_Item == 
+      full_data <- full_data[full_data$classification_item == 
                       "Supporting elements (Surface Water)" | 
-                        full_data$Classification_Item == 
+                        full_data$classification_item == 
                         "Supporting elements (Groundwater)", ]
     }
     else {
-      full_data <- full_data[full_data$Classification_Item == level, ]
+      full_data <- full_data[full_data$classification_item == level, ]
     }
   }
-  # now Water.body.type
+  # now water_body_type
   if (!is.null(type)) {
-    full_data <- full_data[full_data$Water_body_type == type, ]
+    full_data <- full_data[full_data$water_body_type == type, ]
   }
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
-  full_data <- full_data[!(full_data$Year == 2013 & full_data$Cycle == 1 | 
-                             full_data$Year == 2014 & full_data$Cycle == 1), ]
+  full_data <- full_data[!(full_data$year == 2013 & full_data$cycle == 1 | 
+                             full_data$year == 2014 & full_data$cycle == 1), ]
   
   return(full_data)
 } # end of function

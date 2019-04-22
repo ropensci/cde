@@ -87,26 +87,6 @@ get_objectives <- function(ea_name = NULL, column = NULL,
   # if all inputs valid, download data
   obj_data <- download_cde(ea_name, column, data_type="objectives")
 
-    # rename columns for consistency with get_status
-  if (column=="WBID"){
-    names(obj_data)[which(names(obj_data) == 
-        "water.body.type")] <- "Water.body.type"
-    names(obj_data)[which(names(obj_data) == 
-        "River.Basin.District")] <- "River.basin.district"
-    names(obj_data)[which(names(obj_data) == 
-        "Management.Catchment")] <- "Management.catchment"
-    names(obj_data)[which(names(obj_data) == 
-        "Operational.Catchment")] <- "Operational.catchment"
-  }
-  if (column!="WBID"){
-    names(obj_data)[which(names(obj_data) == 
-        "River.Basin.District")] <- "River.basin.district"
-    names(obj_data)[which(names(obj_data) == 
-        "Management.Catchment")] <- "Management.catchment"
-    names(obj_data)[which(names(obj_data) == 
-        "Operational.Catchment")] <- "Operational.catchment"
-  }
-  
   # if there are no objectives set, give a message
   if (nrow(obj_data)==0){
     message("No objectives specified - empty dataframe returned")
