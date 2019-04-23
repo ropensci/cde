@@ -50,7 +50,7 @@ plot_status <- function(ea_name = NULL, column = NULL,
     stop("No data returned, plotting not possible.")
   }
   # convert to summary table
-  plot_table <- with(plot_data, table(Status, Year))
+  plot_table <- with(plot_data, table(status, year))
 
   # convert to percentages
   props <- as.matrix(prop.table(plot_table, 2) * 100)

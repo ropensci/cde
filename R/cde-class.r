@@ -17,9 +17,15 @@ as.cde <- function(x) {
 #' Formats output to fit current width of console.
 #' 
 #' @param x An object of class `cde_df`
+#' 
+#' @param ... Other arguments passed on to individual methods
 #'
-#'@noRd
-print.cde_df <- function(x){
+#' @method print cde_df
+#' @export
+
+# need to set this up as a generic, passing in comment then switch to 
+# different methods for data types
+print.cde_df <- function(x, ...){
   # find number of columns that will fit on current width
   # if the maximum length of all column names is greater than the width
   # subset the columns
