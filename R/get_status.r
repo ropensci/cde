@@ -103,5 +103,7 @@ get_status <- function(ea_name = NULL, column = NULL,
         empty dataframe returned")
     }
   }
+  # add comment for plot method identification
+  comment(status_data) <- "status"
   return(as.cde(status_data))
 } # end of function

@@ -48,5 +48,7 @@ get_pa <- function(ea_name = NULL, column = NULL) {
   if (nrow(pa_data)==0){
     message("No protected areas present - empty dataframe returned")
   }
+  # add comment for plot method identification
+  comment(pa_data) <- "pa"
   return(as.cde(pa_data))
 } # end of function

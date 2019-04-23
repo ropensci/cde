@@ -107,6 +107,8 @@ get_objectives <- function(ea_name = NULL, column = NULL,
     if (nrow(obj_data)==0){
       message("No objectives specified - empty dataframe returned")
     }
+    # add comment for plot method identification
+    comment(obj_data) <- "objectives"
     return(as.cde(obj_data))
   }
 } # end of function

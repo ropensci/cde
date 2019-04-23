@@ -46,5 +46,7 @@ get_measures <- function(ea_name = NULL, column = NULL) {
   if (nrow(measures_data)==0){
     message("No measures data specified - empty dataframe returned")
   }
+  # add comment for plot method identification
+  comment(measures_data)<-"measures"
   return(as.cde(measures_data))
 } # end of function
