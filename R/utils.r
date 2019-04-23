@@ -305,10 +305,6 @@ subset_data <- function(full_data, column = NULL,
   # level subsetting, defaults to "Overall Water Body"
   # for Chemical and Supporting Elements levels, need to deal with options for
   # surface waters and groundwaters
-  
-  # PROBLEM HERE FOR RNAG DATA - change in format, so level needs to be
-  # adjusted - only reported at Element level now.
-  
   if (!is.null(level)){
     if (level == "Chemical") {
       full_data <- full_data[full_data$classification_item == "Chemical" | 
@@ -328,10 +324,15 @@ subset_data <- function(full_data, column = NULL,
   if (!is.null(type)) {
     full_data <- full_data[full_data$water_body_type == type, ]
   }
+
+  # for rnag data, replace classification_year with year first
+  names(full_data)[names(full_data) == "classification_year"] <- "year"
+  
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
-  full_data <- full_data[!(full_data$year == 2013 & full_data$cycle == 1 | 
+  if ("cycle" %in% names(full_data)) {
+    full_data <- full_data[!(full_data$year == 2013 & full_data$cycle == 1 | 
                              full_data$year == 2014 & full_data$cycle == 1), ]
-  
+  }
   return(full_data)
 } # end of function
