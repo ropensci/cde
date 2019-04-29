@@ -4,10 +4,13 @@
 \alias{plot_status}
 \title{Plot Status Summary}
 \usage{
-plot_status(x, scheme)
+plot_status(x, data_type, scheme)
 }
 \arguments{
 \item{x}{An object of class `cde_df`to be plotted}
+
+\item{data_type}{String representing The type of data to be plotted, 
+either "class" or "objectives".}
 
 \item{scheme}{Which colour scheme to use with plots; defaults to a viridis
 based scheme (\code{"vir"} but can also choose to use the colours specified

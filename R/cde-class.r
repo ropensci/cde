@@ -134,7 +134,7 @@ plot_histogram<-function(column, data_type){
   par(mar=c(4,max(nchar(column))/2,2,2))
   # this works,could make font smaller for consistency
   barplot(sort(table(column), decreasing=TRUE), horiz=TRUE, cex.names=0.8, 
-          las=2,space=0,col=viridis(nrow(table(column))), 
+          las=2,space=0,col=viridisLite::viridis(nrow(table(column))), 
           xpd=FALSE, xlab="Number of waterbodies")
   par(old.par)
 }

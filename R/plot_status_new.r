@@ -12,7 +12,6 @@
 #' in the WFD document by specifying as \code{"wfd"}.
 #'
 #' @importFrom graphics barplot
-#' @importFrom viridis viridis
 #'
 #' @return A (stacked) barplot of the percentage of waterbodies within the
 #' specified area of different status values represented as different colours
