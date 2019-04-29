@@ -23,8 +23,6 @@ as.cde <- function(x) {
 #' @method print cde_df
 #' @export
 
-# need to set this up as a generic, passing in comment then switch to 
-# different methods for data types
 print.cde_df <- function(x, ...){
   # find number of columns that will fit on current width
   # if the maximum length of all column names is greater than the width
@@ -78,3 +76,71 @@ trunc_char <- function(x, col_name_lengths){
     substr(x,1,col_name_lengths)
   }
 }
+
+#' Plot method for cde_df output
+#' @description Default plots of the output of calls to `get...` functions.
+#' For `status` and `objectives` produces a (stacked) percentage barplot of 
+#' waterbody observed or predicted (objective) status information for a 
+#' given set of data. 
+#' 
+#' For `rnag`, `measures` or `pa` produces a frequency
+#' histogram. NEED TO INCLUDE LINK TO EA classification site here. 
+#' Plotting is only possible for MC, OC or RBD downloads.
+#' 
+#' @param x An object of class `cde_df` to be plotted
+#'
+#' @param scheme Which colour scheme to use with plots; defaults to a viridis
+#' based scheme (\code{"vir"} but can also choose to use the colours specified
+#' in the WFD document by specifying as \code{"wfd"}.
+#'
+#' @importFrom graphics barplot
+#' 
+#' @method print cde_df
+#' @export plot.cde_df
+#' 
+plot.cde_df <- function(x, scheme = "vir", ...) {
+  # extract the data type from the comment string
+  meta_data<-strsplit(attr(x, "comment"), ";")
+  # catch wbid here
+  if (meta_data[[1]][2]=="WBID"){
+    stop("Plot method is not defined for WBID level downloads.")
+  }
+  plot_choice(x, meta_data[[1]][1], scheme)
+} # end of function
+
+# document here
+plot_choice<-function(x, data_type, scheme="Vir"){
+  switch(data_type, 
+         "class" = plot_status(x, data_type, scheme="vir"),
+         "rnag" = plot_categories(x, data_type),
+         "measures" = plot_categories(x, data_type),
+         "pa" = plot_categories(x, data_type),
+         "objectives" = plot_status(x, data_type, scheme="vir"))
+}
+
+
+# control function to set column 
+plot_categories<-function(x, data_type){
+  switch(data_type,
+         "pa"=plot_histogram(x$protected_area_type, data_type),
+         # or measure_category_1
+         "measures"=plot_histogram(x$measure_type, data_type),
+         "rnag"=plot_histogram(x$pressure_tier_3, data_type))
+}
+
+# actual plotting function
+plot_histogram<-function(column, data_type){
+  old.par <- par(no.readonly = TRUE)
+  par(mar=c(4,max(nchar(column))/2,2,2))
+  # this works,could make font smaller for consistency
+  barplot(sort(table(column), decreasing=TRUE), horiz=TRUE, cex.names=0.8, 
+          las=2,space=0,col=viridis(nrow(table(column))), 
+          xpd=FALSE, xlab="Number of waterbodies")
+  par(old.par)
+}
+
+
+# rnag - category, swmi or pressure_tier_1
+# objectives - predicted and year [status crosstab]
+# measures - measure_category_1 or measure_type
+# pa - protected_area_type - numbers rather than %??

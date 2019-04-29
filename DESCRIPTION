@@ -21,7 +21,8 @@ LazyData: true
 Imports:
    graphics,
    utils,
-   data.table
+   data.table,
+   viridisLite
 Suggests:
     testthat,
     knitr,

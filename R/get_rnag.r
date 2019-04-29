@@ -95,7 +95,7 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
       message("No RNAG data - empty dataframe returned")
     }
     # add comment for plot method identification
-    comment(rnag_data)<-"rnag"
+    comment(rnag_data) <- paste0("rnag;", column)
     return(as.cde(rnag_data))
   }
   
