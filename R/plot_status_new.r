@@ -17,7 +17,7 @@
 #' specified area of different status values represented as different colours
 #' depending on the scheme specified.
 #'
-#' @export plot_status
+#' @noRd
 #' 
 plot_status <- function(x, data_type, scheme) {
   # this needs to be in plot method
@@ -42,8 +42,9 @@ plot_status <- function(x, data_type, scheme) {
   nums <- c(1, 2, 2, 3, 4, 5, 5, 6)
   status <- c("High", "Good", "Supports Good", "Moderate", "Poor", 
               "Bad", "Fail", "Does not require assessment")
-  vir_colours <- c("#79d051ff", "#26a784ff", "#26a784ff", "#2a768eff", 
-                   "#404284ff", "#440154ff", "#440154ff", "#BEBEBE")
+  vir_colours <- c(viridisLite::viridis(7, direction=-1), "#BEBEBE")
+#  vir_colours <- c("#79d051ff", "#26a784ff", "#26a784ff", "#2a768eff", 
+#                  "#404284ff", "#440154ff", "#440154ff", "#BEBEBE")
   wfd_colours <- c("Blue", "Green", "Green", "Yellow", "Orange", "Red", 
                    "Red", "Gray")
   statusdf <- cbind.data.frame(nums, status, vir_colours, wfd_colours)
@@ -78,28 +79,32 @@ plot_status <- function(x, data_type, scheme) {
   if (ncol(props) == 1 & nrow(props) == 1) {
     return(graphics::barplot(ord_props, names.arg = needed$status, 
       col = cols_ordered, space = 0, ylab = "Percentage of waterbodies", 
-      xlab="Status class", ylim = c(0, 100)))
+      xlab="Status class", ylim = c(0, 100)), cex.names=0.8, cex.axis=0.8, 
+      cex.lab=0.8)
   }
   # single year, more than one status class
   if (ncol(props) == 1 & nrow(props) > 1) {
     return(graphics::barplot(ord_props, col = cols_ordered, space = 0, 
-      xlab="Status class", ylab = "Percentage of waterbodies", ylim = c(0, 100)))
+      xlab="Status class", ylab = "Percentage of waterbodies", ylim = c(0, 100),
+      cex.names=0.8, cex.axis=0.8, cex.lab=0.8))
   }
   # more than one year, one status class
   if (ncol(props) > 1 & nrow(props) == 1) {
-    graphics::barplot(ord_props, legend.text = needed$status, 
+    return(graphics::barplot(ord_props, legend.text = needed$status, 
       args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), 
-      y = 80, bg="white"), col = cols_ordered, 
+      y = 80, bg="white", cex=0.8), col = cols_ordered, 
       ylab = "Percentage of waterbodies", xlab=xlabel, 
-      xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100))
+      xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100),
+      cex.names=0.8, cex.axis=0.8, cex.lab=0.8))
   }
   # more than one year, more than one status class
   else {
     return(graphics::barplot(ord_props, legend = TRUE, 
       args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), 
-      y = 80, bg="white"), col = cols_ordered, 
+      y = 80, bg="white", cex=0.8), col = cols_ordered, 
       ylab = "Percentage of waterbodies", xlab=xlabel, 
-      xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100)))
+      xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100), 
+      cex.names=0.8, cex.axis=0.8, cex.lab=0.8))
   }
 } # end of function
 

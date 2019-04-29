@@ -49,15 +49,16 @@ print.cde_df <- function(x, ...){
   }else{cat("No data returned - printing not possible")}
   
   # if more than 10 rows, indicate missing data
-  if(nrow(x)>10){
-    # if there are more columns that visible on the screen
-    if (ncol(x)>ncol(data_to_print)){
-      cat(paste0("With an additional ", nrow(x)-10, " rows and ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
-    }else{
-      cat(paste0("With an additional ", nrow(x)-10, " rows of data."),"\n")
-    }
+  if(nrow(x)>10  & ncol(x)>ncol(data_to_print)){
+    cat(paste0("With an additional ", nrow(x)-10, " rows and ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
   }
-  cat("Row values may be truncated to fit console.")
+  if (nrow(x)<11  & ncol(x)>ncol(data_to_print)){
+    cat(paste0("With an additional ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
+  }
+  if(nrow(x)>10 & ncol(x)<=ncol(data_to_print)){
+    cat(paste0("With an additional ", nrow(x)-10, " rows of data."),"\n")
+  }
+  cat("Row values may be truncated to fit console. \n")
   # end of function
 }
 
@@ -83,39 +84,57 @@ trunc_char <- function(x, col_name_lengths){
 #' waterbody observed or predicted (objective) status information for a 
 #' given set of data. 
 #' 
-#' For `rnag`, `measures` or `pa` produces a frequency
-#' histogram. NEED TO INCLUDE LINK TO EA classification site here. 
+#' For `rnag`, `measures` or `pa` produces a frequency histogram of the 
+#' columns `pressure_tier_3` for `rnag`, `measures_tier_1` for `measures`
+#'  and `protected_area_type` for `pa`. Details of the classifications used
+#'  are given XXXXXX
+#'
 #' Plotting is only possible for MC, OC or RBD downloads.
 #' 
 #' @param x An object of class `cde_df` to be plotted
 #'
 #' @param scheme Which colour scheme to use with plots; defaults to a viridis
-#' based scheme (\code{"vir"} but can also choose to use the colours specified
-#' in the WFD document by specifying as \code{"wfd"}.
+#' based scheme (\code{"vir"} but for \code{rnag] and \code{objectives} data 
+#' the colours specified in the WFD document by specifying as \code{"wfd"}.
 #'
 #' @importFrom graphics barplot
 #' 
-#' @method print cde_df
-#' @export plot.cde_df
+#' @importFrom graphics par
+#' 
+#' @method plot cde_df
+#' @export
 #' 
 plot.cde_df <- function(x, scheme = "vir", ...) {
+  # set up the choice of plotting levels
+  plot_choices <- c("MC", "OC", "RBD")
+
   # extract the data type from the comment string
   meta_data<-strsplit(attr(x, "comment"), ";")
-  # catch wbid here
+  
+  # if there are no rows, plotting not possible
+  if (nrow(x)==0){
+    stop("No data - plotting not possible")
+  }
+  
+  # check if WBID - no plotting possible
   if (meta_data[[1]][2]=="WBID"){
     stop("Plot method is not defined for WBID level downloads.")
+  }
+  # if not defined or not in choices
+  if(is.na(meta_data[[1]][2])| !meta_data[[1]][2] %in% plot_choices){
+    stop("Type of data cannot be determined for plotting")
   }
   plot_choice(x, meta_data[[1]][1], scheme)
 } # end of function
 
 # document here
-plot_choice<-function(x, data_type, scheme="Vir"){
+plot_choice<-function(x, data_type, scheme="vir"){
   switch(data_type, 
-         "class" = plot_status(x, data_type, scheme="vir"),
+         "class" = plot_status(x, data_type, scheme=scheme),
          "rnag" = plot_categories(x, data_type),
          "measures" = plot_categories(x, data_type),
          "pa" = plot_categories(x, data_type),
-         "objectives" = plot_status(x, data_type, scheme="vir"))
+         "objectives" = plot_status(x, data_type, scheme=scheme))
 }
 
 
@@ -130,12 +149,21 @@ plot_categories<-function(x, data_type){
 
 # actual plotting function
 plot_histogram<-function(column, data_type){
+  # save the original graphics pars
   old.par <- par(no.readonly = TRUE)
-  par(mar=c(4,max(nchar(column))/2,2,2))
-  # this works,could make font smaller for consistency
-  barplot(sort(table(column), decreasing=TRUE), horiz=TRUE, cex.names=0.8, 
-          las=2,space=0,col=viridisLite::viridis(nrow(table(column))), 
-          xpd=FALSE, xlab="Number of waterbodies")
+  # change margins to fit column text lengths
+  par(mar=c(5,(max(nchar(column))/2)-2,2,2))
+  # do the actual plotting
+  if (data_type=="rnag"){
+    xlabel<-"Frequency of RNAG across all waterbodies"
+  }
+  if (data_type=="pa"){
+    xlabel="Number of protected areas"
+  }
+  barplot(sort(table(column), decreasing=TRUE), horiz=TRUE, cex.names=0.8,
+          cex.axis=0.8, las=2,space=0,col=viridisLite::viridis(nrow(table(column))), 
+          xpd=FALSE, xlab=xlabel, cex.lab=0.8)
+  # reset the graphics pars
   par(old.par)
 }
 
