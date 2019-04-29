@@ -92,10 +92,12 @@ trunc_char <- function(x, col_name_lengths){
 #' Plotting is only possible for MC, OC or RBD downloads.
 #' 
 #' @param x An object of class `cde_df` to be plotted
-#'
+#' 
 #' @param scheme Which colour scheme to use with plots; defaults to a viridis
-#' based scheme (\code{"vir"} but for \code{rnag] and \code{objectives} data 
+#' based scheme (\code{"vir"}) but for \code{rnag} and \code{objectives} data 
 #' the colours specified in the WFD document by specifying as \code{"wfd"}.
+#' 
+#' @param ... Other arguments passed on to individual methods
 #'
 #' @importFrom graphics barplot
 #' 

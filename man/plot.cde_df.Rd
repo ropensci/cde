@@ -4,14 +4,16 @@
 \alias{plot.cde_df}
 \title{Plot method for cde_df output}
 \usage{
-\method{print}{cde_df}(x, scheme = "vir", ...)
+\method{plot}{cde_df}(x, scheme = "vir", ...)
 }
 \arguments{
 \item{x}{An object of class `cde_df` to be plotted}
 
 \item{scheme}{Which colour scheme to use with plots; defaults to a viridis
-based scheme (\code{"vir"} but can also choose to use the colours specified
-in the WFD document by specifying as \code{"wfd"}.}
+based scheme (\code{"vir"}) but for \code{rnag} and \code{objectives} data 
+the colours specified in the WFD document by specifying as \code{"wfd"}.}
+
+\item{...}{Other arguments passed on to individual methods}
 }
 \description{
 Default plots of the output of calls to `get...` functions.
@@ -19,7 +21,10 @@ For `status` and `objectives` produces a (stacked) percentage barplot of
 waterbody observed or predicted (objective) status information for a 
 given set of data. 
 
-For `rnag`, `measures` or `pa` produces a frequency
-histogram. NEED TO INCLUDE LINK TO EA classification site here. 
+For `rnag`, `measures` or `pa` produces a frequency histogram of the 
+columns `pressure_tier_3` for `rnag`, `measures_tier_1` for `measures`
+ and `protected_area_type` for `pa`. Details of the classifications used
+ are given XXXXXX
+
 Plotting is only possible for MC, OC or RBD downloads.
 }
