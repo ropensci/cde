@@ -1,9 +1,10 @@
 #' Class definition for cde_df
 #' @description Output from a call to the EA website is returned as an
-#' object of class '`cde_df`, which is basically a dataframe with a 
-#' modified `print` method to format the output ro fit the console width
+#' object of class \code{cde_df}, which is basically a dataframe with 
+#' modified \code{print} method to format the output to fit the console 
+#' width and a \code{plot} method to produce default plots of the data.
 #
-#' @param x A dataframe to be converted to class `cde_df`
+#' @param x A dataframe to be converted to class \code{cde_df}
 #'
 #'@noRd
 
@@ -13,18 +14,19 @@ as.cde <- function(x) {
 }
 
 #' Print method definition for cde_df
-#' @description Custom `print` method for objects of class '`cde_df`.
+#' @description Custom \code{print} method for objects of class \code{cde_df}.
 #' Formats output to fit current width of console.
 #' 
-#' @param x An object of class `cde_df`
+#' @param x An object of class \code{cde_df}.
 #' 
-#' @param ... Other arguments passed on to individual methods
+#' @param ... Other arguments passed on to individual methods. None 
+#' implemented at present.
 #'
 #' @method print cde_df
 #' @export
 
 print.cde_df <- function(x, ...){
-  # find number of columns that will fit on current width
+  # find number of columns that will fit on current console width
   # if the maximum length of all column names is greater than the width
   # subset the columns
   if(max(cumsum(nchar(names(x))+2)>getOption("width"))){
@@ -44,16 +46,19 @@ print.cde_df <- function(x, ...){
   
   # truncate strings within rows to fit as well
   if(!nrow(x)==0){
-    data_to_print <- as.data.frame(t(apply(data_to_print, 1, trunc_char, col_name_lengths)))
+    data_to_print <- as.data.frame(t(apply(data_to_print, 1, trunc_char, 
+      col_name_lengths)))
     print(data_to_print, row.names=FALSE)
   }else{cat("No data returned - printing not possible")}
   
   # if more than 10 rows, indicate missing data
   if(nrow(x)>10  & ncol(x)>ncol(data_to_print)){
-    cat(paste0("With an additional ", nrow(x)-10, " rows and ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
+    cat(paste0("With an additional ", nrow(x)-10, " rows and ", 
+      ncol(x)-ncol(data_to_print), " columns of data."),"\n")
   }
   if (nrow(x)<11  & ncol(x)>ncol(data_to_print)){
-    cat(paste0("With an additional ", ncol(x)-ncol(data_to_print), " columns of data."),"\n")
+    cat(paste0("With an additional ", ncol(x)-ncol(data_to_print), 
+      " columns of data."),"\n")
   }
   if(nrow(x)>10 & ncol(x)<=ncol(data_to_print)){
     cat(paste0("With an additional ", nrow(x)-10, " rows of data."),"\n")
@@ -62,14 +67,14 @@ print.cde_df <- function(x, ...){
   # end of function
 }
 
-#' Truncate strings within `cde_df` objects to fit console
-#' @description Truncates the length of strings within rows of `cde_df`
+#' Truncate strings within \code{cde_df} objects to fit console
+#' @description Truncates the length of strings within rows of \code{cde_df}
 #' objects to the same length as the column name, ensuring that they
 #' fit current width of console.
 #' 
-#' @param x An object of class `cde_df`
+#' @param x An object of class \code{cde_df}.
 #' 
-#' @param col_name_lengths Vector containing lengths of column names
+#' @param col_name_lengths Vector containing lengths of column names.
 #'
 #'@noRd
 trunc_char <- function(x, col_name_lengths){
@@ -78,33 +83,32 @@ trunc_char <- function(x, col_name_lengths){
   }
 }
 
-#' Plot method for cde_df output
+#' Plot method for \code{cde_df} output
 #' @description Default plots of the output of calls to \code{get...}
-#'  functions.
+#'  functions. Details of the plots for different data are given below.
 #'  
 #'  For \code{status} and \code{objectives} produces a (stacked) 
 #'  percentage barplot of waterbody observed or predicted (objective) 
 #'  status information for a given set of data. 
 #' 
 #' For \code{rnag}, \code{measures} or \code{pa} produces a frequency 
-#' histogram of the columns `pressure_tier_3` for `rnag`, `measures_tier_1` for `measures`
-#'  and `protected_area_type` for `pa`. Details of the classifications used
-#'  are given XXXXXX.
-#'  
+#' histogram. Columns plotted, with links to the related information on the 
+#' EA website are given below:
+#' 
 #' \itemize{
-#'   \item First item
-#'   \item Second item
-#' }
-#'
+#'   \item \code{rnag}: pressure_tier_3
+#'   \item \code{measures}: \href{https://environment.data.gov.uk/catchment-planning/def/reason-for-failure/measure/tier.html?__htmlView=table}{measures_tier_1}
+#'   \item \code{pa}: protected_area_type
+#'   
 #' Plotting is only possible for MC, OC or RBD downloads.
 #' 
-#' @param x An object of class `cde_df` to be plotted
+#' @param x An object of class \code{cde_df} to be plotted.
 #' 
-#' @param scheme Which colour scheme to use with plots; defaults to a viridis
-#' based scheme (\code{"vir"}) but for \code{rnag} and \code{objectives} data 
-#' the colours specified in the WFD document by specifying as \code{"wfd"}.
-#' 
-#' @param ... Other arguments passed on to individual methods
+#' @param ... Other arguments passed on to individual methods. The only other
+#' argument implemented at present is \code{scheme}. For \code{status} and 
+#' \code{objectives} this defines Which colour scheme to use with plots.It 
+#' defaults to a viridis-based scheme (\code{"vir"}). Alternatively, the 
+#' colours specified in the WFD document by specifying as \code{"wfd"}.
 #'
 #' @importFrom graphics barplot
 #' 
@@ -136,7 +140,22 @@ plot.cde_df <- function(x, scheme = "vir", ...) {
   plot_choice(x, meta_data[[1]][1], scheme)
 } # end of function
 
-# document here
+#' Function to select the right plot type depending on data
+#' @description Based on the \code{data_type}, determines the appropriate
+#' plot.
+#' @param x An object of class \code{cde_df} to be plotted
+#' 
+#' @param data_type String representing The type of data to be plotted.
+#'
+#' @param scheme Which colour scheme to use with plots (only used for 
+#' \code{status} and \code{objectives}).
+#'
+#' @importFrom graphics barplot
+#'
+#' @return A plot of the data supplied. Format of plot depends on data.
+#'
+#' @noRd
+
 plot_choice<-function(x, data_type, scheme="vir"){
   switch(data_type, 
          "class" = plot_status(x, data_type, scheme=scheme),
@@ -147,22 +166,44 @@ plot_choice<-function(x, data_type, scheme="vir"){
 }
 
 
-# control function to set column 
+#' Plot frequency histogram of data
+#' @description Plots frequency histogram of different columns depending on 
+#' the type of data for \code{rnag}, \code{measures}and \code{pa}.
+#' 
+#' @param x An object of class \code{cde_df} to be plotted
+#' 
+#' @param data_type String representing The type of data to be plotted.
+#'
+#' @return A frequency histogram of the data supplied.
+#' 
+#' @noRd
 plot_categories<-function(x, data_type){
   switch(data_type,
          "pa"=plot_histogram(x$protected_area_type, data_type),
-         # or measure_category_1
          "measures"=plot_histogram(x$measure_type, data_type),
          "rnag"=plot_histogram(x$pressure_tier_3, data_type))
 }
 
-# actual plotting function
+#' Plot frequency histogram of data
+#' @description Plots frequency histogram of different columns depending on 
+#' the type of data for \code{rnag}, \code{measures}and \code{pa}.
+#' 
+#' @param column Specific column to be plotted (depends on \code{data_type}).
+#' 
+#' @param data_type String representing The type of data to be plotted.
+#'
+#' @return A frequency histogram of the data supplied.
+#' 
+#' @noRd
 plot_histogram<-function(column, data_type){
-  # save the original graphics pars
+
+    # save the original graphics pars
   old.par <- par(no.readonly = TRUE)
-  # change margins to fit column text lengths
+
+    # change margins to fit column text lengths
   par(mar=c(5,(max(nchar(column))/2)-2,2,2))
-  # do the actual plotting
+
+    # do the actual plotting
   if (data_type=="rnag"){
     xlabel<-"Frequency of RNAG across all waterbodies"
   }
@@ -172,15 +213,16 @@ plot_histogram<-function(column, data_type){
   barplot(sort(table(column), decreasing=TRUE), horiz=TRUE, cex.names=0.8,
           cex.axis=0.8, las=2,space=0,col=viridisLite::viridis(nrow(table(column))), 
           xpd=FALSE, xlab=xlabel, cex.lab=0.8)
+
   # reset the graphics pars
   par(old.par)
 }
 
 #' Plot Status Summary
 #' @description Produces a (stacked) percentage barplot of waterbody
-#' status information for a given set of data (MC, OC or RBD)
+#' status information for a given set of data (MC, OC or RBD).
 
-#' @param x An object of class `cde_df`to be plotted
+#' @param x An object of class \code{cde_df} to be plotted.
 #' 
 #' @param data_type String representing The type of data to be plotted, 
 #' either "class" or "objectives".
@@ -197,7 +239,7 @@ plot_histogram<-function(column, data_type){
 #'
 #' @noRd
 #' 
-plot_status <- function(x, data_type, scheme) {
+plot_status <- function(x, data_type, scheme="vir") {
   
   # check that scheme is specified correctly
   scheme_choices<-c("vir", "wfd")
@@ -216,8 +258,6 @@ plot_status <- function(x, data_type, scheme) {
   status <- c("High", "Good", "Supports Good", "Moderate", "Poor", 
               "Bad", "Fail", "Does not require assessment")
   vir_colours <- c(viridisLite::viridis(7, direction=-1), "#BEBEBE")
-  #  vir_colours <- c("#79d051ff", "#26a784ff", "#26a784ff", "#2a768eff", 
-  #                  "#404284ff", "#440154ff", "#440154ff", "#BEBEBE")
   wfd_colours <- c("Blue", "Green", "Green", "Yellow", "Orange", "Red", 
                    "Red", "Gray")
   statusdf <- cbind.data.frame(nums, status, vir_colours, wfd_colours)
