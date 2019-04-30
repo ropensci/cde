@@ -84,31 +84,35 @@ trunc_char <- function(x, col_name_lengths){
 }
 
 #' Plot method for \code{cde_df} output
-#' @description Default plots of the output of calls to \code{get...}
-#'  functions. Details of the plots for different data are given below.
+#' @description Default plots of the output main \code{get_} functions.
+#' Details of the plots for different data are given below.
 #'  
 #'  For \code{status} and \code{objectives} produces a (stacked) 
 #'  percentage barplot of waterbody observed or predicted (objective) 
 #'  status information for a given set of data. 
 #' 
 #' For \code{rnag}, \code{measures} or \code{pa} produces a frequency 
-#' histogram. Columns plotted, with links to the related information on the 
-#' EA website are given below:
+#' histogram. Links to information on the EA website about the columns 
+#' plotted for each data type are given below:
 #' 
 #' \itemize{
-#'   \item \code{rnag}: pressure_tier_3
-#'   \item \code{measures}: \href{https://environment.data.gov.uk/catchment-planning/def/reason-for-failure/measure/tier.html?__htmlView=table}{measures_tier_1}
-#'   \item \code{pa}: protected_area_type
-#'   
+#'   \item \href{https://tinyurl.com/y5gn492m}{rnag} 
+#'   (pressure_tier_3)
+#'   \item \href{https://tinyurl.com/y5gn492m}{measures} 
+#'   (measure_tier_1)
+#'   \item \href{https://tinyurl.com/y5gn492m}{pa} 
+#'   (protected_area_type)
+#'}   
 #' Plotting is only possible for MC, OC or RBD downloads.
 #' 
 #' @param x An object of class \code{cde_df} to be plotted.
 #' 
 #' @param ... Other arguments passed on to individual methods. The only other
 #' argument implemented at present is \code{scheme}. For \code{status} and 
-#' \code{objectives} this defines Which colour scheme to use with plots.It 
-#' defaults to a viridis-based scheme (\code{"vir"}). Alternatively, the 
-#' colours specified in the WFD document by specifying as \code{"wfd"}.
+#' \code{objectives} this defines which colour scheme to use with plots.It 
+#' defaults to a viridis-based scheme (\code{scheme="vir"}). Alternatively, the 
+#' colours specified in the WFD document ca be used by specifying 
+#' \code{scheme="wfd"}.
 #'
 #' @importFrom graphics barplot
 #' 
@@ -117,7 +121,7 @@ trunc_char <- function(x, col_name_lengths){
 #' @method plot cde_df
 #' @export
 #' 
-plot.cde_df <- function(x, scheme = "vir", ...) {
+plot.cde_df <- function(x, ...) {
   # set up the choice of plotting levels
   plot_choices <- c("MC", "OC", "RBD")
 
@@ -137,7 +141,7 @@ plot.cde_df <- function(x, scheme = "vir", ...) {
   if(is.na(meta_data[[1]][2])| !meta_data[[1]][2] %in% plot_choices){
     stop("Type of data cannot be determined for plotting")
   }
-  plot_choice(x, meta_data[[1]][1], scheme)
+  plot_choice(x, meta_data[[1]][1], ...)
 } # end of function
 
 #' Function to select the right plot type depending on data

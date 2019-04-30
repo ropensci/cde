@@ -4,35 +4,37 @@
 \alias{plot.cde_df}
 \title{Plot method for \code{cde_df} output}
 \usage{
-\method{plot}{cde_df}(x, scheme = "vir", ...)
+\method{plot}{cde_df}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{cde_df} to be plotted.}
 
 \item{...}{Other arguments passed on to individual methods. The only other
 argument implemented at present is \code{scheme}. For \code{status} and 
-\code{objectives} this defines Which colour scheme to use with plots.It 
-defaults to a viridis-based scheme (\code{"vir"}). Alternatively, the 
-colours specified in the WFD document by specifying as \code{"wfd"}.}
+\code{objectives} this defines which colour scheme to use with plots.It 
+defaults to a viridis-based scheme (\code{scheme="vir"}). Alternatively, the 
+colours specified in the WFD document ca be used by specifying 
+\code{scheme="wfd"}.}
 }
 \description{
-Default plots of the output of calls to \code{get...}
- functions. Details of the plots for different data are given below.
- 
- \tabular{ccc}{
- Function \tab Data plotted \tab Plot type \cr
- \code{get_status} \tab status class (by year if included) \tab percentage barplot \cr
- 
- }
+Default plots of the output main \code{get_} functions.
+Details of the plots for different data are given below.
  
  For \code{status} and \code{objectives} produces a (stacked) 
  percentage barplot of waterbody observed or predicted (objective) 
  status information for a given set of data. 
 
 For \code{rnag}, \code{measures} or \code{pa} produces a frequency 
-histogram of the columns `pressure_tier_3` for `rnag`, `measures_tier_1` for `measures`
- and `protected_area_type` for `pa`. Details of the classifications used
- are given XXXXXX.
- 
+histogram. Links to information on the EA website about the columns 
+plotted for each data type are given below:
+
+\itemize{
+  \item \href{https://tinyurl.com/y5gn492m}{rnag} 
+  (pressure_tier_3)
+  \item \href{https://tinyurl.com/y5gn492m}{measures} 
+  (measures_type)
+  \item \href{https://tinyurl.com/y5gn492m}{pa} 
+  (protected_area_type)
+}   
 Plotting is only possible for MC, OC or RBD downloads.
 }
