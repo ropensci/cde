@@ -268,6 +268,7 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 #'
 subset_data <- function(full_data, column = NULL, 
     level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+  
   # if only start year is set, is it beyond the data range?
   if (!is.null(startyr) & is.null(endyr)){
     if (startyr>max(full_data$year)){
@@ -323,9 +324,6 @@ subset_data <- function(full_data, column = NULL,
   if (!is.null(type)) {
     full_data <- full_data[full_data$water_body_type == type, ]
   }
-
-  # for rnag data, replace classification_year with year first
-  names(full_data)[names(full_data) == "classification_year"] <- "year"
   
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies

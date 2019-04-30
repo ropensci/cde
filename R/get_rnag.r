@@ -77,6 +77,9 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
   # if all inputs valid, download data
   rnag_data <- download_cde(ea_name, column, data_type="rnag")
 
+  # replace classification_year with year first
+  names(rnag_data)[names(rnag_data) == "classification_year"] <- "year"
+  
     # check if any data returned
   if (nrow(rnag_data)==0){
     message("No RNAG data - empty dataframe returned")
