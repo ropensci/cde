@@ -294,33 +294,33 @@ plot_status <- function(x, data_type, scheme="vir") {
   # do the actual plotting
   # single year, single status class
   if (ncol(props) == 1 & nrow(props) == 1) {
-    graphics::barplot(ord_props, names.arg = needed$status, 
+    return(graphics::barplot(ord_props, names.arg = needed$status, 
       col = cols_ordered, space = 0, ylab = "Percentage of waterbodies", 
       xlab="Status class", ylim = c(0, 100), cex.names=0.8, cex.axis=0.8, 
-      cex.lab=0.8)
+      cex.lab=0.8))
   }
   # single year, more than one status class
   if (ncol(props) == 1 & nrow(props) > 1) {
-    graphics::barplot(ord_props, col = cols_ordered, space = 0, 
+    return(graphics::barplot(ord_props, col = cols_ordered, space = 0, 
       xlab="Status class", ylab = "Percentage of waterbodies", ylim = c(0, 100),
-      cex.names=0.8, cex.axis=0.8, cex.lab=0.8)
+      cex.names=0.8, cex.axis=0.8, cex.lab=0.8))
   }
   # more than one year, one status class
   if (ncol(props) > 1 & nrow(props) == 1) {
-    graphics::barplot(ord_props, legend.text = needed$status, 
+    return(graphics::barplot(ord_props, legend.text = needed$status, 
       args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), 
       y = 80, bg="white", cex=0.8), col = cols_ordered, 
       ylab = "Percentage of waterbodies", xlab=xlabel, 
       xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100),
-      cex.names=0.8, cex.axis=0.8, cex.lab=0.8)
+      cex.names=0.8, cex.axis=0.8, cex.lab=0.8))
   }
   # more than one year, more than one status class
   else {
-    graphics::barplot(ord_props, legend = TRUE, 
+    return(graphics::barplot(ord_props, legend = TRUE, 
       args.legend = list(x = (ncol(props) * 2) - (ncol(props) / 2.5), 
       y = 80, bg="white", cex=0.8), col = cols_ordered, 
       ylab = "Percentage of waterbodies", xlab=xlabel, 
       xlim = c(0, (ncol(props) * 2) - ncol(props) / 2), ylim = c(0, 100), 
-      cex.names=0.8, cex.axis=0.8, cex.lab=0.8)
+      cex.names=0.8, cex.axis=0.8, cex.lab=0.8))
   }
 } # end of function

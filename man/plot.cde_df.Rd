@@ -32,7 +32,7 @@ plotted for each data type are given below:
   \item \href{https://tinyurl.com/y5gn492m}{rnag} 
   (pressure_tier_3)
   \item \href{https://tinyurl.com/y5gn492m}{measures} 
-  (measures_type)
+  (measure_tier_1)
   \item \href{https://tinyurl.com/y5gn492m}{pa} 
   (protected_area_type)
 }   
