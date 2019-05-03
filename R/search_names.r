@@ -3,7 +3,8 @@
 #' that contain the string provided. Can search by WBID (\code{WBID}), name 
 #' (\code{name}), Management Catchment (\code{MC}), Operational Catchment 
 #' (\code{OC}) or River Basin District (\code{RBD}). The search is done 
-#' on a local copy of the waterbody listing rather than connecting to the 
+#' on a local copy of the waterbody listing contained in the 
+#' \code{\link{ea_wbids}} object rather than connecting to the 
 #' EA site.
 #
 #' @param string The search string to be matched. Will match whole or partial
@@ -15,6 +16,7 @@
 #'
 #' @return A data frame containing the details of all the sites that match
 #' the search string (full or partial matches) in the column specified.
+#' Columns are defined in \code{\link{ea_wbids}}.
 #'
 #' @export search_names
 #'

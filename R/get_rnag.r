@@ -13,11 +13,13 @@
 #' Data is presented at the level of individual elements that are the
 #' reasons for not achieving good status.
 #
-#' @param ea_name A string representing the description (name) of the
-#' features to be extracted. For example to extract data for the whole of
-#' the Humber RBD, this would be "Humber"; also see examples. Must be an
-#' exact match to the values used in the EA database.
-#' Use the \code{\link{search_names}} function to search for specific values.
+#' @param ea_name A string representing the description (\code{name} for 
+#' \code{OC}, \code{MC} or \code{RBD} level downloads or \code{WBID} for 
+#' individual waterbodies) of the features to be extracted. For example 
+#' to extract data for the whole of the Humber RBD, this would be "Humber"; 
+#' also see examples. Must be an exact match to the values used in the EA 
+#' database. Use the \code{\link{search_names}} function to search for 
+#' specific values.
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
@@ -39,8 +41,9 @@
 #' waterbody type. Possible values are \code{River}, \code{Lake},
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #'
-#' @return A data frame containing the details of the Reasons for Not 
-#' Achieving Good Status for the specified combination of criteria.
+#' @return An object of class \code{cde_df} containing the details of the 
+#' Reasons for Not Achieving Good Status for the specified combination 
+#' of criteria.
 #'
 #' @export get_rnag
 #'

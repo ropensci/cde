@@ -11,11 +11,13 @@
 #' downloads, waterbody \code{type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #
-#' @param ea_name A string representing the description (name) of the
-#' features to be extracted. For example to extract data for the whole of
-#' the Humber RBD, this would be "Humber"; also see examples. Must be an
-#' exact match to the values used in the EA database.
-#' Use the \code{\link{search_names}} function to search for specific values.
+#' @param ea_name A string representing the description (\code{name} for 
+#' \code{OC}, \code{MC} or \code{RBD} level downloads or \code{WBID} for 
+#' individual waterbodies) of the features to be extracted. For example 
+#' to extract data for the whole of the Humber RBD, this would be "Humber"; 
+#' also see examples. Must be an exact match to the values used in the EA 
+#' database. Use the \code{\link{search_names}} function to search for 
+#' specific values.
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
@@ -76,11 +78,11 @@ get_objectives <- function(ea_name = NULL, column = NULL,
   }
   
   # check year is one of options
-  years <- c(2015, 2021, 2027)
+  years <- c(2015, 2021, 2027, 2040, 2050)
   if (!is.null(year)){
     if (!year %in% years) {
       stop("Year specified is not one of the possible choices 
-           (2015, 2021 or 2027).")
+           (2015, 2021, 2027, 2040 or 2050).")
     }
   }
   

@@ -10,19 +10,34 @@
 #' downloads, waterbody \code{type} can also be specified to allow
 #' extraction of specific waterbody types (River, Lake etc).
 #
-#' @param ea_name A string representing the description (name) of the
-#' features to be extracted. For example to extract data for the whole of
-#' the Humber RBD, this would be "Humber"; also see examples. Must be an
-#' exact match to the values used in the EA database.
-#' Use the \code{\link{search_names}} function to search for specific values.
+#' @param ea_name A string representing the description (\code{name} for 
+#' \code{OC}, \code{MC} or \code{RBD} level downloads or \code{WBID} for 
+#' individual waterbodies) of the features to be extracted. For example 
+#' to extract data for the whole of the Humber RBD, this would be "Humber"; 
+#' also see examples. Must be an exact match to the values used in the EA 
+#' database. Use the \code{\link{search_names}} function to search for 
+#' specific values.
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #'
 #' @param level The level within the WFD quality status classification to be
-#' extracted. Defaults to 'Overall Water Body'. See Vignette for possible 
-#' values.
+#' extracted. Defaults to 'Overall Water Body'. Possible values for the 
+#' different levels used are shown below.
+#' \tabular{ccc}{
+#'  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
+#'  Ecological \tab Biological quality elements \tab Overall Water Body\cr
+#'Chemical \tab Chemical Status element \tab -\cr
+#'  Quantitative \tab Hydromorphological Supporting Elements \tab -\cr
+#'  - \tab Other Substances \tab -\cr
+#'  - \tab Physico-chemical quality elements \tab -\cr
+#'  - \tab Priority hazardous substances \tab -\cr
+#'  - \tab Priority substances \tab -\cr
+#'  - \tab Quantitative Status element \tab - \cr
+#'  - \tab Specific pollutants \tab -\cr
+#'  - \tab Supporting elements \tab -\cr
+#' }
 #'
 #' @param startyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is

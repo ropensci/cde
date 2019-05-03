@@ -9,9 +9,9 @@
 #'   \item{WBID}{identifier for individual waterbodies}
 #'   \item{name}{detailed name of the site/catchment}
 #'   \item{type}{type of waterbody (River, Lake etc.)}
-#'   \item{OC}{Operational catchment name}
+#'   \item{OC}{Operational Catchment name}
 #'   \item{OC_num}{Index number of the Operational Catchment}
-#'   \item{MC}{Management catchment name}
+#'   \item{MC}{Management Catchment name}
 #'   \item{MC_num}{Index number of the Management Catchment}
 #'   \item{RBD}{River Basin District name}
 #'   \item{RBD_num}{Index number of the River Basin District}

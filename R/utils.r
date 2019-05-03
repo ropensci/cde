@@ -26,8 +26,9 @@
 #' objectives ("objectives"), measures ("Measures") or Protected 
 #' Areas ("pa").
 #' 
-#' @return A data frame containing the classifcation or RNAG details for the
-#' specified combination of column and value.
+#' @return An object of class \code{cde_df}  containing the classifcation, 
+#' RNAG, measures, objectives or protected areas for the specified 
+#' combination of column and value.
 #'
 #' @noRd
 
@@ -117,12 +118,13 @@ set_url<-function(column, data_type, index){
 }
 
 #' Find column index number
-#' @description Find column index number for different types for download.
+#' @description Find column index number (or WBID) for setting up 
+#' download url.
 #'  
 #' @param column A string representing the column type to be downloaded.
 #' 
-#' @param ea_name A string representing the name of the site/catchment to 
-#' be downloaded.
+#' @param ea_name A string representing the name of the catchment or 
+#' WBID for individual waterbodies to be downloaded.
 #' 
 #' @noRd
 
@@ -140,6 +142,8 @@ find_index<-function(column, ea_name){
 #' csv file and reads csv into dataframe.
 #' 
 #' @importFrom utils download.file
+#' @importFrom utils unzip
+#' @importFrom data.table fread
 #
 #' @param download_url A string representing the url to download the
 #' zip file from.
@@ -153,7 +157,6 @@ zip_download <- function(download_url) {
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
   cde_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
       check.names = TRUE, data.table = FALSE, showProgress = TRUE)
-  names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
   # delete the intermediate files
   unlink(temp)
   unlink(csvfile)
