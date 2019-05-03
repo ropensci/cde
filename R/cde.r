@@ -2,19 +2,20 @@
 #' Environment Agency Catchment Data Explorer (CDE) website.
 #'
 #' The cde package facilitates searching and download of the WFD-related
-#' data for all waterbodies within the Environment Agency area.
-#' The types of data that can be downloaded are: WFD status classification data
-#' (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, 
-#' objectives set for waterbodies, measures put in place to improve water 
-#' quality and details of associated protected areas. 
+#' data for all waterbodies within the Environment Agency area (i.e. England).
+#' The types of data that can be downloaded are: WFD status classification 
+#' data, Reasons for Not Achieving Good (RNAG) status, objectives set for 
+#' waterbodies, measures put in place to improve water quality and details 
+#' of associated protected areas. Default plots can also be produced from the 
+#' data downloaded (form of plot depends on data type).
 #'
 #' The website that is accessed is: 
-#' https://environment.data.gov.uk/catchment-planning/.
+#' \url{https://environment.data.gov.uk/catchment-planning/}.
 
-#' The data are made available under the Open Government Licence v3.0
-#' (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
+#' The data are made available under the Open Government Licence v3.0 
+#' \url{https://www.nationalarchives.gov.uk/doc/open-government-licence
+#' /version/3/}
 #'
-#' @importFrom graphics barplot
 #' @docType package
 #'
 #' @name cde

@@ -92,17 +92,20 @@ trunc_char <- function(x, col_name_lengths){
 #'  status information for a given set of data. 
 #' 
 #' For \code{rnag}, \code{measures} or \code{pa} produces a frequency 
-#' histogram. Links to information on the EA website about the columns 
-#' plotted for each data type are given below:
+#' histogram. The columns plotted for each data type are given below:
 #' 
 #' \itemize{
-#'   \item \href{https://tinyurl.com/y5gn492m}{rnag} 
+#'   \item{rnag} 
 #'   (pressure_tier_3)
-#'   \item \href{https://tinyurl.com/y5gn492m}{measures} 
+#'   \item {measures} 
 #'   (measure_tier_1)
-#'   \item \href{https://tinyurl.com/y5gn492m}{pa} 
+#'   \item {pa} 
 #'   (protected_area_type)
-#'}   
+#'}
+#' The full detail of the different data being plotted can be found in 
+#' the EA Catchment Data Explorer API reference:
+#' \url{https://environment.data.gov.uk/catchment-planning/ui/reference}
+#'      
 #' Plotting is only possible for MC, OC or RBD downloads.
 #' 
 #' @param x An object of class \code{cde_df} to be plotted.
@@ -149,7 +152,7 @@ plot.cde_df <- function(x, ...) {
 #' plot.
 #' @param x An object of class \code{cde_df} to be plotted
 #' 
-#' @param data_type String representing The type of data to be plotted.
+#' @param data_type String representing the type of data to be plotted.
 #'
 #' @param scheme Which colour scheme to use with plots (only used for 
 #' \code{status} and \code{objectives}).
@@ -170,15 +173,13 @@ plot_choice<-function(x, data_type, scheme="vir"){
 }
 
 
-#' Plot frequency histogram of data
-#' @description Plots frequency histogram of different columns depending on 
-#' the type of data for \code{rnag}, \code{measures}and \code{pa}.
+#' Sends column for plotting based on data
+#' @description For \code{rnag}, \code{measures}and \code{pa} data this 
+#' function passes on the appropriate column for plotting.
 #' 
 #' @param x An object of class \code{cde_df} to be plotted
 #' 
-#' @param data_type String representing The type of data to be plotted.
-#'
-#' @return A frequency histogram of the data supplied.
+#' @param data_type String representing the type of data to be plotted.
 #' 
 #' @noRd
 plot_categories<-function(x, data_type){
@@ -195,6 +196,10 @@ plot_categories<-function(x, data_type){
 #' @param column Specific column to be plotted (depends on \code{data_type}).
 #' 
 #' @param data_type String representing The type of data to be plotted.
+#' 
+#' @importFrom graphics barplot
+#' 
+#' @importFrom viridisLite viridis
 #'
 #' @return A frequency histogram of the data supplied.
 #' 
@@ -224,18 +229,21 @@ plot_histogram<-function(column, data_type){
 
 #' Plot Status Summary
 #' @description Produces a (stacked) percentage barplot of waterbody
-#' status information for a given set of data (MC, OC or RBD).
-
+#' status information for a given set of classification or objective 
+#' data (from MC, OC or RBD level downloads).
+#' 
 #' @param x An object of class \code{cde_df} to be plotted.
 #' 
-#' @param data_type String representing The type of data to be plotted, 
-#' either "class" or "objectives".
+#' @param data_type String representing the type of data to be plotted, 
+#' either \code{class} or \code{objectives}.
 #'
 #' @param scheme Which colour scheme to use with plots; defaults to a viridis
 #' based scheme (\code{"vir"} but can also choose to use the colours specified
 #' in the WFD document by specifying as \code{"wfd"}.
 #'
 #' @importFrom graphics barplot
+#' 
+#' @importFrom viridisLite viridis
 #'
 #' @return A (stacked) barplot of the percentage of waterbodies within the
 #' specified area of different status values represented as different colours

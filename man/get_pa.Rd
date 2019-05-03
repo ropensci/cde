@@ -7,10 +7,11 @@
 get_pa(ea_name = NULL, column = NULL)
 }
 \arguments{
-\item{ea_name}{A string representing the description (name) of the
-features to be extracted. For example to extract data for the whole of
-the Humber RBD, this would be "Humber"; also see examples. Must be an
-exact match to the values used in the EA database.
+\item{ea_name}{A string representing the description (name for \code{OC}, 
+\code{MC} or \code{RBD} level downloads or \code{WBID} for individual 
+waterbodies) of the features to be extracted. For example to extract 
+data for the whole of the Humber RBD, this would be "Humber"; also 
+see examples. Must be an exact match to the values used in the EA database.
 Use the \code{\link{search_names}} function to search for specific values.}
 
 \item{column}{The column to be searched. Possible options are
@@ -18,8 +19,8 @@ Use the \code{\link{search_names}} function to search for specific values.}
 (Management Catchment) and \code{RBD} (River Basin District)}
 }
 \value{
-A data frame containing the details of the Protected Areas 
-associated with the waterbodies.
+An object of class \code{cde_df} containing the details of the 
+Protected Areas associated with the waterbodies.
 }
 \description{
 Retrieves details of Protected Areas associated with 

@@ -18,8 +18,8 @@ Use the \code{\link{search_names}} function to search for specific values.}
 (Management Catchment) and \code{RBD} (River Basin District).}
 }
 \value{
-A data frame containing the details of the measures put in place 
-to try and improve water quality.
+An object of class \code{cde_df} containing the details 
+of the measures put in place to try and improve water quality.
 }
 \description{
 Retrieves details of the measures put in place or proposed 

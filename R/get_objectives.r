@@ -23,19 +23,32 @@
 #' 
 #' @param level The level within the WFD quality classification that 
 #' objectives have been set at. Defaults to 'Overall Water Body'. 
-#' See information in the Vignette for possible values.
+#' Possible values for the different levels used are shown below.
+#' \tabular{ccc}{
+#'  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
+#'  Ecological \tab Biological quality elements \tab Overall Water Body\cr
+#'Chemical \tab Chemical Status element \tab -\cr
+#'  Quantitative \tab Hydromorphological Supporting Elements \tab -\cr
+#'  - \tab Other Substances \tab -\cr
+#'  - \tab Physico-chemical quality elements \tab -\cr
+#'  - \tab Priority hazardous substances \tab -\cr
+#'  - \tab Priority substances \tab -\cr
+#'  - \tab Quantitative Status element \tab - \cr
+#'  - \tab Specific pollutants \tab -\cr
+#'  - \tab Supporting elements \tab -\cr
+#' }
 #'
 #' @param year The year that objectives are set for, either 2015, 
-#' 2021 or 2027. If not given then objectives for all years are returned.
-#' Note that objectives may not be set for all years.
+#' 2021, 2027, 2040 or 2050. If not given then objectives for all years 
+#' are returned. Note that objectives may not be set for all years.
 #'
 #' @param type Type of waterbody to be extracted. For Operational/Management
 #' catchment level or RBD level queries, the data can also be subset by
 #' waterbody type. Possible values are \code{River}, \code{Lake},
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #'
-#' @return A data frame containing the details of the objectives set for
-#' the specified set of waterbodies.
+#' @return An object of class \code{cde_df} containing the details 
+#' of the objectives set for the specified set of waterbodies.
 #'
 #' @export get_objectives
 #'

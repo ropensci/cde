@@ -25,16 +25,19 @@ Details of the plots for different data are given below.
  status information for a given set of data. 
 
 For \code{rnag}, \code{measures} or \code{pa} produces a frequency 
-histogram. Links to information on the EA website about the columns 
-plotted for each data type are given below:
+histogram. The columns plotted for each data type are given below:
 
 \itemize{
-  \item \href{https://tinyurl.com/y5gn492m}{rnag} 
+  \item{rnag} 
   (pressure_tier_3)
-  \item \href{https://tinyurl.com/y5gn492m}{measures} 
+  \item {measures} 
   (measure_tier_1)
-  \item \href{https://tinyurl.com/y5gn492m}{pa} 
+  \item {pa} 
   (protected_area_type)
-}   
+}
+The full detail of the different data being plotted can be found in 
+the EA Catchment Data Explorer API reference:
+\url{https://environment.data.gov.uk/catchment-planning/ui/reference}
+     
 Plotting is only possible for MC, OC or RBD downloads.
 }

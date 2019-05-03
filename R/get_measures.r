@@ -18,8 +18,8 @@
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District).
 #'
-#' @return A data frame containing the details of the measures put in place 
-#' to try and improve water quality.
+#' @return An object of class \code{cde_df} containing the details 
+#' of the measures put in place to try and improve water quality.
 #'
 #' @export get_measures
 #'
