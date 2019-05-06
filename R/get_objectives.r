@@ -23,9 +23,13 @@
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #' 
-#' @param level The level within the WFD quality classification that 
-#' objectives have been set at. Defaults to 'Overall Water Body'. 
-#' Possible values for the different levels used are shown below.
+#' @param level The level within the WFD quality classification elements that 
+#' objectives have been set at. For full details of the hierarchy of elements 
+#' within the classification used, see \url{https://environment.data.gov.uk/
+#' catchment-planning/help#help-classification-hierarchy}.
+#' 
+#' Defaults to 'Overall Water Body'. Possible values for the different levels 
+#' retrived by the function are shown below.
 #' \tabular{ccc}{
 #'  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
 #'  Ecological \tab Biological quality elements \tab Overall Water Body\cr

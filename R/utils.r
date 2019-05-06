@@ -23,7 +23,7 @@
 #' 
 #' @param data_type The type of data to be retrieved, either status 
 #' classification ("class"), Reasons of Not Acheving Good ("rnag"), 
-#' objectives ("objectives"), measures ("Measures") or Protected 
+#' objectives ("objectives"), measures ("measures") or Protected 
 #' Areas ("pa").
 #' 
 #' @return An object of class \code{cde_df}  containing the classifcation, 
@@ -81,29 +81,30 @@ set_end_url<-function(data_type){
 #' @param data_type A string representing the type of data (class, rnag, 
 #' measures, objectives or pa) to be downloaded.
 #' 
-#' @param ea_name A string representing the site name (WBID) to be 
-#' downloaded.
+#' @param index Either an integer representing the catchment number on 
+#' the EA site (RBD, MC or OC downloadas) or a string of the WBID (for 
+#' waterbody downloads).
 #' 
 #' @noRd
 
-wbid_end_url <- function(data_type, index_num){
+wbid_end_url <- function(data_type, index){
   switch(data_type,
-         "class" = paste0("data/classification.csv?waterBody=", index_num, "&_view=csv"),
-         "rnag" = paste0("data/reason-for-failure.csv?waterBody=", index_num, "&_view=csv"),
-         "pa" = paste0("WaterBody/", index_num, "/pa/csv"),
-         "objectives" = paste0("so/WaterBody/", index_num, "/objective-outcomes.csv?_view=csv"))
+         "class" = paste0("data/classification.csv?waterBody=", index, "&_view=csv"),
+         "rnag" = paste0("data/reason-for-failure.csv?waterBody=", index, "&_view=csv"),
+         "pa" = paste0("WaterBody/", index, "/pa/csv"),
+         "objectives" = paste0("so/WaterBody/", index, "/objective-outcomes.csv?_view=csv"))
 }
 
 #' Set overall URL for downloads
 #' @description Derive the overall download URL for all types (columns).
+#' 
+#' @param column A string representing the column type to be downloaded.
 #
 #' @param data_type A string representing the type of data (class, rnag, 
 #' measures, objectives or pa) to be downloaded.
-#'  
-#' @param column A string representing the column type to be downloaded.
 #' 
-#' @param index_num Numeric index of RBD/OC/MC to be downloaded or for
-#' WBID downloads the WBID name.
+#' @param index Numeric index of RBD/OC/MC to be downloaded or for
+#' WBID downloads the WBID code.
 #' 
 #' @noRd
 
@@ -248,7 +249,8 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #'
 #' @param level The level within the WFD quality status classification to be
-#' extracted. Defaults to 'Overall Water Body'. See docs for possible values.
+#' extracted. Defaults to 'Overall Water Body'. See \code{\link{get_status}}.
+# for possible values.
 #'
 #' @param startyr The data can be extracted for specific years using the
 #' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
