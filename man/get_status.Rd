@@ -21,9 +21,13 @@ specific values.}
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{level}{The level within the WFD quality status classification to be
-extracted. Defaults to 'Overall Water Body'. Possible values for the 
-different levels used are shown below.
+\item{level}{The level within the WFD quality classification elements that 
+objectives have been set at. For full details of the hierarchy of elements 
+within the classification used, see \url{https://environment.data.gov.uk/
+catchment-planning/help#help-classification-hierarchy}.
+
+Defaults to 'Overall Water Body'. Possible values for the different levels 
+retrived by the function are shown below.
 \tabular{ccc}{
  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
  Ecological \tab Biological quality elements \tab Overall Water Body\cr
@@ -54,8 +58,8 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.}
 }
 \value{
-A data frame containing the classification details for the
-specified combination of criteria.
+An object of class \code{cde_df} containing the classification 
+details for the specified combination of criteria.
 }
 \description{
 Retrieves WFD Status classification data from EA Catchment 
@@ -71,17 +75,17 @@ extraction of specific waterbody types (River, Lake etc).
 }
 \examples{
 # get Overall Water Body status classification for waterbody GB520804714300
-\dontrun{get_status("GB520804714300", "WBID")}
+get_status("GB520804714300", "WBID")
 
 # get status class based on Priority substances for waterbody GB520804714300
-\dontrun{get_status("GB520804714300", "WBID", level = "Priority substances")}
+get_status("GB520804714300", "WBID", level = "Priority substances")
 
 # get the Overall Water Body status of Lakes in the Humber RBD, between
 # 2012 and 2014
-\dontrun{get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
+get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
 
 # get the Overall Water Body status for Rivers in the Avon Warwickshire
 # Operational Catchment in 2011
-\dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
+get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 
 }
