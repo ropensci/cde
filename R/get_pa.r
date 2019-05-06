@@ -25,10 +25,10 @@
 #'
 #' @examples
 #' # get protected areas associated with waterbody GB112071065700
-#' \dontrun{get_pa("GB112071065700", "WBID")}
+#' get_pa("GB112071065700", "WBID")
 #' 
 #' # get the protected areas associated with the Humber RBD
-#' \dontrun{get_pa("Humber", "RBD")}
+#' get_pa("Humber", "RBD")
 #' 
 #' # get the protected areas associated with the Avon Warwickshire
 #' # Management Catchment

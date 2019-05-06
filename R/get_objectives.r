@@ -60,14 +60,14 @@
 #'
 #' @examples
 #' # get all objectives set for waterbody GB112071065700
-#' \dontrun{get_objectives("GB112071065700", "WBID")}
+#' get_objectives("GB112071065700", "WBID")
 #' 
 #' # get the objectives set for Lakes in the Humber RBD, for the year 2021
-#' \dontrun{get_objectives("Humber", "RBD", year=2021, type="Lake")}
+#' get_objectives("Humber", "RBD", year=2021, type="Lake")
 #' 
 #' # get the objectives set for Rivers in the Avon Warwickshire
 #' # Operational Catchment in relation to Chemical status
-#' \dontrun{get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")}
+#' get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")
 #' 
 get_objectives <- function(ea_name = NULL, column = NULL, 
   level="Overall Water Body", year = NULL, type = NULL) {

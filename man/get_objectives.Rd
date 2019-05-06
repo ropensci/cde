@@ -20,9 +20,13 @@ specific values.}
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
 
-\item{level}{The level within the WFD quality classification that 
-objectives have been set at. Defaults to 'Overall Water Body'. 
-Possible values for the different levels used are shown below.
+\item{level}{The level within the WFD quality classification elements that 
+objectives have been set at. For full details of the hierarchy of elements 
+within the classification used, see \url{https://environment.data.gov.uk/
+catchment-planning/help#help-classification-hierarchy}.
+
+Defaults to 'Overall Water Body'. Possible values for the different levels 
+retrived by the function are shown below.
 \tabular{ccc}{
  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
  Ecological \tab Biological quality elements \tab Overall Water Body\cr
@@ -65,13 +69,13 @@ extraction of specific waterbody types (River, Lake etc).
 }
 \examples{
 # get all objectives set for waterbody GB112071065700
-\dontrun{get_objectives("GB112071065700", "WBID")}
+get_objectives("GB112071065700", "WBID")
 
 # get the objectives set for Lakes in the Humber RBD, for the year 2021
-\dontrun{get_objectives("Humber", "RBD", year=2021, type="Lake")}
+get_objectives("Humber", "RBD", year=2021, type="Lake")
 
 # get the objectives set for Rivers in the Avon Warwickshire
 # Operational Catchment in relation to Chemical status
-\dontrun{get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")}
+get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")
 
 }

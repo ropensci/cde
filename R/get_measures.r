@@ -27,10 +27,10 @@
 #'
 #' @examples
 #' # get the measures put in place for the Thames RBD
-#' \dontrun{get_measures("Thames", "RBD")}
+#' get_measures("Thames", "RBD")
 #' 
 #' # get the measures put in place for the Loddon Operational Catchment
-#' \dontrun{get_measures("Loddon", "OC")}
+#' get_measures("Loddon", "OC")
 #' 
 get_measures <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data

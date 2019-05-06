@@ -58,25 +58,25 @@
 #' waterbody type. Possible values are \code{River}, \code{Lake},
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
 #'
-#' @return A data frame containing the classification details for the
-#' specified combination of criteria.
+#' @return An object of class \code{cde_df} containing the classification 
+#' details for the specified combination of criteria.
 #'
 #' @export get_status
 #'
 #' @examples
 #' # get Overall Water Body status classification for waterbody GB520804714300
-#' \dontrun{get_status("GB520804714300", "WBID")}
+#' get_status("GB520804714300", "WBID")
 #' 
 #' # get status class based on Priority substances for waterbody GB520804714300
-#' \dontrun{get_status("GB520804714300", "WBID", level = "Priority substances")}
+#' get_status("GB520804714300", "WBID", level = "Priority substances")
 #' 
 #' # get the Overall Water Body status of Lakes in the Humber RBD, between
 #' # 2012 and 2014
-#' \dontrun{get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")}
+#' get_status("Humber", "RBD", startyr = 2012, endyr = 2014, type = "Lake")
 #' 
 #' # get the Overall Water Body status for Rivers in the Avon Warwickshire
 #' # Operational Catchment in 2011
-#' \dontrun{get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")}
+#' get_status("Avon Warwickshire", "MC", startyr = 2011, type = "River")
 #' 
 get_status <- function(ea_name = NULL, column = NULL, 
     level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
