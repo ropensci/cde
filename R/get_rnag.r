@@ -80,8 +80,10 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
   # if all inputs valid, download data
   rnag_data <- download_cde(ea_name, column, data_type="rnag")
 
-  # replace classification_year with year first
+  # replace columns titles for consistency with other outputs
   names(rnag_data)[names(rnag_data) == "classification_year"] <- "year"
+  names(rnag_data)[names(rnag_data) == "classification_status"] <- "status"
+  names(rnag_data)[names(rnag_data) == "water_body_id"] <- "waterbody_id"
   
     # check if any data returned
   if (nrow(rnag_data)==0){

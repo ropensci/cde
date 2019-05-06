@@ -1,0 +1,79 @@
+---
+title: "cde-output-reference"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{cde-output-reference}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cde)
+```
+
+## Reference list of all output columns
+
+The table below gives information on all the current columns of data retrieved by the different functions of `cde`; names, what they mean and which functions return them. The EA do modify the format of their data from time to time, so this will be updated as necessary.
+
+
+Column name | Description | Output by which functions
+--- | --- | ---
+river_basin_district | Name of the River Basin District. This is the top level in the [catchment hierarchy](https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy). | All functions
+management_catchment | Management Catchments are the next level down the hierarchy, see link above. | All functions
+operational_catchment | Operational Catchments are the next level down from Management Catchments. | All functions
+waterbody_id | Water Bodies are the smallest unit in the catchment hierarchy, representing all or part of a river system, lake, estuary etc. Each has a unique ID (WBID). | All functions
+status | WFD status classification (High, Good, Moderate, Poor or Bad). For objectives this represents the target (aimed for) status class. | All get_ functions except get_pa
+classification_level | The level within the range of classification elements that the status class refers to (NEEDS LINK) | objectives, rnag & status
+classification_level |  | -
+cycle |  | -
+water_body |  | -
+water_body_type |  | -
+year |  | -
+classification_item |  | -
+easting |  | -
+hydromorphological_designation |  | -
+id |  | -
+investigation_outcome |  | -
+ngr |  | -
+northing |  | -
+activity_certainty |  | -
+business_sector |  | -
+category |  | -
+category_certainty |  | -
+certainty |  | -
+classification_element |  | -
+classification_id |  | -
+confidence |  | -
+estimated_start_date |  | -
+funding_stream |  | -
+lead_organisation |  | -
+linked_rnags |  | -
+measure_category_1 |  | -
+measure_category_2 |  | -
+measure_category_3 |  | -
+measure_reference_code |  | -
+measure_type |  | -
+national_swmi_header |  | -
+objectivetype |  | -
+pressure_tier_1 |  | -
+pressure_tier_2 |  | -
+pressure_tier_3 |  | -
+protected_area_code |  | -
+protected_area_label |  | -
+protected_area_type |  | -
+reason_type |  | -
+reasons_for_alternative_objectives |  | -
+rnag_url |  | -
+sector_of_lead_organisation |  | -
+see_also |  | -
+swmi |  | -
+swmi_certainty |  | -
+title |  | -
+
