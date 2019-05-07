@@ -19,6 +19,20 @@ test_that("plotting WBID data results in error", {
    expect_true(length(plot(testframe))== 8)
  })
 
+ test_that("plotting status (one year) returns a vector of given length", {
+    # plot for Avon Warwickshire MC chemical status
+    testframe<-get_status("Avon Warwickshire", "MC", startyr=2015, level="Chemical")
+    # check that the vector has a length of 2
+    expect_true(length(plot(testframe))== 2)
+ })
+
+ test_that("plotting objectives (one year/class) returns a vector", {
+    # plot for Avon Warwickshire MC chemical status
+    testframe<-get_objectives("Avon Warwickshire", "MC", year=2027, level="Chemical")
+    # check that the vector has a length of 1
+    expect_true(length(plot(testframe))== 1)
+ })
+ 
  test_that("plotting objectives returns a vector of given length", {
    # plot for Avon Warwickshire MC chemical status
    testframe<-get_objectives("Avon Warwickshire", "MC", level="Chemical")
