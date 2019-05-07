@@ -1,5 +1,5 @@
 ---
-title: "cde-output-reference"
+title: "cde: Reference list of all output columns"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{cde-output-reference}
@@ -15,44 +15,39 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(cde)
+#library(cde)
 ```
+The table below gives information on all the current columns of data retrieved by the different `get_...` functions of `cde`; names, what they mean and which functions return them. The EA do modify the format of their data from time to time, so this will be updated as necessary.
 
-## Reference list of all output columns
-
-The table below gives information on all the current columns of data retrieved by the different functions of `cde`; names, what they mean and which functions return them. The EA do modify the format of their data from time to time, so this will be updated as necessary.
-
-
-Column name | Description | Output by which functions
+Column name | Description | Output from which functions
 --- | --- | ---
-river_basin_district | Name of the River Basin District. This is the top level in the [catchment hierarchy](https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy). | All functions
-management_catchment | Management Catchments are the next level down the hierarchy, see link above. | All functions
-operational_catchment | Operational Catchments are the next level down from Management Catchments. | All functions
-waterbody_id | Water Bodies are the smallest unit in the catchment hierarchy, representing all or part of a river system, lake, estuary etc. Each has a unique ID (WBID). | All functions
-status | WFD status classification (High, Good, Moderate, Poor or Bad). For objectives this represents the target (aimed for) status class. | All get_ functions except get_pa
-classification_level | The level within the range of classification elements that the status class refers to (NEEDS LINK) | objectives, rnag & status
-cycle | Which cycle of assessment the data come from. The first cycle. The first cycle ran from 2009 to 2015 and cycle 2 to 2015-2021. There were changes in some environmental standards between cycles and for theoverlap period, `cde` only returns cycle 2 assessments.  | -
-water_body | Name of the waterbody. | rnag etc.
-water_body_type | Type of waterbody. Values are: River, Lake, CoastalWater, TransitionalWater, GroundWaterBody | -
-year | Year to which the data refer to. | -
-classification_item |  | -
-easting | British National Grid Reference easting, i.e. x coordinate of location. | -
-hydromorphological_designation |  | -
-id | Unique numerical code of RNAG (may be linked to measures specified).  | get_rnag
-investigation_outcome | Outcome of the investigation into the RNAG | -
-ngr | Ordnance Survey Landranger grid reference of the location. | -
-northing | British National Grid Reference northing, i.e. y coordinate of location.  | -
+river_basin_district | Name of the River Basin District. This is the top level in the [catchment hierarchy](https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy). | All get_... functions
+management_catchment | Name of the Management Catchment, the next level down the hierarchy, see link above. | All get_... functions
+operational_catchment | name of the Operational Catchment, the next level down from Management Catchments. | All get_... functions
+waterbody_id | Waterbodies are the smallest unit in the catchment hierarchy, representing all or part of a river system, lake, estuary etc. Each has a unique ID (WBID). | All get_... functions
+status | WFD status classification (High, Good, Moderate, Poor or Bad). For objectives this represents the target (aimed for) status class. | All get_... functions except get_pa
+classification_item | Broad category of classification level (ecological, chemical or quantitative). | get_objectives, get_rnag & get_status
+classification_level | The level within the range of classification elements that the status class refers to (see details [here](https://environment.data.gov.uk/catchment-planning/help#help-surface-waters-classification-hierarchy)). | get_objectives, get_rnag & get_status
+cycle | Which cycle of assessment the data come from. The first cycle. The first cycle ran from 2009 to 2015 and cycle 2 to 2015-2021. There were changes in some environmental standards between cycles and for the overlap period, `cde` only returns cycle 2 assessments. | get_objectives, get_rnag & get_status
+water_body | Name of the waterbody. | get_objectives, get_rnag & get_status
+water_body_type | Type of waterbody. Values are: River, Lake, CoastalWater, TransitionalWater, GroundWaterBody | get_objectives, get_rnag & get_status
+year | Year to which the data refer to. | get_objectives, get_rnag & get_status
+easting | British National Grid Reference easting, i.e. x coordinate of location. | get_objectives & get_status
+hydromorphological_designation | Hydromorphological designation of the waterbody (e.g. whether the body is artificial or heavily modified). | get_objectives & get_status
+ngr | Ordnance Survey Landranger grid reference of the location. | get_objectives & get_status
+northing | British National Grid Reference northing, i.e. y coordinate of location.  | get_objectives & get_status
 activity | Classification of the activity linked to the RNAG identified, for example "Forestry", "Septic Tanks". | get_rnag
-activity_certainty | Assessment of the certainty with which the RNAG identified is linked to the activity specifed.  | -
-business_sector | Categorisation of the business sector linked to the activity causing the RNAG, for example "Transport", "Retail sector", "Forestry". | -
-category | Broad categorisation of the RNAG, for example "Industry", "Agriculture and rural land management" or "Water Industry". | -
+activity_certainty | Assessment of the certainty with which the RNAG identified is linked to the activity specifed.  | get_rnag
+business_sector | Categorisation of the business sector linked to the activity causing the RNAG, for example "Transport", "Retail sector", "Forestry". | get_rnag
+category | Broad categorisation of the RNAG, for example "Industry", "Agriculture and rural land management" or "Water Industry". | get_rnag
 category_certainty | Assessment of the certainty with which the RNAG identified is linked to the category specifed. | get_rnag
 certainty | Assessment of the certainty of the status class assignment. | get_status
 classification_element | Specific quality element or metric linked to the RNAG. | get_rnag
-classification_id |  | ### NEEDED?? ###
-confidence | Confidence in the status class assignment. | get_status
+confidence | Confidence in the status class assignment (0-1 scale). | get_status
 estimated_start_date | Estimated date at which action specified will being  | get_measures
 funding_stream | Source of funding for measure specified. | get_measures
+id | Unique numerical code of RNAG (may be linked to measures specified).  | get_rnag
+investigation_outcome | Outcome of the investigation into the RNAG | get_rnag
 lead_organisation | Organisation leading the work on the measure specified. | get_measures
 linked_rnags | Numerical code(s) of RNAGS linked to measures specified (see 'id' above.)  | get_measures
 measure_category_1 | Top level classification of measure specified. | get_measures
