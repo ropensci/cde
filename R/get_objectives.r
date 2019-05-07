@@ -119,6 +119,8 @@ get_objectives <- function(ea_name = NULL, column = NULL,
         message("Type is ignored for WBID objectives")
       }
     }
+    # delete uri columns
+    obj_data <- obj_data[,!grepl("_uri",names(obj_data))]
     # subset data as required
     obj_data<-subset_data(obj_data, column, level, startyr=year, 
         endyr=NULL, type)
