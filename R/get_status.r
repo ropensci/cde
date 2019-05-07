@@ -104,7 +104,7 @@ get_status <- function(ea_name = NULL, column = NULL,
   # if WB level download, type should not be specified, so give message
   if (column=="WBID" & !is.null(type)){
     type<-NULL
-    message("Type is ignored for WBID objectives")
+    message("Type is ignored for WBID downloads")
   }
   # if all inputs valid, download data
   status_data <- download_cde(ea_name, column, "class")
