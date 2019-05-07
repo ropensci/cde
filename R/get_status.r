@@ -108,7 +108,7 @@ get_status <- function(ea_name = NULL, column = NULL,
   }
   # if all inputs valid, download data
   status_data <- download_cde(ea_name, column, "class")
-
+  
   # check if any data returned
   if (nrow(status_data)==0){
     message("No status data for combination specified - 
@@ -122,6 +122,8 @@ get_status <- function(ea_name = NULL, column = NULL,
         empty dataframe returned")
     }
   }
+  # remove classification_id column - not needed
+  status_data  <-  subset(status_data, select = -classification_id)
   # add comment for plot method identification
   comment(status_data) <- paste0("class;", column)
   return(as.cde(status_data))
