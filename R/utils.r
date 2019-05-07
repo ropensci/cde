@@ -156,6 +156,7 @@ zip_download <- function(download_url) {
   utils::download.file(download_url, temp, mode = "wb", quiet=FALSE)
   # extract data from zipfile to df using data.table to speed things up
   csvfile <- utils::unzip(temp, junkpaths = TRUE)
+  message(paste0("Processing data from zipfile...","\n"))
   cde_data <- data.table::fread(csvfile, stringsAsFactors = FALSE, 
       check.names = TRUE, data.table = FALSE, showProgress = TRUE)
   # delete the intermediate files
