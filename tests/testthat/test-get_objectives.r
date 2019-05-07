@@ -12,7 +12,7 @@ test_that("dimensions of dataframe are as expected", {
   # retrieve data for Avon Warwickshire MC
   test_mc_avon<-get_objectives("Avon Warwickshire", "MC", year=2015)
   # check that the dimensions are 20 rows, 20 cols
-  expect_true(all(dim(test_mc_avon)== c(20, 20)))
+  expect_true(all(dim(test_mc_avon)== c(20, 17)))
 })
 
 test_that("invalid column specified returns an error", {
