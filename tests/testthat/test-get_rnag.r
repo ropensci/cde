@@ -1,7 +1,7 @@
 library(cde)
 context("testing RNAG issue downloads")
 
-test_that("get_rnag returns a dataframe", {
+test_that("get_rnag returns a dataframe (as cde_df class)", {
   # retrieve data for specific waterbody
   testframe<-get_rnag("GB112071065700", "WBID")
   # check that it outputs a dataframe object

@@ -123,7 +123,7 @@ get_status <- function(ea_name = NULL, column = NULL,
     }
   }
   # remove classification_id column - not needed
-  status_data  <-  subset(status_data, select = -classification_id)
+  status_data  <-  status_data[,!(names(status_data) %in% c("classification_id"))]
   # add comment for plot method identification
   comment(status_data) <- paste0("class;", column)
   return(as.cde(status_data))

@@ -43,7 +43,12 @@ test_that("invalid type returns an error", {
 
 test_that("start date outside data range returns an error", {
   # retrieve data for year 1900
-  expect_error(get_status("Avon Hampshire", "MC", startyr=1900))
+  expect_error(get_status("Lark", "OC", startyr=1900))
+})
+
+test_that("end date outside data range returns a message", {
+  # retrieve data for year 1900
+  expect_message(get_status("Lark", "OC", startyr=2014, endyr=2100))
 })
 
 test_that("end date only returns an error", {
