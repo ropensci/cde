@@ -31,6 +31,8 @@ northing | British National Grid Reference northing, i.e. y coordinate of locati
 activity | Classification of the activity linked to the RNAG identified, for example "Forestry", "Septic Tanks". | get_rnag
 activity_certainty | Categorical assessment of the certainty with which the RNAG identified is linked to the activity specifed.  | get_rnag
 business_sector | Categorisation of the business sector linked to the RNAG, for example "Transport", "Retail sector", "Forestry" | get_rnag
+category | Broad categorisation of the RNAG, for example "Industry", "Agriculture and rural land management". | get_rnag
+
 certainty | Categorical assessment of the certainty of the status class assignment. | get_status
 classification_element | Specific quality element or metric linked to the RNAG. | get_rnag
 confidence | Confidence in the status class assignment (0-1 scale). | get_status

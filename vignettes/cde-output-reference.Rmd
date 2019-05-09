@@ -12,8 +12,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-## Reference list
-
 The table below gives information on all the current columns of data retrieved by the different `get_...` functions of `cde`; names, what they mean and which functions return them. The EA do modify the format of their data from time to time, so this will be updated as necessary.
 
 Column name | Description | Output from which functions
