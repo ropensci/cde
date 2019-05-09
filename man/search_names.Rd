@@ -7,8 +7,8 @@
 search_names(string = NULL, column = NULL)
 }
 \arguments{
-\item{string}{The search string to be matched. Will match whole or partial
-strings in the column values.}
+\item{string}{The search string to be matched (case-sensitive). Will match 
+whole or partial strings in the column values.}
 
 \item{column}{The column to be searched. Possible options are
 \code{WBID}, \code{name}, \code{OC} (Operational Catchment), \code{MC}
@@ -17,7 +17,7 @@ strings in the column values.}
 \value{
 A data frame containing the details of all the sites that match
 the search string (full or partial matches) in the column specified.
-Columns are defined in \code{\link{ea_wbids}}.
+Columns returned are defined in \code{\link{ea_wbids}}.
 }
 \description{
 Searches the listing of EA monitoring sites to find rows

@@ -10,8 +10,8 @@
 #' the \code{\link{ea_wbids}} object rather than connecting to the 
 #' EA site.
 #
-#' @param string The search string to be matched. Will match whole or partial
-#' strings in the column values.
+#' @param string The search string to be matched (case-sensitive). Will match 
+#' whole or partial strings in the column values.
 #'
 #' @param column The column to be searched. Possible options are
 #' \code{WBID}, \code{name}, \code{OC} (Operational Catchment), \code{MC}
@@ -19,7 +19,7 @@
 #'
 #' @return A data frame containing the details of all the sites that match
 #' the search string (full or partial matches) in the column specified.
-#' Columns are defined in \code{\link{ea_wbids}}.
+#' Columns returned are defined in \code{\link{ea_wbids}}.
 #'
 #' @export search_names
 #'
