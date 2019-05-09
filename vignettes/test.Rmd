@@ -1,18 +1,13 @@
 ---
-title: "cde: Reference list of all output columns"
+title: "cde: testing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{cde-output-reference}
+  %\VignetteIndexEntry{cde-testing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-## Reference list
+
+## Reference list of columns output
 
 The table below gives information on all the current columns of data retrieved by the different `get_...` functions of `cde`; names, what they mean and which functions return them. The EA do modify the format of their data from time to time, so this will be updated as necessary.
 
@@ -35,9 +30,7 @@ ngr | Ordnance Survey Landranger grid reference of the location. | get_objective
 northing | British National Grid Reference northing, i.e. y coordinate of location.  | get_objectives & get_status
 activity | Classification of the activity linked to the RNAG identified, for example "Forestry", "Septic Tanks". | get_rnag
 activity_certainty | Categorical assessment of the certainty with which the RNAG identified is linked to the activity specifed.  | get_rnag
-business_sector | Categorisation of the business sector linked to the activity causing the RNAG, for example "Transport", "Retail sector", "Forestry". | get_rnag
-category | Broad categorisation of the RNAG, for example "Industry", "Agriculture and rural land management" or "Water Industry". | get_rnag
-category_certainty | Categorical assessment of the certainty with which the RNAG identified is linked to the category specifed. | get_rnag
+business_sector | Categorisation of the business sector linked to the RNAG, for example "Transport", "Retail sector", "Forestry" | get_rnag
 certainty | Categorical assessment of the certainty of the status class assignment. | get_status
 classification_element | Specific quality element or metric linked to the RNAG. | get_rnag
 confidence | Confidence in the status class assignment (0-1 scale). | get_status
@@ -68,4 +61,3 @@ see_also | Additional details about the protected area specified. | get_pa
 swmi | SWMI (Significant Water Management Issue) classification of the RNAG, for example "Diffuse source", "Invasive non-native species". | get_rnag
 swmi_certainty | Categorical assessment of the certainy with which the RNAG is linked to the SWMI classification specified. | get_rnag
 title | Title of the measures project specified. | get_measures
-
