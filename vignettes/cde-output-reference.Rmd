@@ -44,7 +44,7 @@ funding_stream | Source of funding for measure specified. | get_measures
 id | Unique numerical code of RNAG (may be linked to measures specified).  | get_rnag
 investigation_outcome | Outcome of the investigation into the RNAG. | get_rnag
 lead_organisation | Organisation leading the work on the measure specified. | get_measures
-linked_rnags | Numerical code(s) of RNAGS linked to measures specified (see 'id' above.)  | get_measures
+linked_rnags | Numerical code(s) of RNAGS linked to measures specified (see 'id' above). | get_measures
 measure_category_1 | Top level classification of measure specified. | get_measures
 measure_category_2 | Next level down (more detailed) classification of measure specified. | get_measures
 measure_category_3 | Most detailed classification of measure specified. | get_measures
@@ -57,8 +57,8 @@ pressure_tier_2 | Specific substance or pressure associated with RNAG identiifed
 pressure_tier_3 | High level classification of the pressure related to the RNAG identifed, for example "Physical modification", "Dissolved oxygen (DO)". | get_rnag
 protected_area_code | Unique code of each protected area. | get_pa
 protected_area_label | Name or code of protected area. | get_pa
-protected_area_type | Designation of protected area, for example "Nitrates Directive" ,  "Bathing Water Directive" | get_pa
-reason_type | Type of RNAG, either "RFF" - reason for failure or "RFD" - reason for deterioration | get_rnag
+protected_area_type | Designation of protected area, for example "Nitrates Directive" ,  "Bathing Water Directive". | get_pa
+reason_type | Type of RNAG, either "RFF" - reason for failure or "RFD" - reason for deterioration. | get_rnag
 reasons_for_alternative_objectives | Detailed text as to why alternative objectives i.e. a status less than good, have been set. | get_objectives
 rnag_url |  URL to page on CDE site giving specifics of RNAG. | get_rnag
 sector_of_lead_organisation | Sectoral classification of organisation leading measures work. | get_measures

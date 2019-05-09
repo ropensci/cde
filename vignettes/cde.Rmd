@@ -32,7 +32,7 @@ The CDE data are made available under the [Open Government Licence v3.0](https:/
 
 You can install `cde` from github with:
 
-```{r gh-installation, eval = TRUE}
+```{r gh-installation, eval = FALSE}
 # if you have not done so already
 # install.packages("remotes")
 remotes::install_github("robbriers/cde", ref="post-review")
