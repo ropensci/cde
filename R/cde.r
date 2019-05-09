@@ -13,8 +13,7 @@
 #' \url{https://environment.data.gov.uk/catchment-planning/}.
 
 #' The data are made available under the Open Government Licence v3.0 
-#' \url{https://www.nationalarchives.gov.uk/doc/open-government-licence
-#' /version/3/}
+#' \url{https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/}
 #'
 #' @docType package
 #'

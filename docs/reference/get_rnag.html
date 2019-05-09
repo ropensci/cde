@@ -93,6 +93,18 @@ reasons for not achieving good status." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cde-output-reference.html">cde: Reference list of all output columns</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -145,11 +157,13 @@ reasons for not achieving good status.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ea_name</th>
-      <td><p>A string representing the description (name) of the
-features to be extracted. For example to extract data for the whole of
-the Humber RBD, this would be "Humber"; also see examples. Must be an
-exact match to the values used in the EA database.
-Use the <code><a href='search_names.html'>search_names</a></code> function to search for specific values.</p></td>
+      <td><p>A string representing the description (<code>name</code> for 
+<code>OC</code>, <code>MC</code> or <code>RBD</code> level downloads or <code>WBID</code> for 
+individual waterbodies) of the features to be extracted. For example 
+to extract data for the whole of the Humber RBD, this would be "Humber"; 
+also see examples. Must be an exact match to the values used in the EA 
+database. Use the <code><a href='search_names.html'>search_names</a></code> function to search for 
+specific values.</p></td>
     </tr>
     <tr>
       <th>column</th>
@@ -183,25 +197,48 @@ waterbody type. Possible values are <code>River</code>, <code>Lake</code>,
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame containing the details of the Reasons for Not 
-Achieving Good Status for the specified combination of criteria.</p>
+    <p>An object of class <code>cde_df</code> containing the details of the 
+Reasons for Not Achieving Good Status for the specified combination 
+of criteria.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># get all RNAG issues identified for waterbody GB112071065700
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_rnag</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)
-<span class='co'># }</span><div class='input'>
-# get the RNAG issues for Lakes in the Humber RBD, between
-# 2013 and 2014
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_rnag</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2013</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)
-<span class='co'># }</span><div class='input'>
-# get the RNAG issues for Rivers in the Avon Warwickshire
-# Management Catchment in 2015
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_rnag</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2015</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
-<span class='co'># }</span><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># get all RNAG issues identified for waterbody GB112071065700</span>
+<span class='fu'>get_rnag</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+#&gt;            North West               Ribble            Big Ribble
+#&gt;            North West               Ribble            Big Ribble
+#&gt; With an additional 27 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
+<span class='co'># get the RNAG issues for Lakes in the Humber RBD, between</span>
+<span class='co'># 2013 and 2014</span>
+<span class='fu'>get_rnag</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2013</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment water_body
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes Belvide Re
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes Belvide Re
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes Belvide Re
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes Belvide Re
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes Belvide Re
+#&gt;                Humber Trent Valley Staffor Blithe Rivers and Lak Blithfield
+#&gt;                Humber Trent Valley Staffor Blithe Rivers and Lak Blithfield
+#&gt;                Humber      Aire and Calder          Calder Upper Widdop Res
+#&gt;                Humber      Aire and Calder          Calder Upper Widdop Res
+#&gt;                Humber      Aire and Calder          Calder Upper Walshaw De
+#&gt; With an additional 139 rows and 22 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
+<span class='co'># get the RNAG issues for Rivers in the Avon Warwickshire</span>
+<span class='co'># Management Catchment in 2015</span>
+<span class='fu'>get_rnag</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2015</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment water_body
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Harvington
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Harvington
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Stoulton B
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt; With an additional 103 rows and 22 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

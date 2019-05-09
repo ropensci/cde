@@ -6,7 +6,6 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -14,9 +13,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-#library(cde)
-```
 The table below gives information on all the current columns of data retrieved by the different `get_...` functions of `cde`; names, what they mean and which functions return them. The EA do modify the format of their data from time to time, so this will be updated as necessary.
 
 Column name | Description | Output from which functions
@@ -72,3 +68,7 @@ swmi | SWMI (Significant Water Management Issue) classification of the RNAG, for
 swmi_certainty | Categorical assessment of the certainy with which the RNAG is linked to the SWMI classification specified. | get_rnag
 title | Title of the measures project specified. | get_measures
 
+```{r gh-installation, include = FALSE}
+library(cde)
+#remotes::install_github("robbriers/cde", ref="post-review")
+```

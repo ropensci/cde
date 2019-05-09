@@ -3,8 +3,7 @@
 #' that contain the string provided. Can search by WBID (\code{WBID}), name 
 #' (\code{name}), Management Catchment (\code{MC}), Operational Catchment 
 #' (\code{OC}) or River Basin District (\code{RBD}). There is a hierarchical 
-#' relationship between these levels as shown at \url{https://environment.data.
-#' gov.uk/catchment-planning/help#help-catchment-hierarchy}.
+#' relationship between these levels as shown at \url{https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy}.
 #' 
 #' The search is done on a local copy of the waterbody listing contained in 
 #' the \code{\link{ea_wbids}} object rather than connecting to the 

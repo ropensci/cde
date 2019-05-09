@@ -86,6 +86,18 @@ Catchment (OC) or River Basin District (RBD)." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cde-output-reference.html">cde: Reference list of all output columns</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -130,11 +142,13 @@ Catchment (<code>OC</code>) or River Basin District (<code>RBD</code>).</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ea_name</th>
-      <td><p>A string representing the description (name) of the
-features to be extracted. For example to extract data for the whole of
-the Humber RBD, this would be "Humber"; also see examples. Must be an
-exact match to the values used in the EA database.
-Use the <code><a href='search_names.html'>search_names</a></code> function to search for specific values.</p></td>
+      <td><p>A string representing the description (<code>name</code> for 
+<code>OC</code>, <code>MC</code> or <code>RBD</code> level downloads or <code>WBID</code> for 
+individual waterbodies) of the features to be extracted. For example 
+to extract data for the whole of the Humber RBD, this would be "Humber"; 
+also see examples. Must be an exact match to the values used in the 
+EA database. Use the <code><a href='search_names.html'>search_names</a></code> function to search 
+for specific values.</p></td>
     </tr>
     <tr>
       <th>column</th>
@@ -146,24 +160,46 @@ Use the <code><a href='search_names.html'>search_names</a></code> function to se
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame containing the details of the Protected Areas 
-associated with the waterbodies.</p>
+    <p>An object of class <code>cde_df</code> containing the details of the 
+Protected Areas associated with the waterbodies.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># get protected areas associated with waterbody GB112071065700
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_pa</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)
-<span class='co'># }</span><div class='input'>
-# get the protected areas associated with the Humber RBD
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_pa</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>)
-<span class='co'># }</span><div class='input'>
-# get the protected areas associated with the Avon Warwickshire
-# Management Catchment
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_pa</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>)
-<span class='co'># }</span><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># get protected areas associated with waterbody GB112071065700</span>
+<span class='fu'>get_pa</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+#&gt;            North West               Ribble            Big Ribble
+#&gt;            North West               Ribble            Big Ribble
+#&gt; With an additional 5 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
+<span class='co'># get the protected areas associated with the Humber RBD</span>
+<span class='fu'>get_pa</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+#&gt; With an additional 2254 rows and 5 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
+<span class='co'># get the protected areas associated with the Avon Warwickshire</span>
+<span class='co'># Management Catchment</span>
+<span class='fu'>get_pa</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West
+#&gt; With an additional 149 rows and 5 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -91,6 +91,18 @@ extraction of specific waterbody types (River, Lake etc)." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cde-output-reference.html">cde: Reference list of all output columns</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -141,11 +153,13 @@ extraction of specific waterbody types (River, Lake etc).</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ea_name</th>
-      <td><p>A string representing the description (name) of the
-features to be extracted. For example to extract data for the whole of
-the Humber RBD, this would be "Humber"; also see examples. Must be an
-exact match to the values used in the EA database.
-Use the <code><a href='search_names.html'>search_names</a></code> function to search for specific values.</p></td>
+      <td><p>A string representing the description (<code>name</code> for 
+<code>OC</code>, <code>MC</code> or <code>RBD</code> level downloads or <code>WBID</code> for 
+individual waterbodies) of the features to be extracted. For example 
+to extract data for the whole of the Humber RBD, this would be "Humber"; 
+also see examples. Must be an exact match to the values used in the EA 
+database. Use the <code><a href='search_names.html'>search_names</a></code> function to search for 
+specific values.</p></td>
     </tr>
     <tr>
       <th>column</th>
@@ -155,15 +169,36 @@ Use the <code><a href='search_names.html'>search_names</a></code> function to se
     </tr>
     <tr>
       <th>level</th>
-      <td><p>The level within the WFD quality classification that 
-objectives have been set at. Defaults to 'Overall Water Body'. 
-See information in the Vignette for possible values.</p></td>
+      <td><p>The level within the WFD quality classification elements that 
+objectives have been set at. For full details of the hierarchy of elements 
+within the classification used, see <a href='https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy'>https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy</a>.</p>
+<p>Defaults to 'Overall Water Body'. Possible values for the different levels 
+retrived by the function are shown below.</p><table class='table'>
+<tr><td></td><td></td><td><strong>Level 1</strong></td></tr>
+<tr><td></td><td></td><td><strong>Level 2</strong></td></tr>
+<tr><td></td><td></td><td><strong>Level 4</strong></td></tr>
+<tr><td></td><td></td><td>Ecological</td></tr>
+<tr><td>Biological quality elements</td><td>Overall Water Body</td><td></td></tr>
+<tr><td>Chemical</td><td>Chemical Status element</td><td>-</td></tr>
+<tr><td></td><td>Quantitative</td><td>Hydromorphological Supporting Elements</td></tr>
+<tr><td>-</td><td></td><td>-</td></tr>
+<tr><td>Other Substances</td><td>-</td><td></td></tr>
+<tr><td>-</td><td>Physico-chemical quality elements</td><td>-</td></tr>
+<tr><td></td><td>-</td><td>Priority hazardous substances</td></tr>
+<tr><td>-</td><td></td><td>-</td></tr>
+<tr><td>Priority substances</td><td>-</td><td></td></tr>
+<tr><td>-</td><td>Quantitative Status element</td><td>-</td></tr>
+<tr><td></td><td>-</td><td>Specific pollutants</td></tr>
+<tr><td>-</td><td></td><td>-</td></tr>
+<tr><td>Supporting elements</td><td>-</td><td></td></tr>
+</table>
+</td>
     </tr>
     <tr>
       <th>year</th>
       <td><p>The year that objectives are set for, either 2015, 
-2021 or 2027. If not given then objectives for all years are returned.
-Note that objectives may not be set for all years.</p></td>
+2021, 2027, 2040 or 2050. If not given then objectives for all years 
+are returned. Note that objectives may not be set for all years.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -176,24 +211,45 @@ waterbody type. Possible values are <code>River</code>, <code>Lake</code>,
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame containing the details of the objectives set for
-the specified set of waterbodies.</p>
+    <p>An object of class <code>cde_df</code> containing the details 
+of the objectives set for the specified set of waterbodies.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># get all objectives set for waterbody GB112071065700
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_objectives</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)
-<span class='co'># }</span><div class='input'>
-# get the objectives set for Lakes in the Humber RBD, for the year 2021
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_objectives</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>year</span><span class='kw'>=</span><span class='fl'>2021</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"Lake"</span>)
-<span class='co'># }</span><div class='input'>
-# get the objectives set for Rivers in the Avon Warwickshire
-# Operational Catchment in relation to Chemical status
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>get_objectives</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='st'>"Chemical"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)
-<span class='co'># }</span><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># get all objectives set for waterbody GB112071065700</span>
+<span class='fu'>get_objectives</span>(<span class='st'>"GB112071065700"</span>, <span class='st'>"WBID"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+#&gt;            North West               Ribble            Big Ribble
+#&gt; With an additional 19 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
+<span class='co'># get the objectives set for Lakes in the Humber RBD, for the year 2021</span>
+<span class='fu'>get_objectives</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>year</span><span class='kw'>=</span><span class='fl'>2021</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"Lake"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment water_body
+#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes Belvide Re
+#&gt;                Humber Trent Valley Staffor Trent - Sow to Tame R Stowe Pool
+#&gt;                Humber Trent Valley Staffor  Sow Rivers and Lakes   Cop Mere
+#&gt;                Humber Trent Valley Staffor Blithe Rivers and Lak Blithfield
+#&gt;                Humber      Aire and Calder          Calder Upper Widdop Res
+#&gt;                Humber      Aire and Calder          Calder Upper Walshaw De
+#&gt;                Humber      Aire and Calder          Calder Upper Gorpley Re
+#&gt;                Humber      Aire and Calder          Calder Upper Gorple Upp
+#&gt;                Humber      Aire and Calder          Calder Upper Ramsden Cl
+#&gt;                Humber      Aire and Calder          Calder Upper Walshaw De
+#&gt; With an additional 126 rows and 13 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
+<span class='co'># get the objectives set for Rivers in the Avon Warwickshire</span>
+<span class='co'># Operational Catchment in relation to Chemical status</span>
+<span class='fu'>get_objectives</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='st'>"Chemical"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment water_body
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Whitsunn B
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Bow Bk - L
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Whitsunn B
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Dean Bk - 
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Piddle Bk 
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Elmley Cas
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Tirle Broo
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Bourne Bk 
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Piddle Bk 
+#&gt;                Severn    Avon Warwickshire  Avon - Midlands West Isbourne -
+#&gt; With an additional 215 rows and 13 columns of data. 
+#&gt; Row values may be truncated to fit console. </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

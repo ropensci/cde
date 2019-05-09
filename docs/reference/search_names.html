@@ -33,10 +33,13 @@
 <meta property="og:title" content="Search database of site names — search_names" />
 
 <meta property="og:description" content="Searches the listing of EA monitoring sites to find rows
-that contain the string provided. Can search by name (name),
-Management Catchment (MC), Operational Catchment (OC)
-or River Basin District (RBD). The search is done on a local copy
-of the waterbody listing rather than connecting to the EA site." />
+that contain the string provided. Can search by WBID (WBID), name 
+(name), Management Catchment (MC), Operational Catchment 
+(OC) or River Basin District (RBD). There is a hierarchical 
+relationship between these levels as shown at https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy.
+The search is done on a local copy of the waterbody listing contained in 
+the ea_wbids object rather than connecting to the 
+EA site." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -85,6 +88,18 @@ of the waterbody listing rather than connecting to the EA site." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cde-output-reference.html">cde: Reference list of all output columns</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -114,10 +129,13 @@ of the waterbody listing rather than connecting to the EA site." />
     <div class="ref-description">
     
     <p>Searches the listing of EA monitoring sites to find rows
-that contain the string provided. Can search by name (<code>name</code>),
-Management Catchment (<code>MC</code>), Operational Catchment (<code>OC</code>)
-or River Basin District (<code>RBD</code>). The search is done on a local copy
-of the waterbody listing rather than connecting to the EA site.</p>
+that contain the string provided. Can search by WBID (<code>WBID</code>), name 
+(<code>name</code>), Management Catchment (<code>MC</code>), Operational Catchment 
+(<code>OC</code>) or River Basin District (<code>RBD</code>). There is a hierarchical 
+relationship between these levels as shown at <a href='https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy'>https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy</a>.</p>
+<p>The search is done on a local copy of the waterbody listing contained in 
+the <code><a href='ea_wbids.html'>ea_wbids</a></code> object rather than connecting to the 
+EA site.</p>
     
     </div>
 
@@ -128,13 +146,13 @@ of the waterbody listing rather than connecting to the EA site.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>string</th>
-      <td><p>The search string to be matched. Will match whole or partial
-strings in the column values.</p></td>
+      <td><p>The search string to be matched (case-sensitive). Will match 
+whole or partial strings in the column values.</p></td>
     </tr>
     <tr>
       <th>column</th>
       <td><p>The column to be searched. Possible options are
-<code>name</code>, <code>OC</code> (Operational Catchment), <code>MC</code>
+<code>WBID</code>, <code>name</code>, <code>OC</code> (Operational Catchment), <code>MC</code>
 (Management Catchment) and <code>RBD</code> (River Basin District)</p></td>
     </tr>
     </table>
@@ -142,7 +160,8 @@ strings in the column values.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame containing the details of all the sites that match
-the search string (full or partial matches) in the column specified.</p>
+the search string (full or partial matches) in the column specified.
+Columns returned are defined in <code><a href='ea_wbids.html'>ea_wbids</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

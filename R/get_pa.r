@@ -32,7 +32,7 @@
 #' 
 #' # get the protected areas associated with the Avon Warwickshire
 #' # Management Catchment
-#' \dontrun{get_pa("Avon Warwickshire", "MC")}
+#' get_pa("Avon Warwickshire", "MC")
 #' 
 get_pa <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data, setting years to NULL

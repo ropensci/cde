@@ -56,6 +56,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/cde-output-reference.html">cde: Reference list of all output columns</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -88,16 +100,18 @@
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p><code>cde</code> is a package for R which facilitates searching and download of the Water Framework Directive (WFD) reporting data for all waterbodies within the Environment Agency area.</p>
+<p>Within Europe, the <a href="http://ec.europa.eu/environment/water/water-framework/index_en.html">Water Framework Directive</a> (WFD) sets EU-wide standards for how the quality of surface- and ground-waters across Europe is assessed and classified. Assessment of quality using the WFD is based on a range of elements that vary depending on the type of water being assessed and are combined to give an overall classification of waterbodies into five classes(High, Good, Moderate, Poor and Bad) for surface waters and two classes (Good or Poor) for groundwaters.</p>
+<p>In the UK the Environment Agency (EA) is the competent authority responsible for monitoring and assessment of water quality within England. The EA have made the reporting data relating to the rquirements of the WFD available via the Catchment Data Explorer (CDE) website, <a href="https://environment.data.gov.uk/catchment-planning/">https://environment.data.gov.uk/catchment-planning/</a>.</p>
+<p><code>cde</code> is a package for R which facilitates searching and download of the WFD reporting data for all waterbodies from the EA CDE website.</p>
 <p>The types of data that can be downloaded are: WFD status classification data (which can also be plotted), Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.</p>
-<p>The site accessed is <a href="https://environment.data.gov.uk/catchment-planning/" class="uri">https://environment.data.gov.uk/catchment-planning/</a>. The data that are downloaded are made available under the Open Government Licence v3.0 (<a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" class="uri">https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</a>) and use of the data accessed by this package implies acceptance of these licence conditions.</p>
+<p>The CDE data are made available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a> and use of the data accessed by and contained within this package implies acceptance of these licence conditions.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install cde from github with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("remotes")</span>
-remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"robbriers/cde"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("remotes")</span></a>
+<a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"robbriers/cde"</span>)</a></code></pre></div>
 </div>
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
@@ -120,7 +134,8 @@ remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocument
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li>
+<a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> | file LICENCE</li>
 </ul>
 </div>
 <div class="developers">

@@ -17,7 +17,6 @@
 #'   \item{RBD_num}{Index number of the River Basin District}
 #' }
 #' For details of the hierarchy of the different catchment types, see
-#' \url{https://environment.data.gov.uk/catchment-planning/help#help-
-#' catchment-hierarchy} 
+#' \url{https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy} 
 #' @source \url{https://environment.data.gov.uk/catchment-planning/}
 "ea_wbids"

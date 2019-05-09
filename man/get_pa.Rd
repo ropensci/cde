@@ -40,6 +40,6 @@ get_pa("Humber", "RBD")
 
 # get the protected areas associated with the Avon Warwickshire
 # Management Catchment
-\dontrun{get_pa("Avon Warwickshire", "MC")}
+get_pa("Avon Warwickshire", "MC")
 
 }
