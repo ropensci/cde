@@ -278,38 +278,30 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 subset_data <- function(full_data, column = NULL, 
     level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, data_type=NULL) {
   
-  # if only start year is set, is it beyond the data range and not objectives
-  # (only value being passed in to data_type)
-  if (!is.null(startyr) & is.null(endyr) & !is.null(data_type)){
+  # if only start year is set beyond the data range and not objectives
+  # (only value being passed in to data_type) then st to max and ignore endyr
+  if (!is.null(startyr) & is.null(data_type)){
     if (startyr>max(full_data$year)){
-      message(paste0("Start year is beyond the most recent year of data (", 
+      message(paste0("Start year (", startyr, ") is beyond the most recent year of data (", 
                      max(full_data$year),")"))
       message("Just outputting most recent year")
       startyr<-max(full_data$year)
+      # as only outputting most recent year, set endyr to null
+      if(!is.null(endyr)){
+        endyr<-NULL
+      }
     }
   }
   # if endyr is set, is it beyond the data range?
   if (!is.null(endyr)){
     if (endyr>max(full_data$year)){
-      message(paste0("End year is beyond the most recent year of data (", 
+      message(paste0("End year (", endyr, ") is beyond the most recent year of data (", 
                      max(full_data$year),")"))
       message("Subsetting to most recent year")
       endyr<-max(full_data$year)
     }
   }
-  # if they are both set, check the endyr
-  if (!is.null(startyr) & !is.null(endyr)) {
-    if (endyr>max(full_data$year)){
-      message(paste0("End year is beyond the most recent year of data (", 
-                     max(full_data$year),")"))
-      message("Subsetting to most recent year")
-      endyr<-max(full_data$year)
-    }
-    # if both years are specified, subset by range
-    full_data <- full_data[full_data$year >= startyr 
-                           & full_data$year <= endyr, ]
-  }
-  else if (!is.null(startyr)) {
+  if (!is.null(startyr)) {
     full_data <- full_data[full_data$year == startyr, ]
   }
   # level subsetting, defaults to "Overall Water Body"

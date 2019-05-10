@@ -11,7 +11,7 @@ test_that("get_status returns a dataframe", {
 test_that("dimensions of dataframe are as expected", {
   # retrieve data for Avon Warwickshire MC
   test_mc_avon<-get_status("Avon Warwickshire", "MC")
-  # check that the dimensions are 594 rows, 19 cols
+  # check that the dimensions are 594 rows, 18 cols
   expect_true(all(dim(test_mc_avon)== c(594, 18)))
 })
 
@@ -96,4 +96,11 @@ test_that("specifying type for WB download returns a message", {
 test_that("incorrect set of criteria returns a message", {
   # retrieve data for level that does not exist
   expect_message(get_status("Avon Warwickshire", "MC", type="CoastalWater"))
+})
+
+test_that("dimensions of dataframe for 'Supporting elements' level are as expected", {
+  # retrieve data for Avon Warwickshire MC
+  test_mc_avon<-get_status("Avon Warwickshire", "MC", level="Supporting elements")
+  # check that the dimensions are 78 rows, 18 cols
+  expect_true(all(dim(test_mc_avon)== c(78, 18)))
 })

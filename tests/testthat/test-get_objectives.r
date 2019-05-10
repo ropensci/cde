@@ -47,12 +47,12 @@ test_that("invalid level returns an error", {
 })
 
 test_that("specifying type for WB download returns a message", {
-  # retrieve data for level that does not exist
+  # retrieve data for WB with type specified
   expect_message(get_objectives("GB520804714300", "WBID", type="River"))
 })
 
-test_that("retuning no objectives give a message", {
-  # retrieve data for level that does not exist
+test_that("returning no objectives give a message", {
+  # retrieve data for combination with no objectives set
   expect_message(get_objectives("Cornwall North Coastal", "OC", year=2040))
 })
 
