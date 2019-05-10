@@ -12,6 +12,7 @@ os:
 - osx
 
 r:
+- devel
 - release
 - oldrel
 
