@@ -64,10 +64,10 @@ get_rnag("GB112071065700", "WBID")
 
 # get the RNAG issues for Lakes in the Humber RBD, between
 # 2013 and 2014
-get_rnag("Humber", "RBD", startyr = 2013, endyr = 2014, type = "Lake")
+get_rnag(ea_name="Humber", column="RBD", startyr=2013, endyr=2014, type="Lake")
 
 # get the RNAG issues for Rivers in the Avon Warwickshire
 # Management Catchment in 2015
-get_rnag("Avon Warwickshire", "MC", startyr = 2015, type = "River")
+get_rnag(ea_name="Avon Warwickshire", column="MC", startyr=2015, type="River")
 
 }

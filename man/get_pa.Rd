@@ -35,13 +35,13 @@ Catchment (\code{OC}) or River Basin District (\code{RBD}).
 }
 \examples{
 # get protected areas associated with waterbody GB112071065700
-get_pa("GB112071065700", "WBID")
+get_pa(ea_name="GB112071065700", column="WBID")
 
 # get the protected areas associated with the Humber RBD
-get_pa("Humber", "RBD")
+get_pa(ea_name="Humber", column="RBD")
 
 # get the protected areas associated with the Avon Warwickshire
 # Management Catchment
-get_pa("Avon Warwickshire", "MC")
+get_pa(ea_name="Avon Warwickshire", column="MC")
 
 }
