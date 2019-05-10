@@ -69,7 +69,7 @@
 #' 
 #' # get the objectives set for Rivers in the Avon Warwickshire
 #' # Operational Catchment in relation to Chemical status
-#' get_objectives(ea_name="Avon Warwickshire", "column=MC", level="Chemical", type="River")
+#' get_objectives(ea_name="Avon Warwickshire", column="MC", level="Chemical", type="River")
 #' 
 get_objectives <- function(ea_name = NULL, column = NULL, 
   level="Overall Water Body", year = NULL, type = NULL) {
