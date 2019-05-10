@@ -1,5 +1,5 @@
 library(cde)
-context("testing plotting")
+context("testing plotting and printing")
 
 test_that("plotting WBID data results in error", {
   # retrieve data for column "Aardvark"
@@ -13,51 +13,56 @@ test_that("plotting WBID data results in error", {
  })
  
  test_that("plotting status returns a vector of given length", {
-   # plot for Avon Warwickshire MC chemical status
+   # download all Avon Warwickshire MC chemical status
    testframe<-get_status("Avon Warwickshire", "MC", level="Chemical")
    # check that the vector has a length of 8
    expect_true(length(plot(testframe))== 8)
  })
 
  test_that("plotting status (one year) returns a vector of given length", {
-    # plot for Avon Warwickshire MC chemical status
+    # download Avon Warwickshire MC chemical status for 2015
     testframe<-get_status("Avon Warwickshire", "MC", startyr=2015, level="Chemical")
     # check that the vector has a length of 2
     expect_true(length(plot(testframe))== 2)
  })
 
  test_that("plotting objectives (one year/class) returns a vector", {
-    # plot for Avon Warwickshire MC chemical status
+    # download objectives for Avon Warwickshire MC chemical status in 2027
     testframe<-get_objectives("Avon Warwickshire", "MC", year=2027, level="Chemical")
     # check that the vector has a length of 1
     expect_true(length(plot(testframe))== 1)
  })
  
  test_that("plotting objectives returns a vector of given length", {
-   # plot for Avon Warwickshire MC chemical status
+   # download objectives for Avon Warwickshire MC chemical status
    testframe<-get_objectives("Avon Warwickshire", "MC", level="Chemical")
    # check that the vector has a length of 8
    expect_true(length(plot(testframe))== 3)
  })
  
  test_that("plotting rnag returns a list", {
-   # plot for Avon Warwickshire MC chemical status
+   # download Avon Warwickshire MC RNAG
    testframe<-get_rnag("Avon Warwickshire", "MC")
    # check that the vector has a length of 8
    expect_true(is.list(plot(testframe)))
  })
  
  test_that("plotting pa returns a list", {
-   # plot for Avon Warwickshire MC chemical status
+   # download all pa in Thames RBD
    testframe<-get_pa("Thames", "RBD")
-   # check that the vector has a length of 8
+   # check that the plot output is a list
    expect_true(is.list(plot(testframe)))
  })
  
  test_that("printing returns a null", {
-   # plot for Avon Warwickshire MC chemical status
+   # download all pa in Thames RBD and print
    testframe<-get_pa("Thames", "RBD")
-   # check that the vector has a length of 8
    expect_true(is.null(print(testframe)))
+ })
+ 
+ test_that("printing (smaller) returns a null", {
+   # download smaller pa list and print
+   testframe<-print(get_pa(ea_name="GB105033042920", column="WBID"))
+   expect_true(is.null(testframe))
  })
  
