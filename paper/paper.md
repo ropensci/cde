@@ -22,9 +22,7 @@ In the UK the Environment Agency (EA) is the competent authority responsible for
 
 The package contains functions to allow users to search for waterbodies, catchments or River Basin Districts that match given search strings. Having identified the relevant sites, the following types of data can be downloaded:
 
-*Status classification data*: either for overall water body classification or at a range of more detailed levels (e.g. ecological, chemical or priority substances). These can be downloaded for specified year ranges and for specific waterbody types (such as lakes). Summary plots of percentage of water bodies in each status class can also be produced as show below, again for a range of levels, years and waterbody types.
-
-![A plot of status classification data for the Lark Operational Catchment between 2013 and 2015](lark plot-1.png){ width=80% }
+*Status classification data*: either for overall water body classification or at a range of more detailed levels (e.g. ecological, chemical or priority substances). These can be downloaded for specified year ranges and for specific waterbody types (such as lakes).
 
 *Reasons for Not Achieving Good status*: For catchments or River Basin Districts where there are waterbodies that have not achieved Good status, the package provides the functionality to download a summary of the Reasons for Not Achieving Good (RNAG) data. This gives a range of information regarding the relevant pressures identified as contributing to the current status, classified according to a standard hierarchy given on the CDE website.
 
@@ -33,6 +31,10 @@ The package contains functions to allow users to search for waterbodies, catchme
 *Measures to achieve objectives*: Details of actions that have been put in place or are proposed to achieve the objectives set (specifically for the target in 2021). Only data linked to the achievement of a specific outcome in terms of status are included.
 
 *Protected areas*: The package also provides a function to download a summary of associated protected areas (such as Special Areas of Conservation or Nitrate Vulnerable Zones), again at a range of levels from individual waterbodies to whole River Basin Districts.
+
+For each of the types of data that can be downloaded, summary plots can also be produced. These differ depending on the type of data, but an example showing the percentage of water bodies in each status class (derived from the 'get_status' function) is show below.
+
+![A plot of status classification data for the Lark Operational Catchment between 2013 and 2015](lark plot-1.png){ width=80% }
 
 
 # Acknowledgements
