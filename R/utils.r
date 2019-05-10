@@ -266,6 +266,9 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 #' catchment level or RBD level queries, the data can also be subset by
 #' waterbody type. Possible values are \code{River}, \code{Lake},
 #' \code{GroundWaterBody}, \code{TransitionalWater} or \code{CoastalWater}.
+#' 
+#' @param data_type Type of data to be subset ("class", "obj" or "rnag"). If
+#' "obj" then don't do subsetting to most recent as this is not appropriate.
 #'
 #' @return A data frame that has been subsetted by the 
 #' specified combination of column, value, level and dates.
@@ -276,7 +279,8 @@ subset_data <- function(full_data, column = NULL,
     level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, data_type=NULL) {
   
   # if only start year is set, is it beyond the data range and not objectives
-  if (!is.null(startyr) & is.null(endyr) & !data_type=="obj"){
+  # (only value being passed in to data_type)
+  if (!is.null(startyr) & is.null(endyr) & !is.null(data_type)){
     if (startyr>max(full_data$year)){
       message(paste0("Start year is beyond the most recent year of data (", 
                      max(full_data$year),")"))
