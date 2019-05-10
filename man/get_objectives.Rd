@@ -77,6 +77,6 @@ get_objectives(ea_name="Humber", column="RBD", year=2021, type="Lake")
 
 # get the objectives set for Rivers in the Avon Warwickshire
 # Operational Catchment in relation to Chemical status
-get_objectives(ea_name="Avon Warwickshire", "column=MC", level="Chemical", type="River")
+get_objectives(ea_name="Avon Warwickshire", column="MC", level="Chemical", type="River")
 
 }
