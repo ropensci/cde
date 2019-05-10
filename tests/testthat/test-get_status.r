@@ -101,6 +101,6 @@ test_that("incorrect set of criteria returns a message", {
 test_that("dimensions of dataframe for 'Supporting elements' level are as expected", {
   # retrieve data for Avon Warwickshire MC
   test_mc_avon<-get_status("Avon Warwickshire", "MC", level="Supporting elements")
-  # check that the dimensions are 78 rows, 18 cols
-  expect_true(all(dim(test_mc_avon)== c(78, 18)))
+  # check that the dimensions are 73 rows, 18 cols
+  expect_true(all(dim(test_mc_avon)== c(73, 18)))
 })
