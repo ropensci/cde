@@ -1,4 +1,4 @@
-#' Retrieve Objectives
+#' Retrieve Objectives set for waterbodies
 #' @description Retrieves details of objectives set for waterbodies in terms
 #' of predicted classification from EA Catchment Data Explorer site.
 #' Data can be retrieved by specifying waterbody id
@@ -54,6 +54,9 @@
 #'
 #' @return An object of class \code{cde_df} containing the details 
 #' of the objectives set for the specified set of waterbodies.
+#' For details of the meaning of the the different columns returned, 
+#' see \url{https://robbriers.github.io/cde/articles/cde-output-reference.html}.
+
 #'
 #' @export get_objectives
 #'

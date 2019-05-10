@@ -19,10 +19,6 @@ specific values.}
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District).}
 }
-\value{
-An object of class \code{cde_df} containing the details 
-of the measures put in place to try and improve water quality.
-}
 \description{
 Retrieves details of the measures put in place or proposed 
 for specified waterbodies to try and achieve the status objectives set

@@ -83,7 +83,7 @@
       <h1>cde: a run through</h1>
                         <h4 class="author">Dr Rob Briers</h4>
             
-            <h4 class="date">2019-05-09</h4>
+            <h4 class="date">2019-05-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robbriers/cde/blob/master/vignettes/cde.Rmd"><code>vignettes/cde.Rmd</code></a></small>
       <div class="hidden name"><code>cde.Rmd</code></div>
@@ -96,7 +96,7 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>Within Europe, the <a href="http://ec.europa.eu/environment/water/water-framework/index_en.html">Water Framework Directive</a> (WFD) sets EU-wide standards for how the quality of surface- and ground-waters across Europe is assessed and classified. Assessment of quality using the WFD is based on a range of elements that vary depending on the type of water being assessed and are combined to give an overall classification of waterbodies into five classes(High, Good, Moderate, Poor and Bad) for surface waters and two classes (Good or Poor) for groundwaters.</p>
-<p>In the UK the Environment Agency (EA) is the competent authority responsible for monitoring and assessment of water quality within England. The EA have made the reporting data relating to the rquirements of the WFD available via the Catchment Data Explorer (CDE) website, <a href="https://environment.data.gov.uk/catchment-planning/">https://environment.data.gov.uk/catchment-planning/</a>.</p>
+<p>In the UK the Environment Agency (EA) is the competent authority responsible for monitoring and assessment of water quality within England. The EA have made the reporting data relating to the rquirements of the WFD available via the Catchment Data Explorer (CDE) website, <a href="https://environment.data.gov.uk/catchment-planning/" class="uri">https://environment.data.gov.uk/catchment-planning/</a>.</p>
 <p><code>cde</code> is a package for R which facilitates searching and download of the WFD reporting data for all waterbodies from the EA CDE website.</p>
 <p>The types of data that can be downloaded are: WFD status classification data, Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.</p>
 <p>The CDE data are made available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a> and use of the data accessed by and contained within this package implies acceptance of these licence conditions.</p>
@@ -105,32 +105,30 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install <code>cde</code> from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># if you have not done so already</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb1-3" title="3">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"robbriers/cde"</span>, <span class="dt">ref=</span><span class="st">"post-review"</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; Skipping install of 'cde' from a github remote, the SHA1 (2c4da3a8) has not changed since last install.</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt;   Use `force = TRUE` to force installation</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if you have not done so already</span>
+<span class="co"># install.packages("remotes")</span>
+remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"robbriers/cde"</span>)</code></pre></div>
 </div>
 <div id="searching-for-sites" class="section level2">
 <h2 class="hasAnchor">
 <a href="#searching-for-sites" class="anchor"></a>Searching for sites</h2>
 <p>The <code>search_sites</code> function allows you to search for waterbodies, Operational or Management Catchments or River Basin Districts that contain a match or partial match for a specified search string (which is case-sensitive). There is a hierarchical relationship between waterbodies, catchments and River Basin Districts (RBD) as shown <a href="https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy">here</a>. As an example, we will search for waterbodies containing the name “Lark”.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># load the package</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cde)</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co"># search for waterbodies containing the name "Lark"</span></a>
-<a class="sourceLine" id="cb2-5" title="5">lark_wb&lt;-<span class="kw"><a href="../reference/search_names.html">search_names</a></span>(<span class="dt">string=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"name"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the package</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cde)
+
+<span class="co"># search for waterbodies containing the name "Lark"</span>
+lark_wb&lt;-<span class="kw"><a href="../reference/search_names.html">search_names</a></span>(<span class="dt">string=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"name"</span>)</code></pre></div>
 <p>The dataframe returned contains details of all the waterbodies containing the string “Lark” in their name. The details returned include waterbody id codes (WBID), type of waterbody, Operational and Management Catchment names and River Basin District.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># show the top 6 rows of the 'name' column</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(lark_wb<span class="op">$</span>name)</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; [1] "Lark (US Hawstead)"                   </span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; [2] "Lark downstream of Mill Street Bridge"</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; [3] "Lark (Hawstead to Abbey Gardens)"     </span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; [4] "Lark (Abbey Gardens to Mildenhall)"   </span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; [5] "Lark"                                 </span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; [6] "Lark - Fynn (d/s confluence)"</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># show the top 6 rows of the 'name' column</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(lark_wb<span class="op">$</span>name)
+<span class="co">#&gt; [1] "Lark (US Hawstead)"                   </span>
+<span class="co">#&gt; [2] "Lark downstream of Mill Street Bridge"</span>
+<span class="co">#&gt; [3] "Lark (Hawstead to Abbey Gardens)"     </span>
+<span class="co">#&gt; [4] "Lark (Abbey Gardens to Mildenhall)"   </span>
+<span class="co">#&gt; [5] "Lark"                                 </span>
+<span class="co">#&gt; [6] "Lark - Fynn (d/s confluence)"</span></code></pre></div>
 <p>To search for Operational Catchments containing the same string we would use the following code.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">lark_oc&lt;-<span class="kw"><a href="../reference/search_names.html">search_names</a></span>(<span class="dt">string=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lark_oc&lt;-<span class="kw"><a href="../reference/search_names.html">search_names</a></span>(<span class="dt">string=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>)</code></pre></div>
 </div>
 <div id="retrieving-quality-status-classification-data" class="section level2">
 <h2 class="hasAnchor">
@@ -198,98 +196,99 @@
 </table>
 <p>The function returns an object of class <code>cde_df</code> (basically a dataframe with custom print and plot methods) containing the status (and other details) for the specified combination of column, value, level and dates. Note that during 2013 and 2014 waterbodies were classified under both Cycle 1 and Cycle 2 methodologies. The status information extracted for these years is just for the Cycle 2 classification, to avoid double counting. There was also a change in some of the environmental standards applied to chemical aspects of status assessment between cycles, so there may be some noticeable changes in status between these years. See <a href="https://environment.data.gov.uk/catchment-planning/help#help-surface-water-chemical-classification">here</a> for more details.</p>
 <p>For details of the meaning of the the different columns returned, see the <a href="../articles/cde-output-reference.html">output reference list</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># extract overall waterbody status classification data for a single </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># waterbody in all years</span></a>
-<a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co"># first decide which waterbody, we can use one from the first search </span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co"># above (need the WBID information)</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(lark_wb)</a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt;                WBID                                  name  type    OC</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 1911 GB105033042920                    Lark (US Hawstead) River  Lark</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 1912 GB105033043052 Lark downstream of Mill Street Bridge River  Lark</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 1914 GB105033042940      Lark (Hawstead to Abbey Gardens) River  Lark</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 1918 GB105033043051    Lark (Abbey Gardens to Mildenhall) River  Lark</span></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; 2197 GB105035040360                                  Lark River Deben</span></a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; 2200 GB105035040300          Lark - Fynn (d/s confluence) River Deben</span></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt;                    MC     RBD</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt; 1911 Cam and Ely Ouse Anglian</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt; 1912 Cam and Ely Ouse Anglian</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; 1914 Cam and Ely Ouse Anglian</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; 1918 Cam and Ely Ouse Anglian</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; 2197     East Suffolk Anglian</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt; 2200     East Suffolk Anglian</span></a>
-<a class="sourceLine" id="cb5-21" title="21"></a>
-<a class="sourceLine" id="cb5-22" title="22"><span class="co"># we will get data for the first waterbody here (WBID: GB105033042920, </span></a>
-<a class="sourceLine" id="cb5-23" title="23"><span class="co"># name: Lark (US Hawstead))</span></a>
-<a class="sourceLine" id="cb5-24" title="24">lark_hawstead&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"GB105033042920"</span>, <span class="dt">column=</span><span class="st">"WBID"</span>)</a>
-<a class="sourceLine" id="cb5-25" title="25"></a>
-<a class="sourceLine" id="cb5-26" title="26"><span class="co"># the dataframe returned contains all of the data for this site in all </span></a>
-<a class="sourceLine" id="cb5-27" title="27"><span class="co"># years (we did not specify year/year range).</span></a>
-<a class="sourceLine" id="cb5-28" title="28">lark_hawstead</a>
-<a class="sourceLine" id="cb5-29" title="29"><span class="co">#&gt;  river_basin_district management_catchment operational_catchment</span></a>
-<a class="sourceLine" id="cb5-30" title="30"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-31" title="31"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-32" title="32"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-33" title="33"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-34" title="34"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-35" title="35"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-36" title="36"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-37" title="37"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb5-38" title="38"><span class="co">#&gt; With an additional 18 columns of data. </span></a>
-<a class="sourceLine" id="cb5-39" title="39"><span class="co">#&gt; Row values may be truncated to fit console.</span></a>
-<a class="sourceLine" id="cb5-40" title="40"></a>
-<a class="sourceLine" id="cb5-41" title="41"><span class="co"># just a quick look at the actual status data</span></a>
-<a class="sourceLine" id="cb5-42" title="42"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_hawstead<span class="op">$</span>status)</a>
-<a class="sourceLine" id="cb5-43" title="43"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-44" title="44"><span class="co">#&gt;     Good Moderate </span></a>
-<a class="sourceLine" id="cb5-45" title="45"><span class="co">#&gt;        1        7</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract overall waterbody status classification data for a single </span>
+<span class="co"># waterbody in all years</span>
+
+<span class="co"># first decide which waterbody, we can use one from the first search </span>
+<span class="co"># above (need the WBID information)</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(lark_wb)
+<span class="co">#&gt;                WBID                                  name  type    OC</span>
+<span class="co">#&gt; 1911 GB105033042920                    Lark (US Hawstead) River  Lark</span>
+<span class="co">#&gt; 1912 GB105033043052 Lark downstream of Mill Street Bridge River  Lark</span>
+<span class="co">#&gt; 1914 GB105033042940      Lark (Hawstead to Abbey Gardens) River  Lark</span>
+<span class="co">#&gt; 1918 GB105033043051    Lark (Abbey Gardens to Mildenhall) River  Lark</span>
+<span class="co">#&gt; 2197 GB105035040360                                  Lark River Deben</span>
+<span class="co">#&gt; 2200 GB105035040300          Lark - Fynn (d/s confluence) River Deben</span>
+<span class="co">#&gt;                    MC     RBD</span>
+<span class="co">#&gt; 1911 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1912 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1914 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 1918 Cam and Ely Ouse Anglian</span>
+<span class="co">#&gt; 2197     East Suffolk Anglian</span>
+<span class="co">#&gt; 2200     East Suffolk Anglian</span>
+
+<span class="co"># we will get data for the first waterbody here (WBID: GB105033042920, </span>
+<span class="co"># name: Lark (US Hawstead))</span>
+lark_hawstead&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"GB105033042920"</span>, <span class="dt">column=</span><span class="st">"WBID"</span>)
+
+<span class="co"># the dataframe returned contains all of the data for this site in all </span>
+<span class="co"># years (we did not specify year/year range).</span>
+lark_hawstead
+<span class="co">#&gt;  river_basin_district management_catchment operational_catchment</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt; With an additional 18 columns of data. </span>
+<span class="co">#&gt; Row values may be truncated to fit console.</span>
+
+<span class="co"># just a quick look at the actual status data</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/table">table</a></span>(lark_hawstead<span class="op">$</span>status)
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Good Moderate </span>
+<span class="co">#&gt;        1        7</span></code></pre></div>
 <p>An example of a higher level download, specifying a year range and type (in this case Rivers).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># download status data for a given year range and type of waterbody</span></a>
-<a class="sourceLine" id="cb6-2" title="2">lark_OC_rivers&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>, <span class="dt">type=</span><span class="st">"River"</span>)</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># print out the results</span></a>
-<a class="sourceLine" id="cb6-4" title="4">lark_OC_rivers</a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt;  river_basin_district management_catchment operational_catchment</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; With an additional 26 rows and 15 columns of data. </span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; Row values may be truncated to fit console.</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download status data for a given year range and type of waterbody</span>
+lark_OC_rivers&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>, <span class="dt">type=</span><span class="st">"River"</span>)
+<span class="co"># print out the results</span>
+lark_OC_rivers
+<span class="co">#&gt;  river_basin_district management_catchment operational_catchment</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt;               Anglian     Cam and Ely Ouse                  Lark</span>
+<span class="co">#&gt; With an additional 26 rows and 15 columns of data. </span>
+<span class="co">#&gt; Row values may be truncated to fit console.</span></code></pre></div>
 <p>To get information about status classification in relation to a specific level in the classification, we can specify <code>level</code> as well (see table above for options and <a href="https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy">here</a> for more details on the classification levels used).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># download Chemical status for rivers in all years</span></a>
-<a class="sourceLine" id="cb7-2" title="2">lark_OC_rivers_chem&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">type=</span><span class="st">"River"</span>, <span class="dt">level=</span><span class="st">"Chemical"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download Chemical status for rivers in all years</span>
+lark_OC_rivers_chem&lt;-<span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">type=</span><span class="st">"River"</span>, <span class="dt">level=</span><span class="st">"Chemical"</span>)</code></pre></div>
 </div>
 <div id="plotting-quality-status-classification-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-quality-status-classification-data" class="anchor"></a>Plotting quality status classification data</h2>
 <p>The <code>get_status</code> function, along with other <code>get_...</code> functions, has a <code>plot</code> method which provides quick overview plots of status classes, giving a plot of percentages of waterbodies in different status classes for the combination of criteria specified. Plotting is only possible for Operational/Management Catchment or River Basin District downloads.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># get overall waterbody status information for the Lark OC between 2013 and 2015</span></a>
-<a class="sourceLine" id="cb8-2" title="2">lark_OC_<span class="dv">2013</span>_<span class="dv">15</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>)</a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co"># plot the data</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_<span class="dv">2013</span>_<span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get overall waterbody status information for the Lark OC between 2013 and 2015</span>
+lark_OC_2013_<span class="dv">15</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>)
+<span class="co"># plot the data</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_2013_<span class="dv">15</span>)</code></pre></div>
 <p><img src="cde_files/figure-html/lark%20plot-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>For plots, the colour scheme used is based on the <code>viridis</code> palette. For <code>get_status</code> and <code>get_objectives</code> an alternative colour scheme, based on the WFD-defined status class colours, can be used instead by setting <code>scheme="wfd"</code> within a <code>plot</code> call. Also if a single year is specified, a standard (as opposed to stacked) barplot is produced as shown below.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># get the overall waterbody status information for rivers in the Lark OC in 2015</span></a>
-<a class="sourceLine" id="cb9-2" title="2">lark_OC_rivers_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2015</span>, <span class="dt">type=</span><span class="st">"River"</span>)</a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="co"># plot these data, using WFD colour scheme</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_rivers_<span class="dv">2015</span>, <span class="dt">scheme=</span><span class="st">"wfd"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the overall waterbody status information for rivers in the Lark OC in 2015</span>
+lark_OC_rivers_<span class="dv">2015</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_status.html">get_status</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2015</span>, <span class="dt">type=</span><span class="st">"River"</span>)
+<span class="co"># plot these data, using WFD colour scheme</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_rivers_<span class="dv">2015</span>, <span class="dt">scheme=</span><span class="st">"wfd"</span>)</code></pre></div>
 <p><img src="cde_files/figure-html/lark%20riverplot%20wfd-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div id="reasons-for-not-achieving-good-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reasons-for-not-achieving-good-status" class="anchor"></a>Reasons for Not Achieving Good status</h2>
-<p>Not all waterbodies in the Lark Operational Catchment example above have achieved Good status. The <code>get_rnag</code> function downloads Reasons for Not Achieving Good (RNAG) data, which allow us to find out more detail on the pressures on the waterbodies that have been assessed to be driving the failure. RNAG data are only available from 2013 onwards. The RNAG data can be extracted for specific years, and also for specific classification levels, as per the status data above. For details of the meaning of the the different columns returned, see the <a href="../articles/cde-output-reference.html">output reference list</a>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># what are the RNAG for the Lark OC between 2013 and 2015</span></a>
-<a class="sourceLine" id="cb10-2" title="2">lark_OC_RNAG_<span class="dv">2013</span>_<span class="dv">15</span>&lt;-<span class="kw"><a href="../reference/get_rnag.html">get_rnag</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>)</a></code></pre></div>
+<p>Not all waterbodies in the Lark Operational Catchment example above have achieved Good status. The <code>get_rnag</code> function downloads Reasons for Not Achieving Good (RNAG) data, which allow us to find out more detail on the pressures on the waterbodies that have been assessed to be driving the failure. RNAG data are only available from 2013 onwards. The RNAG data can be extracted for specific years, and also for specific classification levels, as per the status data above.</p>
+<p>For details of the meaning of the the different columns returned, see the <a href="../articles/cde-output-reference.html">output reference list</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># what are the RNAG for the Lark OC between 2013 and 2015</span>
+lark_OC_RNAG_2013_<span class="dv">15</span>&lt;-<span class="kw"><a href="../reference/get_rnag.html">get_rnag</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">startyr=</span><span class="dv">2013</span>, <span class="dt">endyr=</span><span class="dv">2015</span>)</code></pre></div>
 <p>Plots of RNAG data are given as frequency histograms of the occurence of information in the <code>pressure_tier_3</code> column. For details of this, see the <a href="../articles/cde-output-reference.html">reference list</a>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># plot RNAG data for the Lark OC, between 2013 and 2015</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_RNAG_<span class="dv">2013</span>_<span class="dv">15</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot RNAG data for the Lark OC, between 2013 and 2015</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_RNAG_2013_<span class="dv">15</span>)</code></pre></div>
 <p><img src="cde_files/figure-html/lark%20RNAG%20plot-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div id="objectives-set-for-waterbodies" class="section level2">
@@ -297,11 +296,11 @@
 <a href="#objectives-set-for-waterbodies" class="anchor"></a>Objectives set for waterbodies</h2>
 <p>For those waterbodies that are at less than Good status, objectives are set to indicate what status is aimed for in the longer term. The objectives are set in relation to what is determined to be achievable in the given timescale. Therefore objectives have been set in relation to the 6-year cycle of assessment (so years 2015, 2021 and 2027, then also 2040 and 2050 for long-term objectives). Using the <code>get_objectives</code> function, we can download objectives for waterbodies, catchments or River Basin Districts. Objectives can be downloaded for a specific year (2015, 2021, 2027, 2040 or 2050), level of classification and waterbody type as per the <code>get_status</code> function. Note however that not all waterbodies have objectives set for all years, levels or types. If no objectives are set for the criteria specified, a message is given.</p>
 <p>For details of the meaning of the the different columns returned, see the <a href="../articles/cde-output-reference.html">output reference list</a>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># download the objectives set for 2015 for the Lark Operational Catchment</span></a>
-<a class="sourceLine" id="cb12-2" title="2">lark_OC_obj_<span class="dv">2015</span>&lt;-<span class="kw"><a href="../reference/get_objectives.html">get_objectives</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">year=</span><span class="dv">2015</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download the objectives set for 2015 for the Lark Operational Catchment</span>
+lark_OC_obj_<span class="dv">2015</span>&lt;-<span class="kw"><a href="../reference/get_objectives.html">get_objectives</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>, <span class="dt">year=</span><span class="dv">2015</span>)</code></pre></div>
 <p>Plotting of objectives is similar to that of <code>get_status</code> data, except the status classes represent the target objectives predicted to be achieved by the date specified.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># plot the objectives for the Lark OC in 2015</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_obj_<span class="dv">2015</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot the objectives for the Lark OC in 2015</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_obj_<span class="dv">2015</span>)</code></pre></div>
 <p><img src="cde_files/figure-html/lark%20obj%20plot-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div id="protected-areas" class="section level2">
@@ -309,10 +308,10 @@
 <a href="#protected-areas" class="anchor"></a>Protected Areas</h2>
 <p>The <code>get_pa</code> function downloads details of the protected areas associated with a waterbody, catchment or River Basin District. The protected areas listed include those designated under conservation reasons, such as SACs (Habitats and Species Directive), pollution reduction, such as Nitrate Vulnerable Zones (Nitrates Directive) or human use (Bathing Water Directive).</p>
 <p>For details of the meaning of the the different columns returned, see the <a href="../articles/cde-output-reference.html">output reference list</a>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># get details of the protected areas within the Lark Operational Catchment</span></a>
-<a class="sourceLine" id="cb14-2" title="2">lark_OC_pa&lt;-<span class="kw"><a href="../reference/get_pa.html">get_pa</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get details of the protected areas within the Lark Operational Catchment</span>
+lark_OC_pa&lt;-<span class="kw"><a href="../reference/get_pa.html">get_pa</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>)</code></pre></div>
 <p>Plotting the output of <code>get_pa</code> produces a frequency histogram of the <code>protected_area_type</code> column within the area specified.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_pa)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(lark_OC_pa)</code></pre></div>
 <p><img src="cde_files/figure-html/lark%20pa%20plot-1.png" width="624" style="display: block; margin: auto;"></p>
 </div>
 <div id="measures-put-in-place-to-improve-status" class="section level2">
@@ -320,8 +319,8 @@
 <a href="#measures-put-in-place-to-improve-status" class="anchor"></a>Measures put in place to improve status</h2>
 <p>Measures are the planned actions that are intended to achieve the objectives set for given waterbodies/catchments etc. The <code>get_measures</code> function downloads the details of the measures in place or proposed. These data are very patchy, so this will quite often return no data. Only the name and column need to be specified for this - measures are not specified in more detail than this. Measures can be plotted in the same way as RNAG or Protected Areas data (frequency histogram).</p>
 <p>For details of the meaning of the the different columns returned, see the <a href="../articles/cde-output-reference.html">output reference list</a>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># what measures are there for the Lark Operational Catchment?</span></a>
-<a class="sourceLine" id="cb16-2" title="2">lark_OC_meas&lt;-<span class="kw"><a href="../reference/get_measures.html">get_measures</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># what measures are there for the Lark Operational Catchment?</span>
+lark_OC_meas&lt;-<span class="kw"><a href="../reference/get_measures.html">get_measures</a></span>(<span class="dt">ea_name=</span><span class="st">"Lark"</span>, <span class="dt">column=</span><span class="st">"OC"</span>)</code></pre></div>
 <p>Currently (2019-05-09) there is a problem with the measures data on the CDE website, and no measures information is available to be downloaded, so this will always return an empty dataframe. This is under active investigation by the EA, so should be resolved soon.</p>
 <p>Data on different aspects of water quality classification and pressures etc. can be combined using tools such as those within the <a href="https://cloud.r-project.org/package=dplyr">dplyr</a> package to take analysis further.</p>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve Objectives — get_objectives • cde</title>
+<title>Retrieve Objectives set for waterbodies — get_objectives • cde</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Retrieve Objectives — get_objectives" />
+<meta property="og:title" content="Retrieve Objectives set for waterbodies — get_objectives" />
 
 <meta property="og:description" content="Retrieves details of objectives set for waterbodies in terms
 of predicted classification from EA Catchment Data Explorer site.
@@ -124,7 +124,7 @@ extraction of specific waterbody types (River, Lake etc)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve Objectives</h1>
+    <h1>Retrieve Objectives set for waterbodies</h1>
     <small class="dont-index">Source: <a href='https://github.com/robbriers/cde/blob/master/R/get_objectives.r'><code>R/get_objectives.r</code></a></small>
     <div class="hidden name"><code>get_objectives.Rd</code></div>
     </div>
@@ -212,7 +212,9 @@ waterbody type. Possible values are <code>River</code>, <code>Lake</code>,
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of class <code>cde_df</code> containing the details 
-of the objectives set for the specified set of waterbodies.</p>
+of the objectives set for the specified set of waterbodies.
+For details of the meaning of the the different columns returned, 
+see <a href='https://robbriers.github.io/cde/articles/cde-output-reference.html'>https://robbriers.github.io/cde/articles/cde-output-reference.html</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

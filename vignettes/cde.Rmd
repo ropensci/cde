@@ -35,7 +35,7 @@ You can install `cde` from github with:
 ```{r gh-installation, eval = FALSE}
 # if you have not done so already
 # install.packages("remotes")
-remotes::install_github("robbriers/cde", ref="post-review")
+remotes::install_github("robbriers/cde")
 ```
 
 ## Searching for sites
@@ -144,7 +144,9 @@ plot(lark_OC_rivers_2015, scheme="wfd")
 
 ## Reasons for Not Achieving Good status
 
-Not all waterbodies in the Lark Operational Catchment example above have achieved Good status. The `get_rnag` function downloads Reasons for Not Achieving Good (RNAG) data, which allow us to find out more detail on the pressures on the waterbodies that have been assessed to be driving the failure. RNAG data are only available from 2013 onwards. The RNAG data can be extracted for specific years, and also for specific classification levels, as per the status data above. For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
+Not all waterbodies in the Lark Operational Catchment example above have achieved Good status. The `get_rnag` function downloads Reasons for Not Achieving Good (RNAG) data, which allow us to find out more detail on the pressures on the waterbodies that have been assessed to be driving the failure. RNAG data are only available from 2013 onwards. The RNAG data can be extracted for specific years, and also for specific classification levels, as per the status data above.
+
+For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
 
 ```{r RNAG in Lark, eval=TRUE}
 # what are the RNAG for the Lark OC between 2013 and 2015

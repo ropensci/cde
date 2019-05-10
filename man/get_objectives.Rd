@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_objectives.r
 \name{get_objectives}
 \alias{get_objectives}
-\title{Retrieve Objectives}
+\title{Retrieve Objectives set for waterbodies}
 \usage{
 get_objectives(ea_name = NULL, column = NULL,
   level = "Overall Water Body", year = NULL, type = NULL)
@@ -52,6 +52,8 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 \value{
 An object of class \code{cde_df} containing the details 
 of the objectives set for the specified set of waterbodies.
+For details of the meaning of the the different columns returned, 
+see \url{https://robbriers.github.io/cde/articles/cde-output-reference.html}.
 }
 \description{
 Retrieves details of objectives set for waterbodies in terms

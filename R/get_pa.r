@@ -20,6 +20,9 @@
 #'
 #' @return An object of class \code{cde_df} containing the details of the 
 #' Protected Areas associated with the waterbodies.
+#' For details of the meaning of the the different columns returned, 
+#' see \url{https://robbriers.github.io/cde/articles/cde-output-reference.html}.
+
 #'
 #' @export get_pa
 #'

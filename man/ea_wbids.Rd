@@ -25,6 +25,10 @@ For details of the hierarchy of the different catchment types, see
 ea_wbids
 }
 \description{
-Dataframe used by `cde` to construct API calls
+Dataframe used by `cde` to construct API calls.
+The data included are made available under the Open Government Licence v3.0 
+\url{https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/}.
+Use of the data accessed by and contained within this package implies 
+acceptance of these licence conditions.
 }
 \keyword{datasets}
