@@ -273,10 +273,10 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 #' @noRd
 #'
 subset_data <- function(full_data, column = NULL, 
-    level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL) {
+    level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, data_type=NULL) {
   
-  # if only start year is set, is it beyond the data range?
-  if (!is.null(startyr) & is.null(endyr)){
+  # if only start year is set, is it beyond the data range and not objectives
+  if (!is.null(startyr) & is.null(endyr) & !data_type=="obj"){
     if (startyr>max(full_data$year)){
       message(paste0("Start year is beyond the most recent year of data (", 
                      max(full_data$year),")"))

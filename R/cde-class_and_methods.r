@@ -45,25 +45,27 @@ print.cde_df <- function(x, ...){
   }
   
   # truncate strings within rows to fit as well
-  if(!nrow(x)==0){
+  if(nrow(x)==0){
+    cat("No data returned - printing not possible.")
+  }else{
     data_to_print <- as.data.frame(t(apply(data_to_print, 1, trunc_char, 
-      col_name_lengths)))
+        col_name_lengths)))
     print(data_to_print, row.names=FALSE)
-  }else{cat("No data returned - printing not possible")}
+    # if more than 10 rows, indicate missing data
+    if(nrow(x)>10  & ncol(x)>ncol(data_to_print)){
+      cat(paste0("With an additional ", nrow(x)-10, " rows and ", 
+        ncol(x)-ncol(data_to_print), " columns of data."),"\n")
+    }
+    if (nrow(x)<11  & ncol(x)>ncol(data_to_print)){
+      cat(paste0("With an additional ", ncol(x)-ncol(data_to_print), 
+        " columns of data."),"\n")
+    }
+    if(nrow(x)>10 & ncol(x)<=ncol(data_to_print)){
+      cat(paste0("With an additional ", nrow(x)-10, " rows of data."),"\n")
+    }
+    cat("Row values may be truncated to fit console. \n")
+  }
   
-  # if more than 10 rows, indicate missing data
-  if(nrow(x)>10  & ncol(x)>ncol(data_to_print)){
-    cat(paste0("With an additional ", nrow(x)-10, " rows and ", 
-      ncol(x)-ncol(data_to_print), " columns of data."),"\n")
-  }
-  if (nrow(x)<11  & ncol(x)>ncol(data_to_print)){
-    cat(paste0("With an additional ", ncol(x)-ncol(data_to_print), 
-      " columns of data."),"\n")
-  }
-  if(nrow(x)>10 & ncol(x)<=ncol(data_to_print)){
-    cat(paste0("With an additional ", nrow(x)-10, " rows of data."),"\n")
-  }
-  cat("Row values may be truncated to fit console. \n")
   # end of function
 }
 

@@ -50,3 +50,9 @@ test_that("specifying type for WB download returns a message", {
   # retrieve data for level that does not exist
   expect_message(get_objectives("GB520804714300", "WBID", type="River"))
 })
+
+test_that("retuning no objectives give a message", {
+  # retrieve data for level that does not exist
+  expect_message(get_objectives("Cornwall North Coastal", "OC", year=2040))
+})
+

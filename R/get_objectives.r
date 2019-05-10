@@ -125,7 +125,7 @@ get_objectives <- function(ea_name = NULL, column = NULL,
     obj_data <- obj_data[,!grepl("_uri",names(obj_data))]
     # subset data as required
     obj_data<-subset_data(obj_data, column, level, startyr=year, 
-        endyr=NULL, type)
+        endyr=NULL, type, data_type="obj")
     # if there are no objectives returned, give a message
     if (nrow(obj_data)==0){
       message("No objectives specified - empty dataframe returned")
