@@ -1,7 +1,5 @@
 ---
 title: "cde: a run through"
-author: "Dr Rob Briers"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{cde: Get Started}

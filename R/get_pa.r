@@ -28,14 +28,14 @@
 #'
 #' @examples
 #' # get protected areas associated with waterbody GB112071065700
-#' get_pa("GB112071065700", "WBID")
+#' get_pa(ea_name="GB112071065700", column="WBID")
 #' 
 #' # get the protected areas associated with the Humber RBD
-#' get_pa("Humber", "RBD")
+#' get_pa(ea_name="Humber", column="RBD")
 #' 
 #' # get the protected areas associated with the Avon Warwickshire
 #' # Management Catchment
-#' get_pa("Avon Warwickshire", "MC")
+#' get_pa(ea_name="Avon Warwickshire", column="MC")
 #' 
 get_pa <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data, setting years to NULL

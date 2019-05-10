@@ -62,14 +62,14 @@
 #'
 #' @examples
 #' # get all objectives set for waterbody GB112071065700
-#' get_objectives("GB112071065700", "WBID")
+#' get_objectives(ea_name="GB112071065700", column="WBID")
 #' 
 #' # get the objectives set for Lakes in the Humber RBD, for the year 2021
-#' get_objectives("Humber", "RBD", year=2021, type="Lake")
+#' get_objectives(ea_name="Humber", column="RBD", year=2021, type="Lake")
 #' 
 #' # get the objectives set for Rivers in the Avon Warwickshire
 #' # Operational Catchment in relation to Chemical status
-#' get_objectives("Avon Warwickshire", "MC", level="Chemical", type = "River")
+#' get_objectives(ea_name="Avon Warwickshire", "column=MC", level="Chemical", type="River")
 #' 
 get_objectives <- function(ea_name = NULL, column = NULL, 
   level="Overall Water Body", year = NULL, type = NULL) {

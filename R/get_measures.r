@@ -30,10 +30,10 @@
 #'
 #' @examples
 #' # get the measures put in place for the Thames RBD
-#' get_measures("Thames", "RBD")
+#' get_measures(ea_name="Thames", column="RBD")
 #' 
 #' # get the measures put in place for the Loddon Operational Catchment
-#' get_measures("Loddon", "OC")
+#' get_measures(ea_name="Loddon", column="OC")
 #' 
 get_measures <- function(ea_name = NULL, column = NULL) {
   # start by running general checks on input data

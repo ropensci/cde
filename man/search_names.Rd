@@ -32,9 +32,9 @@ EA site.
 }
 \examples{
 # search for River Basin Districts containing "Tweed"
-\dontrun{search_names("Tweed", "RBD")}
+\dontrun{search_names(string="Tweed", column="RBD")}
 
 # search for Management Catchments containing "Kennet"
-\dontrun{search_names("Kennet", "MC")}
+\dontrun{search_names(string="Kennet", column="MC")}
 
 }
