@@ -23,11 +23,11 @@
 #' @export search_names
 #'
 #' @examples
-#' # search for River Basin Districts containing "Tweed"
-#' \dontrun{search_names(string="Tweed", column="RBD")}
+#' # search for sites containing "Tadnoll" in the name
+#' search_names(string="Tadnoll", column="name")
 #' 
-#' # search for Management Catchments containing "Kennet"
-#' \dontrun{search_names(string="Kennet", column="MC")}
+#' # search for Operational Catchments containing "Cornwall"
+#' search_names(string="Cornwall", column="OC")
 #' 
 search_names <- function(string = NULL, column = NULL) {
   search_choices <- c("name","WBID", "MC", "OC", "RBD")

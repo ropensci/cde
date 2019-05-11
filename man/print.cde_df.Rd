@@ -2,7 +2,7 @@
 % Please edit documentation in R/cde-class_and_methods.r
 \name{print.cde_df}
 \alias{print.cde_df}
-\title{Print method definition for cde_df}
+\title{Print method for cde_df}
 \usage{
 \method{print}{cde_df}(x, ...)
 }
@@ -14,5 +14,6 @@ implemented at present.}
 }
 \description{
 Custom \code{print} method for objects of class \code{cde_df}.
-Formats output to fit current width of console.
+Formats output to fit current width of console, keeping full column names 
+but truncating row values as required.
 }

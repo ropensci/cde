@@ -172,24 +172,24 @@ specific values.</p></td>
 objectives have been set at. For full details of the hierarchy of elements 
 within the classification used, see <a href='https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy'>https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy</a>.</p>
 <p>Defaults to 'Overall Water Body'. Possible values for the different levels 
-retrived by the function are shown below.</p><table class='table'>
-<tr><td></td><td></td><td><strong>Level 1</strong></td></tr>
-<tr><td></td><td></td><td><strong>Level 2</strong></td></tr>
-<tr><td></td><td></td><td><strong>Level 4</strong></td></tr>
-<tr><td></td><td></td><td>Ecological</td></tr>
-<tr><td>Biological quality elements</td><td>Overall Water Body</td><td></td></tr>
-<tr><td>Chemical</td><td>Chemical Status element</td><td>-</td></tr>
-<tr><td></td><td>Quantitative</td><td>Hydromorphological Supporting Elements</td></tr>
+retrieved by the function are shown below.</p><table class='table'>
+<tr><td></td><td><strong>Level 1</strong></td><td></td></tr>
+<tr><td></td><td><strong>Level 2</strong></td><td></td></tr>
+<tr><td></td><td><strong>Level 4</strong></td><td></td></tr>
+<tr><td></td><td>Ecological</td><td>Biological quality elements</td></tr>
+<tr><td>Overall Water Body</td><td></td><td>Chemical</td></tr>
+<tr><td>Chemical Status element</td><td>-</td><td></td></tr>
+<tr><td>Quantitative</td><td>Hydromorphological Supporting Elements</td><td>-</td></tr>
+<tr><td></td><td>-</td><td>Other Substances</td></tr>
 <tr><td>-</td><td></td><td>-</td></tr>
-<tr><td>Other Substances</td><td>-</td><td></td></tr>
-<tr><td>-</td><td>Physico-chemical quality elements</td><td>-</td></tr>
-<tr><td></td><td>-</td><td>Priority hazardous substances</td></tr>
+<tr><td>Physico-chemical quality elements</td><td>-</td><td></td></tr>
+<tr><td>-</td><td>Priority hazardous substances</td><td>-</td></tr>
+<tr><td></td><td>-</td><td>Priority substances</td></tr>
 <tr><td>-</td><td></td><td>-</td></tr>
-<tr><td>Priority substances</td><td>-</td><td></td></tr>
-<tr><td>-</td><td>Quantitative Status element</td><td>-</td></tr>
-<tr><td></td><td>-</td><td>Specific pollutants</td></tr>
-<tr><td>-</td><td></td><td>-</td></tr>
-<tr><td>Supporting elements</td><td>-</td><td></td></tr>
+<tr><td>Quantitative Status element</td><td>-</td><td></td></tr>
+<tr><td>-</td><td>Specific pollutants</td><td>-</td></tr>
+<tr><td></td><td>-</td><td>Supporting elements</td></tr>
+<tr><td>-</td><td></td><td></td></tr>
 </table>
 </td>
     </tr>
@@ -226,7 +226,7 @@ see <a href='https://robbriers.github.io/cde/articles/cde-output-reference.html'
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># get Overall Water Body status classification for waterbody GB520804714300</span>
-<span class='fu'>get_status</span>(<span class='st'>"GB520804714300"</span>, <span class='st'>"WBID"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+<span class='fu'>get_status</span>(<span class='kw'>ea_name</span><span class='kw'>=</span><span class='st'>"GB520804714300"</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='st'>"WBID"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
 #&gt;            South West      South West TraC         Tamar Estuary
 #&gt;            South West      South West TraC         Tamar Estuary
 #&gt;            South West      South West TraC         Tamar Estuary
@@ -238,7 +238,7 @@ see <a href='https://robbriers.github.io/cde/articles/cde-output-reference.html'
 #&gt; With an additional 18 columns of data. 
 #&gt; Row values may be truncated to fit console. </div><div class='input'>
 <span class='co'># get status class based on Priority substances for waterbody GB520804714300</span>
-<span class='fu'>get_status</span>(<span class='st'>"GB520804714300"</span>, <span class='st'>"WBID"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='st'>"Priority substances"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+<span class='fu'>get_status</span>(<span class='kw'>ea_name</span><span class='kw'>=</span><span class='st'>"GB520804714300"</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='st'>"WBID"</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='st'>"Priority substances"</span>)</div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
 #&gt;            South West      South West TraC         Tamar Estuary
 #&gt;            South West      South West TraC         Tamar Estuary
 #&gt;            South West      South West TraC         Tamar Estuary
@@ -251,22 +251,22 @@ see <a href='https://robbriers.github.io/cde/articles/cde-output-reference.html'
 #&gt; Row values may be truncated to fit console. </div><div class='input'>
 <span class='co'># get the Overall Water Body status of Lakes in the Humber RBD, between</span>
 <span class='co'># 2012 and 2014</span>
-<span class='fu'>get_status</span>(<span class='st'>"Humber"</span>, <span class='st'>"RBD"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2012</span>, <span class='kw'>endyr</span> <span class='kw'>=</span> <span class='fl'>2014</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Lake"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
-#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
-#&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
+<span class='fu'>get_status</span>(<span class='kw'>ea_name</span><span class='kw'>=</span><span class='st'>"Humber"</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='st'>"RBD"</span>, <span class='kw'>startyr</span><span class='kw'>=</span><span class='fl'>2012</span>, <span class='kw'>endyr</span><span class='kw'>=</span><span class='fl'>2014</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"Lake"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
 #&gt;                Humber Trent Valley Staffor Penk Rivers and Lakes
 #&gt;                Humber Trent Valley Staffor Trent - Sow to Tame R
-#&gt;                Humber Trent Valley Staffor Trent - Sow to Tame R
-#&gt;                Humber Trent Valley Staffor Trent - Sow to Tame R
-#&gt;                Humber Trent Valley Staffor  Sow Rivers and Lakes
-#&gt;                Humber Trent Valley Staffor  Sow Rivers and Lakes
 #&gt;                Humber Trent Valley Staffor  Sow Rivers and Lakes
 #&gt;                Humber Trent Valley Staffor Blithe Rivers and Lak
-#&gt; With an additional 392 rows and 15 columns of data. 
+#&gt;                Humber      Aire and Calder          Calder Upper
+#&gt;                Humber      Aire and Calder          Calder Upper
+#&gt;                Humber      Aire and Calder          Calder Upper
+#&gt;                Humber      Aire and Calder          Calder Upper
+#&gt;                Humber      Aire and Calder          Calder Upper
+#&gt;                Humber      Aire and Calder          Calder Upper
+#&gt; With an additional 124 rows and 15 columns of data. 
 #&gt; Row values may be truncated to fit console. </div><div class='input'>
 <span class='co'># get the Overall Water Body status for Rivers in the Avon Warwickshire</span>
 <span class='co'># Operational Catchment in 2011</span>
-<span class='fu'>get_status</span>(<span class='st'>"Avon Warwickshire"</span>, <span class='st'>"MC"</span>, <span class='kw'>startyr</span> <span class='kw'>=</span> <span class='fl'>2011</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"River"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
+<span class='fu'>get_status</span>(<span class='kw'>ea_name</span><span class='kw'>=</span><span class='st'>"Avon Warwickshire"</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='st'>"MC"</span>, <span class='kw'>startyr</span><span class='kw'>=</span><span class='fl'>2011</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"River"</span>)</div><div class='output co'>#&gt; <span class='message'>Processing data from zipfile...</span></div><div class='output co'>#&gt;  river_basin_district management_catchment operational_catchment
 #&gt;                Severn    Avon Warwickshire  Avon - Midlands West
 #&gt;                Severn    Avon Warwickshire  Avon - Midlands West
 #&gt;                Severn    Avon Warwickshire  Avon - Midlands West

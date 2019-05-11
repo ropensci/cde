@@ -165,14 +165,24 @@ Columns returned are defined in <code><a href='ea_wbids.html'>ea_wbids</a></code
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># search for River Basin Districts containing "Tweed"
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>search_names</span>(<span class='st'>"Tweed"</span>, <span class='st'>"RBD"</span>)
-<span class='co'># }</span><div class='input'>
-# search for Management Catchments containing "Kennet"
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>search_names</span>(<span class='st'>"Kennet"</span>, <span class='st'>"MC"</span>)
-<span class='co'># }</span><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># search for sites containing "Tadnoll" in the name</span>
+<span class='fu'>search_names</span>(<span class='kw'>string</span><span class='kw'>=</span><span class='st'>"Tadnoll"</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='st'>"name"</span>)</div><div class='output co'>#&gt;                WBID                                    name  type
+#&gt; 3694 GB108044009660 Tadnoll Brook (including Empool Bottom) River
+#&gt;                        OC     MC        RBD
+#&gt; 3694 Poole Harbour Rivers Dorset South West</div><div class='input'>
+<span class='co'># search for Operational Catchments containing "Cornwall"</span>
+<span class='fu'>search_names</span>(<span class='kw'>string</span><span class='kw'>=</span><span class='st'>"Cornwall"</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='st'>"OC"</span>)</div><div class='output co'>#&gt;                WBID           name        type                     OC
+#&gt; 3544 GB610807680002 Cornwall North     Coastal Cornwall North Coastal
+#&gt; 3567 GB620806570000 Cornwall South     Coastal Cornwall South Coastal
+#&gt; 3763 GB40802G800300 North Cornwall Groundwater         North Cornwall
+#&gt; 3769 GB40802G800200 South Cornwall Groundwater         South Cornwall
+#&gt; 3772 GB40802G800100  West Cornwall Groundwater          West Cornwall
+#&gt;                   MC        RBD
+#&gt; 3544 South West TraC South West
+#&gt; 3567 South West TraC South West
+#&gt; 3763   South West GW South West
+#&gt; 3769   South West GW South West
+#&gt; 3772   South West GW South West</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

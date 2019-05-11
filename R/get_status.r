@@ -27,19 +27,19 @@
 #' within the classification used, see \url{https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy}.
 #' 
 #' Defaults to 'Overall Water Body'. Possible values for the different levels 
-#' retrived by the function are shown below.
+#' retrieved by the function are shown below.
 #' \tabular{ccc}{
-#'  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
-#'  Ecological \tab Biological quality elements \tab Overall Water Body\cr
-#'Chemical \tab Chemical Status element \tab -\cr
-#'  Quantitative \tab Hydromorphological Supporting Elements \tab -\cr
-#'  - \tab Other Substances \tab -\cr
-#'  - \tab Physico-chemical quality elements \tab -\cr
-#'  - \tab Priority hazardous substances \tab -\cr
-#'  - \tab Priority substances \tab -\cr
-#'  - \tab Quantitative Status element \tab - \cr
-#'  - \tab Specific pollutants \tab -\cr
-#'  - \tab Supporting elements \tab -\cr
+#' \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
+#' Ecological \tab Biological quality elements \tab Overall Water Body\cr
+#' Chemical \tab Chemical Status element \tab -\cr
+#' Quantitative \tab Hydromorphological Supporting Elements \tab -\cr
+#' - \tab Other Substances \tab -\cr
+#' - \tab Physico-chemical quality elements \tab -\cr
+#' - \tab Priority hazardous substances \tab -\cr
+#' - \tab Priority substances \tab -\cr
+#' - \tab Quantitative Status element \tab - \cr
+#' - \tab Specific pollutants \tab -\cr
+#' - \tab Supporting elements \tab -\cr
 #' }
 #'
 #' @param startyr The data can be extracted for specific years using the

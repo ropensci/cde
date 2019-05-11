@@ -13,9 +13,10 @@ as.cde <- function(x) {
   x
 }
 
-#' Print method definition for cde_df
+#' Print method for cde_df
 #' @description Custom \code{print} method for objects of class \code{cde_df}.
-#' Formats output to fit current width of console.
+#' Formats output to fit current width of console, keeping full column names 
+#' but truncating row values as required.
 #' 
 #' @param x An object of class \code{cde_df}.
 #' 

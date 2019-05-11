@@ -25,12 +25,17 @@ objectives have been set at. For full details of the hierarchy of elements
 within the classification used, see \url{https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy}.
 
 Defaults to 'Overall Water Body'. Possible values for the different levels 
-retrived by the function are shown below.
+retrieved by the function are shown below.
+\tabular{ccc}{
+Level 1 \tab Level 2 \tab Level 3 \cr
+This is the first col \tab This is the second column \tab This is the third col \cr
+}
+
 \tabular{ccc}{
  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
- Ecological \tab Biological quality elements \tab Overall Water Body\cr
+Ecological \tab Biological quality elements \tab Overall Water Body \cr
 Chemical \tab Chemical Status element \tab -\cr
- Quantitative \tab Hydromorphological Supporting Elements \tab -\cr
+Quantitative \tab Hydromorphological Supporting Elements \tab -\cr
  - \tab Other Substances \tab -\cr
  - \tab Physico-chemical quality elements \tab -\cr
  - \tab Priority hazardous substances \tab -\cr
@@ -76,7 +81,7 @@ get_objectives(ea_name="GB112071065700", column="WBID")
 get_objectives(ea_name="Humber", column="RBD", year=2021, type="Lake")
 
 # get the objectives set for Rivers in the Avon Warwickshire
-# Operational Catchment in relation to Chemical status
+# Management Catchment in relation to Chemical status
 get_objectives(ea_name="Avon Warwickshire", column="MC", level="Chemical", type="River")
 
 }
