@@ -29,10 +29,6 @@
 #' 
 #' Defaults to 'Overall Water Body'. Possible values for the different levels 
 #' retrieved by the function are shown below.
-#' \tabular{ccc}{
-#' Level 1 \tab Level 2 \tab Level 3 \cr
-#' This is the first col \tab This is the second column \tab This is the third col \cr
-#' }
 #' 
 #' \tabular{ccc}{
 #'  \strong{Level 1} \tab \strong{Level 2} \tab \strong{Level 4}\cr
@@ -61,7 +57,6 @@
 #' of the objectives set for the specified set of waterbodies.
 #' For details of the meaning of the the different columns returned, 
 #' see \url{https://robbriers.github.io/cde/articles/cde-output-reference.html}.
-
 #'
 #' @export get_objectives
 #'
