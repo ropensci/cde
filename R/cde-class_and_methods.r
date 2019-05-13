@@ -34,6 +34,10 @@ print.cde_df <- function(x, ...){
     cols<-min(which(cumsum(nchar(names(x))+2) > getOption("width")))-1
   }else{cols<-ncol(x)}
   
+  # catch if too small to show
+  if (cols==1){
+    stop("Console too narrow to display data")
+  }
   # subset cde_df for just these columns
   data_to_print <- x[,1:cols]
   
