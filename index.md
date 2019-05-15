@@ -55,4 +55,7 @@ remotes::install_github("robbriers/cde")
 ## Basic usage
 
 See the ‘Get started’ vignette or ‘Reference’ sections above for details
-of the different functions.
+of the different
+functions.
+
+[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

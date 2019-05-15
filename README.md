@@ -56,3 +56,5 @@ remotes::install_github("robbriers/cde")
 
 Details of how to use the package can be found at
 <https://robbriers.github.io/cde>.
+
+[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
