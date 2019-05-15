@@ -49,7 +49,7 @@ You can install cde from github with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("robbriers/cde")
+remotes::install_github("ropensci/cde")
 ```
 
 ## Basic usage

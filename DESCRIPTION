@@ -1,7 +1,7 @@
 Package: cde
 Type: Package
 Title: Download Water Framework Directive (WFD) data from the Environment Agency Catchment Data Explorer (CDE) website
-Version: 0.3.0
+Version: 0.3.0.9000
 Authors@R: person("Rob", "Briers", email = "r.briers@napier.ac.uk",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0341-1203"))
 Description: The cde package facilitates searching and download of the
@@ -27,7 +27,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-URL: https://github.com/robbriers/cde
-BugReports: https://github.com/robbriers/cde/issues
+URL: https://github.com/ropensci/cde
+BugReports: https://github.com/ropensci/cde/issues
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

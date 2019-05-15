@@ -49,12 +49,12 @@ You can install cde from github with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("robbriers/cde")
+remotes::install_github("ropensci/cde")
 ```
 
 ## Basic usage
 
 Details of how to use the package can be found at
-<https://robbriers.github.io/cde>.
+<https://ropensci.github.io/cde>.
 
 [![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
