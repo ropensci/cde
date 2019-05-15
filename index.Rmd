@@ -38,6 +38,6 @@ remotes::install_github("ropensci/cde")
 
 ## Basic usage
 
-See the 'Get started' vignette or 'Reference' sections above for details of the different functions.
+See the [Get started](../articles/cde.html)' vignette or [Reference](../reference/index.html) sections above for details of the different functions.
 
 [![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

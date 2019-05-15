@@ -33,7 +33,7 @@ You can install `cde` from github with:
 ```{r gh-installation, eval = FALSE}
 # if you have not done so already
 # install.packages("remotes")
-remotes::install_github("robbriers/cde")
+remotes::install_github("ropensci/cde")
 ```
 
 ## Searching for sites
