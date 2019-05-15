@@ -60,7 +60,7 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 An object of class \code{cde_df} containing the classification 
 details for the specified combination of criteria.
 For details of the meaning of the the different columns returned, 
-see \url{https://robbriers.github.io/cde/articles/cde-output-reference.html}.
+see \url{https://ropensci.github.io/cde/articles/cde-output-reference.html}.
 }
 \description{
 Retrieves WFD Status classification data from EA Catchment 

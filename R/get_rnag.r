@@ -45,7 +45,7 @@
 #' Reasons for Not Achieving Good Status for the specified combination 
 #' of criteria.
 #' For details of the meaning of the the different columns returned, 
-#' see \url{https://robbriers.github.io/cde/articles/cde-output-reference.html}.
+#' see \url{https://ropensci.github.io/cde/articles/cde-output-reference.html}.
 
 #'
 #' @export get_rnag
