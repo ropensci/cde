@@ -34,9 +34,9 @@ website, <https://environment.data.gov.uk/catchment-planning/>.
 WFD reporting data for all waterbodies from the EA CDE website.
 
 The types of data that can be downloaded are: WFD status classification
-data (which can also be plotted), Reasons for Not Achieving Good (RNAG)
-status, objectives set for waterbodies, measures put in place to improve
-water quality and details of associated protected areas.
+data, Reasons for Not Achieving Good (RNAG) status, objectives set for
+waterbodies, measures put in place to improve water quality and details
+of associated protected areas.
 
 The CDE data are made available under the [Open Government Licence
 v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)

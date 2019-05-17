@@ -36,8 +36,7 @@
 download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   # do search to make sure that name is present
   search_names(ea_name, column)
-  # check that this thows out if error given
-  
+
   # this gives either index number (RBD, MC, OC) or wbid for next bit
   index<-find_index(column, ea_name)
   # do download using either zip or plain fread depending on type
