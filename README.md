@@ -11,6 +11,7 @@ Status](https://coveralls.io/repos/github/ropensci/cde/badge.svg?branch=master)]
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://badges.ropensci.org/284_status.svg)](https://github.com/ropensci/onboarding/issues/284)
+[![DOI](https://zenodo.org/badge/92712854.svg)](https://zenodo.org/badge/latestdoi/92712854)
 
 ## Introduction
 

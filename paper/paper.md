@@ -11,7 +11,7 @@ authors:
 affiliations:
  - name: School of Applied Sciences, Edinburgh Napier University
    index: 1
-date: 25 Feburary 2019
+date: 17 May 2019
 bibliography: paper.bib
 
 # Summary
