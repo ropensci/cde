@@ -29,9 +29,9 @@ The package allows users to search for waterbodies, catchments or River Basin Di
 
 *Objectives for waterbodies*: where less than Good status has been achieved, data on the objectives that have been set in terms of status aimed for in the longer term can be downloaded, for specific target years and for specified levels of classification.
 
-*Measures to achieve objectives*: Details of actions that have been put in place or are proposed to achieve the objectives set (currently in relation to the target objective set for 2021). Only data linked to the achievement of a specific outcome in terms of status are included.
+*Measures to achieve objectives*: details of actions that have been put in place or are proposed to achieve the objectives set (currently in relation to the target objective set for 2021). Only data linked to the achievement of a specific outcome in terms of status are included.
 
-*Protected areas*: The package also provides a function to download a summary of associated protected areas (such as Special Areas of Conservation or Nitrate Vulnerable Zones), again at a range of levels from individual waterbodies to whole River Basin Districts.
+*Protected areas*: a summary of associated protected areas (such as Special Areas of Conservation or Nitrate Vulnerable Zones), again at a range of levels from individual waterbodies to whole River Basin Districts.
 
 For each of the types of data that can be downloaded, summary plots can also be produced. These differ depending on the type of data, but an example showing the percentage of water bodies in each status class (derived from the ``get_status`` function) is shown in Figure 1.
 
