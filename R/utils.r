@@ -277,8 +277,8 @@ check_args <- function(ea_name = NULL, column = NULL, startyr = NULL,
 subset_data <- function(full_data, column = NULL, 
     level = "Overall Water Body", startyr = NULL, endyr = NULL, type = NULL, data_type=NULL) {
   
-  # if only start year is set beyond the data range and not objectives
-  # (only value being passed in to data_type) then st to max and ignore endyr
+  # if start year is set beyond the data range and not objectives
+  # (only value being passed in to data_type) then set to max and ignore endyr
   if (!is.null(startyr) & is.null(data_type)){
     if (startyr>max(full_data$year)){
       message(paste0("Start year (", startyr, ") is beyond the most recent year of data (", 
@@ -301,7 +301,14 @@ subset_data <- function(full_data, column = NULL,
     }
   }
   if (!is.null(startyr)) {
-    full_data <- full_data[full_data$year == startyr, ]
+    if(is.null(endyr)){
+    # if only single year specified, just take this
+      full_data <- full_data[full_data$year == startyr, ]
+    }else{
+      # if both years are specified, subset by range
+      full_data <- full_data[full_data$year >= startyr 
+                             & full_data$year <= endyr, ]
+    }
   }
   # level subsetting, defaults to "Overall Water Body"
   # for Chemical and Supporting Elements levels, need to deal with options for
