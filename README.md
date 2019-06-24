@@ -12,6 +12,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://badges.ropensci.org/284_status.svg)](https://github.com/ropensci/onboarding/issues/284)
 [![DOI](https://zenodo.org/badge/92712854.svg)](https://zenodo.org/badge/latestdoi/92712854)
+[![status](http://joss.theoj.org/papers/0d35f75e861fcf47556d70571e226589/status.svg)](http://joss.theoj.org/papers/0d35f75e861fcf47556d70571e226589)
 
 ## Introduction
 

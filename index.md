@@ -12,8 +12,8 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![](https://badges.ropensci.org/284_status.svg)](https://github.com/ropensci/onboarding/issues/284)
 [![DOI](https://zenodo.org/badge/92712854.svg)](https://zenodo.org/badge/latestdoi/92712854)
-
-## Introduction
+[![status](http://joss.theoj.org/papers/0d35f75e861fcf47556d70571e226589/status.svg)](http://joss.theoj.org/papers/0d35f75e861fcf47556d70571e226589)
+\#\# Introduction
 
 Within Europe, the [Water Framework
 Directive](http://ec.europa.eu/environment/water/water-framework/index_en.html)
@@ -32,7 +32,11 @@ requirements of the WFD available via the Catchment Data Explorer (CDE)
 website, <https://environment.data.gov.uk/catchment-planning/>.
 
 `cde` is a package for R which facilitates searching and download of the
-WFD reporting data for all waterbodies from the EA CDE website.
+WFD reporting data for all waterbodies from the EA CDE website. The
+ability to access these data from within the R environment allows for
+efficient collation and interrogation of data and reproducible analysis
+of trends or patterns in water quality and pressures on waterbodies
+across England.
 
 The types of data that can be downloaded are: WFD status classification
 data, Reasons for Not Achieving Good (RNAG) status, objectives set for
@@ -55,10 +59,10 @@ remotes::install_github("ropensci/cde")
 
 ## Basic usage
 
-See the [Get started](https://ropensci.github.io/cde/articles/cde.html)
+See the [Get started](https://docs.ropensci.org/cde/articles/cde.html)
 vignette or
-[Reference](https://ropensci.github.io/cde/reference/index.html)
-sections above for details of the different
+[Reference](https://docs.ropensci.org/cde/reference/index.html) sections
+above for details of the different
 functions.
 
 [![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
