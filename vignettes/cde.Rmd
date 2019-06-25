@@ -204,5 +204,3 @@ lark_OC_meas<-get_measures(ea_name="Lark", column="OC")
 ```
 
 Currently (2019-05-09) there is a problem with the measures data on the CDE website, and no measures information is available to be downloaded, so this will always return an empty dataframe. This is under active investigation by the EA, so should be resolved soon.
-
-Data on different aspects of water quality classification and pressures etc. can be combined using tools such as those within the [dplyr](https://cloud.r-project.org/package=dplyr) package to take analysis further.
