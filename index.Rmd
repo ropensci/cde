@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 # cde <img src="docs/logo/logo.png" align="right" height=140/>
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/cde.svg?branch=master)](https://travis-ci.org/ropensci/cde) [![Coverage Status](https://coveralls.io/repos/github/ropensci/cde/badge.svg?branch=master)](https://coveralls.io/github/ropensci/cde?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![](https://badges.ropensci.org/284_status.svg)](https://github.com/ropensci/onboarding/issues/284) [![DOI](https://zenodo.org/badge/92712854.svg)](https://zenodo.org/badge/latestdoi/92712854)
 [![status](http://joss.theoj.org/papers/0d35f75e861fcf47556d70571e226589/status.svg)](http://joss.theoj.org/papers/0d35f75e861fcf47556d70571e226589)
+
 ## Introduction
 
 Within Europe, the [Water Framework Directive](http://ec.europa.eu/environment/water/water-framework/index_en.html) (WFD) sets EU-wide standards for how the quality of surface- and ground-waters across Europe is assessed and classified. Assessment of quality using the WFD is based on a range of elements that vary depending on the type of water being assessed and are combined to give an overall classification of waterbodies into five classes (High, Good, Moderate, Poor and Bad) for surface waters and two classes (Good or Poor) for groundwaters.
