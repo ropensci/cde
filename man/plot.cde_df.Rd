@@ -11,9 +11,9 @@
 
 \item{...}{Other arguments passed on to individual methods. The only other
 argument implemented at present is \code{scheme}. For \code{status} and 
-\code{objectives} this defines which colour scheme to use with plots.It 
+\code{objectives} data this defines which colour scheme to use with plots. It 
 defaults to a viridis-based scheme (\code{scheme="vir"}). Alternatively, the 
-colours specified in the WFD document ca be used by specifying 
+colours specified in the WFD document can be used by specifying 
 \code{scheme="wfd"}.}
 }
 \description{

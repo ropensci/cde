@@ -54,7 +54,7 @@ waterbody type. Possible values are \code{River}, \code{Lake},
 An object of class \code{cde_df} containing the details 
 of the objectives set for the specified set of waterbodies.
 For details of the meaning of the the different columns returned, 
-see \url{https://ropensci.github.io/cde/articles/cde-output-reference.html}.
+see \url{https://docs.ropensci.org/cde/articles/cde-output-reference.html}.
 }
 \description{
 Retrieves details of objectives set for waterbodies in terms

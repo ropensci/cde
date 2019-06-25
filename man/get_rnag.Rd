@@ -28,8 +28,7 @@ all years are returned. RNAG data are only available from 2013 onwards.}
 \item{endyr}{The data can be extracted for specific years using the
 \code{startyr} and \code{endyr} arguments. The \code{endyr} should
 only be specified if \code{startyr} is also included, otherwise it
-is ignored and all years are returned. RNAG data are only available from 
-2013 onwards.}
+returns an error. RNAG data are only available from 2013 onwards.}
 
 \item{type}{Type of waterbody to be extracted. For Operational/Management
 catchment level or RBD level queries, the data can also be subset by
@@ -41,7 +40,7 @@ An object of class \code{cde_df} containing the details of the
 Reasons for Not Achieving Good Status for the specified combination 
 of criteria.
 For details of the meaning of the the different columns returned, 
-see \url{https://ropensci.github.io/cde/articles/cde-output-reference.html}.
+see \url{https://docs.ropensci.org/cde/articles/cde-output-reference.html}.
 }
 \description{
 Retrieves details of Reasons for Not Achieving Good (RNAG)
@@ -55,7 +54,7 @@ For Management Catchment (\code{MC}), Operational
 Catchment (\code{OC}) or River Basin District (\code{RBD}) level
 downloads, waterbody \code{type} can also be specified to allow
 extraction of specific waterbody types (River, Lake etc).
-Data is presented at the level of individual elements that are the
+Data are presented at the level of individual elements that are the
 reasons for not achieving good status.
 }
 \examples{
