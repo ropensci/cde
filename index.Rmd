@@ -44,5 +44,3 @@ See the [Get started](https://docs.ropensci.org/cde/articles/cde.html) vignette 
 ## Contributing
 
 For details of how to contribute to this package, see [here](https://docs.ropensci.org/cde/CONTRIBUTING.html).
-
-[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
