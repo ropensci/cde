@@ -1,4 +1,8 @@
-# cde (development version)
+# cde 0.4.1
+
+### BUG FIX
+
+  * Fixed bug in year subsetting caused by accidental deletion of endyear code
 
 cde 0.4.0 (2019-05-17)
 =========================
