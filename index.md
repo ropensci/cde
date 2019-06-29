@@ -12,7 +12,7 @@ Within Europe, the [Water Framework Directive](http://ec.europa.eu/environment/w
 
 In the UK the Environment Agency (EA) is the competent authority responsible for monitoring and assessment of water quality within England. The EA have made the reporting data relating to the requirements of the WFD available via the Catchment Data Explorer (CDE) website, <https://environment.data.gov.uk/catchment-planning/>.
 
-`cde` is a package for R which facilitates searching and download of the WFD reporting data for all waterbodies from the EA CDE website. The ability to access these data from within the R environment allows for efficient collation and interrogation of data and reproducible analysis of trends or patterns in water quality and pressures on waterbodies across England.
+`cde` is a package for R which facilitates searching and download of the WFD reporting data for all waterbodies from the EA CDE website. The ability to access these data from within the R environment allows for efficient collation and interrogation of data and reproducible analysis of trends or patterns in water quality and pressures on waterbodies across England. There are also some inconsistencies in the way in which the data are structured within the original CDE website; `cde` provides consistently named and structured output which facilitates further analysis.
 
 The types of data that can be downloaded are: WFD status classification data, Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.
 
