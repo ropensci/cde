@@ -132,6 +132,9 @@ trunc_char <- function(x, col_name_lengths){
 #' @export
 #' 
 plot.cde_df <- function(x, ...) {
+  # save the original graphics pars
+  old.par <- par(no.readonly = TRUE)
+  
   # set up the choice of plotting levels
   plot_choices <- c("MC", "OC", "RBD")
 
@@ -152,6 +155,9 @@ plot.cde_df <- function(x, ...) {
     stop("Type of data cannot be determined for plotting")
   }
   plot_choice(x, meta_data[[1]][1], ...)
+  
+  # reset the graphics pars
+  par(old.par)
 } # end of function
 
 #' Function to select the right plot type depending on data
@@ -213,10 +219,7 @@ plot_categories<-function(x, data_type){
 #' @noRd
 plot_histogram<-function(column, data_type){
 
-    # save the original graphics pars
-  old.par <- par(no.readonly = TRUE)
-
-    # change margins to fit column text lengths
+  # change margins to fit column text lengths
   par(mar=c(5,(max(nchar(column))/2)-2,2,2))
 
     # do the actual plotting
@@ -230,8 +233,6 @@ plot_histogram<-function(column, data_type){
           cex.axis=0.8, las=2,space=0,col=viridisLite::viridis(nrow(table(column))), 
           xpd=FALSE, xlab=xlabel, cex.lab=0.8)
 
-  # reset the graphics pars
-  par(old.par)
 }
 
 #' Plot Status Summary
