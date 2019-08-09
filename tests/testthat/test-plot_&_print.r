@@ -12,46 +12,46 @@ test_that("plotting WBID data results in error", {
    expect_error(plot(get_status("Avon Warwickshire", "MC"),scheme="Aardvark"))
  })
  
- test_that("plotting status returns a vector of given length", {
+ test_that("plotting status returns a null", {
    # download all Avon Warwickshire MC chemical status
    testframe<-get_status("Avon Warwickshire", "MC", level="Chemical")
-   # check that the vector has a length of 8
-   expect_true(length(plot(testframe))== 8)
+   # check that the plot output is null
+   expect_true(is.null(plot(testframe)))
  })
 
- test_that("plotting status (one year) returns a vector of given length", {
+ test_that("plotting status (one year) returns a null", {
     # download Avon Warwickshire MC chemical status for 2015
     testframe<-get_status("Avon Warwickshire", "MC", startyr=2015, level="Chemical")
-    # check that the vector has a length of 2
-    expect_true(length(plot(testframe))== 2)
+    # check that the plot output is null
+    expect_true(is.null(plot(testframe)))
  })
 
- test_that("plotting objectives (one year/class) returns a vector", {
+ test_that("plotting objectives (one year/class) returns a null", {
     # download objectives for Avon Warwickshire MC chemical status in 2027
     testframe<-get_objectives("Avon Warwickshire", "MC", year=2027, level="Chemical")
-    # check that the vector has a length of 1
-    expect_true(length(plot(testframe))== 1)
+    # check that the plot output is null
+    expect_true(is.null(plot(testframe)))
  })
  
- test_that("plotting objectives returns a vector of given length", {
+ test_that("plotting objectives returns a null", {
    # download objectives for Avon Warwickshire MC chemical status
    testframe<-get_objectives("Avon Warwickshire", "MC", level="Chemical")
-   # check that the vector has a length of 8
-   expect_true(length(plot(testframe))== 3)
+   # check that the plot output is null
+   expect_true(is.null(plot(testframe)))
  })
  
- test_that("plotting rnag returns a list", {
+ test_that("plotting rnag returns a null", {
    # download Avon Warwickshire MC RNAG
    testframe<-get_rnag("Avon Warwickshire", "MC")
-   # check that the vector has a length of 8
-   expect_true(is.list(plot(testframe)))
+   # check that the plot output is null
+   expect_true(is.null(plot(testframe)))
  })
  
- test_that("plotting pa returns a list", {
+ test_that("plotting pa returns a null", {
    # download all pa in Thames RBD
    testframe<-get_pa("Thames", "RBD")
-   # check that the plot output is a list
-   expect_true(is.list(plot(testframe)))
+   # check that the plot output is null
+   expect_true(is.null(plot(testframe)))
  })
  
  test_that("printing returns a null", {
