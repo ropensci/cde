@@ -157,7 +157,7 @@ plot.cde_df <- function(x, ...) {
   plot_choice(x, meta_data[[1]][1], ...)
   
   # reset the graphics pars
-  par(old.par)
+  on.exit(par(old.par))
 } # end of function
 
 #' Function to select the right plot type depending on data
