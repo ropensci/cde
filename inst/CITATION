@@ -2,7 +2,7 @@ citHeader("To cite cde in publications use:")
 
 citEntry(entry = "Article",
   title        = "cde - R package to retrieve data from the Environment Agency Catchment Data Explorer site",
-  author       = personList(as.person("Briers Robert A")),
+  author       = personList(person("Briers Robert A")),
   journal      = "Journal of Open Source Software",
   year         = "2019",
   volume       = "4",
@@ -11,7 +11,7 @@ citEntry(entry = "Article",
   url          = "https://doi.org/10.21105/joss.01473",
 
   textVersion  =
-  paste("Robert Briers (2019).",
+  paste("Robert A Briers (2019).",
         "cde - R package to retrieve data from the Environment Agency Catchment Data Explorer site.",
         "Journal of Open Source Software, 4(39), 1473.",
         "URL https://doi.org/10.21105/joss.01473/.")
