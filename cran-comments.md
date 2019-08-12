@@ -1,7 +1,7 @@
 cde v 0.4.1
 ================
 Rob Briers
-2019-07-04
+2019-08-12
 
 ## Test environments
 
@@ -32,3 +32,9 @@ supporting docs.
 ## Downstream dependencies
 
 There aren’t any.
+
+## Resubmission notes
+
+The text of the DESCRIPTION has been updated to not start ‘The cde
+package…’ and the code has been revised so that no changes are made to
+the ‘par’ settings of the user.
