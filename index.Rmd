@@ -29,8 +29,13 @@ The types of data that can be downloaded are: WFD status classification data, Re
 The CDE data are made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) and use of the data accessed by and contained within this package implies acceptance of these licence conditions.
 
 ## Installation
+You can install the stable version of `cde` from CRAN with:
 
-You can install cde from github with:
+```{r cran-installation, eval = FALSE}
+install.packages("cde")
+```
+
+Or you can install the current development version from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("remotes")

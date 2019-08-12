@@ -30,7 +30,13 @@ The CDE data are made available under the [Open Government Licence v3.0](https:/
 
 ## Installation
 
-You can install cde from github with:
+You can install the stable version of `cde` from CRAN with:
+
+```{r cran-installation, eval = FALSE}
+install.packages("cde")
+```
+
+Or you can install the current development version from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("remotes")
