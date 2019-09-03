@@ -1,13 +1,13 @@
 Package: cde
 Type: Package
-Title: Download Water Framework Directive (WFD) Data from the Environment Agency Catchment Data Explorer (CDE) Website
+Title: Download Data from the Catchment Data Explorer Website
 Version: 0.4.1
 Authors@R: person("Rob", "Briers", email = "r.briers@napier.ac.uk",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0341-1203"))
-Description: Facilitates searching and download of the
-  WFD-related data for all waterbodies within the Environment Agency area.
-  The types of data that can be downloaded are: WFD status classification data
-  (which can also be plotted), Reasons for Not Achieving Good (RNAG) status,
+Description: Facilitates searching, download and plotting of Water Framework 
+  Directive (WFD) reporting data for all waterbodies within the UK Environment 
+  Agency area. The types of data that can be downloaded are: WFD status 
+  classification data, Reasons for Not Achieving Good (RNAG) status, 
   objectives set for waterbodies, measures put in place to improve water 
   quality and details of associated protected areas. The site accessed is 
   <https://environment.data.gov.uk/catchment-planning/>. The data are made 
@@ -16,7 +16,7 @@ Description: Facilitates searching and download of the
   This package has been peer-reviewed by rOpenSci (v. 0.4.0).
 Depends:
     R (>= 3.0.0)
-License: GPL-3 | file LICENCE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:

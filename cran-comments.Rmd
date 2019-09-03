@@ -45,4 +45,6 @@ There aren't any.
 
 ## Resubmission notes
 
-The text of the DESCRIPTION has been updated to not start 'The cde package...' and the code has been revised so that no changes are made to the 'par' settings of the user.
+The title of the package has been reduced to less than 65 characters 
+and the additional LICENCE file and reference to this in the DESCRIPTION
+have been removed.

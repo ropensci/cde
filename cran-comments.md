@@ -1,7 +1,7 @@
 cde v 0.4.1
 ================
 Rob Briers
-2019-08-12
+2019-09-03
 
 ## Test environments
 
@@ -35,6 +35,6 @@ There aren’t any.
 
 ## Resubmission notes
 
-The text of the DESCRIPTION has been updated to not start ‘The cde
-package…’ and the code has been revised so that no changes are made to
-the ‘par’ settings of the user.
+The title of the package has been reduced to less than 65 characters and
+the additional LICENCE file and reference to this in the DESCRIPTION
+have been removed.
