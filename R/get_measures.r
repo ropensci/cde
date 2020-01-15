@@ -12,7 +12,7 @@
 #' \code{OC}, \code{MC} or \code{RBD} level downloads or \code{WBID} for 
 #' individual waterbodies) of the features to be extracted. For example 
 #' to extract data for the whole of the Humber RBD, this would be "Humber"; 
-#' also see examples. Must be anexact match to the values used in the EA 
+#' also see examples. Must be an exact match to the values used in the EA 
 #' database. Use the \code{\link{search_names}} function to search for 
 #' specific values.
 #'
