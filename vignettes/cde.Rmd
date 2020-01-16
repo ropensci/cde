@@ -209,4 +209,8 @@ For details of the meaning of the the different columns returned, see the [outpu
 lark_OC_meas<-get_measures(ea_name="Lark", column="OC")
 ```
 
-Currently (2019-05-09) there is a problem with the measures data on the CDE website, and no measures information is available to be downloaded, so this will always return an empty dataframe. This is under active investigation by the EA, so should be resolved soon.
+Plotting the output of `get_measures` produces a frequency histogram of the `measure_category_1` column within the area specified.
+
+```{r lark measures plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+plot(lark_OC_meas)
+```
