@@ -7,12 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+
 
 ## Introduction
 
@@ -30,13 +25,15 @@ The CDE data are made available under the [Open Government Licence v3.0](https:/
 
 You can install the stable version of `cde` from CRAN with:
 
-```{r cran-installation, eval = FALSE}
+
+```r
 install.packages("cde")
 ```
 
 Or you can install the current development version from github with:
 
-```{r gh-installation, eval = FALSE}
+
+```r
 # if you have not done so already
 # install.packages("remotes")
 remotes::install_github("ropensci/cde")
@@ -46,7 +43,8 @@ remotes::install_github("ropensci/cde")
 
 The `search_sites` function allows you to search for waterbodies, Operational or Management Catchments or River Basin Districts that contain a match or partial match for a specified search string (which is case-sensitive). There is a hierarchical relationship between waterbodies, catchments and River Basin Districts (RBD) as shown [here](https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy). As an example, we will search for waterbodies containing the name "Lark".
 
-```{r load and search, eval = TRUE}
+
+```r
 # load the package
 library(cde)
 
@@ -56,14 +54,22 @@ lark_wb<-search_names(string="Lark", column="name")
 
 The dataframe returned contains details of all the waterbodies containing the string "Lark" in their name. The details returned include waterbody id codes (WBID), type of waterbody, Operational and Management Catchment names and River Basin District.
 
-```{r show lark_wb content,eval=TRUE}
+
+```r
 # show the top 6 rows of the 'name' column
 head(lark_wb$name)
+#> [1] "Lark (US Hawstead)"                   
+#> [2] "Lark downstream of Mill Street Bridge"
+#> [3] "Lark (Hawstead to Abbey Gardens)"     
+#> [4] "Lark (Abbey Gardens to Mildenhall)"   
+#> [5] "Lark"                                 
+#> [6] "Lark - Fynn (d/s confluence)"
 ```
 
 To search for Operational Catchments containing the same string we would use the following code.
 
-```{r lark search, eval=TRUE}
+
+```r
 lark_oc<-search_names(string="Lark", column="OC")
 ```
 
@@ -90,13 +96,28 @@ The function returns an object of class `cde_df` (basically a dataframe with cus
 
 For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
 
-```{r status data, eval=TRUE}
+
+```r
 # extract overall waterbody status classification data for a single 
 # waterbody in all years
 
 # first decide which waterbody, we can use one from the first search 
 # above (need the WBID information)
 head(lark_wb)
+#>                WBID                                  name  type    OC
+#> 1911 GB105033042920                    Lark (US Hawstead) River  Lark
+#> 1912 GB105033043052 Lark downstream of Mill Street Bridge River  Lark
+#> 1914 GB105033042940      Lark (Hawstead to Abbey Gardens) River  Lark
+#> 1918 GB105033043051    Lark (Abbey Gardens to Mildenhall) River  Lark
+#> 2197 GB105035040360                                  Lark River Deben
+#> 2200 GB105035040300          Lark - Fynn (d/s confluence) River Deben
+#>                    MC     RBD
+#> 1911 Cam and Ely Ouse Anglian
+#> 1912 Cam and Ely Ouse Anglian
+#> 1914 Cam and Ely Ouse Anglian
+#> 1918 Cam and Ely Ouse Anglian
+#> 2197     East Suffolk Anglian
+#> 2200     East Suffolk Anglian
 
 # we will get data for the first waterbody here (WBID: GB105033042920, 
 # name: Lark (US Hawstead))
@@ -105,23 +126,52 @@ lark_hawstead<-get_status(ea_name="GB105033042920", column="WBID")
 # the dataframe returned contains all of the data for this site in all 
 # years (we did not specify year/year range).
 lark_hawstead
+#>  river_basin_district management_catchment operational_catchment
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#> With an additional 18 columns of data. 
+#> Row values may be truncated to fit console.
 
 # just a quick look at the actual status data
 table(lark_hawstead$status)
+#> 
+#>     Good Moderate 
+#>        1        7
 ```
 
 An example of a higher level download, specifying a year range and type (in this case Rivers).
 
-```{r lark river,eval=TRUE}
+
+```r
 # download status data for a given year range and type of waterbody
 lark_OC_rivers<-get_status(ea_name="Lark", column="OC", startyr=2013, endyr=2015, type="River")
 # print out the results
 lark_OC_rivers
+#>  river_basin_district management_catchment operational_catchment
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#>               Anglian     Cam and Ely Ouse                  Lark
+#> With an additional 26 rows and 15 columns of data. 
+#> Row values may be truncated to fit console.
 ```
 
 To get information about status classification in relation to a specific level in the classification, we can specify `level` as well (see table above for options and [here](https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy) for more details on the classification levels used).
 
-```{r lark rivers chem, eval=TRUE}
+
+```r
 # download Chemical status for rivers in all years
 lark_OC_rivers_chem<-get_status(ea_name="Lark", column="OC", type="River", level="Chemical")
 ```
@@ -130,21 +180,27 @@ lark_OC_rivers_chem<-get_status(ea_name="Lark", column="OC", type="River", level
 
 The `get_status` function, along with other `get_...` functions, has a `plot` method which provides quick overview plots of status classes, giving a plot of percentages of waterbodies in different status classes for the combination of criteria specified. Plotting is only possible for Operational/Management Catchment or River Basin District downloads.
 
-```{r lark plot, fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+
+```r
 # get overall waterbody status information for the Lark OC between 2013 and 2015
 lark_OC_2013_15 <- get_status(ea_name="Lark", column="OC", startyr=2013, endyr=2015)
 # plot the data
 plot(lark_OC_2013_15)
 ```
 
+<img src="figure/lark plot-1.png" title="plot of chunk lark plot" alt="plot of chunk lark plot" style="display: block; margin: auto;" />
+
 For plots, the colour scheme used is based on the `viridis` palette. For `get_status` and `get_objectives` an alternative colour scheme, based on the WFD-defined status class colours, can be used instead by setting `scheme="wfd"` within a `plot` call. Also if a single year is specified, a standard (as opposed to stacked) barplot is produced as shown below.
 
-```{r lark riverplot wfd,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+
+```r
 # get the overall waterbody status information for rivers in the Lark OC in 2015
 lark_OC_rivers_2015 <- get_status(ea_name="Lark", column="OC", startyr=2015, type="River")
 # plot these data, using WFD colour scheme
 plot(lark_OC_rivers_2015, scheme="wfd")
 ```
+
+<img src="figure/lark riverplot wfd-1.png" title="plot of chunk lark riverplot wfd" alt="plot of chunk lark riverplot wfd" style="display: block; margin: auto;" />
 
 ## Reasons for Not Achieving Good status
 
@@ -152,17 +208,21 @@ Not all waterbodies in the Lark Operational Catchment example above have achieve
 
 For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
 
-```{r RNAG in Lark, eval=TRUE}
+
+```r
 # what are the RNAG for the Lark OC between 2013 and 2015
 lark_OC_RNAG_2013_15<-get_rnag(ea_name="Lark", column="OC", startyr=2013, endyr=2015)
 ```
 
 Plots of RNAG data are given as frequency histograms of the occurence of information in the `pressure_tier_3` column. For details of this, see the [reference list](../articles/cde-output-reference.html).
 
-```{r lark RNAG plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+
+```r
 # plot RNAG data for the Lark OC, between 2013 and 2015
 plot(lark_OC_RNAG_2013_15)
 ```
+
+<img src="figure/lark RNAG plot-1.png" title="plot of chunk lark RNAG plot" alt="plot of chunk lark RNAG plot" style="display: block; margin: auto;" />
 
 ## Objectives set for waterbodies
 
@@ -170,16 +230,20 @@ For those waterbodies that are at less than Good status, objectives are set to i
 
 For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
 
-```{r lark obj, eval=TRUE}
+
+```r
 # download the objectives set for 2015 for the Lark Operational Catchment
 lark_OC_obj_2015<-get_objectives(ea_name="Lark", column="OC", year=2015)
 ```
 
 Plotting of objectives is similar to that of `get_status` data, except the status classes represent the target objectives predicted to be achieved by the date specified.
-```{r lark obj plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+
+```r
 # plot the objectives for the Lark OC in 2015
 plot(lark_OC_obj_2015)
 ```
+
+<img src="figure/lark obj plot-1.png" title="plot of chunk lark obj plot" alt="plot of chunk lark obj plot" style="display: block; margin: auto;" />
 
 ## Protected Areas
 
@@ -187,16 +251,20 @@ The `get_pa` function downloads details of the protected areas associated with a
 
 For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
 
-```{r lark PA, eval=TRUE}
+
+```r
 # get details of the protected areas within the Lark Operational Catchment
 lark_OC_pa<-get_pa(ea_name="Lark", column="OC")
 ```
 
 Plotting the output of `get_pa` produces a frequency histogram of the `protected_area_type` column within the area specified.
 
-```{r lark pa plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+
+```r
 plot(lark_OC_pa)
 ```
+
+<img src="figure/lark pa plot-1.png" title="plot of chunk lark pa plot" alt="plot of chunk lark pa plot" style="display: block; margin: auto;" />
 
 ## Measures put in place to improve status
 
@@ -204,13 +272,17 @@ Measures are the planned actions that are intended to achieve the objectives set
 
 For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
 
-```{r lark measures, eval=TRUE}
+
+```r
 # what measures are there for the Lark Operational Catchment?
 lark_OC_meas<-get_measures(ea_name="Lark", column="OC")
 ```
 
 Plotting the output of `get_measures` produces a frequency histogram of the `measure_category_1` column within the area specified.
 
-```{r lark measures plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
+
+```r
 plot(lark_OC_meas)
 ```
+
+<img src="figure/lark measures plot-1.png" title="plot of chunk lark measures plot" alt="plot of chunk lark measures plot" style="display: block; margin: auto;" />
