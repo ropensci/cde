@@ -3,7 +3,6 @@
 \docType{package}
 \name{cde}
 \alias{cde}
-\alias{cde-package}
 \title{cde: Download Water Framework Directive (WFD) data from the 
 Environment Agency Catchment Data Explorer (CDE) website.}
 \description{

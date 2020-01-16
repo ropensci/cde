@@ -105,7 +105,7 @@ trunc_char <- function(x, col_name_lengths){
 #'   \item{rnag} 
 #'   (pressure_tier_3)
 #'   \item {measures} 
-#'   (measure_tier_1)
+#'   (measure_category_1)
 #'   \item {pa} 
 #'   (protected_area_type)
 #'}
@@ -198,7 +198,7 @@ plot_choice<-function(x, data_type, scheme="vir"){
 plot_categories<-function(x, data_type){
   switch(data_type,
          "pa"=plot_histogram(x$protected_area_type, data_type),
-         "measures"=plot_histogram(x$measure_type, data_type),
+         "measures"=plot_histogram(x$measure_category_1, data_type),
          "rnag"=plot_histogram(x$pressure_tier_3, data_type))
 }
 
@@ -229,6 +229,10 @@ plot_histogram<-function(column, data_type){
   if (data_type=="pa"){
     xlabel="Number of protected areas"
   }
+  if (data_type=="measures"){
+    xlabel="Frequency of measure type"
+  }
+  
   barplot(sort(table(column), decreasing=TRUE), horiz=TRUE, cex.names=0.8,
           cex.axis=0.8, las=2,space=0,col=viridisLite::viridis(nrow(table(column))), 
           xpd=FALSE, xlab=xlabel, cex.lab=0.8)

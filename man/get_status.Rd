@@ -4,9 +4,14 @@
 \alias{get_status}
 \title{Retrieve WFD Status Classification Data}
 \usage{
-get_status(ea_name = NULL, column = NULL,
-  level = "Overall Water Body", startyr = NULL, endyr = NULL,
-  type = NULL)
+get_status(
+  ea_name = NULL,
+  column = NULL,
+  level = "Overall Water Body",
+  startyr = NULL,
+  endyr = NULL,
+  type = NULL
+)
 }
 \arguments{
 \item{ea_name}{A string representing the description (\code{name} for 

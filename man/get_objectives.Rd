@@ -4,8 +4,13 @@
 \alias{get_objectives}
 \title{Retrieve Objectives set for waterbodies}
 \usage{
-get_objectives(ea_name = NULL, column = NULL,
-  level = "Overall Water Body", year = NULL, type = NULL)
+get_objectives(
+  ea_name = NULL,
+  column = NULL,
+  level = "Overall Water Body",
+  year = NULL,
+  type = NULL
+)
 }
 \arguments{
 \item{ea_name}{A string representing the description (\code{name} for 

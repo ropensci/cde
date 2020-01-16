@@ -4,8 +4,13 @@
 \alias{get_rnag}
 \title{Retrieve Reasons for Not Achieving Good Status}
 \usage{
-get_rnag(ea_name = NULL, column = NULL, startyr = NULL,
-  endyr = NULL, type = NULL)
+get_rnag(
+  ea_name = NULL,
+  column = NULL,
+  startyr = NULL,
+  endyr = NULL,
+  type = NULL
+)
 }
 \arguments{
 \item{ea_name}{A string representing the description (\code{name} for 

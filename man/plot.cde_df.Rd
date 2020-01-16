@@ -31,7 +31,7 @@ histogram. The columns plotted for each data type are given below:
   \item{rnag} 
   (pressure_tier_3)
   \item {measures} 
-  (measure_tier_1)
+  (measure_category_1)
   \item {pa} 
   (protected_area_type)
 }
