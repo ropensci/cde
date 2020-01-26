@@ -209,7 +209,7 @@ For details of the meaning of the the different columns returned, see the [outpu
 lark_OC_meas<-get_measures(ea_name="Lark", column="OC")
 ```
 
-Plotting the output of `get_measures` produces a frequency histogram of the `measure_category_1` column within the area specified.
+Plotting the output of `get_measures` produces a frequency histogram of the `measure_category_1` column within the area specified. In this case, there is only one measure specified.
 
 ```{r lark measures plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
 plot(lark_OC_meas)
