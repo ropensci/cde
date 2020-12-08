@@ -4,7 +4,8 @@
 \name{ea_wbids}
 \alias{ea_wbids}
 \title{Details of name and index of all sites/catchments.}
-\format{A data frame with 5237 rows and 9 variables:
+\format{
+A data frame with 5237 rows and 9 variables:
 \describe{
   \item{WBID}{identifier for individual waterbodies}
   \item{name}{detailed name of the site/catchment}
@@ -17,7 +18,8 @@
   \item{RBD_num}{Index number of the River Basin District}
 }
 For details of the hierarchy of the different catchment types, see
-\url{https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy}}
+\url{https://environment.data.gov.uk/catchment-planning/help#help-catchment-hierarchy}
+}
 \source{
 \url{https://environment.data.gov.uk/catchment-planning/}
 }

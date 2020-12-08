@@ -29,5 +29,5 @@ Suggests:
     rmarkdown
 URL: https://docs.ropensci.org/cde, https://github.com/ropensci/cde
 BugReports: https://github.com/ropensci/cde/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
