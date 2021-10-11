@@ -40,14 +40,15 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
   # this gives either index number (RBD, MC, OC) or wbid for next bit
   index<-find_index(column, ea_name)
   # do download using either zip or plain fread depending on type
-  if (column=="RBD" | column=="MC"){
-    cde_data <- zip_download(set_url(column, data_type, index))
-  } else{
+  ############################################# removing zip dls ###############
+  ### if (column=="RBD" | column=="MC"){
+  #  cde_data <- zip_download(set_url(column, data_type, index))
+  #} else{
     cde_data <- tryCatch(data.table::fread(set_url(column, data_type, index),
                     showProgress = TRUE, header = TRUE, stringsAsFactors = FALSE, 
                     check.names=TRUE, data.table=FALSE),
                     warning=function(w){})
-  }
+  ###########################################################}
   # substitute . for _ in all column names
   names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
   # convert all to lower case
@@ -66,11 +67,14 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
 
 set_end_url<-function(data_type){
   switch(data_type, 
-         "class" = "/classification?item=all&status=all&format=csv",
-         "rnag" = "/ReasonsForNotAchievingGood?item=all&format=csv",
-         "measures" = "/Action?format=csv",
-         "pa" = "/pa/csv",
-         "objectives" = "/outcome?item=all&status=all&format=csv")
+         #         "class" = "/classification?item=all&status=all&format=csv",
+
+         "class" = "/classifications.csv",
+         "rnag" = "/rnags.csv",
+         # not sure there are any measures info available now
+         #"measures" = "/Action?format=csv",
+         "pa" = "/protected-areas.csv",
+         "objectives" = "/objectives.csv")
 }
 
 #' Set end URL for WBID level downloads (different format to rest)
@@ -113,7 +117,9 @@ set_url<-function(column, data_type, index){
        "RBD"=paste0(start_url, "RiverBasinDistrict/", index, set_end_url(data_type)),
        "MC"=paste0(start_url, "ManagementCatchment/", index, set_end_url(data_type)),
        "OC"=paste0(start_url, "OperationalCatchment/", index, set_end_url(data_type)),
-       "WBID"=paste0(start_url, wbid_end_url(data_type, index))
+        # wbids now consistent with others
+        #"WBID"=paste0(start_url, wbid_end_url(data_type, index))
+       "WBID"=paste0(start_url, "WaterBody/", index, set_end_url(data_type))
 )
 }
 
