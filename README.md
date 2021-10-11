@@ -19,6 +19,10 @@ Version](http://www.r-pkg.org/badges/version/cde)](http://www.r-pkg.org/pkg/cde)
 
 ## Introduction
 
+**NOTE: The EA has recently changed the format of their API, so none of
+the download functions in the package are currently working. This is
+being worked on and a new release will be made once fixed.**
+
 Within Europe, the [Water Framework
 Directive](http://ec.europa.eu/environment/water/water-framework/index_en.html)
 (WFD) sets EU-wide standards for how the quality of surface- and
@@ -57,13 +61,7 @@ implies acceptance of these licence conditions.
 
 ## Installation
 
-You can install the stable version of `cde` from CRAN with:
-
-``` r
-install.packages("cde")
-```
-
-Or you can install the current development version from github with:
+You can install the current development version from github with:
 
 ``` r
 # install.packages("remotes")
