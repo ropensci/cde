@@ -25,16 +25,6 @@
 #' \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 #' (Management Catchment) and \code{RBD} (River Basin District)
 #'
-#' @param startyr The data can be extracted for specific years using the
-#' \code{startyr} and \code{endyr} arguments. If only \code{startyr} is
-#' specified this extracts for a particular year. If no years are specified
-#' all years are returned. RNAG data are only available from 2013 onwards.
-#'
-#' @param endyr The data can be extracted for specific years using the
-#' \code{startyr} and \code{endyr} arguments. The \code{endyr} should
-#' only be specified if \code{startyr} is also included, otherwise it
-#' returns an error. RNAG data are only available from 2013 onwards.
-#'
 #' @param type Type of waterbody to be extracted. For Operational/Management
 #' catchment level or RBD level queries, the data can also be subset by
 #' waterbody type. Possible values are \code{River}, \code{Lake},
@@ -55,23 +45,16 @@
 #' 
 #' # get the RNAG issues for Lakes in the Humber RBD, between
 #' # 2013 and 2014
-#' get_rnag(ea_name="Humber", column="RBD", startyr=2013, endyr=2014, type="Lake")
+#' get_rnag(ea_name="Humber", column="RBD", type="Lake")
 #' 
 #' # get the RNAG issues for Rivers in the Avon Warwickshire
-#' # Management Catchment in 2015
-#' get_rnag(ea_name="Avon Warwickshire", column="MC", startyr=2015, type="River")
+#' # Management Catchment
+#' get_rnag(ea_name="Avon Warwickshire", column="MC", type="River")
 #' 
-get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL, 
-    endyr = NULL, type = NULL) {
+get_rnag <- function(ea_name = NULL, column = NULL, type = NULL) {
 
-  # if there is a startyr set
-  if (!is.null(startyr)) {
-    if (startyr < 2013) {
-      stop("RNAG data only available from 2013 onwards")
-    }
-  }
   # start by running general checks on input data
-  check_args(ea_name, column, startyr, endyr, type)
+  check_args(ea_name, column, type)
   # list of possible columns to select on
   choices <- c("WBID", "MC", "OC", "RBD")
   # check column is one of options
@@ -83,7 +66,6 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
   rnag_data <- download_cde(ea_name, column, data_type="rnag")
 
   # replace columns titles for consistency with other outputs
-  names(rnag_data)[names(rnag_data) == "classification_year"] <- "year"
   names(rnag_data)[names(rnag_data) == "classification_status"] <- "status"
   names(rnag_data)[names(rnag_data) == "water_body_id"] <- "waterbody_id"
   
@@ -100,7 +82,7 @@ get_rnag <- function(ea_name = NULL, column = NULL, startyr = NULL,
       }
     }
     # subset data
-    rnag_data<-subset_data(rnag_data, column, NULL, startyr, endyr, type, data_type=NULL)
+    rnag_data<-subset_data(rnag_data, column, NULL, NULL, NULL, type, data_type="rnag")
     if (nrow(rnag_data)==0){
       message("No RNAG data - empty dataframe returned")
     }

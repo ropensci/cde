@@ -2,7 +2,6 @@
 
 S3method(plot,cde_df)
 S3method(print,cde_df)
-export(get_measures)
 export(get_objectives)
 export(get_pa)
 export(get_rnag)

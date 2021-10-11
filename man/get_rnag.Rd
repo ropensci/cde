@@ -4,13 +4,7 @@
 \alias{get_rnag}
 \title{Retrieve Reasons for Not Achieving Good Status}
 \usage{
-get_rnag(
-  ea_name = NULL,
-  column = NULL,
-  startyr = NULL,
-  endyr = NULL,
-  type = NULL
-)
+get_rnag(ea_name = NULL, column = NULL, type = NULL)
 }
 \arguments{
 \item{ea_name}{A string representing the description (\code{name} for 
@@ -24,16 +18,6 @@ specific values.}
 \item{column}{The column to be searched. Possible options are
 \code{WBID} (waterbody id), \code{OC} (Operational Catchment), \code{MC}
 (Management Catchment) and \code{RBD} (River Basin District)}
-
-\item{startyr}{The data can be extracted for specific years using the
-\code{startyr} and \code{endyr} arguments. If only \code{startyr} is
-specified this extracts for a particular year. If no years are specified
-all years are returned. RNAG data are only available from 2013 onwards.}
-
-\item{endyr}{The data can be extracted for specific years using the
-\code{startyr} and \code{endyr} arguments. The \code{endyr} should
-only be specified if \code{startyr} is also included, otherwise it
-returns an error. RNAG data are only available from 2013 onwards.}
 
 \item{type}{Type of waterbody to be extracted. For Operational/Management
 catchment level or RBD level queries, the data can also be subset by
@@ -68,10 +52,10 @@ get_rnag("GB112071065700", "WBID")
 
 # get the RNAG issues for Lakes in the Humber RBD, between
 # 2013 and 2014
-get_rnag(ea_name="Humber", column="RBD", startyr=2013, endyr=2014, type="Lake")
+get_rnag(ea_name="Humber", column="RBD", type="Lake")
 
 # get the RNAG issues for Rivers in the Avon Warwickshire
-# Management Catchment in 2015
-get_rnag(ea_name="Avon Warwickshire", column="MC", startyr=2015, type="River")
+# Management Catchment
+get_rnag(ea_name="Avon Warwickshire", column="MC", type="River")
 
 }

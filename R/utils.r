@@ -341,9 +341,12 @@ subset_data <- function(full_data, column = NULL,
   
   # if year range covers 2013 and 2014, subset to just include cycle 2 data
   # avoids double counting of waterbodies
-  if ("cycle" %in% names(full_data)) {
-    full_data <- full_data[!(full_data$year == 2013 & full_data$cycle == 1 | 
-                             full_data$year == 2014 & full_data$cycle == 1), ]
+  # only do for data_type "class", where data_type = NULL
+  if (data_type=="class"){
+    if ("cycle" %in% names(full_data)) {
+      full_data <- full_data[!(full_data$year == 2013 & full_data$cycle == 1 | 
+                               full_data$year == 2014 & full_data$cycle == 1), ]
+    }
   }
   return(full_data)
 } # end of function
