@@ -24,7 +24,7 @@
 #'
 #' @param level The level within the WFD quality classification elements that 
 #' objectives have been set at. For full details of the hierarchy of elements 
-#' within the classification used, see \url{https://environment.data.gov.uk/catchment-planning/help#help-classification-hierarchy}.
+#' within the classification used, see \url{https://environment.data.gov.uk/catchment-planning/help/usage#catchment-hierarchy}.
 #' 
 #' Defaults to 'Overall Water Body'. Possible values for the different levels 
 #' retrieved by the function are shown below.
