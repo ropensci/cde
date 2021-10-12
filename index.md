@@ -4,8 +4,7 @@
 # cde <img src="https://docs.ropensci.org/cde/reference/figures/logo.png" align="right" height=140/>
 
 [![R-CMD-check](https://github.com/ropensci/cde/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/cde/actions)
-[![Coverage
-Status](https://coveralls.io/repos/github/ropensci/cde/badge.svg?branch=master)](https://coveralls.io/github/ropensci/cde?branch=master)
+[![codecov](https://codecov.io/gh/ropensci/cde/branch/master/graph/badge.svg?token=F4R6nEywTx)](https://codecov.io/gh/ropensci/cde)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
