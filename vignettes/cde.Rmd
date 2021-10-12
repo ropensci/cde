@@ -28,13 +28,7 @@ The CDE data are made available under the [Open Government Licence v3.0](https:/
 
 ## Installation
 
-You can install the stable version of `cde` from CRAN with:
-
-```{r cran-installation, eval = FALSE}
-install.packages("cde")
-```
-
-Or you can install the current development version from github with:
+You can install the current development version from github with:
 
 ```{r gh-installation, eval = FALSE}
 # if you have not done so already
@@ -196,22 +190,4 @@ Plotting the output of `get_pa` produces a frequency histogram of the `protected
 
 ```{r lark pa plot,fig.height=4, fig.width=6.5, fig.align="center", eval=TRUE}
 plot(lark_OC_pa)
-```
-
-## Measures put in place to improve status
-
-**MEASURES DATA ARE NO LONGER AVAILABLE**
-Measures are the planned actions that are intended to achieve the objectives set for given waterbodies/catchments etc. The `get_measures` function downloads the details of the measures in place or proposed. These data are very patchy, so this will quite often return no data. Only the name and column need to be specified for this - measures are not specified in more detail than this. Measures can be plotted in the same way as RNAG or Protected Areas data (frequency histogram).
-
-For details of the meaning of the the different columns returned, see the [output reference list](../articles/cde-output-reference.html).
-
-```{r lark measures, eval=FALSE}
-# what measures are there for the Lark Operational Catchment?
-lark_OC_meas<-get_measures(ea_name="Lark", column="OC")
-```
-
-Plotting the output of `get_measures` produces a frequency histogram of the `measure_category_1` column within the area specified. In this case, there is only one measure specified.
-
-```{r lark measures plot,fig.height=4, fig.width=6.5, fig.align="center", eval=FALSE}
-plot(lark_OC_meas)
 ```
