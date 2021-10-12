@@ -3,8 +3,7 @@
 
 # cde <img src="https://docs.ropensci.org/cde/reference/figures/logo.png" align="right" height=140/>
 
-[![Travis-CI Build
-Status](https://travis-ci.org/ropensci/cde.svg?branch=master)](https://travis-ci.org/ropensci/cde)
+[![R-CMD-check](https://github.com/ropensci/cde/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/cde/actions)
 [![Coverage
 Status](https://coveralls.io/repos/github/ropensci/cde/badge.svg?branch=master)](https://coveralls.io/github/ropensci/cde?branch=master)
 [![Project Status: Active – The project has reached a stable, usable

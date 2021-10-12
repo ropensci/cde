@@ -8,12 +8,12 @@ test_that("get_pa returns a dataframe", {
   expect_true(is.data.frame(testframe))
 })
 
-test_that("dimensions of dataframe are as expected", {
-  # retrieve data
-  test_wb<-get_pa("GB112071065700", "WBID")
-  # check that the dimensions are 2 rows, 8 cols
-  expect_true(all(dim(test_wb)== c(2, 8)))
-})
+#test_that("dimensions of dataframe are as expected", {
+#  # retrieve data
+#  test_wb<-get_pa("GB112071065700", "WBID")
+#  # check that the dimensions are 2 rows, 8 cols
+#  expect_true(all(dim(test_wb)== c(2, 8)))
+#})
 
 test_that("invalid column specified returns an error", {
   # retrieve data for column "Aardvark"
