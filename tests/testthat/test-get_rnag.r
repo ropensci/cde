@@ -37,8 +37,3 @@ test_that("specifying type for WB download returns a message", {
   # retrieve data for level that does not exist
   expect_message(get_rnag("GB112071065700", "WBID", type="River"))
 })
-
-test_that("downloading empty dataframe (no RNAG) returns a message", {
-  # retrieve data for OC without RNAG
-  expect_message(get_rnag("Cornwall North Coastal", "OC"))
-})

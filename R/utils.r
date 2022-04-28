@@ -50,9 +50,14 @@ download_cde <- function(ea_name = NULL, column = NULL, data_type=NULL) {
                     warning=function(w){})
   ###########################################################}
   # substitute . for _ in all column names
-  names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
-  # convert all to lower case
-  names(cde_data)<-tolower(names(cde_data))
+  #
+  # checking for NULL
+  if (!is.null(cde_data)==TRUE){
+    names(cde_data)<-gsub(".", "_", names(cde_data), fixed=TRUE)
+    # convert all to lower case
+    names(cde_data)<-tolower(names(cde_data))
+    return(cde_data)
+  }
   return(cde_data)
 } # end of function
 
