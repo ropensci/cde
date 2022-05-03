@@ -17,10 +17,6 @@ Version](http://www.r-pkg.org/badges/version/cde)](http://www.r-pkg.org/pkg/cde)
 
 ## Introduction
 
-**NOTE: The EA has recently changed the format of their API, so none of
-the download functions in the package are currently working. This is
-being worked on and a new release will be made once fixed.**
-
 Within Europe, the [Water Framework
 Directive](http://ec.europa.eu/environment/water/water-framework/index_en.html)
 (WFD) sets EU-wide standards for how the quality of surface- and
@@ -49,8 +45,7 @@ analysis.
 
 The types of data that can be downloaded are: WFD status classification
 data, Reasons for Not Achieving Good (RNAG) status, objectives set for
-waterbodies, measures put in place to improve water quality and details
-of associated protected areas.
+waterbodies and details of associated protected areas.
 
 The CDE data are made available under the [Open Government Licence
 v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)

@@ -270,8 +270,12 @@ plot_status <- function(x, data_type, scheme="vir") {
   if (!scheme %in% scheme_choices){
     stop("scheme should be either \"vir\" or \"wfd\".")
   }
+  # if objectives, rename column to allow plotting
+  if (data_type=="objectives"){
+    names(x)[names(x) == "status_objective"] <- "status"
+  }
   plot_table <- with(x, table(status, year))
-  
+
   # convert to percentages
   props <- as.matrix(prop.table(plot_table, 2) * 100)
   

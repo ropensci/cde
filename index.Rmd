@@ -20,15 +20,13 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-**NOTE: The EA has recently changed the format of their API, so none of the download functions in the package are currently working. This is being worked on and a new release will be made once fixed.**
-
 Within Europe, the [Water Framework Directive](http://ec.europa.eu/environment/water/water-framework/index_en.html) (WFD) sets EU-wide standards for how the quality of surface- and ground-waters across Europe is assessed and classified. Assessment of quality using the WFD is based on a range of elements that vary depending on the type of water being assessed and are combined to give an overall classification of waterbodies into five classes (High, Good, Moderate, Poor and Bad) for surface waters and two classes (Good or Poor) for groundwaters.
 
 In the UK the Environment Agency (EA) is the competent authority responsible for monitoring and assessment of water quality within England. The EA have made the reporting data relating to the requirements of the WFD available via the Catchment Data Explorer (CDE) website, [https://environment.data.gov.uk/catchment-planning/](https://environment.data.gov.uk/catchment-planning/). 
 
 `cde` is a package for R which facilitates searching and download of the WFD reporting data for all waterbodies from the EA CDE website. The ability to access these data from within the R environment allows for efficient collation and interrogation of data and reproducible analysis of trends or patterns in water quality and pressures on waterbodies across England. There are also some inconsistencies in the way in which the data are structured within the original CDE website; ``cde`` provides consistently named and structured output which facilitates further analysis.
 
-The types of data that can be downloaded are: WFD status classification data, Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies, measures put in place to improve water quality and details of associated protected areas.
+The types of data that can be downloaded are: WFD status classification data, Reasons for Not Achieving Good (RNAG) status, objectives set for waterbodies and details of associated protected areas.
 
 The CDE data are made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) and use of the data accessed by and contained within this package implies acceptance of these licence conditions.
 
