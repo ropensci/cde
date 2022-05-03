@@ -67,7 +67,6 @@ get_rnag <- function(ea_name = NULL, column = NULL, type = NULL) {
 
   # replace columns titles for consistency with other outputs
   names(rnag_data)[names(rnag_data) == "classification_status"] <- "status"
-  names(rnag_data)[names(rnag_data) == "water_body_id"] <- "waterbody_id"
   
     # check if any data returned
   if (nrow(rnag_data)==0){

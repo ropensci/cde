@@ -130,6 +130,8 @@ get_objectives <- function(ea_name = NULL, column = NULL,
     if (nrow(obj_data)==0){
       message("No objectives specified - empty dataframe returned")
     }
+    # rename status objective column to distinguish from actual status
+    names(obj_data)[names(obj_data) == "status"] <- "status_objective"
     # add comment for plot method identification
     comment(obj_data) <- paste0("objectives;", column)
     return(as.cde(obj_data))
