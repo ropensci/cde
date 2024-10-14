@@ -30,7 +30,8 @@ test_that("plotting WBID data results in error", {
     # download objectives for Avon Warwickshire MC chemical status in 2027
     testframe<-get_objectives("Avon Warwickshire", "MC", year=2027, level="Chemical")
     # check that the plot output is null
-    expect_true(is.null(plot(testframe)))
+    # expect_true(is.null(plot(testframe)))
+    expect_error(plot(testframe))
  })
  
  test_that("plotting objectives returns a null", {

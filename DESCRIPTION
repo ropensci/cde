@@ -1,5 +1,4 @@
 Package: cde
-Type: Package
 Title: Download Data from the Catchment Data Explorer Website
 Version: 0.4.1.9003
 Authors@R: person("Rob", "Briers", email = "r.briers@napier.ac.uk",
@@ -30,5 +29,5 @@ Suggests:
     covr
 URL: https://docs.ropensci.org/cde, https://github.com/ropensci/cde
 BugReports: https://github.com/ropensci/cde/issues
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr

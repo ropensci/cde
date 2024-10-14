@@ -1,3 +1,5 @@
+#' @keywords internal
+"_PACKAGE"
 #' cde: Download Water Framework Directive (WFD) data from the 
 #' Environment Agency Catchment Data Explorer (CDE) website.
 #'
@@ -14,8 +16,6 @@
 #' The data accessed by and included within the package are made available 
 #' under the Open Government Licence v3.0 
 #' \url{https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/}
-#'
-#' @docType package
 #'
 #' @name cde
 NULL
