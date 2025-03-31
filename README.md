@@ -5,7 +5,8 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/ropensci/cde/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/cde/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/ropensci/cde/branch/master/graph/badge.svg?token=F4R6nEywTx)](https://codecov.io/gh/ropensci/cde)
+[![Codecov test
+coverage](https://codecov.io/gh/ropensci/cde/graph/badge.svg)](https://app.codecov.io/gh/ropensci/cde)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
