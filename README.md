@@ -3,7 +3,8 @@
 
 # cde <img src="https://docs.ropensci.org/cde/reference/figures/logo.png" align="right" height=140/>
 
-[![R-CMD-check](https://github.com/ropensci/cde/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/cde/actions)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/ropensci/cde/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/cde/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/ropensci/cde/branch/master/graph/badge.svg?token=F4R6nEywTx)](https://codecov.io/gh/ropensci/cde)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -14,6 +15,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![CRAN
 Version](http://www.r-pkg.org/badges/version/cde)](http://www.r-pkg.org/pkg/cde)
 [![](http://cranlogs.r-pkg.org/badges/cde)](http://cran.rstudio.com/web/packages/cde/index.html)
+<!-- badges: end -->
 
 ## Introduction
 
